@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import entities.User;
 
 @Stateless(name = "UserDAOImpl", mappedName = "UserDAOImpl")
-
 public class UserDAOImpl implements UserDAO {
 
 	@PersistenceContext(unitName = "jbugs-persistence")
