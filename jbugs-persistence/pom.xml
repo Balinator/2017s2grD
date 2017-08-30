@@ -6,30 +6,17 @@
 		<artifactId>jbugs</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
+	
 	<artifactId>jbugs-persistence</artifactId>
-	<name>JBugger Persistance</name>
-	<packaging>ejb</packaging>
+	<name>JBugs Persistence</name>
+	<description>Persistence layer</description>
+	<packaging>jar</packaging>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
-		</dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<configuration>
-					<ejbVersion>3.2</ejbVersion>
-					<generateClient>true</generateClient>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	</dependencies>	
+	
 </project>
