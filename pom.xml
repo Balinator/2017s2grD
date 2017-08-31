@@ -6,7 +6,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>JBugger Parent</name>
-	<description>Parent Project</description>
+	<description>Parent Project S2D Varadi</description>
 	<properties>
 		<project.build.sourceEconding>UTF-8</project.build.sourceEconding>
 		<java.source>1.8</java.source>
