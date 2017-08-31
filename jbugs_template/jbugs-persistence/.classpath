@@ -29,5 +29,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="T:/20_TOOLS/servers/payara41/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="T:/20_TOOLS/mysql_connector_java/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="T:/20_TOOLS/servers/payara41/glassfish/lib/appserv-rt.jar"/>
+	<classpathentry kind="lib" path="T:/20_TOOLS/servers/payara41/glassfish/lib/gf-client.jar"/>
+	<classpathentry kind="lib" path="T:/20_TOOLS/servers/payara41/glassfish/lib/jndi-properties.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
