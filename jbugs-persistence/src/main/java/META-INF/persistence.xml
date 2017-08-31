@@ -18,4 +18,4 @@
 				value="both" />
 		</properties>
 	</persistence-unit>
-</persistence>
+</persistence> 
