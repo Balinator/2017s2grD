@@ -79,8 +79,6 @@
 			<artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>
