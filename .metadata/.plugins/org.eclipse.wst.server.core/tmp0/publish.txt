@@ -1,3 +1,0 @@
-#GlassFish 3
-#Wed Aug 30 17:28:44 EEST 2017
-org.eclipse.jst.jee.server\:jbugs-ear=T\:\\20_TOOLS\\servers\\payara41\\glassfish\\domains\\domain1\\eclipseApps\\jbugs-ear
