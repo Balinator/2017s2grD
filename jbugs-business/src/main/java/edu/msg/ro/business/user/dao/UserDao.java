@@ -1,39 +1,30 @@
 package edu.msg.ro.business.user.dao;
 
-import java.util.List;
-
-import javax.enterprise.context.Dependent;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
+import edu.msg.ro.business.common.dao.AbstractDao;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * TODO: add javadoc create AbtractDao (findById generic)
+ * DAO for {@link User} entity.
  * 
  * @author Andrei Floricel, msg systems ag
  *
  */
-@Dependent
-public class UserDao {
+@Stateless
+public class UserDAO extends AbstractDao<User> {
 
-	@PersistenceContext(unitName = "jbugs-persistence")
-	private EntityManager em;
-
-	public void persistUser(final User user) {
-		em.persist(user);
+	@Override
+	public Class<User> getEntityClass() {
+		return User.class;
 	}
 
-	public List<User> getUserByLastName(final String lastName) {
-		final TypedQuery<User> query = em.createNamedQuery(User.FIND_USER_BY_LASTNAME, User.class);
-		query.setParameter("lastName", lastName);
+	public User findUserByEmail(String email) {
+		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_USER_BY_EMAIL, User.class);
+		query.setParameter("email", email);
 
-		return query.getResultList();
-	}
-
-	public User findById(final Long id) {
-		return this.em.find(User.class, id);
+		return getSingleResult(query);
 	}
 
 }

@@ -2,28 +2,45 @@ package edu.msg.ro.business.user.dto.mapper;
 
 import javax.enterprise.context.Dependent;
 
+import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
+/**
+ * Mapper for {@link User} and {@link UserDTO}.
+ * 
+ * @author Andrei Floricel, msg systems ag
+ *
+ */
 @Dependent
-public class UserDTOMapper {
+public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 
-	public UserDTO mapToDTO(final User userEntity) {
-		final UserDTO userDTO = new UserDTO();
-		userDTO.setId(userEntity.getId());
-		userDTO.setFirstName(userEntity.getFirstName());
-		userDTO.setLastName(userEntity.getLastName());
-		userDTO.setActive(userEntity.isActive());
-
-		return userDTO;
+	@Override
+	public UserDTO getDTOInstance() {
+		return new UserDTO();
 	}
 
-	public User mapToEntity(final UserDTO userDTO, final User userEntity) {
-		userEntity.setFirstName(userDTO.getFirstName());
-		userEntity.setLastName(userEntity.getLastName());
-		userEntity.setActive(userDTO.isActive());
+	@Override
+	protected void mapEntityToDTOFields(User entity, UserDTO dto) {
+		dto.setEmail(entity.getEmail());
+		dto.setFirstname(entity.getFirstname());
+		dto.setLastname(entity.getLastname());
+		dto.setPassword(entity.getPassword());
+		dto.setPhoneNumber(entity.getPhoneNumber());
+		dto.setUsername(entity.getUsername());
+		dto.setActive(entity.isActive());
+	}
 
-		return userEntity;
+	@Override
+	protected void mapDTOToEntityFields(UserDTO dto, User entity) {
+		entity.setEmail(dto.getEmail());
+		entity.setFirstname(dto.getFirstname());
+		entity.setLastname(dto.getLastname());
+		entity.setPassword(dto.getPassword());
+		entity.setLockVersion(dto.getLockVersion());
+		entity.setPhoneNumber(dto.getPhoneNumber());
+		entity.setUsername(dto.getUsername());
+		entity.setActive(dto.isActive());
 	}
 
 }
