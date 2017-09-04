@@ -3,20 +3,14 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import msg.ejb.SomeEjb;
-
 @WebServlet(urlPatterns = { "/TestServlet" })
 public class TestServlet extends HttpServlet {
-
-	@EJB
-	private SomeEjb someEjbBean;
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,8 +35,8 @@ public class TestServlet extends HttpServlet {
 			out.println("<head>");
 			out.println("<title>Test EJB Bean New</title>");
 			out.println("</head>");
-			out.println("<body>");
-			out.println(someEjbBean.hello() + "<br>");
+			out.println("<body> hmm");
+			out.println("User with lastname  'Doe' are:<br>");
 
 			out.println("</body>");
 			out.println("</html>");

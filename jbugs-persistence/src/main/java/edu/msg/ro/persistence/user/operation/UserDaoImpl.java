@@ -1,4 +1,4 @@
-package operations;
+package edu.msg.ro.persistence.user.operation;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import entities.User;
+import edu.msg.ro.persistence.user.entity.User;
 
 @Stateless(name = "UserDAOImpl", mappedName = "UserDAOImpl")
-public class UserDAOImpl implements UserDAO {
+public class UserDaoImpl implements UserDao {
 
 	@PersistenceContext(unitName = "jbugs-persistence")
 	private EntityManager em;

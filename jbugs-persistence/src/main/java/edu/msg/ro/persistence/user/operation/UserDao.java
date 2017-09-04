@@ -1,11 +1,10 @@
-package operations;
+package edu.msg.ro.persistence.user.operation;
 
 import java.util.List;
-import javax.ejb.Remote;
-import entities.User;
 
-@Remote
-public interface UserDAO {
+import edu.msg.ro.persistence.user.entity.User;
+
+public interface UserDao {
 
 	public void persistUser(User user);
 
