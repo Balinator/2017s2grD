@@ -45,4 +45,24 @@ public class UserSomething {
 		}
 	}
 
+	public void deleteUser(UserDTO user) {
+		User userEntity = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, userEntity);
+
+		userDAO.deleteEntity(userEntity);
+	}
+
+	public UserDTO findById(Long id) throws BusinessException {
+		return userDTOMapper.mapToDTO(userDAO.findEntity(id));
+	}
+
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
+		User userEntity = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, userEntity);
+		User persisted = userDAO.findEntity(user.getId());
+
+		return userDTOMapper.mapToDTO(persisted);
+
+	}
+
 }

@@ -28,6 +28,7 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	public void mapToEntity(DTO dto, E entity) {
 		entity.setLockVersion(dto.getLockVersion());
+		// entity.setId(dto.getId());
 
 		mapDTOToEntityFields(dto, entity);
 	}

@@ -37,4 +37,37 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 		Assert.fail("Email validation should fail!");
 	}
 
+	@Test
+	public void deleteUser_succesfull() throws BusinessException {
+		UserDTO test = new UserDTO();
+
+		test.setFirstname("Peter");
+		test.setLastname("Varadi");
+
+		UserDTO created = sut.createUser(test);
+
+		Long id = created.getId();
+
+		sut.deleteUser(created);
+
+		UserDTO find = sut.findById(id);
+
+		Assert.assertNull("After deleting", find);
+	}
+
+	@Test
+	public void updateUser_succesfull() throws BusinessException {
+		UserDTO test = new UserDTO();
+
+		test.setLastname("Varadi");
+
+		UserDTO created = sut.createUser(test);
+
+		created.setLastname("Varadi2");
+
+		UserDTO find = sut.updateUser(created);
+
+		Assert.assertEquals("After update the name shoud be the same", "Varadi2", find.getLastname());
+
+	}
 }
