@@ -22,6 +22,7 @@ public abstract class AbstractDao<E extends AbstractEntity> {
 
 	public void deleteEntity(E entity) {
 		em.remove(entity);
+
 	}
 
 	public E findEntity(Long id) {
