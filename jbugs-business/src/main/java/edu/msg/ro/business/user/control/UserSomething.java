@@ -45,4 +45,21 @@ public class UserSomething {
 		}
 	}
 
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
+
+		User userEntity = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, userEntity);
+		User persisted = userDAO.findEntity(userEntity.getId());
+		return userDTOMapper.mapToDTO(persisted);
+	}
+
+	public void deleteUser(UserDTO user) throws BusinessException {
+		User userEntity = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, userEntity);
+
+		userEntity.setActive(false);
+		User persisted = userDAO.findEntity(user.getId());
+
+	}
+
 }

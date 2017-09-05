@@ -25,7 +25,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 
 		UserDTO testUser2 = new UserDTO();
 		testUser2.setFirstname("Mary");
-		testUser2.setLastname("Jane");
+		testUser2.setLastname("Jane2");
 		testUser2.setEmail("unique@mail.com");
 
 		try {
