@@ -34,7 +34,6 @@ public abstract class AbstractDao<E extends AbstractEntity> {
 		} catch (NoResultException e) {
 			return null;
 		}
-
 	}
 
 }
