@@ -24,6 +24,11 @@ public abstract class AbstractDao<E extends AbstractEntity> {
 		em.remove(entity);
 	}
 
+	// My solution
+	public void updateEntity(E entity) {
+		em.merge(entity);
+	}
+
 	public E findEntity(Long id) {
 		return em.find(getEntityClass(), id);
 	}
