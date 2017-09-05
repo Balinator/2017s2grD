@@ -5,9 +5,8 @@ import javax.ejb.EJB;
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
-import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.user.dto.UserDTO;
+import src.main.java.edu.msg.ro.business.common.exception.BusinessException;
+import src.test.java.edu.msg.ro.business.AbstractIntegrationTest;
 
 public class UserSomethingTest extends AbstractIntegrationTest {
 

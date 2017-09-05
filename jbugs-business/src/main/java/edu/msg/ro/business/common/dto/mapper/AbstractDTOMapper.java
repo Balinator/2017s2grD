@@ -3,8 +3,8 @@ package edu.msg.ro.business.common.dto.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.persistence.user.entity.AbstractEntity;
+import src.main.java.edu.msg.ro.business.common.dto.AbstractDTO;
 
 public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends AbstractDTO> {
 

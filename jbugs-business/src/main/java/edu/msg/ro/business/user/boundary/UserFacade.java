@@ -11,7 +11,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * Boundary for {@link User} component.
+ * Boundary for {@link User} component
  * 
  * @author floricea
  * 
@@ -21,7 +21,9 @@ import edu.msg.ro.persistence.user.entity.User;
 public class UserFacade {
 
 	@EJB
-	private UserService userSomething;
+<<<<<<< HEAD
+	private UserService userSomething;=======
+	private UserSomething userSomething;>>>>>>>origin/VaradiPeter
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userSomething.createUser(user);
