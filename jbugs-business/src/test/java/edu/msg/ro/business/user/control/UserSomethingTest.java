@@ -52,7 +52,8 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 
 		UserDTO find = sut.findById(id);
 
-		Assert.assertNull("After deleting", find);
+		Assert.assertEquals(false, find.isActive());
+		// Assert.assertNull("After deleting", find);
 	}
 
 	@Test

@@ -45,11 +45,15 @@ public class UserSomething {
 		}
 	}
 
-	public void deleteUser(UserDTO user) {
+	public UserDTO deleteUser(UserDTO user) {
 		User userEntity = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, userEntity);
 
-		userDAO.deleteEntity(userEntity);
+		// delete means to make the user inactiv
+		userEntity.setActive(false);
+
+		User persisted = userDAO.findEntity(user.getId());
+		return userDTOMapper.mapToDTO(persisted);
 	}
 
 	public UserDTO findById(Long id) throws BusinessException {
