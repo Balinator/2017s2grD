@@ -11,13 +11,13 @@ import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
 import edu.msg.ro.persistence.user.entity.Role;
 
 /**
- * Controller for Role component.
+ * Controller for {@link Role} component.
  * 
  * @author laszll
  *
  */
 @Stateless
-public class RoleSomething {
+public class RoleService {
 
 	@Inject
 	private RoleDTOMapper roleDTOMapper;

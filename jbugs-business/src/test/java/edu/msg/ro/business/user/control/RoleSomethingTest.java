@@ -11,7 +11,7 @@ import edu.msg.ro.business.user.dto.RoleDTO;
 
 public class RoleSomethingTest extends AbstractIntegrationTest {
 	@EJB
-	private RoleSomething sut;
+	private RoleService sut;
 
 	@Test
 	public void createRole_works() throws BusinessException {
