@@ -53,13 +53,17 @@ public class UserSomething {
 		return userDTOMapper.mapToDTO(persisted);
 	}
 
-	public void deleteUser(UserDTO user) throws BusinessException {
+	public UserDTO deleteUser(UserDTO user) throws BusinessException {
 		User userEntity = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, userEntity);
 
 		userEntity.setActive(false);
 		User persisted = userDAO.findEntity(user.getId());
+		return userDTOMapper.mapToDTO(persisted);
 
 	}
 
+	public UserDTO findById(Long id) throws BusinessException {
+		return userDTOMapper.mapToDTO(userDAO.findEntity(id));
+	}
 }
