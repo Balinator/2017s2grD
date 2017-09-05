@@ -21,9 +21,7 @@ import edu.msg.ro.persistence.user.entity.User;
 public class UserFacade {
 
 	@EJB
-<<<<<<< HEAD
-	private UserService userSomething;=======
-	private UserSomething userSomething;>>>>>>>origin/VaradiPeter
+	private UserService userSomething;
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userSomething.createUser(user);
