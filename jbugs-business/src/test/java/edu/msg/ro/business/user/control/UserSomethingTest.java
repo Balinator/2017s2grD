@@ -12,7 +12,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 public class UserSomethingTest extends AbstractIntegrationTest {
 
 	@EJB
-	private UserSomething sut;
+	private UserService sut;
 
 	@Test
 	public void createUser_EmailValidationFail() throws BusinessException {

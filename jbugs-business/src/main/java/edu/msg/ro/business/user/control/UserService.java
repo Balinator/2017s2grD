@@ -17,7 +17,7 @@ import edu.msg.ro.persistence.user.entity.User;
  *
  */
 @Stateless
-public class UserSomething {
+public class UserService {
 
 	@Inject
 	private UserDTOMapper userDTOMapper;
