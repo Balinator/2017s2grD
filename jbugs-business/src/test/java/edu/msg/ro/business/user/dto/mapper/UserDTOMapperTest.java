@@ -18,13 +18,13 @@ public class UserDTOMapperTest extends AbstractIntegrationTest {
 	public void mapToDTO_validEntity() {
 		// arrange
 		User entity = new User();
-		entity.setEmail("test@msg.com");
-		entity.setFirstname("Ale");
-		entity.setLastname("Mihai");
+		entity.setEmail("varadi@msg.com");
+		entity.setFirstname("Petger");
+		entity.setLastname("Varadi");
 		entity.setPassword("msg");
 		entity.setLockVersion(1L);
-		entity.setPhoneNumber("54545");
-		entity.setUsername("msg");
+		entity.setPhoneNumber("0729565415");
+		entity.setUsername("varadp");
 		entity.setActive(true);
 
 		// act
@@ -34,6 +34,13 @@ public class UserDTOMapperTest extends AbstractIntegrationTest {
 		// assert
 
 		Assert.assertEquals("Email mapping failed", entity.getEmail(), userDTO.getEmail());
+		Assert.assertEquals("FirstName mapping failed", entity.getFirstname(), userDTO.getFirstname());
+		Assert.assertEquals("LastName mapping failed", entity.getLastname(), userDTO.getLastname());
+		Assert.assertEquals("Password mapping failed", entity.getPassword(), userDTO.getPassword());
+		Assert.assertEquals("LockVersion mapping failed", entity.getLockVersion(), userDTO.getLockVersion());
+		Assert.assertEquals("PhoneNumbver mapping failed", entity.getPhoneNumber(), userDTO.getPhoneNumber());
+		Assert.assertEquals("Username mapping failed", entity.getUsername(), userDTO.getUsername());
+		Assert.assertEquals("Active mapping failed", entity.isActive(), userDTO.isActive());
 
 	}
 
