@@ -34,8 +34,7 @@ public class RoleService {
 
 	public RoleDTO updateRole(RoleDTO role) {
 		Role persistedRole = roleDAO.findEntity(role.getId());
-		Role roleEntity = new Role();
-		roleDTOMapper.mapToEntity(role, roleEntity);
+		roleDTOMapper.mapToEntity(role, persistedRole);
 		return roleDTOMapper.mapToDTO(persistedRole);
 	}
 

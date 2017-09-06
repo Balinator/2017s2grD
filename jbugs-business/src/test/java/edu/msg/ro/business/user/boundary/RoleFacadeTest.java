@@ -3,6 +3,7 @@ package edu.msg.ro.business.user.boundary;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 
+import org.jboss.arquillian.junit.InSequence;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,12 +25,7 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 	private RoleDTOMapper mapper;
 
 	@Test
-	public void roleCRUD_succesfull() {
-		createRole_succesfull();
-		updateRole_succesfull();
-		deleteRole_succesfull();
-	}
-
+	@InSequence(1)
 	public void createRole_succesfull() {
 		RoleDTO testRole = new RoleDTO();
 		testRole.setName_EN("Admin");
@@ -38,6 +34,8 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 		Assert.assertNotNull("The newly persisted role should have an id!", createdRole.getId());
 	}
 
+	@Test
+	@InSequence(2)
 	public void updateRole_succesfull() {
 		Role role = dao.findEntity(1L);
 		Assert.assertNotNull("The role with id 1 should be in the database!", role.getId());
@@ -47,6 +45,8 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 		Assert.assertEquals(role.getName_EN(), updatedRole.getName_EN());
 	}
 
+	@Test
+	@InSequence(3)
 	public void deleteRole_succesfull() {
 		Role role = dao.findEntity(1L);
 		Assert.assertNotNull("The role with id 1 should be in the database!", role.getId());
