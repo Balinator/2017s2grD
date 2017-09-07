@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
+import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -18,6 +19,10 @@ public class UserDAO extends AbstractDao<User> {
 	@Override
 	public Class<User> getEntityClass() {
 		return User.class;
+	}
+
+	public void deactivateUser(UserDTO user) {
+
 	}
 
 	public User findUserByEmail(String email) {

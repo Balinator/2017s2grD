@@ -29,6 +29,8 @@ public class User extends AbstractEntity {
 	@Column
 	private String lastname;
 
+	// @Pattern(regexp =
+	// "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@+[msggroup.com]{12}$")
 	@Column
 	private String email;
 

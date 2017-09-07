@@ -18,12 +18,23 @@ import edu.msg.ro.business.user.dto.UserDTO;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class UserFacade {
-
 	@EJB
 	private UserSomething userSomething;
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userSomething.createUser(user);
+	}
+
+	public UserDTO findUserById(Long id) throws BusinessException {
+		return userSomething.findById(id);
+	}
+
+	public void deleteUser(UserDTO user) throws BusinessException {
+		userSomething.deactivateUser(user);
+	}
+
+	public UserDTO editUser(UserDTO user) throws BusinessException {
+		return userSomething.editUser(user);
 	}
 
 }
