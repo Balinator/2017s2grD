@@ -21,7 +21,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 		testUser.setLastname("Doe");
 		testUser.setEmail("unique@mail.com");
 
-		UserDTO createdUser = sut.createUser(testUser);
+		sut.createUser(testUser);
 
 		UserDTO testUser2 = new UserDTO();
 		testUser2.setFirstname("Mary");
@@ -29,7 +29,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 		testUser2.setEmail("unique@mail.com");
 
 		try {
-			UserDTO createdUser2 = sut.createUser(testUser2);
+			sut.createUser(testUser2);
 		} catch (BusinessException e) {
 			Assert.assertEquals("User already exists with given email unique@mail.com", e.getMessage());
 			return;
