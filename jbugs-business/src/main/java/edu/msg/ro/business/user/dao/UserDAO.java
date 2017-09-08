@@ -26,4 +26,11 @@ public class UserDAO extends AbstractDao<User> {
 		return getSingleResult(query);
 	}
 
+	public User findUserByUsernameAndPass(String username, String password) {
+		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASS, User.class);
+		query.setParameter("username", username);
+		query.setParameter("password", password);
+		return getSingleResult(query);
+	}
+
 }
