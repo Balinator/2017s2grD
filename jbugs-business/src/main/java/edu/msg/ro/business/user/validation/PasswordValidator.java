@@ -8,7 +8,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- * @author balinc
+ * @author nagya
  *
  */
 @FacesValidator("passwordValidator")
