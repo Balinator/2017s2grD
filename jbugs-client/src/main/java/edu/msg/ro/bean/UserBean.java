@@ -5,15 +5,16 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.JBugsException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UserBean {
 
 	@EJB
@@ -21,19 +22,22 @@ public class UserBean {
 
 	private UserDTO newUser = new UserDTO();
 
-	/**
-	 * @return the user
-	 */
+	private UserDTO selectedUser = new UserDTO();
+
 	public UserDTO getNewUser() {
 		return newUser;
 	}
 
-	/**
-	 * @param user
-	 *            the user to set
-	 */
 	public void setNewUser(UserDTO user) {
 		this.newUser = user;
+	}
+
+	public UserDTO getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(UserDTO selectedUser) {
+		this.selectedUser = selectedUser;
 	}
 
 	public List<UserDTO> getAllUsers() {
@@ -50,11 +54,42 @@ public class UserBean {
 	}
 
 	public String deleteUser(UserDTO user) {
-		userFacade.deleteUser(user);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Userul " + newUser.getFirstname() + " a fost sters!"));
+		try {
+			userFacade.deleteUser(user);
+		} catch (JBugsException e) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			String eMaesage = context.getApplication().evaluateExpressionGet(context,
+					"#{msg['" + e.getMessage() + "']}", String.class);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(eMaesage));
+
+		}
+
 		return "users";
 
+	}
+
+	public String enterUpdateMode(UserDTO user) {
+		this.selectedUser = user;
+		return "users";
+	}
+
+	public String leaveUpdateMode() {
+		selectedUser = new UserDTO();
+		return "users";
+	}
+
+	public boolean verifyUserRendere(UserDTO user) {
+		return selectedUser != null && user.getId().equals(selectedUser.getId());
+	}
+
+	public String editUser() {
+		try {
+			userFacade.updateUser(selectedUser);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		selectedUser = new UserDTO();
+		return "users";
 	}
 
 }

@@ -21,19 +21,19 @@
 			<h:messages />
 
 
-			<h:panelGrid id="loginPanel" columns="3" cellpadding="5"
+			<p:panelGrid id="loginPanel" columns="3" cellpadding="5"
 				cellspacing="5">
 				<f:facet name="header">
 					<h:outputText value="#{msg['login.header']}" />
 				</f:facet>
 
-				<h:outputLabel for="username" value="#{msg['login.username']}" />
+				<p:outputLabel for="username" value="#{msg['login.username']}" />
 				<h:inputText id="username" value="#{loginBean.user.username}">
 					<f:validateLength minimum="3" maximum="10" />
 				</h:inputText>
 				<h:message for="username" />
 
-				<h:outputLabel for="password" value="#{msg['login.password']}" />
+				<p:outputLabel for="password" value="#{msg['login.password']}" />
 				<h:inputText id="password" value="#{loginBean.user.password}">
 					<f:validator validatorId="passwordValidator" />
 				</h:inputText>
@@ -47,7 +47,7 @@
 					</h:panelGroup>
 				</f:facet>
 
-			</h:panelGrid>
+			</p:panelGrid>
 
 		</h:form>
 

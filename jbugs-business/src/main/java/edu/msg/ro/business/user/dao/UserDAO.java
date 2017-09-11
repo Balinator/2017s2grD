@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -23,10 +24,16 @@ public class UserDAO extends AbstractDao<User> {
 		return User.class;
 	}
 
-	public User findUserByUsername(String username) {
+	public User findUserByUsername(String username) throws TechnicalException {
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username");
 		query.setParameter("username", username);
-		return (User) query.getSingleResult();
+		try {
+			return (User) query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new TechnicalException(e.getCause());
+		}
+
 	}
 
 	public User findUserByEmail(String email) {

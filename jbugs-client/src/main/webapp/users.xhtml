@@ -14,52 +14,106 @@
 
 		<h:form id="userForm">
 			<p:messages autoUpdate="true" />
-			<h:dataTable value="#{userBean.allUsers}" var="user">
-			<f:facet name="header">
-			
-			</f:facet>
-				<h:column >
+			<p:dataTable value="#{userBean.allUsers}" var="user">
+				<f:facet name="header">
+
+				</f:facet>
+				<p:column>
 					<f:facet name="header">
 						Firstname
-						<br/>
+						<br />
 						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{user.firstname}"></h:outputText>
-				</h:column>
-				<h:column>
+					<h:outputText value="#{user.firstname}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.firstname}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Lastname
-						<br/>
+						<br />
 						<h:inputText value="#{userBean.newUser.lastname}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{user.lastname}"></h:outputText>
-				</h:column>
-				<h:column>
+					<h:outputText value="#{user.lastname}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.lastname}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column> 
+				
+				<p:column>
+					<f:facet name="header">
+						E-mail
+						<br />
+						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.email}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.email}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Phone
+						<br />
+						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.phoneNumber}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.phoneNumber}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Lock Version
+						<br />
+						<h:inputText value="#{userBean.newUser.lockVersion}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.lockVersion}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.lockVersion}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
 					<f:facet name="header">
 						Username
-						<br/>
+						<br />
 						<h:inputText value="#{userBean.newUser.username}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
-				</h:column>		
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Active
-						<br/>
-						<h:inputText value="#{userBean.newUser.active}"></h:inputText>
+						<br />
 					</f:facet>
-					<h:outputText value="#{user.active}"></h:outputText>
-				</h:column>						
-				<h:column>
+					<h:outputText value="ACTIVE" rendered="#{user.active}"></h:outputText>
+					<h:outputText value="INACTIVE" rendered="#{!user.active}"></h:outputText>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Action
 						<br />
 						<h:commandButton value="Create" action="#{userBean.createNewUser}"></h:commandButton>
 					</f:facet>
-					<h:commandButton value="delete" action="#{userBean.deleteUser(user)}"></h:commandButton>
-				</h:column>
-				
-			</h:dataTable>
+					<h:commandButton value="delete"
+						action="#{userBean.deleteUser(user)}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:commandButton>
+					<h:commandButton value="update"
+						action="#{userBean.enterUpdateMode(user)}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:commandButton>
+					<h:commandButton value="abort" action="#{userBean.leaveUpdateMode}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
+					<h:commandButton value="edit" action="#{userBean.editUser}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+			<h:outputText value="#{userBean.selectedUser.username}"></h:outputText>
 			<p:commandLink action="#{loginBean.processLogout}"
 				value="#{msg['general.logout']}"></p:commandLink>
 		</h:form>

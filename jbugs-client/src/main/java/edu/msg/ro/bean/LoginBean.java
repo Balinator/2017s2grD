@@ -1,6 +1,7 @@
 package edu.msg.ro.bean;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -51,6 +52,8 @@ public class LoginBean implements Serializable {
 			HttpSession session = (HttpSession) getFacesContext().getExternalContext().getSession(false);
 			session.setAttribute("username", user.getUsername());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome!"));
+			// todo DYNAMIC
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
 			return "users";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("loginForm:username",

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
@@ -44,7 +45,13 @@ public class UserService {
 		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
-	public UserDTO deleteUser(UserDTO userDTO) {
+	public UserDTO updateUser(UserDTO user) {
+		User persistedUser = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, persistedUser);
+		return userDTOMapper.mapToDTO(persistedUser);
+	}
+
+	public UserDTO deleteUser(UserDTO userDTO) throws TechnicalException {
 		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
 		if (userValidator.checkIfUserHasActiveTasks(userEntity) == false) {
 			userEntity.setActive(false);
