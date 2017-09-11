@@ -1,1 +1,0 @@
-INSERT INTO USER (USERNAME, PASSWORD,lockversion) VALUES ('Sanyi', 'teszt',1);
