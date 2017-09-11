@@ -1,8 +1,10 @@
 package edu.msg.ro.business.user.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.UserDAO;
@@ -19,7 +21,7 @@ import edu.msg.ro.persistence.user.entity.User;
 @Stateless
 public class UserSomething {
 
-	@Inject
+	@EJB
 	private UserDTOMapper userDTOMapper;
 
 	@EJB
@@ -66,7 +68,19 @@ public class UserSomething {
 		User persisted = userDAO.findEntity(user.getId());
 
 		return userDTOMapper.mapToDTO(persisted);
-
 	}
 
+	public boolean verifyUserExists(UserDTO user) {
+		return userDAO.verifyUserExists(user.getUsername(), user.getPassword());
+	}
+
+	public List<UserDTO> getAll() {
+		List<User> users = userDAO.getAll();
+		List<UserDTO> listUserDTO = new ArrayList<>();
+		for (User u : users) {
+			listUserDTO.add(userDTOMapper.mapToDTO(u));
+		}
+		return listUserDTO;
+
+	}
 }
