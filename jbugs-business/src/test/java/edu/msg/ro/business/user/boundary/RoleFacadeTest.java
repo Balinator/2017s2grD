@@ -1,7 +1,6 @@
 package edu.msg.ro.business.user.boundary;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Assert;
@@ -21,7 +20,7 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 	@EJB
 	private RoleDAO dao;
 
-	@Inject
+	@EJB
 	private RoleDTOMapper mapper;
 
 	@Test
