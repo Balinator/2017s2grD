@@ -13,12 +13,14 @@
 	<f:view>
 
 		<h:form id="userForm">
+			
 			<p:messages autoUpdate="true" />
-			<h:dataTable value="#{userBean.allUsers}" var="user">
+			
+			<p:dataTable value="#{userBean.allUsers}" var="user">
 				<f:facet name="header">
 
 				</f:facet>
-				<h:column>
+				<p:column>
 					<f:facet name="header">
 						Firstname
 						<br />
@@ -28,8 +30,8 @@
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.firstname}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Lastname
 						<br />
@@ -39,24 +41,24 @@
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.lastname}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Username
 						<br />
 						<h:inputText value="#{userBean.newUser.username}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Active
 						<br />
 					</f:facet>
 					<h:outputText value="ACTIVE" rendered="#{user.active}"></h:outputText>
 					<h:outputText value="INACTIVE" rendered="#{!user.active}"></h:outputText>
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">
 						Action
 						<br />
@@ -72,9 +74,9 @@
 						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
 					<h:commandButton value="edit" action="#{userBean.editUser}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
-				</h:column>
+				</p:column>
 
-			</h:dataTable>
+			</p:dataTable>
 
 			<h:outputText value="#{userBean.selectedUser.username}"></h:outputText>
 			<p:commandLink action="#{loginBean.processLogout}"
