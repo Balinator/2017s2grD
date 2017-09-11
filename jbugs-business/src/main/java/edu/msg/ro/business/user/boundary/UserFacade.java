@@ -28,6 +28,10 @@ public class UserFacade {
 		return userService.createUser(user);
 	}
 
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
+		return userService.updateUser(user);
+	}
+
 	public UserDTO deleteUser(UserDTO userDTO) {
 		return userService.deleteUser(userDTO);
 

@@ -1,6 +1,6 @@
 package edu.msg.ro.business.user.dto.mapper;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import edu.msg.ro.persistence.user.entity.Role;
 
 public class RoleDTOMapperTest extends AbstractIntegrationTest {
 
-	@Inject
+	@EJB
 	RoleDTOMapper sut;
 
 	@Test

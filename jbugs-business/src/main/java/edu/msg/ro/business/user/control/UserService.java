@@ -44,6 +44,12 @@ public class UserService {
 		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
+	public UserDTO updateUser(UserDTO user) {
+		User persistedUser = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, persistedUser);
+		return userDTOMapper.mapToDTO(persistedUser);
+	}
+
 	public UserDTO deleteUser(UserDTO userDTO) {
 		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
 		if (userValidator.checkIfUserHasActiveTasks(userEntity) == false) {
