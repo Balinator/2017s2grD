@@ -1,5 +1,7 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -25,6 +27,22 @@ public class UserFacade {
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userSomething.createUser(user);
+	}
+
+	public boolean verifiedLoggedInUser(UserDTO userDTO) {
+		return userSomething.findUserToLogin(userDTO.getUsername(), userDTO.getPassword()) != null;
+	}
+
+	public List<UserDTO> findAllUser() {
+		return userSomething.findAllUser();
+	}
+
+	public void deleteUser(UserDTO userDTO) {
+		userSomething.delete(userDTO);
+	}
+
+	public UserDTO updateUser(UserDTO userDTO) {
+		return userSomething.update(userDTO);
 	}
 
 }

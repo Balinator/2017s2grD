@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -13,11 +14,19 @@ import javax.persistence.NamedQuery;
  * @author Andrei Floricel, msg systems ag
  *
  */
-@NamedQuery(name = User.FIND_USER_BY_EMAIL, query = "SELECT u from User u WHERE u.email = :email")
+@NamedQueries({ @NamedQuery(name = User.FIND_USER_BY_EMAIL, query = "SELECT u from User u WHERE u.email = :email"),
+		@NamedQuery(name = User.FIND_USER_BY_USERNAME, query = "SELECT u from User u WHERE u.username = :username"),
+		@NamedQuery(name = User.FIND_USER_TO_LOGIN, query = "SELECT u from User u WHERE u.username = :username AND u.password = :password"),
+		@NamedQuery(name = User.FIND_USER_BY_ID, query = "SELECT u from User u WHERE u.id = :id"),
+		@NamedQuery(name = User.FIND_ALL, query = "SELECT u from User u") })
 @Entity
 public class User extends AbstractEntity {
 
-	public static final String FIND_USER_BY_EMAIL = "User.findUserByEmail";
+	public static final String FIND_USER_BY_EMAIL = "User.findByEmail";
+	public static final String FIND_USER_BY_ID = "User.findById";
+	public static final String FIND_ALL = "User.findAll";
+	public static final String FIND_USER_BY_USERNAME = "User.findByUsername";
+	public static final String FIND_USER_TO_LOGIN = "User.findToLogin";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

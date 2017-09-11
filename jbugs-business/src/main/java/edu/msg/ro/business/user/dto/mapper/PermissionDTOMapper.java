@@ -1,6 +1,6 @@
 package edu.msg.ro.business.user.dto.mapper;
 
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.business.user.dto.PermissionDTO;
@@ -12,7 +12,7 @@ import edu.msg.ro.persistence.user.entity.Permission;
  * @author laszll
  *
  */
-@Dependent
+@Stateless
 public class PermissionDTOMapper extends AbstractDTOMapper<Permission, PermissionDTO> {
 
 	@Override

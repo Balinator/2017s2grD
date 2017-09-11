@@ -2,7 +2,6 @@ package edu.msg.ro.business.user.control;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.RoleDAO;
@@ -19,7 +18,7 @@ import edu.msg.ro.persistence.user.entity.Role;
 @Stateless
 public class RoleService {
 
-	@Inject
+	@EJB
 	private RoleDTOMapper roleDTOMapper;
 
 	@EJB

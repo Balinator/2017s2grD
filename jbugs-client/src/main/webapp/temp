@@ -1,0 +1,25 @@
+<p:dataTable value="#{usersBean.allUsers}" var="user" rows="5"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20,25">
+				<p:column headerText="Username" sortBy="#{user.userName}">
+					<h:outputText value="#{user.username}" rendered="#{not user.equals(usersBean.editedUserDTO)}"/>
+					<h:inputText value="#{usersBean.editedUserDTO.username}" rendered="#{user.equals(usersBean.editedUserDTO)}"/>
+				</p:column>
+				<p:column headerText="Password" sortBy="#{user.password}">
+					<h:outputText value="#{user.password}" rendered="#{not user.equals(usersBean.editedUserDTO)}"/>
+					<h:inputText value="#{usersBean.editedUserDTO.password}" rendered="#{user.equals(usersBean.editedUserDTO)}"/>
+				</p:column>
+				<p:column headerText="Action">
+					<h:commandButton value="Edit" 
+									 action="#{usersBean.setEditedUserDTO(user)}" 
+								     rendered="#{not user.equals(usersBean.editedUserDTO)}"/>
+					<h:commandButton value="Save" 
+									 action="#{usersBean.doSaveEditedUser}" 
+								     rendered="#{user.equals(usersBean.editedUserDTO)}"/>
+					<h:commandButton value="Edit2" 
+									 action="#{usersBean.setEditedUserDTO(null)}" 
+								     rendered="#{user.equals(usersBean.editedUserDTO)}"/>
+				     
+				</p:column>
+			</p:dataTable>

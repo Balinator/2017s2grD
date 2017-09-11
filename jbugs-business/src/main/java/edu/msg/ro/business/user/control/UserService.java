@@ -1,8 +1,9 @@
 package edu.msg.ro.business.user.control;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.UserDAO;
@@ -19,7 +20,7 @@ import edu.msg.ro.persistence.user.entity.User;
 @Stateless
 public class UserService {
 
-	@Inject
+	@EJB
 	private UserDTOMapper userDTOMapper;
 
 	@EJB
@@ -43,6 +44,40 @@ public class UserService {
 		if (existingUserWithSameEmail != null) {
 			throw new BusinessException("User already exists with given email " + user.getEmail());
 		}
+	}
+
+	public UserDTO findUserById(Long id) {
+		return userDTOMapper.mapToDTO(userDAO.findEntity(id));
+	}
+
+	public UserDTO findUserByUsername(String username) {
+		return userDTOMapper.mapToDTO(userDAO.findUserByUsername(username));
+	}
+
+	public List<UserDTO> findAllUser() {
+		return userDTOMapper.mapToDTOs(userDAO.findAllUser());
+	}
+
+	public UserDTO findUserToLogin(String username, String password) {
+		return userDTOMapper.mapToDTO(userDAO.findUserToLogin(username, password));
+	}
+
+	public void delete(UserDTO userDTO) {
+		// User u = new User();
+		// userDTOMapper.mapToEntity(userDTO, u);
+		// userDAO.deleteEntity(u);
+
+		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
+		// if (!userValidator.checkIfUserHasActiveTasks(userEntity)) {
+		userEntity.setActive(false);
+		// }
+	}
+
+	public UserDTO update(UserDTO userDTO) {
+		User userEntity = userDAO.findEntity(userDTO.getId());
+		userDTOMapper.mapToEntity(userDTO, userEntity);
+		User persisted = userDAO.findEntity(userEntity.getId());
+		return userDTOMapper.mapToDTO(persisted);
 	}
 
 }

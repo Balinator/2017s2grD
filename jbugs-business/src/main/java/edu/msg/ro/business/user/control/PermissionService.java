@@ -2,7 +2,6 @@ package edu.msg.ro.business.user.control;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.PermissionDAO;
@@ -19,7 +18,7 @@ import edu.msg.ro.persistence.user.entity.Permission;
 @Stateless
 public class PermissionService {
 
-	@Inject
+	@EJB
 	private PermissionDTOMapper permissionDTOMapper;
 
 	@EJB

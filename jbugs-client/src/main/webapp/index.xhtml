@@ -3,16 +3,16 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<f:view>
-	<h:head>
-		<title>JSF 2.0 Hello World</title>
-	</h:head>
-	<h:body bgcolor="white">
-		<h2>JSF 2.0 Hello World Example - welcome.xhtml</h2>
-		<h:button value="JSF Button" />
-		<p:editor />
-	</h:body>
-</f:view>
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF 2.0 Hello World</title>
+</h:head>
+<h:body>
+	<f:view>
+		<h:form>
+			<h:commandLink value="Log in" action="login" />
+		</h:form>
+	</f:view>
+</h:body>
 </html>
