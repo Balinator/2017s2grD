@@ -1,40 +1,36 @@
-package edu.msg.ro.business.user.control;
+package edu.msg.ro.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import edu.msg.ro.business.user.boundary.LoginFacade;
-import edu.msg.ro.persistence.user.entity.User;
+import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
- * @author Mihaly Fodor
+ * @author balinc
  */
-@Named
+@ManagedBean
 @RequestScoped
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = -2617767540112561117L;
 
-	private User user = new User();
+	private UserDTO user = new UserDTO();
 
-	private Date date = new Date();
-
-	@Inject
+	@EJB
 	private LoginFacade loginFacade;
 
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
@@ -42,8 +38,8 @@ public class LoginBean implements Serializable {
 	 * @param user
 	 *            the user to set
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(UserDTO userDTO) {
+		this.user = userDTO;
 	}
 
 	public void loginActionListener(ActionEvent event) {
@@ -52,34 +48,20 @@ public class LoginBean implements Serializable {
 
 	public String processLogin() {
 		if (loginFacade.isValidUser(user)) {
-			// facesContext.addMessage(null, new FacesMessage("We logged in,
-			// yey"));
-
-			getFacesContext().addMessage(null, new FacesMessage("We logged in, yey"));
-
 			HttpSession session = (HttpSession) getFacesContext().getExternalContext().getSession(false);
-
-			// HttpSession session = (HttpSession)
-			// facesContext.getExternalContext().getSession(false);
-
-			// sessionMap.put("username", user.getUserName());
-
 			session.setAttribute("username", user.getUsername());
-			return "user";
-			// Here we need to return the dashbord after login.
-			// return "loginSuccess";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome!"));
+			return "users";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("loginForm:username",
 					new FacesMessage("Password or Username wrong!"));
 			return "login";
-			// return "loginFailed";
 		}
 	}
 
 	public String processLogout() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.invalidate();
-		// facesContext.getExternalContext().invalidateSession();
 		return "login";
 	}
 
@@ -89,17 +71,7 @@ public class LoginBean implements Serializable {
 	 * 
 	 * @return {@link FacesContext}
 	 */
-	@Produces
-	@RequestScoped
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 }

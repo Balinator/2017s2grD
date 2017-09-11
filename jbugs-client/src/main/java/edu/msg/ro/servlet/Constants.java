@@ -1,4 +1,4 @@
-package servlet;
+package edu.msg.ro.servlet;
 
 public class Constants {
 	public static final String USERNAME = "username";
