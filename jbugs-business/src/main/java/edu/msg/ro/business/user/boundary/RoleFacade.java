@@ -5,8 +5,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.user.control.RoleSomething;
+import edu.msg.ro.business.user.control.RoleService;
 import edu.msg.ro.business.user.dto.RoleDTO;
 
 /**
@@ -18,22 +17,23 @@ import edu.msg.ro.business.user.dto.RoleDTO;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class RoleFacade {
+
 	@EJB
-	private RoleSomething roleSomething;
+	private RoleService roleService;
 
-	public RoleDTO createRole(RoleDTO role) throws BusinessException {
-		return roleSomething.createRole(role);
+	public RoleDTO createRole(RoleDTO role) {
+		return roleService.createRole(role);
 	}
 
-	public void deleteRole(RoleDTO role) throws BusinessException {
-		roleSomething.deleteRole(role);
+	public RoleDTO updateRole(RoleDTO role) {
+		return roleService.updateRole(role);
 	}
 
-	public RoleDTO updateRole(RoleDTO role) throws BusinessException {
-		return roleSomething.updateRole(role);
+	public void deleteRole(RoleDTO role) {
+		roleService.deleteRole(role);
 	}
 
-	public RoleDTO findRoleById(Long id) throws BusinessException {
-		return roleSomething.findById(id);
+	public RoleDTO findRoleById(Long id) {
+		return roleService.findById(id);
 	}
 }

@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.RoleDAO;
 import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
@@ -17,7 +16,7 @@ import edu.msg.ro.persistence.user.entity.Role;
  *
  */
 @Stateless
-public class RoleSomething {
+public class RoleService {
 
 	@Inject
 	private RoleDTOMapper roleDTOMapper;
@@ -25,7 +24,7 @@ public class RoleSomething {
 	@EJB
 	private RoleDAO roleDAO;
 
-	public RoleDTO createRole(RoleDTO role) throws BusinessException {
+	public RoleDTO createRole(RoleDTO role) {
 		Role roleEntity = new Role();
 		roleDTOMapper.mapToEntity(role, roleEntity);
 		roleDAO.persistEntity(roleEntity);
@@ -33,7 +32,7 @@ public class RoleSomething {
 		return roleDTOMapper.mapToDTO(persisted);
 	}
 
-	public RoleDTO updateRole(RoleDTO role) throws BusinessException {
+	public RoleDTO updateRole(RoleDTO role) {
 		Role roleEntity = roleDAO.findEntity(role.getId());
 		roleDTOMapper.mapToEntity(role, roleEntity);
 		Role persisted = roleDAO.findEntity(roleEntity.getId());
@@ -47,7 +46,7 @@ public class RoleSomething {
 		roleDAO.deleteEntity(roleEntity);
 	}
 
-	public RoleDTO findById(Long id) throws BusinessException {
+	public RoleDTO findById(Long id) {
 		return roleDTOMapper.mapToDTO(roleDAO.findEntity(id));
 	}
 

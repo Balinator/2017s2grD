@@ -85,5 +85,4 @@ public class UserDTO extends AbstractDTO {
 	public String toString() {
 		return "UserDTO [id=" + getId() + ", username=" + username + "]";
 	}
-
 }

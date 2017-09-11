@@ -1,20 +1,19 @@
-package bean;
+package edu.msg.ro.bean;
 
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.JBugsException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 @ManagedBean
 @SessionScoped
-public class UserBean {
+public class UserBean extends AbstractBean {
 	@EJB
 	UserFacade userFacade;
 
@@ -53,16 +52,18 @@ public class UserBean {
 
 	public String createNewUser() throws BusinessException {
 		userFacade.createUser(newUser);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Userul " + newUser.getFirstname() + " a fost creat!"));
+		addMessage("Userul " + newUser.getFirstname() + " a fost creat!");
 		newUser = new UserDTO();
 		return "users";
 	}
 
 	public String deleteUser(UserDTO user) {
-		userFacade.deleteUser(user);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Userul " + newUser.getFirstname() + " a fost sters!"));
+		try {
+			userFacade.deleteUser(user);
+			addMessage("Userul " + newUser.getFirstname() + " a fost sters!");
+		} catch (JBugsException e) {
+			handleExeptionI18n(e);
+		}
 		return "users";
 
 	}

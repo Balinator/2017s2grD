@@ -10,11 +10,13 @@
 	<title><h:outputText value="#{msg['login.title']}" /></title>
 </h:head>
 <h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	
 	<f:view>
 
 		<h:outputText value="#{initParam['hello_world']}"></h:outputText>
 		<br />
-		
+
 		<h:form id="loginForm">
 
 			<h:messages />
@@ -41,7 +43,7 @@
 				<f:facet name="footer">
 					<h:panelGroup style="display:block; text-align:center">
 						<h:commandButton id="submit" value="#{msg['login.loginButton']}"
-							action="#{loginBean.processLogin}"/>
+							action="#{loginBean.processLogin}" />
 					</h:panelGroup>
 				</f:facet>
 

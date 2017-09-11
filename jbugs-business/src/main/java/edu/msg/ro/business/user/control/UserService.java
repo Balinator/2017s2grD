@@ -19,7 +19,7 @@ import edu.msg.ro.persistence.user.entity.User;
  *
  */
 @Stateless
-public class UserSomething {
+public class UserService {
 
 	@EJB
 	private UserDTOMapper userDTOMapper;
@@ -70,8 +70,8 @@ public class UserSomething {
 		return userDTOMapper.mapToDTO(persisted);
 	}
 
-	public boolean verifyUserExists(UserDTO user) {
-		return userDAO.verifyUserExists(user.getUsername(), user.getPassword());
+	public boolean findUserExists(String username, String pass) {
+		return userDAO.verifyUserExists(username, pass);
 	}
 
 	public List<UserDTO> getAll() {

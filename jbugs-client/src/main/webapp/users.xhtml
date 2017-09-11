@@ -40,6 +40,40 @@
 					<h:inputText value="#{userBean.selectedUser.lastname}"
 						rendered="#{userBean.verifyUserRendered(user)}"></h:inputText>
 				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Email
+						<br />
+						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.email}"
+						rendered="#{!userBean.verifyUserRendered(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.email}"
+						rendered="#{userBean.verifyUserRendered(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Username
+						<br />
+						<h:inputText value="#{userBean.newUser.username}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.username}"
+						rendered="#{!userBean.verifyUserRendered(user)}"></h:outputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Phonenumber
+						<br />
+						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.phoneNumber}"
+						rendered="#{!userBean.verifyUserRendered(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.phoneNumber}"
+						rendered="#{userBean.verifyUserRendered(user)}"></h:inputText>
+				</p:column>
 
 				<p:column>
 					<f:facet name="header">

@@ -8,7 +8,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.user.control.UserSomething;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -22,28 +23,21 @@ import edu.msg.ro.business.user.dto.UserDTO;
 public class UserFacade {
 
 	@EJB
-	private UserSomething userSomething;
+	private UserService userService;
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
-		return userSomething.createUser(user);
+		return userService.createUser(user);
 	}
 
-	public UserDTO deleteUser(UserDTO userDTO) {
-		return userSomething.deleteUser(userDTO);
-
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
+		return userService.updateUser(user);
 	}
 
-	public UserDTO updateUser(UserDTO userDTO) throws BusinessException {
-		return userSomething.updateUser(userDTO);
-	}
-
-	public boolean verifyLoggedInUser(UserDTO user) {
-		return userSomething.verifyUserExists(user);
-
+	public UserDTO deleteUser(UserDTO userDTO) throws TechnicalExeption {
+		return userService.deleteUser(userDTO);
 	}
 
 	public List<UserDTO> getAllUsers() {
-		return userSomething.getAll();
+		return userService.getAll();
 	}
-
 }

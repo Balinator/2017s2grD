@@ -28,13 +28,10 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	public void mapToEntity(DTO dto, E entity) {
 		entity.setLockVersion(dto.getLockVersion());
-		// entity.setId(dto.getId());
-
 		mapDTOToEntityFields(dto, entity);
 	}
 
 	public List<DTO> mapToDTOs(List<E> entities) {
-		// TODO refactor with Java8 map()
 
 		List<DTO> dtos = new ArrayList<>();
 		for (E entity : entities) {
@@ -43,8 +40,6 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 		return dtos;
 	}
-
-	// TODO implement mapToEntites()
 
 	protected abstract void mapEntityToDTOFields(E entity, DTO dto);
 
