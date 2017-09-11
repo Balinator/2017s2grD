@@ -1,12 +1,14 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.user.control.UserSomething;
+import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -20,10 +22,18 @@ import edu.msg.ro.business.user.dto.UserDTO;
 public class UserFacade {
 
 	@EJB
-	private UserSomething userSomething;
+	private UserService userService;
 
 	public UserDTO createUser(UserDTO user) throws BusinessException {
-		return userSomething.createUser(user);
+		return userService.createUser(user);
 	}
 
+	public UserDTO deleteUser(UserDTO userDTO) {
+		return userService.deleteUser(userDTO);
+
+	}
+
+	public List<UserDTO> getAllUsers() {
+		return userService.getAllUsers();
+	}
 }

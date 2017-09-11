@@ -6,7 +6,7 @@
 		<artifactId>jbugs</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>jbugs-business</artifactId>
 	<name>JBugs Business</name>
 	<description>Business layer</description>
