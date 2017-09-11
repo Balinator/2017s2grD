@@ -3,36 +3,36 @@ package edu.msg.ro.business.user.dto;
 import edu.msg.ro.business.common.dto.AbstractDTO;
 
 /**
+ * 
  * DTO for {@link Role} entity.
  * 
- * @author nemeta
+ * @author balinc
  *
  */
 public class RoleDTO extends AbstractDTO {
-	private Long id;
+	private String name_EN;
 
-	private String nameRo;
-	private String nameEng;
+	private String name_RO;
 
-	public String getNameRo() {
-		return nameRo;
+	public String getName_EN() {
+		return name_EN;
 	}
 
-	public void setNameRo(String nameRo) {
-		this.nameRo = nameRo;
+	public void setName_EN(String name_EN) {
+		this.name_EN = name_EN;
 	}
 
-	public String getNameEng() {
-		return nameEng;
+	public String getName_RO() {
+		return name_RO;
 	}
 
-	public void setNameEng(String nameEng) {
-		this.nameEng = nameEng;
+	public void setName_RO(String name_RO) {
+		this.name_RO = name_RO;
 	}
 
 	@Override
 	public String toString() {
-		return "RoleDTO [id=" + getId() + ", nameRo=" + nameRo + ", nameEng=" + nameEng + "]";
+		return "RoleDTO [name_EN=" + name_EN + "]";
 	}
 
 }
