@@ -13,8 +13,8 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 	private RoleFacade srt;
 
 	@Test
-	public void RoleFacade_test() {
-		Assert.assertNotEquals("RoleFacade is not working", srt.getAllUsers(), null);
+	public void getRole_succesfull() {
+		Assert.assertNotEquals("RoleFacade is not working", srt.getAllRoles(), null);
 
 	}
 

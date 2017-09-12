@@ -23,7 +23,7 @@ public class RoleFacade {
 	@EJB
 	private RoleService roleService;
 
-	public List<Role> getAllUsers() {
+	public List<Role> getAllRoles() {
 		return roleService.getAllRoles();
 	}
 }

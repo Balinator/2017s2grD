@@ -14,8 +14,8 @@ public class RoleDAOTest extends AbstractIntegrationTest {
 	private RoleDAO dao;
 
 	@Test
-	public void RoleDAO_test() {
-		Assert.assertNotEquals("RoleDAO is not working", dao.findAll(), null);
+	public void getRole_succesfull() {
+		Assert.assertNotEquals("RoleDAO is not working", dao.getAll(), null);
 
 	}
 }
