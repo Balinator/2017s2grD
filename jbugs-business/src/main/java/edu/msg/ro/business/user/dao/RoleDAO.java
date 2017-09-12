@@ -22,7 +22,7 @@ public class RoleDAO extends AbstractDao<Role> {
 		return Role.class;
 	}
 
-	public List<Role> findAll() {
+	public List<Role> getAll() {
 		TypedQuery<Role> query = this.em.createNamedQuery(Role.FIND_All_ROLES, Role.class);
 		return query.getResultList();
 	}

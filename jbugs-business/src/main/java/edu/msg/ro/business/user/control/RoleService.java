@@ -21,6 +21,6 @@ public class RoleService {
 	private RoleDAO roleDAO;
 
 	public List<Role> getAllRoles() {
-		return roleDAO.findAll();
+		return roleDAO.getAll();
 	}
 }
