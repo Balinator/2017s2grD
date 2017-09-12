@@ -1,10 +1,13 @@
 package edu.msg.ro.persistence.user.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -28,6 +31,12 @@ public class User extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ManyToMany
+	// @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name =
+	// "user_id", referencedColumnName = "id"), inverseJoinColumns =
+	// @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private List<Role> roles;
+
 	@Column
 	private String firstname;
 
@@ -48,6 +57,14 @@ public class User extends AbstractEntity {
 
 	@Column
 	private boolean active;
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 	public String getPassword() {
 		return password;
