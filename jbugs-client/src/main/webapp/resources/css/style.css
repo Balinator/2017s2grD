@@ -2,4 +2,21 @@
 
 body {
 	background-color: #F0F0F0;
+	margin: 0;
+}
+.header-class{
+	background: #906090;
+	padding: 1%;
+	overflow: auto;
+}
+.header-class-right{
+	float: right;
+}
+.header-class-left{
+	float: left;
+}
+.header-class-flag{
+	width: 50px;
+	height: 50px;
+	padding: 10px;
 }
