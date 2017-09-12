@@ -1,12 +1,14 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.user.control.RoleService;
-import edu.msg.ro.business.user.dto.RoleDTO;
+import edu.msg.ro.persistence.user.entity.Role;
 
 /**
  * Boundary for role component.
@@ -21,15 +23,7 @@ public class RoleFacade {
 	@EJB
 	private RoleService roleService;
 
-	public RoleDTO createRole(RoleDTO role) {
-		return roleService.createRole(role);
-	}
-
-	public RoleDTO updateRole(RoleDTO role) {
-		return roleService.updateRole(role);
-	}
-
-	public void deleteRole(RoleDTO role) {
-		roleService.deleteRole(role);
+	public List<Role> getAllRoles() {
+		return roleService.getAllRoles();
 	}
 }

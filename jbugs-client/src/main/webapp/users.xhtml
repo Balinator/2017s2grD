@@ -18,7 +18,7 @@
 			
 			<p:messages autoUpdate="true" />
 			
-			<p:dataTable value="#{userBean.allUsers}" var="user">
+			<p:dataTable value="#{userBean.allUsers}" var="user" paginator="true" rows="5" styleClass="paginated">
 				<f:facet name="header">
 
 				</f:facet>
