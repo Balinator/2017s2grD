@@ -2,6 +2,7 @@ package edu.msg.ro.business.user.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
@@ -13,6 +14,7 @@ import edu.msg.ro.persistence.user.entity.Permission;
  * @author varadp
  *
  */
+@Stateless
 public class PermissionDAO extends AbstractDao<Permission> {
 
 	@Override
@@ -24,5 +26,4 @@ public class PermissionDAO extends AbstractDao<Permission> {
 		TypedQuery<Permission> query = this.em.createNamedQuery(Permission.FIND_ALL, Permission.class);
 		return query.getResultList();
 	}
-
 }
