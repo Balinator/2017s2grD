@@ -23,33 +23,22 @@ public class Role extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String name_EN;
+	private String name;
 
-	private String name_RO;
-
-	@Override
 	public Long getId() {
 		return id;
 	}
 
-	public String getName_EN() {
-		return name_EN;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setName_EN(String name) {
-		this.name_EN = name;
+	public String getName() {
+		return name;
 	}
 
-	public String getName_RO() {
-		return name_RO;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setName_RO(String name) {
-		this.name_RO = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Role [name_EN=" + name_EN + "]";
-	}
 }
