@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * Entity for Permission
@@ -11,8 +12,11 @@ import javax.persistence.Id;
  * @author varadp
  *
  */
+@NamedQuery(name = Permission.FIND_ALL, query = "SELECT p FROM Permission p")
 @Entity
-public class Permission {
+public class Permission extends AbstractEntity {
+
+	public static final String FIND_ALL = "Permission.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
