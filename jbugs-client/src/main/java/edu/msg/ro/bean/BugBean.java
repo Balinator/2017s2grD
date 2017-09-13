@@ -82,7 +82,7 @@ public class BugBean extends AbstractBean {
 		return selectedBug != null && bug.getId().equals(selectedBug.getId());
 	}
 
-	public String editBug() {
+	public String editBug() throws TechnicalExeption {
 		try {
 			bugFacade.updateBug(selectedBug);
 		} catch (BusinessException e) {
