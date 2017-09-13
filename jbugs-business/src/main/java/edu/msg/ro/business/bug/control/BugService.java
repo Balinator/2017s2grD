@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
@@ -24,7 +25,7 @@ public class BugService {
 	@EJB
 	private BugDAO bugDAO;
 
-	@EJB
+	@Inject
 	private BugDTOMapper bugDTOMapper;
 
 	public BugDTO createBug(BugDTO bugDTO) throws BusinessException, TechnicalExeption {
