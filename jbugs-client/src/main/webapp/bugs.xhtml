@@ -35,7 +35,7 @@
 					<f:facet name="header">
 						Description
 						<br />
-						<h:inputText value="#{bugBean.newBug.lastname}"></h:inputText>
+						<h:inputText value="#{bugBean.newBug.description}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{bug.description}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
@@ -46,16 +46,14 @@
 					<f:facet name="header">
 						TargetDate
 						<br />
-						<h:inputText value="#{bugBean.newBug.targetdate}"></h:inputText>
+						<h:inputText value="#{bugBean.newBug.targetDate}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.targetdate}"></h:outputText>
+					<h:outputText value="#{bug.targetDate}"></h:outputText>
 				</p:column>
 
 			</p:dataTable>
-
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 		</h:form>
-
 	</f:view>
 </h:body>
 </html>
