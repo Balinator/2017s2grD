@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import edu.msg.ro.persistence.common.entity.AbstractEntity;
+
 /**
  * 
  * Entity for Role.

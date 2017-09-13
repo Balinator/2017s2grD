@@ -1,9 +1,13 @@
-package edu.msg.ro.persistence.user.entity;
+package edu.msg.ro.persistence.bug.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
 /**
  * Entity for the Bug.
@@ -11,8 +15,11 @@ import javax.persistence.Id;
  * @author balinc
  *
  */
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
 @Entity
 public class Bug extends AbstractEntity {
+
+	public static final String FIND_ALL = "Bug.FIND_ALL";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +38,10 @@ public class Bug extends AbstractEntity {
 	private int status;
 
 	private int assigned;
+
+	private String version;
+
+	private String fixedIn;
 
 	private byte[] attachment;
 
@@ -96,6 +107,22 @@ public class Bug extends AbstractEntity {
 
 	public void setAssigned(int assigned) {
 		this.assigned = assigned;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getFixedIn() {
+		return fixedIn;
+	}
+
+	public void setFixedIn(String fixedIn) {
+		this.fixedIn = fixedIn;
 	}
 
 	public byte[] getAttachment() {

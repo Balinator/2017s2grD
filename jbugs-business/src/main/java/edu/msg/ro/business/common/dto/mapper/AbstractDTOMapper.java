@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
-import edu.msg.ro.persistence.user.entity.AbstractEntity;
+import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
 public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends AbstractDTO> {
 

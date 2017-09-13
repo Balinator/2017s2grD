@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import edu.msg.ro.persistence.common.entity.AbstractEntity;
+
 /**
  * Entity for the User.
  * 
