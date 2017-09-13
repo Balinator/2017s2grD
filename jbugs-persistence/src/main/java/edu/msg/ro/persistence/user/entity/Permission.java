@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
+import edu.msg.ro.persistence.common.entity.AbstractEntity;
+
 /**
  * Entity for Permission
  * 
