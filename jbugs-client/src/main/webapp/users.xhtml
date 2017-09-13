@@ -58,7 +58,9 @@
 					<f:facet name="header">
 						Email
 						<br />
-						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
+						<h:inputText value="#{userBean.newUser.email}">
+							<f:validator validatorId="emailValidator" />
+						</h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.email}"
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
