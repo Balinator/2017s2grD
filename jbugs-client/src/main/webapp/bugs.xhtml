@@ -38,6 +38,7 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						TargetDate
@@ -46,6 +47,73 @@
 					<h:outputText value="#{bug.targetDate}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
+				
+				
+				<p:column>
+					<f:facet name="header">
+						Severity
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.severity}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						author
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.author}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						status
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.status}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						assigned
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.assigned}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						version
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.version}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						fixedIn
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.fixedIn}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						attachment
+						<br />
+					</f:facet>
+					<h:outputText value="#{bug.attachment}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				</p:column>
+				
+				
 
 			</p:dataTable>
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
