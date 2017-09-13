@@ -1,7 +1,6 @@
 package edu.msg.ro.bean;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -11,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
+import edu.msg.ro.bean.LanguageBean.Language;
 import edu.msg.ro.business.user.boundary.LoginFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
@@ -19,7 +19,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
  */
 @ManagedBean
 @RequestScoped
-public class LoginBean implements Serializable {
+public class LoginBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = -2617767540112561117L;
 
@@ -53,9 +53,6 @@ public class LoginBean implements Serializable {
 			session.setAttribute("username", user.getUsername());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome!"));
 
-			// @Todo - dynamic
-			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
-
 			return "users";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("loginForm:username",
@@ -67,6 +64,7 @@ public class LoginBean implements Serializable {
 	public String processLogout() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.invalidate();
+		LanguageBean.setLanguage(Language.DEFAULT);
 		return "login";
 	}
 

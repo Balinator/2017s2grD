@@ -11,8 +11,8 @@
 					<h:outputText value="#{msg['header.loginName']}"/><h:outputText value="#{sessionScope['username']}"/>
 				</h2>
 				<h:form>
-					<p:commandLink action="#{loginBean.processLogout}"
-						value="#{msg['general.logout']}" icon="ui-icon-star" />
+					<h:commandLink action="#{loginBean.processLogout}"
+						value="#{msg['general.logout']}"/>
 				</h:form>
 			</h:panelGroup>
 			<h:panelGroup layout="block"
