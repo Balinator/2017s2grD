@@ -1,4 +1,4 @@
-package edu.msg.ro.persistence.user.entity;
+package edu.msg.ro.persistence.common.entity;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
