@@ -64,4 +64,12 @@ public class Role extends AbstractEntity {
 		this.name = name;
 	}
 
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
 }
