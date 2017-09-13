@@ -4,23 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title><h:outputText value="#{msg['login.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css"  />
 </h:head>
 <h:body>
 	<f:view>
-
 		<h:outputText value="#{initParam['hello_world']}"></h:outputText>
-		<br />
-		<h:outputText value="Ola, #{initParam['hello_world']}"></h:outputText>
-
 		<h:form id="loginForm">
-
 			<h:messages />
-
-
 			<h:panelGrid id="loginPanel" columns="3" cellpadding="5"
 				cellspacing="5">
 				<f:facet name="header">
@@ -46,11 +40,8 @@
 							actionListener="#{loginBean.loginActionListener}" />
 					</h:panelGroup>
 				</f:facet>
-
 			</h:panelGrid>
-
 		</h:form>
-
 	</f:view>
 </h:body>
 </html>

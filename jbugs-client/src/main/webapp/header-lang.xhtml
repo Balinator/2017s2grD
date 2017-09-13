@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:panelGroup layout="block">
+		<h:form>
+			<h:commandLink action="#{langvigeBean.setEnglish}">
+			    <h:graphicImage styleClass="header-class-flag" value="https://www.belko.nl/wp-content/themes/belko/img/flags/flag-en.svg" />
+			</h:commandLink>
+			<h:commandLink action="#{langvigeBean.setRomanian}">
+			    <h:graphicImage styleClass="header-class-flag" value="http://flagpedia.net/data/flags/ultra/ro.png" />
+			</h:commandLink>
+		</h:form>
+	</h:panelGroup>
+</ui:composition>
