@@ -10,6 +10,7 @@ import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
+import edu.msg.ro.business.user.util.UsernameGenerator;
 import edu.msg.ro.business.user.validation.UserValidator;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -31,10 +32,15 @@ public class UserService {
 	@EJB
 	UserValidator userValidator;
 
+	@EJB
+	UsernameGenerator usernameGenerator;
+
 	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		validateUserData(user);
 
 		User userEntity = new User();
+		String username = usernameGenerator.createUsername(user);
+		user.setUsername(username);
 		userDTOMapper.mapToEntity(user, userEntity);
 
 		userEntity.setActive(true);
