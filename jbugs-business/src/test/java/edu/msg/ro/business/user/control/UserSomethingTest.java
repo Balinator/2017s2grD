@@ -13,7 +13,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 public class UserSomethingTest extends AbstractIntegrationTest {
 
 	@EJB
-	private UserService sut;
+	private UserService uService;
 
 	@Test
 	public void createUser_EmailValidationFail() throws BusinessException, TechnicalExeption {
@@ -22,7 +22,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 		testUser.setLastname("Doe");
 		testUser.setEmail("unique@mail.com");
 
-		UserDTO createdUser = sut.createUser(testUser);
+		UserDTO createdUser = uService.createUser(testUser);
 
 		UserDTO testUser2 = new UserDTO();
 		testUser2.setFirstname("Mary");
@@ -30,7 +30,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 		testUser2.setEmail("unique@mail.com");
 
 		try {
-			UserDTO createdUser2 = sut.createUser(testUser2);
+			UserDTO createdUser2 = uService.createUser(testUser2);
 		} catch (BusinessException e) {
 			Assert.assertEquals("User already exists with given email unique@mail.com", e.getMessage());
 			return;

@@ -6,6 +6,11 @@ import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
+/**
+ * 
+ * @author balinc
+ *
+ */
 @Dependent
 public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 

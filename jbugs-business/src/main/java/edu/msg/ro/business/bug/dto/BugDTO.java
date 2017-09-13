@@ -2,6 +2,7 @@ package edu.msg.ro.business.bug.dto;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;
+import edu.msg.ro.persistence.user.entity.User;
 
 /**
  * Mapper for {@link Bug} and {@link BugDTO}.
@@ -19,11 +20,11 @@ public class BugDTO extends AbstractDTO {
 
 	private String severity;
 
-	private int author;
+	private User author;
 
 	private int status;
 
-	private int assigned;
+	private User assigned;
 
 	private String version;
 
@@ -63,11 +64,11 @@ public class BugDTO extends AbstractDTO {
 		this.severity = severity;
 	}
 
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -79,11 +80,11 @@ public class BugDTO extends AbstractDTO {
 		this.status = status;
 	}
 
-	public int getAssigned() {
+	public User getAssigned() {
 		return assigned;
 	}
 
-	public void setAssigned(int assigned) {
+	public void setAssigned(User assigned) {
 		this.assigned = assigned;
 	}
 

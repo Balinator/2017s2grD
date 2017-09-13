@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -18,7 +18,7 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author Andrei Floricel, msg systems ag
  *
  */
-@Dependent
+@Stateless
 public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 	@EJB
 	private UserPassword userPass;

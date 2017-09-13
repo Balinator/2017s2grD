@@ -1,14 +1,14 @@
 package edu.msg.ro.business.user.validation;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
-@Dependent
+@Stateless
 public class UserValidator {
 
 	@EJB
