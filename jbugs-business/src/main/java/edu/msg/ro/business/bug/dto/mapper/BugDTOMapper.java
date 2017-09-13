@@ -1,12 +1,17 @@
 package edu.msg.ro.business.bug.dto.mapper;
 
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
-@Dependent
+/**
+ * 
+ * @author balinc
+ *
+ */
+@Stateless
 public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 
 	@Override

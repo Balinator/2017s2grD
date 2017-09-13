@@ -6,8 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
+import edu.msg.ro.persistence.user.entity.User;
 
 /**
  * Entity for the Bug.
@@ -33,11 +35,13 @@ public class Bug extends AbstractEntity {
 
 	private String severity;
 
-	private int author;
+	@OneToOne
+	private User author;
 
 	private int status;
 
-	private int assigned;
+	@OneToOne
+	private User assigned;
 
 	private String version;
 
@@ -85,11 +89,11 @@ public class Bug extends AbstractEntity {
 		this.severity = severity;
 	}
 
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -101,11 +105,11 @@ public class Bug extends AbstractEntity {
 		this.status = status;
 	}
 
-	public int getAssigned() {
+	public User getAssigned() {
 		return assigned;
 	}
 
-	public void setAssigned(int assigned) {
+	public void setAssigned(User assigned) {
 		this.assigned = assigned;
 	}
 

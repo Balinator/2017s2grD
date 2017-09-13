@@ -16,8 +16,7 @@
 
 			<p:messages autoUpdate="true" />
 
-			<p:dataTable value="#{bugBean.allBugs}" var="bug" paginator="true"
-				rows="25" styleClass="paginated">
+			<p:dataTable value="createBug" var="createbug">
 				<f:facet name="header">
 
 				</f:facet>
@@ -25,98 +24,93 @@
 					<f:facet name="header">
 						Title
 						<br />
+						<h:inputText value="#{bugBean.newBug.title}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.title}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						Description
 						<br />
+						<h:inputText value="#{bugBean.newBug.description}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.description}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
-				
 				<p:column>
 					<f:facet name="header">
 						TargetDate
 						<br />
+						<p:calendar id="popup" value="#{bugBean.newBug.targetDate}" />
 					</f:facet>
-					<h:outputText value="#{bug.targetDate}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
-				
 				
 				<p:column>
 					<f:facet name="header">
-						Severity
+						severity
 						<br />
+						<h:inputText value="#{bugBean.newBug.severity}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.severity}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						author
 						<br />
+						<h:inputText value="#{bugBean.newBug.author}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.author}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						status
 						<br />
+						<h:inputText value="#{bugBean.newBug.status}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.status}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						assigned
 						<br />
+						<h:inputText value="#{bugBean.newBug.assigned}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.assigned}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						version
 						<br />
+						<h:inputText value="#{bugBean.newBug.version}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.version}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						fixedIn
 						<br />
+						<h:inputText value="#{bugBean.newBug.fixedIn}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.fixedIn}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						attachment
 						<br />
+						<h:inputText value="#{bugBean.newBug.attachment}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.attachment}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
-				
-				
 
+				<p:column>
+					<f:facet name="header">
+						Action
+						<br />
+						<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
+					</f:facet>
+				</p:column>
 			</p:dataTable>
-			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
+
+
+
+
 		</h:form>
 	</f:view>
 </h:body>

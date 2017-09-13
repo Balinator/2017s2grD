@@ -10,6 +10,7 @@ import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 
 /****
  * Bug Bean.****
@@ -50,11 +51,11 @@ public class BugBean extends AbstractBean {
 
 	}
 
-	public String createNewBug() throws BusinessException {
+	public void createNewBug() throws BusinessException, TechnicalExeption {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		return "bugs";
+		// return "bugs";
 	}
 
 	public String deleteBug(BugDTO bug) {

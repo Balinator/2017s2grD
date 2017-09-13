@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
+import edu.msg.ro.business.user.util.UserGenerator;
 import edu.msg.ro.business.user.validation.UserValidator;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -23,19 +23,24 @@ import edu.msg.ro.persistence.user.entity.User;
 @Stateless
 public class UserService {
 
-	@Inject
+	@EJB
 	private UserDTOMapper userDTOMapper;
 
 	@EJB
 	private UserDAO userDAO;
 
-	@Inject
+	@EJB
 	UserValidator userValidator;
+
+	@EJB
+	UserGenerator usernameGenerator;
 
 	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		validateUserData(user);
 
 		User userEntity = new User();
+		String username = usernameGenerator.createUsername(user);
+		user.setUsername(username);
 		userDTOMapper.mapToEntity(user, userEntity);
 
 		userEntity.setActive(true);

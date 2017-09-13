@@ -23,6 +23,7 @@
 				<f:facet name="header">
 
 				</f:facet>
+
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.firstname']}<br />
 						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
@@ -34,6 +35,7 @@
 				</p:column>
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.lastname']}<br />
+
 						<h:inputText value="#{userBean.newUser.lastname}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.lastname}"
@@ -42,15 +44,18 @@
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
 
+
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['login.username']}<br />
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
 				</p:column>
 
+
 				<p:column style="text-align: center;">
 					<f:facet name="header">Email<br />
 						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
+
 					</f:facet>
 					<h:outputText value="#{user.email}"
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
@@ -60,6 +65,7 @@
 
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.phonenumber']}<br />
+
 						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.phoneNumber}"
@@ -68,8 +74,10 @@
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
 
+
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['login.password']}<br />
+
 						<h:inputText value="#{userBean.newUser.password}"></h:inputText>
 					</f:facet>
 					<h:outputText value=""
@@ -79,8 +87,10 @@
 				</p:column>
 
 				<p:column>
+
 					<f:facet name="header">#{msg['users.active']}<br /></f:facet>
 					<h:outputText value="#{msg['users.active']}"
+
 						rendered="#{user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:outputText value="#{msg['users.inactive']}"
 						rendered="#{!user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
@@ -92,8 +102,10 @@
 
 				</p:column>
 				<p:column>
+
 					<f:facet name="header">#{msg['users.action']}<br />
 						<h:commandButton value="#{msg['users.create']}" action="#{userBean.createNewUser}"></h:commandButton>
+
 					</f:facet>
 
 					<h:commandButton value="#{msg['users.update']}"
