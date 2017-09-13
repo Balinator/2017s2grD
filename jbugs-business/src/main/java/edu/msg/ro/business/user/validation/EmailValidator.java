@@ -8,17 +8,23 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- * @author balinc
+ * Class for checking email format
+ * 
+ * @author nemeta
  *
  */
-@FacesValidator("passwordValidator")
-public class PasswordValidator implements Validator {
-
+@FacesValidator("emailValidator")
+public class EmailValidator implements Validator {
+	/**
+	 * Check email format with regex
+	 */
 	@Override
 	public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
-		String stringValue = value.toString();
-		if (stringValue.length() < 3) {
-			FacesMessage message = new FacesMessage("We have a wrong password!");
+
+		String email = value.toString();
+
+		if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@+[msggroup.com]{12}$")) {
+			FacesMessage message = new FacesMessage("Email format needed: [adress]@msggroup.com");
 			throw new ValidatorException(message);
 		}
 

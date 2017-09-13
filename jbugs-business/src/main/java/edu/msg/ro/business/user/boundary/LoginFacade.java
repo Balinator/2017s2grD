@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
-import edu.msg.ro.business.user.util.UserPassword;
+import edu.msg.ro.business.user.util.UserGenerator;
 
 /**
  * @author balinc
@@ -20,7 +20,7 @@ public class LoginFacade {
 	private UserService userService;
 
 	@EJB
-	private UserPassword userPass;
+	private UserGenerator userPass;
 
 	public boolean isValidUser(UserDTO userDTO) {
 		String passwordHash = null;
