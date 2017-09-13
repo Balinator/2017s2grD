@@ -1,9 +1,14 @@
 package edu.msg.ro.persistence.user.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 /**
@@ -24,6 +29,11 @@ public class Role extends AbstractEntity {
 	private Long id;
 
 	private String name;
+
+	@ManyToMany
+	@JoinTable(name = "Role_Permission", joinColumns = @JoinColumn(name = "idRole"), inverseJoinColumns = {
+			@JoinColumn(name = "idPermission") })
+	private List<Permission> permissions;
 
 	public Long getId() {
 		return id;

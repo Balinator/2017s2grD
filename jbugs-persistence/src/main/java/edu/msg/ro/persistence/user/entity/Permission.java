@@ -1,9 +1,12 @@
 package edu.msg.ro.persistence.user.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 /**
@@ -25,6 +28,9 @@ public class Permission extends AbstractEntity {
 	private String name;
 
 	private String detail;
+
+	@ManyToMany(mappedBy = "permissions")
+	private List<Role> roles;
 
 	public Long getId() {
 		return id;
