@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
 public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends AbstractDTO> {
@@ -26,7 +27,7 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	}
 
-	public void mapToEntity(DTO dto, E entity) {
+	public void mapToEntity(DTO dto, E entity) throws TechnicalExeption {
 		entity.setLockVersion(dto.getLockVersion());
 		mapDTOToEntityFields(dto, entity);
 	}
@@ -46,6 +47,6 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	protected abstract void mapEntityToDTOFields(E entity, DTO dto);
 
-	protected abstract void mapDTOToEntityFields(DTO dto, E entity);
+	protected abstract void mapDTOToEntityFields(DTO dto, E entity) throws TechnicalExeption;
 
 }

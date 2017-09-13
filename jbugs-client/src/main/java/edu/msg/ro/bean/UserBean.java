@@ -75,7 +75,7 @@ public class UserBean extends AbstractBean {
 		return selectedUser != null && user.getId().equals(selectedUser.getId());
 	}
 
-	public String editUser() {
+	public String editUser() throws TechnicalExeption {
 		try {
 			userFacade.updateUser(selectedUser);
 		} catch (BusinessException e) {

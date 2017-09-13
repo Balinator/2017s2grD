@@ -51,7 +51,7 @@ public class UserService {
 		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
-	public UserDTO updateUser(UserDTO user) {
+	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
 		User persistedUser = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, persistedUser);
 		return userDTOMapper.mapToDTO(persistedUser);

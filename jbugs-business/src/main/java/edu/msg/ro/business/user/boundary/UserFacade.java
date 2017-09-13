@@ -29,7 +29,7 @@ public class UserFacade {
 		return userService.createUser(user);
 	}
 
-	public UserDTO updateUser(UserDTO user) throws BusinessException {
+	public UserDTO updateUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		return userService.updateUser(user);
 	}
 

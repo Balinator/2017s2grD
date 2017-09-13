@@ -2,6 +2,7 @@ package edu.msg.ro.business.bug.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
@@ -13,6 +14,7 @@ import edu.msg.ro.persistence.bug.entity.Bug;
  * @author balinc
  *
  */
+@Stateless
 public class BugDAO extends AbstractDao<Bug> {
 
 	@Override
