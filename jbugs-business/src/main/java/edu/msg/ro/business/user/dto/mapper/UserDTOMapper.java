@@ -20,6 +20,7 @@ import edu.msg.ro.persistence.user.entity.User;
  */
 @Stateless
 public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
+
 	@EJB
 	private UserPassword userPass;
 
