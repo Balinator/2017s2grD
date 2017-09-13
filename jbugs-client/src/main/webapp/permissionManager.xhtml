@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title><h:outputText value="#{msg['permissionManager.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css"  />
+</h:head>
+<h:body>
+	<f:view>
+		<ui:include src="/header.xhtml"/>
+		<h:form id="userForm">
+			<p:messages autoUpdate="true" />
+			<!--<p:dataTable value="#{permissionManagerBean.allPermission}" var="permission">
+				<f:facet name="header">
+				</f:facet>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['permissionManager.name']}" />
+					</f:facet>
+					
+					<h:outputText value="#{msg[permission.name]}"/>
+				</p:column>
+				
+				<ui:repeat var="role" value="permission.roles">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg[role.name]}" />
+						</f:facet>
+						
+						<h:selectBooleanCheckbox value="#{permissionManagerBean.isChackboxChacked(permission,role)}" onchange="submit()"
+							valueChangeListener="#{permissionManagerBean.permissionRoleChanged(permission,role)}"/>
+					</p:column>
+				</ui:repeat>
+				
+				
+
+			</p:dataTable> -->
+			<p:dataTable value="#{permissionManagerBean.allRoles}" var="role">
+				<f:facet name="header">
+				</f:facet>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['permissionManager.name']}" />
+					</f:facet>
+					
+					<h:outputText value="#{msg[role.name]}"/>
+				</p:column>
+				
+				<ui:repeat var="permission" value="role.permissions">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg[permission.name]}" />
+						</f:facet>
+						
+						<h:selectBooleanCheckbox value="#{permissionManagerBean.isChackboxChacked(permission,role)}" onchange="submit()"
+							valueChangeListener="#{permissionManagerBean.permissionRoleChanged(permission,role)}"/>
+					</p:column>
+				</ui:repeat>
+				
+				
+
+			</p:dataTable>
+		</h:form>
+	</f:view>
+</h:body>
+</html>
