@@ -35,6 +35,17 @@ public class Role extends AbstractEntity {
 			@JoinColumn(name = "idPermission") })
 	private List<Permission> permissions;
 
+	@ManyToMany(mappedBy = "roles")
+	private List<User> users;
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	public Long getId() {
 		return id;
 	}
