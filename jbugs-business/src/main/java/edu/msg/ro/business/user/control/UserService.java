@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -24,13 +23,13 @@ import edu.msg.ro.persistence.user.entity.User;
 @Stateless
 public class UserService {
 
-	@Inject
+	@EJB
 	private UserDTOMapper userDTOMapper;
 
 	@EJB
 	private UserDAO userDAO;
 
-	@Inject
+	@EJB
 	UserValidator userValidator;
 
 	@EJB
