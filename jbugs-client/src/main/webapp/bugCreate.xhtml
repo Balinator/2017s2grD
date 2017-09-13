@@ -16,8 +16,7 @@
 
 			<p:messages autoUpdate="true" />
 
-			<p:dataTable value="#{bugBean.allBugs}" var="bug" paginator="true"
-				rows="25" styleClass="paginated">
+			<p:dataTable value="createBug" var="createbug">
 				<f:facet name="header">
 
 				</f:facet>
@@ -25,30 +24,37 @@
 					<f:facet name="header">
 						Title
 						<br />
+						<h:inputText value="#{bugBean.newBug.title}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.title}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						Description
 						<br />
+						<h:inputText value="#{bugBean.newBug.description}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{bug.description}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						TargetDate
 						<br />
+						<p:calendar id="popup" value="#{bugBean.newBug.targetDate}" />
 					</f:facet>
-					<h:outputText value="#{bug.targetDate}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
+				<p:column>
+					<f:facet name="header">
+						Action
+						<br />
+						<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
+					</f:facet>
+				</p:column>
 			</p:dataTable>
-			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
+
+
+
+
 		</h:form>
 	</f:view>
 </h:body>
