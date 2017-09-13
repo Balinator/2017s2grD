@@ -25,7 +25,7 @@
 				</f:facet>
 				<p:column>
 					<f:facet name="header">
-						Firstname
+						<h:outputText value="#{msg['user.firstname']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
 					</f:facet>
@@ -36,7 +36,7 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						Lastname
+						<h:outputText value="#{msg['user.lastname']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.lastname}"></h:inputText>
 					</f:facet>
@@ -48,7 +48,7 @@
 
 				<p:column>
 					<f:facet name="header">
-						Username
+						<h:outputText value="#{msg['user.username']}" />
 						<br />
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
@@ -56,7 +56,7 @@
 
 				<p:column>
 					<f:facet name="header">
-						Email
+						<h:outputText value="#{msg['user.email']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.email}">
 							<!--  <f:validator validatorId="emailValidator" /> -->
@@ -70,7 +70,7 @@
 
 				<p:column>
 					<f:facet name="header">
-						Phonenumber
+						<h:outputText value="#{msg['user.phonenumber']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
 					</f:facet>
@@ -82,7 +82,7 @@
 
 				<p:column>
 					<f:facet name="header">
-						Password
+						<h:outputText value="#{msg['user.password']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.password}"></h:inputText>
 					</f:facet>
@@ -94,7 +94,7 @@
 
 				<p:column>
 					<f:facet name="header">
-						Active
+						<h:outputText value="#{msg['user.active']}" />
 						<br />
 
 					</f:facet>
@@ -111,7 +111,7 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						Action
+						<h:outputText value="#{msg['user.action']}" />
 						<br />
 						<h:commandButton value="Create" action="#{userBean.createNewUser}"></h:commandButton>
 					</f:facet>
