@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 public class UserFacadeTest extends AbstractIntegrationTest {
@@ -15,7 +16,7 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	private UserFacade sut;
 
 	@Test
-	public void createUser_succesfull() throws BusinessException {
+	public void createUser_succesfull() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
 		testUser.setFirstname("John");
 		testUser.setLastname("Doe");
@@ -26,7 +27,7 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	}
 
 	@Test
-	public void createUser_ActiveByDefault() throws BusinessException {
+	public void createUser_ActiveByDefault() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
 
 		UserDTO createdUser = sut.createUser(testUser);

@@ -32,7 +32,7 @@ public class UserService {
 	@Inject
 	UserValidator userValidator;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException {
+	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		validateUserData(user);
 
 		User userEntity = new User();
@@ -45,7 +45,7 @@ public class UserService {
 		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
-	public UserDTO updateUser(UserDTO user) {
+	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
 		User persistedUser = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, persistedUser);
 		return userDTOMapper.mapToDTO(persistedUser);

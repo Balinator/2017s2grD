@@ -44,14 +44,48 @@
 					<h:inputText value="#{userBean.selectedUser.lastname}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						Username
 						<br />
-						<h:inputText value="#{userBean.newUser.username}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
 				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Email
+						<br />
+						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.email}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.email}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Phonenumber
+						<br />
+						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
+					</f:facet>
+					<h:outputText value="#{user.phoneNumber}"
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
+					<h:inputText value="#{userBean.selectedUser.phoneNumber}"
+						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						Password
+						<br />
+						<h:inputText value="#{userBean.newUser.password}"></h:inputText>
+					</f:facet>
+					<h:outputText value=""></h:outputText>
+				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						Active

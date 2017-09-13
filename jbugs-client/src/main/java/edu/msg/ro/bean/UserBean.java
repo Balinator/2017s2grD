@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
@@ -43,7 +44,7 @@ public class UserBean extends AbstractBean {
 
 	}
 
-	public String createNewUser() throws BusinessException {
+	public String createNewUser() throws BusinessException, TechnicalExeption {
 		userFacade.createUser(newUser);
 		addMessage("Userul " + newUser.getFirstname() + " a fost creat!");
 		newUser = new UserDTO();
@@ -74,7 +75,7 @@ public class UserBean extends AbstractBean {
 		return selectedUser != null && user.getId().equals(selectedUser.getId());
 	}
 
-	public String editUser() {
+	public String editUser() throws TechnicalExeption {
 		try {
 			userFacade.updateUser(selectedUser);
 		} catch (BusinessException e) {

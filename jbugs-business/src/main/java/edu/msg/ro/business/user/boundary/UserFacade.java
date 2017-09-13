@@ -25,11 +25,11 @@ public class UserFacade {
 	@EJB
 	private UserService userService;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException {
+	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		return userService.createUser(user);
 	}
 
-	public UserDTO updateUser(UserDTO user) throws BusinessException {
+	public UserDTO updateUser(UserDTO user) throws BusinessException, TechnicalExeption {
 		return userService.updateUser(user);
 	}
 

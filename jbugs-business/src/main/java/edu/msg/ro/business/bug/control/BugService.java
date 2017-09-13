@@ -9,6 +9,7 @@ import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.mapper.BugDTOMapper;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -26,7 +27,7 @@ public class BugService {
 	@EJB
 	private BugDTOMapper bugDTOMapper;
 
-	public BugDTO createBug(BugDTO bugDTO) throws BusinessException {
+	public BugDTO createBug(BugDTO bugDTO) throws BusinessException, TechnicalExeption {
 
 		Bug bugEntity = new Bug();
 		bugDTOMapper.mapToEntity(bugDTO, bugEntity);
@@ -35,7 +36,7 @@ public class BugService {
 		return bugDTOMapper.mapToDTO(persistedBug);
 	}
 
-	public BugDTO updateBug(BugDTO bugDTO) {
+	public BugDTO updateBug(BugDTO bugDTO) throws TechnicalExeption {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
 		bugDTOMapper.mapToEntity(bugDTO, persistedBug);
 		return bugDTOMapper.mapToDTO(persistedBug);

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 public class UserSomethingTest extends AbstractIntegrationTest {
@@ -15,7 +16,7 @@ public class UserSomethingTest extends AbstractIntegrationTest {
 	private UserService sut;
 
 	@Test
-	public void createUser_EmailValidationFail() throws BusinessException {
+	public void createUser_EmailValidationFail() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
 		testUser.setFirstname("John");
 		testUser.setLastname("Doe");

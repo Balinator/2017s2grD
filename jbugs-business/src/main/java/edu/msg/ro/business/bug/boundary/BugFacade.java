@@ -25,11 +25,11 @@ public class BugFacade {
 	@EJB
 	private BugService bugService;
 
-	public BugDTO createBug(BugDTO bug) throws BusinessException {
+	public BugDTO createBug(BugDTO bug) throws BusinessException, TechnicalExeption {
 		return bugService.createBug(bug);
 	}
 
-	public BugDTO updateBug(BugDTO bug) throws BusinessException {
+	public BugDTO updateBug(BugDTO bug) throws BusinessException, TechnicalExeption {
 		return bugService.updateBug(bug);
 	}
 
