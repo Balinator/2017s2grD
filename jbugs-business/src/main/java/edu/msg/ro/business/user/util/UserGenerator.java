@@ -61,7 +61,7 @@ public class UserGenerator {
 	 * @return true/false
 	 * @throws TechnicalExeption
 	 */
-	public boolean checkIfUsernameExists(String username) {
+	private boolean checkIfUsernameExists(String username) {
 		User existingUser = new User();
 		try {
 

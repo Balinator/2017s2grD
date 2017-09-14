@@ -59,13 +59,15 @@
 						<h:outputText value="#{msg['user.email']}" />
 						<br />
 						<h:inputText value="#{userBean.newUser.email}">
-							<!--  <f:validator validatorId="emailValidator" /> -->
+							   
 						</h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.email}"
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.email}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+						rendered="#{userBean.verifyUserRendere(user)}">
+						<!--<f:validator validatorId="emailValidator" />-->
+					</h:inputText>
 				</p:column>
 
 				<p:column>
