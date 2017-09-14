@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+.loginPnl{
+	width: 350px; 
+	margin: 0 auto; 
+	margin-top: 40px;
+	background-color: #330033;
+}
+

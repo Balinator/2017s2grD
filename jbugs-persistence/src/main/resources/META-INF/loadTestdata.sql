@@ -5,6 +5,7 @@ INSERT INTO PERMISSION (NAME,DETAIL) VALUES ('user.management','detail');
 INSERT INTO PERMISSION (NAME,DETAIL) VALUES ('bug.management','detail');
 INSERT INTO PERMISSION (NAME,DETAIL) VALUES ('bug.close','detail');
 
+
 INSERT INTO ROLE(NAME) VALUES ('role.administrator');
 INSERT INTO ROLE(NAME) VALUES ('role.projectmanager');
 INSERT INTO ROLE(NAME)VALUES ('role.testmanager');
