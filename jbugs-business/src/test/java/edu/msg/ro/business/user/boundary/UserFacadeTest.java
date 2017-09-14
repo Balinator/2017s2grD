@@ -10,11 +10,23 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
+/**
+ * Test for {@link UserFacade} facede.
+ *
+ * @author balinc
+ *
+ */
 public class UserFacadeTest extends AbstractIntegrationTest {
 
 	@EJB
 	private UserFacade sut;
 
+	/**
+	 * Check if user insert is working.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_succesfull() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
@@ -26,10 +38,19 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 		Assert.assertNotNull("The newly persisted user should have an id!", createdUser.getId());
 	}
 
+	/**
+	 * 
+	 * Check if the user is active by default.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_ActiveByDefault() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
-
+		testUser.setFirstname("John");
+		testUser.setLastname("Doe");
+		testUser.setEmail("test@msggroup.com");
 		UserDTO createdUser = sut.createUser(testUser);
 		Assert.assertTrue("The newly persisted user should be active!", createdUser.isActive());
 	}
@@ -55,13 +76,13 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	 * @throws TechnicalExeption
 	 * @throws BusinessException
 	 */
+	@Test
 	public void createUserWithCorrectUsername() throws BusinessException, TechnicalExeption {
 		UserDTO user = new UserDTO();
 		user.setFirstname("Nemeth");
 		user.setLastname("Attila");
 		UserDTO createdUser = sut.createUser(user);
-		Assert.assertEquals("The created username should match the exrpesssion !", "AttilaN",
-				createdUser.getUsername());
+		Assert.assertEquals("The created username should match the exrpesssion !", "AttilN", createdUser.getUsername());
 	}
 
 	/**
@@ -70,17 +91,18 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	 * @throws BusinessException
 	 * @throws TechnicalExeption
 	 */
+	@Test
 	public void createUserWithExistingUsername() throws BusinessException, TechnicalExeption {
 		UserDTO user = new UserDTO();
-		user.setFirstname("Nemeth");
-		user.setLastname("Attila");
+		user.setFirstname("Fulop");
+		user.setLastname("Szabi");
 		UserDTO createdUser = sut.createUser(user);
 		UserDTO user2 = new UserDTO();
-		user2.setFirstname("Nemeth");
-		user2.setLastname("Attila");
+		user2.setFirstname("Fulop");
+		user2.setLastname("Szabi");
 		UserDTO createdUser2 = sut.createUser(user2);
-		Assert.assertEquals("The created username should match the exrpesssion !", "AttilaNe",
-				createdUser.getUsername());
+		Assert.assertEquals("The created username should match the exrpesssion !", "SzabiFu",
+				createdUser2.getUsername());
 	}
 
 }
