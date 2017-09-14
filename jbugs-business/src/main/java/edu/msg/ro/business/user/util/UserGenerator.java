@@ -29,11 +29,17 @@ public class UserGenerator {
 	 * 
 	 * @param user
 	 * @return
+	 * @throws TechnicalExeption
 	 */
-	public String createUsername(UserDTO user) {
+	public String createUsername(UserDTO user) throws TechnicalExeption {
 
 		String firstName = user.getFirstname();
 		String lastName = user.getLastname();
+
+		if (firstName == null || lastName == null) {
+			throw new TechnicalExeption();
+		}
+
 		int lastNameLength = lastName.length();
 		int firstNameLength = firstName.length();
 		StringBuilder username = new StringBuilder();
@@ -63,7 +69,6 @@ public class UserGenerator {
 	private boolean checkIfUsernameExists(String username) {
 		User existingUser = new User();
 		try {
-
 			existingUser = userDao.findUserByUsername(username);
 		} catch (TechnicalExeption e) {
 			return false;
@@ -84,10 +89,12 @@ public class UserGenerator {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
+	 * @throws TechnicalExeption
 	 */
-	public String encryptPassword(UserDTO userDTO) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		if (userDTO.getPassword() == null) {
-			return null;
+	public String encryptPassword(UserDTO userDTO)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException, TechnicalExeption {
+		if (userDTO.getPassword().isEmpty()) {
+			throw new TechnicalExeption();
 		}
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] md_password = md.digest(userDTO.getPassword().getBytes("UTF-8"));
