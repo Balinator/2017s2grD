@@ -33,14 +33,20 @@ public class UserService {
 	UserValidator userValidator;
 
 	@EJB
-	UserGenerator usernameGenerator;
+	UserGenerator userUtils;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
+	public UserDTO createUser(UserDTO user) throws TechnicalExeption, BusinessException {
 		validateUserData(user);
 
 		User userEntity = new User();
-		String username = usernameGenerator.createUsername(user);
+		String username = userUtils.createUsername(user);
 		user.setUsername(username);
+		try {
+			user.setPassword(userUtils.encryptPassword(user));
+		} catch (Exception e) {
+			throw new TechnicalExeption();
+		}
+
 		userDTOMapper.mapToEntity(user, userEntity);
 
 		userEntity.setActive(true);
