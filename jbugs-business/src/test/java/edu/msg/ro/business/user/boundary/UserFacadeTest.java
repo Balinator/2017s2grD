@@ -76,13 +76,13 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	 * @throws TechnicalExeption
 	 * @throws BusinessException
 	 */
+	@Test
 	public void createUserWithCorrectUsername() throws BusinessException, TechnicalExeption {
 		UserDTO user = new UserDTO();
 		user.setFirstname("Nemeth");
 		user.setLastname("Attila");
 		UserDTO createdUser = sut.createUser(user);
-		Assert.assertEquals("The created username should match the exrpesssion !", "AttilaN",
-				createdUser.getUsername());
+		Assert.assertEquals("The created username should match the exrpesssion !", "AttilN", createdUser.getUsername());
 	}
 
 	/**
@@ -91,17 +91,18 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	 * @throws BusinessException
 	 * @throws TechnicalExeption
 	 */
+	@Test
 	public void createUserWithExistingUsername() throws BusinessException, TechnicalExeption {
 		UserDTO user = new UserDTO();
-		user.setFirstname("Nemeth");
-		user.setLastname("Attila");
+		user.setFirstname("Fulop");
+		user.setLastname("Szabi");
 		UserDTO createdUser = sut.createUser(user);
 		UserDTO user2 = new UserDTO();
-		user2.setFirstname("Nemeth");
-		user2.setLastname("Attila");
+		user2.setFirstname("Fulop");
+		user2.setLastname("Szabi");
 		UserDTO createdUser2 = sut.createUser(user2);
-		Assert.assertEquals("The created username should match the exrpesssion !", "AttilaNe",
-				createdUser.getUsername());
+		Assert.assertEquals("The created username should match the exrpesssion !", "SzabiFu",
+				createdUser2.getUsername());
 	}
 
 }
