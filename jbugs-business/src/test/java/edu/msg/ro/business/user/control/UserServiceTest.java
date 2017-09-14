@@ -11,11 +11,24 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
+/**
+ * 
+ * Test for {@link UserService}
+ *
+ * @author balinc
+ *
+ */
 public class UserServiceTest extends AbstractIntegrationTest {
 
 	@EJB
 	private UserService uService;
 
+	/**
+	 * Test if email not containing the required format.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_EmailValidationFail() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
@@ -35,6 +48,12 @@ public class UserServiceTest extends AbstractIntegrationTest {
 		Assert.fail("Email validation should fail!");
 	}
 
+	/**
+	 * Test if fail the user insert with same email address.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_UniqueEmailFail() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();

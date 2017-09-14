@@ -10,11 +10,23 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
+/**
+ * Test for {@link UserFacade} facede.
+ *
+ * @author balinc
+ *
+ */
 public class UserFacadeTest extends AbstractIntegrationTest {
 
 	@EJB
 	private UserFacade sut;
 
+	/**
+	 * Check if user insert is working.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_succesfull() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
@@ -26,10 +38,19 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 		Assert.assertNotNull("The newly persisted user should have an id!", createdUser.getId());
 	}
 
+	/**
+	 * 
+	 * Check if the user is active by default.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void createUser_ActiveByDefault() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = new UserDTO();
-
+		testUser.setFirstname("John");
+		testUser.setLastname("Doe");
+		testUser.setEmail("test@msggroup.com");
 		UserDTO createdUser = sut.createUser(testUser);
 		Assert.assertTrue("The newly persisted user should be active!", createdUser.isActive());
 	}
