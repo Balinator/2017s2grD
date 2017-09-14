@@ -36,6 +36,7 @@ public class UserBean extends AbstractBean {
 	}
 
 	public void setSelectedUser(UserDTO selectedUser) {
+	
 		this.selectedUser = selectedUser;
 	}
 
