@@ -29,9 +29,8 @@ public class UserGenerator {
 	 * 
 	 * @param user
 	 * @return
-	 * @throws TechnicalExeption
 	 */
-	public String createUsername(UserDTO user) throws TechnicalExeption {
+	public String createUsername(UserDTO user) {
 
 		String firstName = user.getFirstname();
 		String lastName = user.getLastname();
@@ -87,6 +86,9 @@ public class UserGenerator {
 	 * @throws UnsupportedEncodingException
 	 */
 	public String encryptPassword(UserDTO userDTO) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		if (userDTO.getPassword() == null) {
+			return null;
+		}
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] md_password = md.digest(userDTO.getPassword().getBytes("UTF-8"));
 		StringBuilder sb = new StringBuilder();
