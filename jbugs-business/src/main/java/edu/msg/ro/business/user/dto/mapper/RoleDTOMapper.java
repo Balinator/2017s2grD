@@ -38,7 +38,7 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 
 	@Override
 	protected void mapDTOToEntityFields(RoleDTO dto, Role entity) throws TechnicalExeption {
-		entity.setPermissions(pdm.mapToEntities(dto.getPermission(), pd));
+		entity.setPermissions(pdm.mapToEntities(dto.getPermissions(), pd));
 		entity.setName(dto.getName());
 	}
 }

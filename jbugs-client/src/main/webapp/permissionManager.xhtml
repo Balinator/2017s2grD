@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<title><h:outputText value="#{msg['permissionManager.title']}" /></title>
@@ -14,60 +15,35 @@
 <h:body>
 	<f:view>
 		<ui:include src="/header.xhtml"/>
-		<h:form id="userForm">
+		<h:form id="form">
 			<p:messages autoUpdate="true" />
-			<!--<p:dataTable value="#{permissionManagerBean.allPermission}" var="permission">
-				<f:facet name="header">
-				</f:facet>
 				
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['permissionManager.name']}" />
-					</f:facet>
-					
-					<h:outputText value="#{msg[permission.name]}"/>
-				</p:column>
-				
-				<ui:repeat var="role" value="permission.roles">
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg[role.name]}" />
-						</f:facet>
-						
-						<h:selectBooleanCheckbox value="#{permissionManagerBean.isChackboxChacked(permission,role)}" onchange="submit()"
-							valueChangeListener="#{permissionManagerBean.permissionRoleChanged(permission,role)}"/>
-					</p:column>
-				</ui:repeat>
-				
-				
-
-			</p:dataTable> -->
-			<p:dataTable value="#{permissionManagerBean.allRoles}" var="role">
-				<f:facet name="header">
-				</f:facet>
-				
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['permissionManager.name']}" />
-					</f:facet>
-					
-					<h:outputText value="#{msg[role.name]}"/>
-				</p:column>
-				
-				<ui:repeat var="permission" value="role.permissions">
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg[permission.name]}" />
-						</f:facet>
-						
-						<h:selectBooleanCheckbox value="#{permissionManagerBean.isChackboxChacked(permission,role)}" onchange="submit()"
-							valueChangeListener="#{permissionManagerBean.permissionRoleChanged(permission,role)}"/>
-					</p:column>
-				</ui:repeat>
-				
-				
-
-			</p:dataTable>
+				<c:forEach var="role" items="#{permissionManagerBean.allRoles}">
+					<p:panel header="#{msg[role.name]}">
+						<p:panelGrid>
+							<p:row>
+								<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
+									<p:column>
+										<h:outputText value="#{msg[permission.name]}" />
+									</p:column>
+								</c:forEach>
+							</p:row>
+							<p:row>
+								<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
+									<p:column>
+										<h:outputText value="#{permission.id}" />
+										<h:outputText value="#{role.id}" />
+										<c:set var="checkboxValue" value="#{permissionManagerBean.isChackboxChacked(permission,role)}" scope="request"/>
+										<h:selectBooleanCheckbox value="#{checkboxValue}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+											<f:ajax/>
+										</h:selectBooleanCheckbox>
+									</p:column>
+								</c:forEach>
+							</p:row>
+			            </p:panelGrid>
+			        </p:panel>
+		 		</c:forEach>
+		 		
 		</h:form>
 	</f:view>
 </h:body>

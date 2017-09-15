@@ -8,7 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.user.control.PermissionService;
-import edu.msg.ro.persistence.user.entity.Permission;
+import edu.msg.ro.business.user.dto.PermissionDTO;
 
 /**
  * Boundary for permission component.
@@ -23,7 +23,7 @@ public class PermissionFacade {
 	@EJB
 	private PermissionService permissionService;
 
-	public List<Permission> getAll() {
+	public List<PermissionDTO> getAll() {
 		return permissionService.getAllPermissions();
 	}
 }

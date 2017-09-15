@@ -11,3 +11,8 @@ INSERT INTO ROLE(NAME)VALUES ('role.testmanager');
 INSERT INTO ROLE(NAME) VALUES ('role.developer');
 INSERT INTO ROLE(NAME) VALUES ('role.tester');
 INSERT INTO BUG (ID, ASSIGNED, AUTHOR, DESCRIPTION, FIXEDIN, LOCKVERSION, SEVERITY, STATUS, TARGETDATE, TITLE, VERSION) VALUES (1, 2, 1, 'sdfasdfsa', 'dsdfad', 1, 'dsfsdf', 1, 'dsafsad', 'Buggy', 'asdsad');
+
+INSERT INTO ROLE_PERMISSION(idrole, idpermission) VALUES (1,1)
+INSERT INTO ROLE_PERMISSION(idrole, idpermission) VALUES (1,2)
+INSERT INTO ROLE_PERMISSION(idrole, idpermission) VALUES (1,3)
+INSERT INTO ROLE_PERMISSION(idrole, idpermission) VALUES (5,4)

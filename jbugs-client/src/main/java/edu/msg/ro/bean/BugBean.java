@@ -10,6 +10,7 @@ import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 
 /****
  * Bug Bean.****
@@ -50,7 +51,7 @@ public class BugBean extends AbstractBean {
 
 	}
 
-	public String createNewBug() throws BusinessException {
+	public String createNewBug() throws BusinessException, TechnicalExeption {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
@@ -81,7 +82,7 @@ public class BugBean extends AbstractBean {
 		return selectedBug != null && bug.getId().equals(selectedBug.getId());
 	}
 
-	public String editBug() {
+	public String editBug() throws TechnicalExeption {
 		try {
 			bugFacade.updateBug(selectedBug);
 		} catch (BusinessException e) {

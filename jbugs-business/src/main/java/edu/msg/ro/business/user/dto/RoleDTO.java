@@ -1,10 +1,16 @@
 package edu.msg.ro.business.user.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
 
-public class RoleDTO extends AbstractDTO {
+public class RoleDTO extends AbstractDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2888638090462609294L;
 
 	private List<PermissionDTO> permission;
 
@@ -18,7 +24,7 @@ public class RoleDTO extends AbstractDTO {
 		this.name = name;
 	}
 
-	public List<PermissionDTO> getPermission() {
+	public List<PermissionDTO> getPermissions() {
 		return permission;
 	}
 
