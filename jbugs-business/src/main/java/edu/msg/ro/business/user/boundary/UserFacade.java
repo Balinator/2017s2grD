@@ -1,5 +1,6 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -40,5 +41,16 @@ public class UserFacade {
 
 	public List<UserDTO> getAllUsers() {
 		return userService.getAllUsers();
+	}
+
+	public List<UserDTO> getAllUserByQuery(String query) {
+		List<UserDTO> queried = new ArrayList<UserDTO>();
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().startsWith(query)) {
+				queried.add(userDTO);
+			}
+		}
+		return queried;
+		// return bugService.getAllBugs();
 	}
 }

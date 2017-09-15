@@ -51,11 +51,17 @@ public class BugBean extends AbstractBean {
 
 	}
 
-	public void createNewBug() throws BusinessException, TechnicalExeption {
+	/**
+	 * Just create a bug without return.
+	 * 
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	public String createNewBug() throws BusinessException, TechnicalExeption {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		// return "bugs";
+		return "bugs";
 	}
 
 	public String deleteBug(BugDTO bug) {
@@ -91,4 +97,5 @@ public class BugBean extends AbstractBean {
 		selectedBug = new BugDTO();
 		return "bugs";
 	}
+
 }

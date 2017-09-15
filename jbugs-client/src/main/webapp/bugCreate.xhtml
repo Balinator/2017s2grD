@@ -9,6 +9,7 @@
 <h:head>
 	<title><h:outputText value="#{msg['login.title']}" /></title>
 	<h:outputStylesheet library="css" name="style.css" />
+	<script name="jquery/jquery.js" library="primefaces"></script>
 </h:head>
 <h:body>
 	<f:view>
@@ -42,7 +43,7 @@
 						<p:calendar id="popup" value="#{bugBean.newBug.targetDate}" />
 					</f:facet>
 				</p:column>
-				
+
 				<p:column>
 					<f:facet name="header">
 						severity
@@ -50,15 +51,19 @@
 						<h:inputText value="#{bugBean.newBug.severity}"></h:inputText>
 					</f:facet>
 				</p:column>
-				
-				<p:column>
+				<!-- 
+					<p:column>
 					<f:facet name="header">
 						author
 						<br />
-						<h:inputText value="#{bugBean.newBug.author}"></h:inputText>
+						<h:outputText value="#{loginBean.user.username}"></h:outputText>
 					</f:facet>
-				</p:column>
+				</p:column> 
 				
+				 -->
+
+
+
 				<p:column>
 					<f:facet name="header">
 						status
@@ -66,15 +71,39 @@
 						<h:inputText value="#{bugBean.newBug.status}"></h:inputText>
 					</f:facet>
 				</p:column>
-				
+
+				<!-- 
 				<p:column>
 					<f:facet name="header">
 						assigned
 						<br />
-						<h:inputText value="#{bugBean.newBug.assigned}"></h:inputText>
+						<p:autoComplete value="#{userBean.selectedUser}"
+							completeMethod="#{userBean.complete}" var="username"
+							itemLabel="#{User.username}" itemValue="#{User.username}"
+							converter="#{conversorSelectItem}" />
 					</f:facet>
 				</p:column>
-				
+				 -->
+
+				<!-- 
+				Autocomplete -> LEGACY CODE
+				 -->
+				<p:column>
+					<f:facet name="header">
+						assigned
+						<br />
+						<f:view>
+							<h:form prependId="false">
+			#{' '}
+			<p:autoComplete value="#{userBean.selectedUser}"
+									completeMethod="#{userBean.complete}" var="user"
+									itemValue="#{user.username}" itemLabel="#{user.username}"></p:autoComplete>
+							</h:form>
+						</f:view>
+					</f:facet>
+				</p:column>
+
+
 				<p:column>
 					<f:facet name="header">
 						version
@@ -82,7 +111,7 @@
 						<h:inputText value="#{bugBean.newBug.version}"></h:inputText>
 					</f:facet>
 				</p:column>
-				
+
 				<p:column>
 					<f:facet name="header">
 						fixedIn
@@ -90,7 +119,7 @@
 						<h:inputText value="#{bugBean.newBug.fixedIn}"></h:inputText>
 					</f:facet>
 				</p:column>
-				
+				<!-- 
 				<p:column>
 					<f:facet name="header">
 						attachment
@@ -98,6 +127,9 @@
 						<h:inputText value="#{bugBean.newBug.attachment}"></h:inputText>
 					</f:facet>
 				</p:column>
+				
+				 -->
+
 
 				<p:column>
 					<f:facet name="header">

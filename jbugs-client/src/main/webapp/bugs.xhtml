@@ -63,7 +63,7 @@
 						author
 						<br />
 					</f:facet>
-					<h:outputText value="#{bug.author}"
+					<h:outputText value="#{bug.author.getUser}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
@@ -76,15 +76,9 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						assigned
-						<br />
-					</f:facet>
-					<h:outputText value="#{bug.assigned}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
-				</p:column>
+				
+			
+				
 				<p:column>
 					<f:facet name="header">
 						version

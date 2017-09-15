@@ -1,5 +1,6 @@
 package edu.msg.ro.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -23,6 +24,11 @@ public class UserBean extends AbstractBean {
 
 	private UserDTO selectedUser = new UserDTO();
 
+	public List<UserDTO> complete(String query) {
+
+		return userFacade.getAllUserByQuery(query);
+	}
+
 	public UserDTO getNewUser() {
 		return newUser;
 	}
@@ -36,13 +42,35 @@ public class UserBean extends AbstractBean {
 	}
 
 	public void setSelectedUser(UserDTO selectedUser) {
-	
+
 		this.selectedUser = selectedUser;
 	}
 
 	public List<UserDTO> getAllUsers() {
 		return userFacade.getAllUsers();
+	}
 
+	// /**
+	// * Needed for bug create assigment.
+	// *
+	// * @return
+	// */
+	// public List<String> getAllUsersByUsername() {
+	// List<String> username = new ArrayList<String>();
+	// List<UserDTO> uDTO = userFacade.getAllUsers();
+	// for (UserDTO userDTO : uDTO) {
+	// username.add(userDTO.getUsername());
+	// }
+	// return username;
+	// }
+
+	public List<String> getAllUserByUsernameQuery(String usernameQuery) {
+		List<String> username = new ArrayList<String>();
+		List<UserDTO> uDTO = userFacade.getAllUserByQuery(usernameQuery);
+		for (UserDTO userDTO : uDTO) {
+			username.add(userDTO.getUsername());
+		}
+		return username;
 	}
 
 	public String createNewUser() throws BusinessException, TechnicalExeption {

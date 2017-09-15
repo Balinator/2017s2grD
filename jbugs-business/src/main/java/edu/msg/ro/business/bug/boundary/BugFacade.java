@@ -41,4 +41,5 @@ public class BugFacade {
 	public List<BugDTO> getAllbugs() {
 		return bugService.getAllBugs();
 	}
+
 }
