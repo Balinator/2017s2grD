@@ -33,6 +33,16 @@ public class PermissionManagerBean extends AbstractBean {
 	private HashMap<Long, RoleDTO> allRoles;
 	private HashMap<Long, PermissionDTO> allPermissions;
 
+	private Long[] checkboxMap;
+
+	public Long[] getCheckboxMap() {
+		return checkboxMap;
+	}
+
+	public void setCheckboxMap(Long[] checkboxMap) {
+		this.checkboxMap = checkboxMap;
+	}
+
 	public List<RoleDTO> getAllRoles() {
 		return roleFacade.getAllRoles();
 	}
@@ -88,29 +98,36 @@ public class PermissionManagerBean extends AbstractBean {
 	// }
 	// }
 
-	public boolean isChackboxChacked(PermissionDTO permission, RoleDTO role) {
-		// return role.getPermissions().contains(permission);
-		FacesContext context = FacesContext.getCurrentInstance();
-		RoleDTO role1 = context.getApplication().evaluateExpressionGet(context, "#{role}", RoleDTO.class);
-		PermissionDTO permission1 = context.getApplication().evaluateExpressionGet(context, "#{permission}",
-				PermissionDTO.class);
-
-		System.out.println(role + " " + permission);
-
-		return role.getPermissions().contains(permission);
+	public Long[] isChackboxChacked(RoleDTO role) {
+		Long[] list = new Long[role.getPermissions().size()];
+		for (int i = 0; i < role.getPermissions().size(); ++i) {
+			list[i] = role.getPermissions().get(i).getId();
+		}
+		return list;
 	}
 
 	public void permissionRoleChangedListener(ValueChangeEvent event) throws TechnicalExeption {
 		FacesContext context = FacesContext.getCurrentInstance();
-		Object role = context.getApplication().evaluateExpressionGet(context, "#{role}", Long.class);
-		Object permission = context.getApplication().evaluateExpressionGet(context, "#{permission}", Long.class);
+		/*
+		 * RoleDTO role0 =
+		 * context.getApplication().evaluateExpressionGet(context, "#{role0}",
+		 * RoleDTO.class); RoleDTO role1 =
+		 * context.getApplication().evaluateExpressionGet(context, "#{role1}",
+		 * RoleDTO.class); RoleDTO role2 =
+		 * context.getApplication().evaluateExpressionGet(context, "#{role2}",
+		 * RoleDTO.class); RoleDTO role3 =
+		 * context.getApplication().evaluateExpressionGet(context, "#{role3}",
+		 * RoleDTO.class); RoleDTO role4 =
+		 * context.getApplication().evaluateExpressionGet(context, "#{role4}",
+		 * RoleDTO.class);
+		 * 
+		 * RoleDTO role = null; if (role0 != null) { role = role0; } else if
+		 * (role1 != null) { role = role1; } else if (role2 != null) { role =
+		 * role2; } else if (role3 != null) { role = role3; } else if (role4 !=
+		 * null) { role = role4; }
+		 */
 
-		// Map<String, String> params =
-		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		// String permission = params.get("permissionId");
-		// String role = params.get("roleId");
-
-		System.out.println(role + " " + permission);
+		System.out.println(role);
 	}
 
 }
