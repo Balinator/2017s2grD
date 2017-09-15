@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -21,8 +21,10 @@ import edu.msg.ro.business.user.dto.RoleDTO;
  *
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class PermissionManagerBean extends AbstractBean {
+
+	private static final String SUCESSFUL_UPDATE = "permissionManager.successfulupdate";
 
 	@EJB
 	private RoleFacade roleFacade;
@@ -113,6 +115,7 @@ public class PermissionManagerBean extends AbstractBean {
 
 		role.setPermission(newPermissions);
 		roleFacade.update(role);
+		addI18nMessage(SUCESSFUL_UPDATE);
 	}
 
 	public void permissionRoleChangedListener0(ValueChangeEvent event) throws TechnicalExeption {
