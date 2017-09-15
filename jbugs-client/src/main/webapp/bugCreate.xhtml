@@ -72,33 +72,16 @@
 					</f:facet>
 				</p:column>
 
-				<!-- 
-				<p:column>
-					<f:facet name="header">
-						assigned
-						<br />
-						<p:autoComplete value="#{userBean.selectedUser}"
-							completeMethod="#{userBean.complete}" var="username"
-							itemLabel="#{User.username}" itemValue="#{User.username}"
-							converter="#{conversorSelectItem}" />
-					</f:facet>
-				</p:column>
-				 -->
-
-				<!-- 
-				Autocomplete -> LEGACY CODE
-				 -->
 				<p:column>
 					<f:facet name="header">
 						assigned
 						<br />
 						<f:view>
-							<h:form prependId="false">
-			#{' '}
-			<p:autoComplete value="#{userBean.selectedUser}"
-									completeMethod="#{userBean.complete}" var="user"
-									itemValue="#{user.username}" itemLabel="#{user.username}"></p:autoComplete>
-							</h:form>
+							<p:autoComplete value="#{userBean.newUser}"
+								completeMethod="#{userBean.complete}" var="user"
+								itemValue="#{user.username}" itemLabel="#{user.id}">
+							</p:autoComplete>
+						
 						</f:view>
 					</f:facet>
 				</p:column>

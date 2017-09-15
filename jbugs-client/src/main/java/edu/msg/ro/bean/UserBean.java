@@ -24,11 +24,6 @@ public class UserBean extends AbstractBean {
 
 	private UserDTO selectedUser = new UserDTO();
 
-	public List<UserDTO> complete(String query) {
-
-		return userFacade.getAllUserByQuery(query);
-	}
-
 	public UserDTO getNewUser() {
 		return newUser;
 	}
@@ -63,6 +58,10 @@ public class UserBean extends AbstractBean {
 	// }
 	// return username;
 	// }
+
+	public List<UserDTO> complete(String query) {
+		return userFacade.getAllUserByQuery(query);
+	}
 
 	public List<String> getAllUserByUsernameQuery(String usernameQuery) {
 		List<String> username = new ArrayList<String>();
