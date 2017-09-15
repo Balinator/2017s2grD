@@ -64,4 +64,9 @@ public class Role extends AbstractEntity {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Role [name=" + name + "]";
+	}
+
 }

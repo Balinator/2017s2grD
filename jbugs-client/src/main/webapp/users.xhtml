@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions">
 
 <h:head>
 	<title><h:outputText value="#{msg['login.title']}" /></title>
@@ -29,7 +30,7 @@
 						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.firstname}"
-						rendered="#{!userBean.verifyUserRendere(user)}" ></h:outputText>
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.firstname}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
@@ -86,25 +87,39 @@
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
 
-				<p:column>
+				<p:column style="text-align: center;">
+					<f:facet name="header">#{msg['users.role']}<br />
 
-					<f:facet name="header">#{msg['users.active']}<br /></f:facet>
+						<p:selectOneMenu value="#{userBean.newUser.roles}" converter="omnifaces.SelectItemsConverter" >
+						
+						 <f:selectItem itemLabel="#{msg['users.rolemessage']}" itemValue="#{null}" />
+						 
+							<f:selectItems value="#{roleBean.roleItems}" var="role"
+								itemValue="#{role.name}" />
+						</p:selectOneMenu>
+
+					</f:facet>
+
+				</p:column>
+
+				<p:column style="text-align: center;">
+					<f:facet name="header">#{msg['users.active']}<br />
+					</f:facet>
 					<h:outputText value="#{msg['users.active']}"
-
 						rendered="#{user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:outputText value="#{msg['users.inactive']}"
 						rendered="#{!user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
-
 					<p:selectBooleanCheckbox value="#{userBean.selectedUser.active}"
 						rendered="#{userBean.verifyUserRendere(user)}"></p:selectBooleanCheckbox>
 
 
-
 				</p:column>
-				<p:column>
+
+				<p:column style="text-align: center;">
 
 					<f:facet name="header">#{msg['users.action']}<br />
-						<h:commandButton value="#{msg['users.create']}" action="#{userBean.createNewUser}"></h:commandButton>
+						<h:commandButton value="#{msg['users.create']}"
+							action="#{userBean.createNewUser}"></h:commandButton>
 
 					</f:facet>
 
