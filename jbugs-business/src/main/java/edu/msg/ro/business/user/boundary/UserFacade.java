@@ -1,5 +1,6 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,7 +16,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 /**
  * Boundary for user component.
  * 
- * @author floricea
+ * @author balinc
  * 
  */
 @Stateless
@@ -25,11 +26,11 @@ public class UserFacade {
 	@EJB
 	private UserService userService;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
+	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userService.createUser(user);
 	}
 
-	public UserDTO updateUser(UserDTO user) throws BusinessException, TechnicalExeption {
+	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
 		return userService.updateUser(user);
 	}
 
@@ -40,5 +41,16 @@ public class UserFacade {
 
 	public List<UserDTO> getAllUsers() {
 		return userService.getAllUsers();
+	}
+
+	public List<UserDTO> getAllUserByQuery(String query) {
+		List<UserDTO> queried = new ArrayList<UserDTO>();
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().startsWith(query)) {
+				queried.add(userDTO);
+			}
+		}
+		return queried;
+		// return bugService.getAllBugs();
 	}
 }

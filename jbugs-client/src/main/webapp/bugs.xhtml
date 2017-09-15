@@ -2,8 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -16,29 +17,33 @@
 
 			<p:messages autoUpdate="true" />
 
-			<p:dataTable value="#{bugBean.allBugs}" var="bug" paginator="true"
-				rows="25" styleClass="paginated">
+			<p:dataTable value="#{bugBean.bugList}" var="bug"
+				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugWidget"
+				paginator="true" rows="25" styleClass="paginated">
+
 				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Search all:" />
+						<p:inputText id="globalFilter" onkeyup="PF('bugWidget').filter()"
+							style="width:150px" placeholder="Search text" />
+					</p:outputPanel>
 
 				</f:facet>
-				<p:column>
-					<f:facet name="header">
-						Title
-						<br />
-					</f:facet>
+
+				<p:column headerText="#{msg['bug.title']}" sortBy="#{bug.title}"
+					filterBy="#{bug.title}" filterMatchMode="contains">
 					<h:outputText value="#{bug.title}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						Description
-						<br />
-					</f:facet>
+
+
+				<p:column headerText="#{msg['bug.description']}"
+					sortBy="#{bug.description}" filterBy="#{bug.description}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.description}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
-				
+
 				<p:column>
 					<f:facet name="header">
 						TargetDate
@@ -47,23 +52,27 @@
 					<h:outputText value="#{bug.targetDate}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
-				
-				
-				<p:column>
-					<f:facet name="header">
-						Severity
-						<br />
+
+
+				<!--  	<p:column filterBy="#{bug.severiy}" filterMatchMode="exact">
+					<f:facet name="header">#{msg['bug.severity']}<br />
+						<p:selectOneMenu onchange="PF('bugWidget').filter()">
+							<f:selectItem itemLabel="Select" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{bugBean.severity}" />
+						</p:selectOneMenu>
+
 					</f:facet>
 					<h:outputText value="#{bug.severity}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+-->
 				<p:column>
 					<f:facet name="header">
 						author
 						<br />
 					</f:facet>
-					<h:outputText value="#{bug.author}"
+					<h:outputText value="#{bug.author.getUser}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
@@ -76,33 +85,25 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						assigned
-						<br />
-					</f:facet>
+
+				<p:column headerText="#{msg['bug.assigned']}" sortBy="#{bug.assigned}" filterBy="#{bug.assigned}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.assigned}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						version
-						<br />
-					</f:facet>
+
+				<p:column headerText="#{msg['bug.version']}" sortBy="#{bug.version}" filterBy="#{bug.version}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.version}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						fixedIn
-						<br />
-					</f:facet>
+
+				<p:column headerText="#{msg['bug.fixedIn']}" sortBy="#{bug.fixedIn}" filterBy="#{bug.fixedIn}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.fixedIn}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+
 				<p:column>
 					<f:facet name="header">
 						attachment
@@ -112,9 +113,6 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
 				</p:column>
-				
-				
-
 			</p:dataTable>
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 		</h:form>

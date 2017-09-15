@@ -1,10 +1,11 @@
 package edu.msg.ro.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
@@ -13,7 +14,7 @@ import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UserBean extends AbstractBean {
 
 	@EJB
@@ -22,6 +23,11 @@ public class UserBean extends AbstractBean {
 	private UserDTO newUser = new UserDTO();
 
 	private UserDTO selectedUser = new UserDTO();
+
+	public List<UserDTO> complete(String query) {
+
+		return userFacade.getAllUserByQuery(query);
+	}
 
 	public UserDTO getNewUser() {
 		return newUser;
@@ -42,13 +48,40 @@ public class UserBean extends AbstractBean {
 
 	public List<UserDTO> getAllUsers() {
 		return userFacade.getAllUsers();
-
 	}
 
-	public String createNewUser() throws BusinessException, TechnicalExeption {
-		userFacade.createUser(newUser);
-		addMessage("Userul " + newUser.getFirstname() + " a fost creat!");
-		newUser = new UserDTO();
+	// /**
+	// * Needed for bug create assigment.
+	// *
+	// * @return
+	// */
+	// public List<String> getAllUsersByUsername() {
+	// List<String> username = new ArrayList<String>();
+	// List<UserDTO> uDTO = userFacade.getAllUsers();
+	// for (UserDTO userDTO : uDTO) {
+	// username.add(userDTO.getUsername());
+	// }
+	// return username;
+	// }
+
+	public List<String> getAllUserByUsernameQuery(String usernameQuery) {
+		List<String> username = new ArrayList<String>();
+		List<UserDTO> uDTO = userFacade.getAllUserByQuery(usernameQuery);
+		for (UserDTO userDTO : uDTO) {
+			username.add(userDTO.getUsername());
+		}
+		return username;
+	}
+
+	public String createNewUser() {
+		try {
+			userFacade.createUser(newUser);
+			addMessage("Userul " + newUser.getFirstname() + " a fost creat!");
+			newUser = new UserDTO();
+		} catch (BusinessException e) {
+			Object[] messageArguments = { newUser.toString() };
+			addI18nMessage(e.getMessage(), messageArguments);
+		}
 		return "users";
 	}
 
@@ -79,8 +112,8 @@ public class UserBean extends AbstractBean {
 	public String editUser() throws TechnicalExeption {
 		try {
 			userFacade.updateUser(selectedUser);
-		} catch (BusinessException e) {
-			e.printStackTrace();
+		} catch (JBugsExeption e) {
+			handleExeptionI18n(e);
 		}
 		selectedUser = new UserDTO();
 		return "users";

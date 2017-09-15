@@ -61,7 +61,9 @@
 					<h:outputText value="#{user.email}"
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.email}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+						rendered="#{userBean.verifyUserRendere(user)}">
+						<!--<f:validator validatorId="emailValidator" />-->
+					</h:inputText>
 				</p:column>
 
 				<p:column style="text-align: center;">
@@ -90,19 +92,23 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.role']}<br />
 
-						<p:selectOneMenu value="#{userBean.newUser.roles}" converter="omnifaces.SelectItemsConverter" >
-						
-						 <f:selectItem itemLabel="#{msg['users.rolemessage']}" itemValue="#{null}" />
-						 
+						<p:selectOneMenu value="#{userBean.newUser.roles}"
+							converter="omnifaces.SelectItemsConverter">
+
+							<f:selectItem itemLabel="#{msg['users.rolemessage']}"
+								itemValue="#{null}" />
+
 							<f:selectItems value="#{roleBean.roleItems}" var="role"
 								itemValue="#{role.name}" />
 						</p:selectOneMenu>
+
 
 					</f:facet>
 
 				</p:column>
 
 				<p:column style="text-align: center;">
+
 					<f:facet name="header">#{msg['users.active']}<br />
 					</f:facet>
 					<h:outputText value="#{msg['users.active']}"
@@ -133,8 +139,6 @@
 				</p:column>
 
 			</p:dataTable>
-
-			<h:outputText value="#{userBean.selectedUser.username}"></h:outputText>
 		</h:form>
 
 	</f:view>

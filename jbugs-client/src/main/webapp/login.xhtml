@@ -1,47 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-	<title><h:outputText value="#{msg['login.title']}" /></title>
-	<h:outputStylesheet library="css" name="style.css"  />
-</h:head>
-<h:body>
-	<f:view>
-		<h:outputText value="#{initParam['hello_world']}"></h:outputText>
-		<h:form id="loginForm">
-			<h:messages />
-			<h:panelGrid id="loginPanel" columns="3" cellpadding="5"
-				cellspacing="5">
-				<f:facet name="header">
-					<h:outputText value="#{msg['login.header']}" />
-				</f:facet>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title><h:outputText value="#{msg['login.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+	<ui:include src="/header.xhtml" />
+
+	<h:form id="loginForm">
+		<p:growl id="msg" showDetail="true" life="4000" />
+		<p:panel id="loginPnl" header="Login"
+			style="width: 350px; margin: 0 auto;">
+
+			<h:panelGrid id="loginPanel" columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="#{msg['login.username']}" />
 				<h:inputText id="username" value="#{loginBean.user.username}">
-					<f:validateLength minimum="3" maximum="10" />
+					<f:validateLength minimum="5" maximum="7" />
 				</h:inputText>
-				<h:message for="username" />
+
+				<p:spacer />
+				<p:spacer />
 
 				<h:outputLabel for="password" value="#{msg['login.password']}" />
-				<h:inputText id="password" value="#{loginBean.user.password}">
+				<h:inputSecret id="password" value="#{loginBean.user.password}">
 					<f:validator validatorId="passwordValidator" />
-				</h:inputText>
-				<h:message for="password" />
+				</h:inputSecret>
 
-				<f:facet name="footer">
-					<h:panelGroup style="display:block; text-align:center">
-						<h:commandButton id="submit" value="#{msg['login.loginButton']}"
-							action="#{loginBean.processLogin}"
-							actionListener="#{loginBean.loginActionListener}" />
-					</h:panelGroup>
-				</f:facet>
 			</h:panelGrid>
-		</h:form>
-	</f:view>
+			<h:panelGrid columns="1" cellpadding="10" width="100%">
+
+				<h:commandButton id="submit" value="#{msg['login.loginButton']}"
+					action="#{loginBean.processLogin}"
+					actionListener="#{loginBean.loginActionListener}"
+					style="float: right;" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
 </h:body>
 </html>
