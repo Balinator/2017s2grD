@@ -93,7 +93,7 @@
 					<f:facet name="header">#{msg['users.role']}<br />
 						<p:selectManyMenu id="basic" value="#{userBean.newUser.roles}">
 							<f:selectItems value="#{roleBean.roleItems}" var="role"
-								itemLabel="#{role.name}" itemValue="#{role}" />
+								itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 						</p:selectManyMenu>
 					</f:facet>
 				</p:column>
