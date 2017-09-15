@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 
 import edu.msg.ro.business.user.boundary.RoleFacade;
 import edu.msg.ro.business.user.dto.RoleDTO;
-import edu.msg.ro.persistence.user.entity.Role;
 
 @ManagedBean
 @SessionScoped
@@ -18,7 +17,7 @@ public class RoleBean {
 	@EJB
 	RoleFacade roleFacade;
 
-	private List<Role> roleItems;
+	private List<RoleDTO> roleItems;
 
 	public List<RoleDTO> getRoleItems() {
 		return roleFacade.getAllRoles();
