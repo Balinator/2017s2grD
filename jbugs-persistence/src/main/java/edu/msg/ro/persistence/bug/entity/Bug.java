@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -17,11 +18,13 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b"),
+		@NamedQuery(name = Bug.FIND_ALL_SEVERITY, query = "SELECT b.severity from Bug b") })
 @Entity
 public class Bug extends AbstractEntity {
 
 	public static final String FIND_ALL = "Bug.FIND_ALL";
+	public static final String FIND_ALL_SEVERITY = "Bug.FIND_ALL_SEVERITY";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +43,7 @@ public class Bug extends AbstractEntity {
 
 	private int status;
 
-	@OneToOne
+	@ManyToOne
 	private User assigned;
 
 	private String version;

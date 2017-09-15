@@ -8,12 +8,24 @@ import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
+/**
+ * Validate user.
+ * 
+ * @author balinc
+ *
+ */
 @Stateless
 public class UserValidator {
 
 	@EJB
 	private UserDAO userDAO;
 
+	/**
+	 * Check for active user tasks.
+	 *
+	 * @param entity
+	 * @return
+	 */
 	public boolean checkIfUserHasActiveTasks(User entity) {
 		// @TODO
 		// get list of users bugs
@@ -22,6 +34,13 @@ public class UserValidator {
 		return false;
 	}
 
+	/**
+	 * Check if user with email already exist.
+	 *
+	 * @param email
+	 * @return
+	 * @throws BusinessException
+	 */
 	public void validateUserData(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
 		if (existingUserWithSameEmail != null) {
@@ -29,6 +48,13 @@ public class UserValidator {
 		}
 	}
 
+	/**
+	 * Check if user with email already exist.
+	 *
+	 * @param email
+	 * @return
+	 * @throws BusinessException
+	 */
 	public boolean validateEmail(String email) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(email);
 		if (existingUserWithSameEmail != null) {

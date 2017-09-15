@@ -1,5 +1,9 @@
 package edu.msg.ro.business.user.util;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -12,10 +16,10 @@ import edu.msg.ro.persistence.user.entity.User;
  * 
  * @author nemeta
  * 
- *         Class for generating username for the user
+ *         Class for generating username and password for the user.
  */
 @Stateless
-public class UsernameGenerator {
+public class UserGenerator {
 
 	@EJB
 	private UserDAO userDao;
@@ -31,6 +35,11 @@ public class UsernameGenerator {
 
 		String firstName = user.getFirstname();
 		String lastName = user.getLastname();
+
+		if (firstName == null || lastName == null) {
+			throw new TechnicalExeption();
+		}
+
 		int lastNameLength = lastName.length();
 		int firstNameLength = firstName.length();
 		StringBuilder username = new StringBuilder();
@@ -51,16 +60,15 @@ public class UsernameGenerator {
 	}
 
 	/**
-	 * Checks if username is already taken
+	 * Checks if username is already taken.
 	 * 
 	 * @param username
 	 * @return true/false
 	 * @throws TechnicalExeption
 	 */
-	public boolean checkIfUsernameExists(String username) {
+	private boolean checkIfUsernameExists(String username) {
 		User existingUser = new User();
 		try {
-
 			existingUser = userDao.findUserByUsername(username);
 		} catch (TechnicalExeption e) {
 			return false;
@@ -72,6 +80,29 @@ public class UsernameGenerator {
 			return false;
 		}
 
+	}
+
+	/**
+	 * Creates hash for user password.
+	 * 
+	 * @param userDTO
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 * @throws TechnicalExeption
+	 */
+	public String encryptPassword(UserDTO userDTO)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException, TechnicalExeption {
+		if (userDTO.getPassword().isEmpty()) {
+			throw new TechnicalExeption();
+		}
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] md_password = md.digest(userDTO.getPassword().getBytes("UTF-8"));
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < md_password.length; i++) {
+			sb.append(Integer.toString((md_password[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		return sb.toString();
 	}
 
 }

@@ -1,6 +1,9 @@
 package edu.msg.ro.business.user.dto;
 
+import java.util.List;
+
 import edu.msg.ro.business.common.dto.AbstractDTO;
+import edu.msg.ro.persistence.user.entity.Role;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -24,6 +27,8 @@ public class UserDTO extends AbstractDTO {
 	private String phoneNumber;
 
 	private boolean active;
+
+	private List<Role> roles;
 
 	public String getFirstname() {
 		return firstname;
@@ -84,6 +89,14 @@ public class UserDTO extends AbstractDTO {
 	@Override
 	public String toString() {
 		return "UserDTO [id=" + getId() + ", username=" + username + "]";
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }

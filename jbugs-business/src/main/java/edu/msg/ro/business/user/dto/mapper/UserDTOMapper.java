@@ -1,28 +1,24 @@
 package edu.msg.ro.business.user.dto.mapper;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
-import edu.msg.ro.business.user.util.UserPassword;
+import edu.msg.ro.business.user.util.UserGenerator;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
  * Mapper for {@link User} and {@link UserDTO}.
  * 
- * @author Andrei Floricel, msg systems ag
+ * @author balinc
  *
  */
 @Stateless
 public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 
 	@EJB
-	private UserPassword userPass;
+	UserGenerator userGenerator;
 
 	@Override
 	public UserDTO getDTOInstance() {
@@ -41,17 +37,11 @@ public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 	}
 
 	@Override
-	protected void mapDTOToEntityFields(UserDTO dto, User entity) throws TechnicalExeption {
+	protected void mapDTOToEntityFields(UserDTO dto, User entity) {
 		entity.setEmail(dto.getEmail());
 		entity.setFirstname(dto.getFirstname());
 		entity.setLastname(dto.getLastname());
-		try {
-			entity.setPassword(userPass.encryptPassword(dto));
-		} catch (NoSuchAlgorithmException e) {
-			throw new TechnicalExeption();
-		} catch (UnsupportedEncodingException e) {
-			throw new TechnicalExeption();
-		}
+		entity.setPassword(dto.getPassword());
 		entity.setLockVersion(dto.getLockVersion());
 		entity.setPhoneNumber(dto.getPhoneNumber());
 		entity.setUsername(dto.getUsername());

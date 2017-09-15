@@ -2,6 +2,7 @@ package edu.msg.ro.bean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,6 +31,38 @@ public class BugBean extends AbstractBean {
 
 	private BugDTO selectedBug = new BugDTO();
 
+	private List<BugDTO> buglist;
+
+	private List<BugDTO> filteredBugList;
+
+	private List<BugDTO> severity;
+
+	@PostConstruct
+	public void init() {
+		buglist = bugFacade.getAllbugs();
+	}
+
+	public List<BugDTO> getBugList() {
+		return buglist;
+	}
+
+	public List<BugDTO> getFilteredBugList() {
+		return filteredBugList;
+	}
+
+	public void setFilteredBugList(List<BugDTO> filteredBugList) {
+		this.filteredBugList = filteredBugList;
+	}
+
+	public List<BugDTO> getSeverity() {
+		severity = bugFacade.getAllSeverity();
+		return severity;
+	}
+
+	public void setSeverity(List<BugDTO> severity) {
+		this.severity = severity;
+	}
+
 	public BugDTO getNewBug() {
 		return newBug;
 	}
@@ -48,9 +81,14 @@ public class BugBean extends AbstractBean {
 
 	public List<BugDTO> getAllBugs() {
 		return bugFacade.getAllbugs();
-
 	}
 
+	/**
+	 * Just create a bug without return.
+	 * 
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	public String createNewBug() throws BusinessException, TechnicalExeption {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
@@ -91,4 +129,5 @@ public class BugBean extends AbstractBean {
 		selectedBug = new BugDTO();
 		return "bugs";
 	}
+
 }

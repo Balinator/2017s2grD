@@ -7,6 +7,13 @@ import javax.persistence.TypedQuery;
 
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
+/**
+ * Abstract DAO class.
+ * 
+ * @author balinc
+ *
+ * @param <E>
+ */
 public abstract class AbstractDao<E extends AbstractEntity> {
 
 	@PersistenceContext(unitName = "jbugs-persistence")
@@ -16,7 +23,6 @@ public abstract class AbstractDao<E extends AbstractEntity> {
 
 	public void persistEntity(E entity) {
 		em.persist(entity);
-		// TODO research if really needed
 		em.flush();
 	}
 

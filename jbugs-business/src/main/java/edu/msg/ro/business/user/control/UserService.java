@@ -10,7 +10,7 @@ import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
-import edu.msg.ro.business.user.util.UsernameGenerator;
+import edu.msg.ro.business.user.util.UserGenerator;
 import edu.msg.ro.business.user.validation.UserValidator;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -33,21 +33,29 @@ public class UserService {
 	UserValidator userValidator;
 
 	@EJB
-	UsernameGenerator usernameGenerator;
+	UserGenerator userUtils;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
-		validateUserData(user);
+	public UserDTO createUser(UserDTO user) throws BusinessException {
+		try {
+			validateUserData(user);
 
-		User userEntity = new User();
-		String username = usernameGenerator.createUsername(user);
-		user.setUsername(username);
-		userDTOMapper.mapToEntity(user, userEntity);
+			User userEntity = new User();
+			String username = userUtils.createUsername(user);
+			user.setUsername(username);
+			String password = userUtils.encryptPassword(user);
+			user.setPassword(password);
 
-		userEntity.setActive(true);
+			userDTOMapper.mapToEntity(user, userEntity);
+			userEntity.setActive(true);
 
-		userDAO.persistEntity(userEntity);
-		User persistedUser = userDAO.findEntity(userEntity.getId());
-		return userDTOMapper.mapToDTO(persistedUser);
+			userDAO.persistEntity(userEntity);
+			User persistedUser = userDAO.findEntity(userEntity.getId());
+			return userDTOMapper.mapToDTO(persistedUser);
+		} catch (BusinessException e) {
+			throw new BusinessException(e.getMessage());
+		} catch (Exception e) {
+			throw new BusinessException("user.crud.save.error");
+		}
 	}
 
 	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {

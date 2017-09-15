@@ -35,10 +35,15 @@ public class BugFacade {
 
 	public BugDTO deleteBug(BugDTO bugDTO) throws TechnicalExeption {
 		return bugService.deleteBug(bugDTO);
-
 	}
 
 	public List<BugDTO> getAllbugs() {
 		return bugService.getAllBugs();
 	}
+
+	// for filter severity
+	public List<BugDTO> getAllSeverity() {
+		return bugService.getAllSeverity();
+	}
+
 }
