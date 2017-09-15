@@ -44,10 +44,8 @@ public class UserService {
 			user.setUsername(username);
 			String password = userUtils.encryptPassword(user);
 			user.setPassword(password);
-
 			userDTOMapper.mapToEntity(user, userEntity);
 			userEntity.setActive(true);
-
 			userDAO.persistEntity(userEntity);
 			User persistedUser = userDAO.findEntity(userEntity.getId());
 			return userDTOMapper.mapToDTO(persistedUser);

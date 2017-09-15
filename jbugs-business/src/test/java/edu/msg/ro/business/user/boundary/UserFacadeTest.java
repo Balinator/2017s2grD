@@ -1,5 +1,8 @@
 package edu.msg.ro.business.user.boundary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 
 import org.junit.Assert;
@@ -7,7 +10,12 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.user.dao.PermissionDAO;
+import edu.msg.ro.business.user.dao.RoleDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionChecker;
+import edu.msg.ro.persistence.user.entity.Permission;
+import edu.msg.ro.persistence.user.entity.Role;
 
 /**
  * Test for {@link UserFacade} facede.
@@ -19,6 +27,8 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 
 	@EJB
 	private UserFacade sut;
+	@EJB
+	private PermissionChecker permCheck;
 
 	/**
 	 * Check if user insert is working.
@@ -103,6 +113,47 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 		UserDTO createdUser2 = sut.createUser(user2);
 		Assert.assertEquals("The created username should match the exrpesssion !", "SzabiFu",
 				createdUser2.getUsername());
+	}
+
+	/**
+	 * Check if user with current role has specific permission
+	 * 
+	 * @throws BusinessException
+	 */
+
+	@EJB
+	private PermissionDAO permDAO;
+	@EJB
+	private RoleDAO roleDAO;
+
+	@Test
+	public void checkPermission() throws BusinessException {
+		List<Role> roles = new ArrayList();
+		List<Permission> permissions = new ArrayList();
+
+		Permission managementPerm = permDAO.findEntity(1L);
+		permissions.add(managementPerm);
+		Permission bugClosePerm = permDAO.findEntity(4L);
+		permissions.add(bugClosePerm);
+
+		Role adminRole = roleDAO.findEntity(1L);
+		roles.add(adminRole);
+
+		UserDTO user = new UserDTO();
+		user.setFirstname("Thierry");
+		user.setLastname("Henry");
+		user.setPassword("12345");
+		user.setRoles(roles);
+		try {
+			user.setEmail("henry@msggroup.com");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		UserDTO createdUser = sut.createUser(user);
+		// boolean hasPermission = permCheck.checkPermission(createdUser,
+		// PermissionConstants.PM);
+		Assert.assertEquals("email", managementPerm.getId(), createdUser.getRoles().get(0));
+		// Assert.assertEquals("PERMISSION: ", true, hasPermission);
 	}
 
 }

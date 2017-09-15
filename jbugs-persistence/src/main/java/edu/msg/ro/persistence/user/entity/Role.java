@@ -74,7 +74,7 @@ public class Role extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return name;
+		return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
 	}
 
 }

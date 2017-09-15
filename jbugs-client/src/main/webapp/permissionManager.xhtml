@@ -23,11 +23,10 @@
 						<p:panelGrid>
 							<p:row>
 								<c:set var="checkboxMap0" value="#{permissionManagerBean.isChackboxChacked(permissionManagerBean.allRoles[0])}" scope="request"/>
-								<h:selectManyCheckbox value="#{checkboxMap0}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+								<h:selectManyCheckbox value="#{checkboxMap0}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener0}">
 									<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
 										<f:selectItem itemValue="#{permission.id}" itemLabel="#{msg[permission.name]}" /> 
 									</c:forEach>
-									<c:set var="roleId" value="#{permissionManagerBean.allRoles[0].id}" scope="request"/>
 									<f:ajax/>
 								</h:selectManyCheckbox>
 							</p:row>
@@ -39,11 +38,10 @@
 						<p:panelGrid>
 							<p:row>
 								<c:set var="checkboxMap1" value="#{permissionManagerBean.isChackboxChacked(permissionManagerBean.allRoles[1])}" scope="request"/>
-								<h:selectManyCheckbox value="#{checkboxMap1}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+								<h:selectManyCheckbox value="#{checkboxMap1}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener1}">
 									<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
 										<f:selectItem itemValue="#{permission.id}" itemLabel="#{msg[permission.name]}" /> 
 									</c:forEach>
-									<c:set var="roleId" value="#{permissionManagerBean.allRoles[1].id}" scope="request"/>
 									<f:ajax/>
 								</h:selectManyCheckbox>
 							</p:row>
@@ -55,7 +53,7 @@
 						<p:panelGrid>
 							<p:row>
 								<c:set var="checkboxMap2" value="#{permissionManagerBean.isChackboxChacked(permissionManagerBean.allRoles[2])}" scope="request"/>
-								<h:selectManyCheckbox value="#{checkboxMap2}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+								<h:selectManyCheckbox value="#{checkboxMap2}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener2}">
 									<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
 										<f:selectItem itemValue="#{permission.id}" itemLabel="#{msg[permission.name]}" /> 
 									</c:forEach>
@@ -70,7 +68,7 @@
 						<p:panelGrid>
 							<p:row>
 								<c:set var="checkboxMap3" value="#{permissionManagerBean.isChackboxChacked(permissionManagerBean.allRoles[3])}" scope="request"/>
-								<h:selectManyCheckbox value="#{checkboxMap3}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+								<h:selectManyCheckbox value="#{checkboxMap3}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener3}">
 									<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
 										<f:selectItem itemValue="#{permission.id}" itemLabel="#{msg[permission.name]}" /> 
 									</c:forEach>
@@ -85,7 +83,7 @@
 						<p:panelGrid>
 							<p:row>
 								<c:set var="checkboxMap4" value="#{permissionManagerBean.isChackboxChacked(permissionManagerBean.allRoles[4])}" scope="request"/>
-								<h:selectManyCheckbox value="#{checkboxMap4}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener}">
+								<h:selectManyCheckbox value="#{checkboxMap4}" valueChangeListener="#{permissionManagerBean.permissionRoleChangedListener4}">
 									<c:forEach var="permission" items="#{permissionManagerBean.allPermissions}">
 										<f:selectItem itemValue="#{permission.id}" itemLabel="#{msg[permission.name]}" /> 
 									</c:forEach>
