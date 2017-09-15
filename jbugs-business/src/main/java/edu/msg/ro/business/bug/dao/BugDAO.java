@@ -30,4 +30,9 @@ public class BugDAO extends AbstractDao<Bug> {
 	public Bug getBug(Long id) {
 		return this.findEntity(id);
 	}
+
+	public List<Bug> getAllSeverity() {
+		TypedQuery<Bug> query = this.em.createNamedQuery(Bug.FIND_ALL_SEVERITY, Bug.class);
+		return query.getResultList();
+	}
 }

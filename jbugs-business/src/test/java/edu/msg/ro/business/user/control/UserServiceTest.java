@@ -1,14 +1,12 @@
 package edu.msg.ro.business.user.control;
 
 import javax.ejb.EJB;
-import javax.ejb.EJBTransactionRolledbackException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -25,12 +23,9 @@ public class UserServiceTest extends AbstractIntegrationTest {
 
 	/**
 	 * Test if email not containing the required format.
-	 *
-	 * @throws BusinessException
-	 * @throws TechnicalExeption
 	 */
 	@Test
-	public void createUser_EmailValidationFail() throws BusinessException, TechnicalExeption {
+	public void createUser_EmailValidationFail() {
 		UserDTO testUser = new UserDTO();
 		testUser.setFirstname("John");
 		testUser.setLastname("Doe");
@@ -40,8 +35,8 @@ public class UserServiceTest extends AbstractIntegrationTest {
 
 		try {
 			UserDTO createdUser = uService.createUser(testUser);
-		} catch (EJBTransactionRolledbackException e) {
-			Assert.assertEquals("Exception thrown from bean", e.getCause().getMessage());
+		} catch (BusinessException e) {
+			Assert.assertEquals("user.crud.save.error", e.getMessage());
 			return;
 		}
 
@@ -52,14 +47,14 @@ public class UserServiceTest extends AbstractIntegrationTest {
 	 * Test if fail the user insert with same email address.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
 	 */
 	@Test
-	public void createUser_UniqueEmailFail() throws BusinessException, TechnicalExeption {
+	public void createUser_UniqueEmailFail() throws BusinessException {
 		UserDTO testUser = new UserDTO();
 		testUser.setFirstname("John");
 		testUser.setLastname("Doe");
 		testUser.setEmail("unique@msggroup.com");
+		testUser.setPassword("123456");
 
 		UserDTO createdUser = uService.createUser(testUser);
 
