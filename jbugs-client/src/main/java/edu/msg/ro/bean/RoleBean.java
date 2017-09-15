@@ -2,6 +2,7 @@ package edu.msg.ro.bean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,10 +18,14 @@ public class RoleBean {
 	RoleFacade roleFacade;
 
 	private List<Role> roleItems;
-	private String name;
 
 	public List<Role> getRoleItems() {
 		return roleFacade.getAllRoles();
+	}
+
+	@PostConstruct
+	public void init() {
+		roleItems = roleFacade.getAllRoles();
 	}
 
 }
