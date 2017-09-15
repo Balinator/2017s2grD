@@ -16,7 +16,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 /**
  * Boundary for user component.
  * 
- * @author floricea
+ * @author balinc
  * 
  */
 @Stateless
@@ -26,11 +26,11 @@ public class UserFacade {
 	@EJB
 	private UserService userService;
 
-	public UserDTO createUser(UserDTO user) throws BusinessException, TechnicalExeption {
+	public UserDTO createUser(UserDTO user) throws BusinessException {
 		return userService.createUser(user);
 	}
 
-	public UserDTO updateUser(UserDTO user) throws BusinessException, TechnicalExeption {
+	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
 		return userService.updateUser(user);
 	}
 

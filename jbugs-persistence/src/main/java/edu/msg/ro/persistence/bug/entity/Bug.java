@@ -18,11 +18,13 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b"),
+		@NamedQuery(name = Bug.FIND_ALL_SEVERITY, query = "SELECT b.severity from Bug b") })
 @Entity
 public class Bug extends AbstractEntity {
 
 	public static final String FIND_ALL = "Bug.FIND_ALL";
+	public static final String FIND_ALL_SEVERITY = "Bug.FIND_ALL_SEVERITY";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

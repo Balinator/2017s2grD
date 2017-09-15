@@ -29,7 +29,7 @@
 						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
 					</f:facet>
 					<h:outputText value="#{user.firstname}"
-						rendered="#{!userBean.verifyUserRendere(user)}" ></h:outputText>
+						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.firstname}"
 						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
 				</p:column>
@@ -60,7 +60,9 @@
 					<h:outputText value="#{user.email}"
 						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:inputText value="#{userBean.selectedUser.email}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+						rendered="#{userBean.verifyUserRendere(user)}">
+						<!--<f:validator validatorId="emailValidator" />-->
+					</h:inputText>
 				</p:column>
 
 				<p:column style="text-align: center;">
@@ -88,9 +90,9 @@
 
 				<p:column>
 
-					<f:facet name="header">#{msg['users.active']}<br /></f:facet>
+					<f:facet name="header">#{msg['users.active']}<br />
+					</f:facet>
 					<h:outputText value="#{msg['users.active']}"
-
 						rendered="#{user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
 					<h:outputText value="#{msg['users.inactive']}"
 						rendered="#{!user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
@@ -104,7 +106,8 @@
 				<p:column>
 
 					<f:facet name="header">#{msg['users.action']}<br />
-						<h:commandButton value="#{msg['users.create']}" action="#{userBean.createNewUser}"></h:commandButton>
+						<h:commandButton value="#{msg['users.create']}"
+							action="#{userBean.createNewUser}"></h:commandButton>
 
 					</f:facet>
 
@@ -118,8 +121,6 @@
 				</p:column>
 
 			</p:dataTable>
-
-			<h:outputText value="#{userBean.selectedUser.username}"></h:outputText>
 		</h:form>
 
 	</f:view>
