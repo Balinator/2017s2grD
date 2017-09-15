@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
@@ -21,7 +21,7 @@ import edu.msg.ro.business.common.exception.TechnicalExeption;
  */
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class BugBean extends AbstractBean {
 
 	@EJB

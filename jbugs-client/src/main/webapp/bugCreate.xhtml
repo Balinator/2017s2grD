@@ -78,8 +78,8 @@
 						<br />
 						<f:view>
 							<p:autoComplete value="#{userBean.newUser}"
-								completeMethod="#{userBean.complete}" var="user"
-								itemValue="#{user.username}" itemLabel="#{user.id}">
+								completeMethod="#{userBean.complete}" var="user" itemLabel="#{user.username}"
+								itemValue="#{user}" converter="#{userConverter}" forceSelection="true">
 							</p:autoComplete>
 						
 						</f:view>

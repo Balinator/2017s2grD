@@ -53,4 +53,13 @@ public class UserFacade {
 		return queried;
 		// return bugService.getAllBugs();
 	}
+
+	public UserDTO getUserByUsername(String username) {
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().equals(username)) {
+				return userDTO;
+			}
+		}
+		return null;
+	}
 }
