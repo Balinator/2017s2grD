@@ -72,9 +72,14 @@ public class Role extends AbstractEntity {
 		this.name = name;
 	}
 
+	// @Override
+	// public String toString() {
+	// return "Role [name=" + name + "]";
+	// }
+
 	@Override
 	public String toString() {
-		return "Role [name=" + name + "]";
+		return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
 	}
 
 }

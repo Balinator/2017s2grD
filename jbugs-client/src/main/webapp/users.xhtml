@@ -92,15 +92,10 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.role']}<br />
 
-						<p:selectOneMenu value="#{userBean.newUser.roles}"
-							converter="omnifaces.SelectItemsConverter">
-
-							<f:selectItem itemLabel="#{msg['users.rolemessage']}"
-								itemValue="#{null}" />
-
+						<p:selectManyMenu id="basic" value="#{userBean.newUser.roles}">
 							<f:selectItems value="#{roleBean.roleItems}" var="role"
-								itemValue="#{role.name}" />
-						</p:selectOneMenu>
+								itemLabel="#{role.name}" itemValue="#{role}" />
+						</p:selectManyMenu>
 
 
 					</f:facet>
