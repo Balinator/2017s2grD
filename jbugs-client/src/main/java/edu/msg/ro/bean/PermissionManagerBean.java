@@ -1,12 +1,12 @@
 package edu.msg.ro.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -71,31 +71,10 @@ public class PermissionManagerBean extends AbstractBean {
 		return allPermissions;
 	}
 
-	// public boolean isChackboxChacked(PermissionDTO permission, RoleDTO role)
-	// {
-	// // return role.getPermissions().contains(permission);
-	// return false;
-	// }
-
 	// public void permissionRoleChangedListener(ValueChangeEvent event,
 	// PermissionDTO permission, RoleDTO role)
 	// throws TechnicalExeption {
-	// Boolean newValue = (Boolean) event.getNewValue();
-	// Boolean oldValue = (Boolean) event.getOldValue();
 	//
-	// if (newValue == null || oldValue == null) {
-	// throw new TechnicalExeption();
-	// }
-	//
-	// if (!newValue.equals(oldValue)) {
-	// if (newValue) {
-	// role.getPermissions().add(permission);
-	// roleFacade.update(role);
-	// } else {
-	// role.getPermissions().remove(permission);
-	// roleFacade.update(role);
-	// }
-	// }
 	// }
 
 	public Long[] isChackboxChacked(RoleDTO role) {
@@ -106,28 +85,54 @@ public class PermissionManagerBean extends AbstractBean {
 		return list;
 	}
 
-	public void permissionRoleChangedListener(ValueChangeEvent event) throws TechnicalExeption {
-		FacesContext context = FacesContext.getCurrentInstance();
-		/*
-		 * RoleDTO role0 =
-		 * context.getApplication().evaluateExpressionGet(context, "#{role0}",
-		 * RoleDTO.class); RoleDTO role1 =
-		 * context.getApplication().evaluateExpressionGet(context, "#{role1}",
-		 * RoleDTO.class); RoleDTO role2 =
-		 * context.getApplication().evaluateExpressionGet(context, "#{role2}",
-		 * RoleDTO.class); RoleDTO role3 =
-		 * context.getApplication().evaluateExpressionGet(context, "#{role3}",
-		 * RoleDTO.class); RoleDTO role4 =
-		 * context.getApplication().evaluateExpressionGet(context, "#{role4}",
-		 * RoleDTO.class);
-		 * 
-		 * RoleDTO role = null; if (role0 != null) { role = role0; } else if
-		 * (role1 != null) { role = role1; } else if (role2 != null) { role =
-		 * role2; } else if (role3 != null) { role = role3; } else if (role4 !=
-		 * null) { role = role4; }
-		 */
+	public void permissionRoleChangedListener(ValueChangeEvent event, RoleDTO role) throws TechnicalExeption {
+		String[] newValueString = (String[]) event.getNewValue();
+		Long[] newValue = new Long[newValueString.length];
+		Long[] oldValue = (Long[]) event.getOldValue();
 
-		System.out.println(role);
+		for (int i = 0; i < newValue.length; ++i) {
+			newValue[i] = Long.valueOf(newValueString[i]);
+		}
+
+		if (newValue == null || oldValue == null) {
+			throw new TechnicalExeption();
+		}
+
+		List<PermissionDTO> newPermissions = new ArrayList<>();
+
+		List<PermissionDTO> all = getAllPermissions();
+
+		for (Long l : newValue) {
+			for (PermissionDTO p : all) {
+				if (l.equals(p.getId())) {
+					newPermissions.add(p);
+					break;
+				}
+			}
+		}
+
+		role.setPermission(newPermissions);
+		roleFacade.update(role);
+	}
+
+	public void permissionRoleChangedListener0(ValueChangeEvent event) throws TechnicalExeption {
+		permissionRoleChangedListener(event, getAllRoles().get(0));
+	}
+
+	public void permissionRoleChangedListener1(ValueChangeEvent event) throws TechnicalExeption {
+		permissionRoleChangedListener(event, getAllRoles().get(1));
+	}
+
+	public void permissionRoleChangedListener2(ValueChangeEvent event) throws TechnicalExeption {
+		permissionRoleChangedListener(event, getAllRoles().get(2));
+	}
+
+	public void permissionRoleChangedListener3(ValueChangeEvent event) throws TechnicalExeption {
+		permissionRoleChangedListener(event, getAllRoles().get(3));
+	}
+
+	public void permissionRoleChangedListener4(ValueChangeEvent event) throws TechnicalExeption {
+		permissionRoleChangedListener(event, getAllRoles().get(4));
 	}
 
 }
