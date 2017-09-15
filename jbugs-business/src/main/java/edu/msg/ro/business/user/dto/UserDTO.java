@@ -3,7 +3,6 @@ package edu.msg.ro.business.user.dto;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
-import edu.msg.ro.persistence.user.entity.Role;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -28,7 +27,7 @@ public class UserDTO extends AbstractDTO {
 
 	private boolean active;
 
-	private List<Role> roles;
+	private List<RoleDTO> rolesDTO;
 
 	public String getFirstname() {
 		return firstname;
@@ -91,12 +90,12 @@ public class UserDTO extends AbstractDTO {
 		return "UserDTO [id=" + getId() + ", username=" + username + "]";
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public List<RoleDTO> getRoles() {
+		return rolesDTO;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRoles(List<RoleDTO> rolesDTO) {
+		this.rolesDTO = rolesDTO;
 	}
 
 }
