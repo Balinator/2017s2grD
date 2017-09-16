@@ -12,6 +12,8 @@ import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.enums.BugSeverity;
+import edu.msg.ro.enums.BugStatus;
 
 /****
  * Bug Bean.****
@@ -35,7 +37,13 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private List<BugDTO> severity;
+	private BugStatus[] statusList;
+
+	private int statuses;
+
+	private BugSeverity[] severityList;
+
+	private int severities;
 
 	@PostConstruct
 	public void init() {
@@ -52,15 +60,6 @@ public class BugBean extends AbstractBean {
 
 	public void setFilteredBugList(List<BugDTO> filteredBugList) {
 		this.filteredBugList = filteredBugList;
-	}
-
-	public List<BugDTO> getSeverity() {
-		severity = bugFacade.getAllSeverity();
-		return severity;
-	}
-
-	public void setSeverity(List<BugDTO> severity) {
-		this.severity = severity;
 	}
 
 	public BugDTO getNewBug() {
@@ -128,6 +127,39 @@ public class BugBean extends AbstractBean {
 		}
 		selectedBug = new BugDTO();
 		return "bugs";
+	}
+
+	// for bug filter
+	public BugStatus[] getStatusList() {
+		return BugStatus.values();
+	}
+
+	public void setStatusList(BugStatus[] statusList) {
+		this.statusList = statusList;
+	}
+
+	public int getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(int statuses) {
+		this.statuses = statuses;
+	}
+
+	public BugSeverity[] getSeverityList() {
+		return BugSeverity.values();
+	}
+
+	public void setSeverityList(BugSeverity[] severityList) {
+		this.severityList = severityList;
+	}
+
+	public int getSeverities() {
+		return severities;
+	}
+
+	public void setSeverities(int severities) {
+		this.severities = severities;
 	}
 
 }
