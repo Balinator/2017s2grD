@@ -92,7 +92,7 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		return "bugs";
+		return "bugCreate";
 	}
 
 	public String deleteBug(BugDTO bug) {
