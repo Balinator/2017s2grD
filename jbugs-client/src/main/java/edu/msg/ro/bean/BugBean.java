@@ -4,8 +4,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.validation.ValidationException;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
@@ -160,6 +165,19 @@ public class BugBean extends AbstractBean {
 
 	public void setSeverities(int severities) {
 		this.severities = severities;
+	}
+
+	// validation for creating bug
+
+	public void validate(FacesContext context, UIComponent uic, Object value) throws ValidationException {
+
+		String input = (String) value;
+
+		if (input.length() == 0) {
+			((UIInput) uic).setValid(false);
+			FacesMessage message = new FacesMessage("Not valid data");
+			context.addMessage(uic.getClientId(context), message);
+		}
 	}
 
 }

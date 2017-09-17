@@ -22,11 +22,13 @@
 			<p:dataTable value="createBug" var="createbug">
 
 				<p:column headerText="#{msg['bug.title']}">
-					<h:inputText value="#{bugBean.newBug.title}"></h:inputText>
+					<h:inputText value="#{bugBean.newBug.title}"
+						validator="#{bugBean.validate}"></h:inputText>
 				</p:column>
 
 				<p:column headerText="#{msg['bug.description']}">
-					<h:inputText value="#{bugBean.newBug.description}"></h:inputText>
+					<h:inputText value="#{bugBean.newBug.description}"
+						validator="#{bugBean.validate}"></h:inputText>
 				</p:column>
 
 				<p:column headerText="#{msg['bug.targetDate']}">
@@ -34,7 +36,7 @@
 				</p:column>
 
 				<p:column headerText=" #{msg['bug.severity']}">
-					<p:selectOneMenu value="#{bugBean.newBug.severity}">
+					<p:selectOneMenu value="#{bugBean.newBug.severity}" style="width:90px">
 
 						<f:selectItem value="#{null}"
 							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
@@ -47,7 +49,7 @@
 				</p:column>
 
 				<p:column headerText="#{msg['bug.status']}">
-					<p:selectOneMenu value="#{bugBean.newBug.status}">
+					<p:selectOneMenu value="#{bugBean.newBug.status}" style="width:90px">
 
 						<f:selectItem value="#{null}"
 							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>

@@ -8,7 +8,7 @@ package edu.msg.ro.enums;
  */
 public enum BugStatus {
 
-	OPEN(0), PROGRESS(1), INFO(2), FIXED(3), REJECTED(4), CLOSED(5);
+	NEW(0), OPEN(1), PROGRESS(2), INFO(3), FIXED(4), REJECTED(5), CLOSED(6);
 
 	private final int label;
 
