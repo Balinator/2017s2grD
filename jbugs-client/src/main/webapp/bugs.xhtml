@@ -19,16 +19,23 @@
 			<p:messages autoUpdate="true" />
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
-				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
-				paginator="true" rows="25" styleClass="paginated">
+				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugUpdateTable"
+				paginator="true" rows="25" styleClass="paginated"
+				selectionMode="single" rowKey="#{bug.id}">
+
+				<p:ajax event="rowSelect" oncomplete="PF('bugAddDialog').show()" update=""/>
 
 				<f:facet name="header">
 					<p:outputPanel>
-						<h:outputText value="#{msg['bug.search.all']}:" />
+						<h:outputText value="#{msg['bug.search.all']}" />
 						<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
 							style="width:150px"
 							placeholder="#{msg['bug.search.placeholder']}" />
 					</p:outputPanel>
+
+					<p:commandButton value="#{msg['add']}" type="button"
+						onclick="PF('bugAddDialog').show();"
+						style=" overflow: auto; float: right;" />
 				</f:facet>
 
 				<p:column headerText="#{msg['bug.title']}" sortBy="#{bug.title}"
@@ -125,6 +132,140 @@
 
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 
+		</h:form>
+
+		<h:form>
+			<p:dialog id="dialog" header="Car Detail" widgetVar="bugAddDialog"
+				resizable="false" position="center center" height="500" width="456"
+				appendToBody="true">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="#{msg['bug.title']}" />
+					<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.description']}" />
+					<p:inputText  value="#{bugBean.newBug.description}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+					<p:calendar value="#{bugBean.newBug.targetDate}" />
+
+					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugBean.newBug.severity}"
+						style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.severityList}" var="severities"
+							itemLabel="#{msg['bug.severity.' += severities]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugBean.newBug.status}"
+						style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.statusList}" var="statuses"
+							itemLabel="#{msg['bug.status.' += statuses]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+					<f:view>
+						<p:autoComplete value="#{bugBean.assignedUser}"
+							completeMethod="#{userBean.complete}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user}"
+							converter="#{userConverter}" forceSelection="true">
+						</p:autoComplete>
+					</f:view>
+
+					<p:outputLabel value="#{msg['bug.version']}" />
+					<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.fixedIn']}" />
+					<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
+
+					<!-- 
+				<p:outputLabel value="#{msg['bug.attechment']}" />
+				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
+ -->
+					<h:commandButton value="Create" action="#{bugBean.createNewBug}"
+						ajax="true"></h:commandButton>
+
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+
+		<h:form>
+			<p:dialog id="dialog" header="Car Detail" widgetVar="bugUpdateDialog"
+				resizable="false" position="center center" height="500" width="456"
+				appendToBody="true">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="#{msg['bug.title']}" />
+					<p:inputText value="#{bugBean.selectedBug.title}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.description']}" />
+					<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+					<p:calendar value="#{bugBean.newBug.targetDate}" />
+
+					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugBean.newBug.severity}"
+						style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.severityList}" var="severities"
+							itemLabel="#{msg['bug.severity.' += severities]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugBean.newBug.status}"
+						style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.statusList}" var="statuses"
+							itemLabel="#{msg['bug.status.' += statuses]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+					<f:view>
+						<p:autoComplete value="#{bugBean.assignedUser}"
+							completeMethod="#{userBean.complete}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user}"
+							converter="#{userConverter}" forceSelection="true">
+						</p:autoComplete>
+					</f:view>
+
+					<p:outputLabel value="#{msg['bug.version']}" />
+					<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
+
+					<p:outputLabel value="#{msg['bug.fixedIn']}" />
+					<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
+
+					<!-- 
+				<p:outputLabel value="#{msg['bug.attechment']}" />
+				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
+ -->
+					<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
+
+
+				</h:panelGrid>
+			</p:dialog>
 		</h:form>
 	</f:view>
 </h:body>
