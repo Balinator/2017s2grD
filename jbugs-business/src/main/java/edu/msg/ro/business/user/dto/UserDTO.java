@@ -8,7 +8,7 @@ import edu.msg.ro.persistence.user.entity.User;
 /**
  * DTO for {@link User} entity.
  * 
- * @author Andrei Floricel, msg systems ag
+ * @author balinc
  *
  */
 public class UserDTO extends AbstractDTO {

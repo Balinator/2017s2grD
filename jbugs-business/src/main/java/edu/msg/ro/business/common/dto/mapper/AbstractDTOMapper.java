@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
 import edu.msg.ro.business.common.dto.AbstractDTO;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
 public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends AbstractDTO> {
@@ -28,7 +27,7 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	}
 
-	public void mapToEntity(DTO dto, E entity) throws TechnicalExeption {
+	public void mapToEntity(DTO dto, E entity) {
 		entity.setLockVersion(dto.getLockVersion());
 		mapDTOToEntityFields(dto, entity);
 	}
@@ -43,7 +42,7 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 		return dtos;
 	}
 
-	public List<E> mapToEntities(List<DTO> listDTO, AbstractDao<E> dao) throws TechnicalExeption {
+	public List<E> mapToEntities(List<DTO> listDTO, AbstractDao<E> dao) {
 		List<E> listEntity = new ArrayList<>();
 		for (DTO dto : listDTO) {
 			E persistedE = dao.findEntity(dto.getId());
@@ -55,6 +54,6 @@ public abstract class AbstractDTOMapper<E extends AbstractEntity, DTO extends Ab
 
 	protected abstract void mapEntityToDTOFields(E entity, DTO dto);
 
-	protected abstract void mapDTOToEntityFields(DTO dto, E entity) throws TechnicalExeption;
+	protected abstract void mapDTOToEntityFields(DTO dto, E entity);
 
 }

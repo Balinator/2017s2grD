@@ -3,14 +3,17 @@ package edu.msg.ro.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.boundary.UserFacade;
+import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 @ManagedBean
@@ -23,6 +26,13 @@ public class UserBean extends AbstractBean {
 	private UserDTO newUser = new UserDTO();
 
 	private UserDTO selectedUser = new UserDTO();
+
+	private List<RoleDTO> roles;
+
+	private List<RoleDTO> selectedRoles;
+
+	@ManagedProperty("#{roleService}")
+	private roleService service;
 
 	public UserDTO getNewUser() {
 		return newUser;
@@ -44,20 +54,6 @@ public class UserBean extends AbstractBean {
 	public List<UserDTO> getAllUsers() {
 		return userFacade.getAllUsers();
 	}
-
-	// /**
-	// * Needed for bug create assigment.
-	// *
-	// * @return
-	// */
-	// public List<String> getAllUsersByUsername() {
-	// List<String> username = new ArrayList<String>();
-	// List<UserDTO> uDTO = userFacade.getAllUsers();
-	// for (UserDTO userDTO : uDTO) {
-	// username.add(userDTO.getUsername());
-	// }
-	// return username;
-	// }
 
 	public List<UserDTO> complete(String query) {
 		return userFacade.getAllUserByQuery(query);
@@ -118,4 +114,24 @@ public class UserBean extends AbstractBean {
 		return "users";
 	}
 
+	@PostConstruct
+	public void init() {
+		roles = service.getRoles();
+	}
+
+	public List<RoleDTO> getRoles() {
+		return roles;
+	}
+
+	public void setService(roleService service) {
+		this.service = service;
+	}
+
+	public List<RoleDTO> getSelectedRoles() {
+		return selectedRoles;
+	}
+
+	public void setSelectedThemes(List<RoleDTO> selectedRoles) {
+		this.selectedRoles = selectedRoles;
+	}
 }

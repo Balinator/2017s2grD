@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.PermissionDAO;
 import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.persistence.user.entity.Role;
@@ -37,7 +36,7 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 	}
 
 	@Override
-	protected void mapDTOToEntityFields(RoleDTO dto, Role entity) throws TechnicalExeption {
+	protected void mapDTOToEntityFields(RoleDTO dto, Role entity) {
 		entity.setPermissions(pdm.mapToEntities(dto.getPermissions(), pd));
 		entity.setName(dto.getName());
 	}

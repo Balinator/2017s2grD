@@ -3,7 +3,7 @@ package edu.msg.ro.business.common.dto;
 /**
  * Abstract common class for DTO objects.
  * 
- * @author Andrei Floricel, msg systems ag
+ * @author balinc
  *
  */
 public abstract class AbstractDTO {
