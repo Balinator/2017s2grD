@@ -1,9 +1,13 @@
 package edu.msg.ro.business.bug.dto.mapper;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.dao.UserDAO;
+import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -14,6 +18,12 @@ import edu.msg.ro.persistence.bug.entity.Bug;
 @Stateless
 public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 
+	@EJB
+	private UserDTOMapper userDtoMapper;
+
+	@EJB
+	private UserDAO userDAO;
+
 	@Override
 	public BugDTO getDTOInstance() {
 		return new BugDTO();
@@ -23,8 +33,8 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 	protected void mapEntityToDTOFields(Bug entity, BugDTO dto) {
 		dto.setTitle(entity.getTitle());
 		dto.setDescription(entity.getDescription());
-		dto.setAuthor(entity.getAuthor());
-		dto.setAssigned(entity.getAssigned());
+		dto.setAuthor(userDtoMapper.mapToDTO(entity.getAuthor()));
+		dto.setAssigned(userDtoMapper.mapToDTO(entity.getAssigned()));
 		dto.setAttachment(entity.getAttachment());
 		dto.setFixedIn(entity.getFixedIn());
 		dto.setSeverity(entity.getSeverity());
@@ -34,11 +44,11 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 	}
 
 	@Override
-	protected void mapDTOToEntityFields(BugDTO dto, Bug entity) {
+	protected void mapDTOToEntityFields(BugDTO dto, Bug entity) throws TechnicalExeption {
 		entity.setTitle(dto.getTitle());
 		entity.setDescription(dto.getDescription());
-		entity.setAuthor(dto.getAuthor());
-		entity.setAssigned(dto.getAssigned());
+		entity.setAuthor(userDAO.findEntity(dto.getAuthor().getId()));
+		entity.setAssigned(userDAO.findEntity(dto.getAssigned().getId()));
 		entity.setAttachment(dto.getAttachment());
 		entity.setFixedIn(dto.getFixedIn());
 		entity.setSeverity(dto.getSeverity());

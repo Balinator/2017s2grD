@@ -12,6 +12,7 @@ import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.dto.UserDTO;
 
 /****
  * Bug Bean.****
@@ -36,6 +37,16 @@ public class BugBean extends AbstractBean {
 	private List<BugDTO> filteredBugList;
 
 	private List<BugDTO> severity;
+
+	private UserDTO assignedUser = new UserDTO();
+
+	public UserDTO getAssignedUser() {
+		return assignedUser;
+	}
+
+	public void setAssignedUser(UserDTO user) {
+		this.assignedUser = user;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -90,6 +101,9 @@ public class BugBean extends AbstractBean {
 	 * @throws TechnicalExeption
 	 */
 	public String createNewBug() throws BusinessException, TechnicalExeption {
+		System.out.println(assignedUser);
+		newBug.setAssigned(assignedUser);
+		newBug.setAuthor(assignedUser);// todo: change it
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
