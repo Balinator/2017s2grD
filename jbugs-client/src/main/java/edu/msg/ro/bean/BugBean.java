@@ -19,6 +19,7 @@ import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.enums.BugStatus;
+import edu.msg.ro.persistence.bug.entity.Bug;
 
 /****
  * Bug Bean.****
@@ -60,39 +61,82 @@ public class BugBean extends AbstractBean {
 		this.assignedUser = user;
 	}
 
+	/**
+	 * Init method.
+	 */
 	@PostConstruct
 	public void init() {
 		buglist = bugFacade.getAllbugs();
 	}
 
+	/**
+	 * Method for getting all {@link Bug}s.
+	 * 
+	 * @return
+	 */
 	public List<BugDTO> getBugList() {
 		return buglist;
 	}
 
+	/**
+	 * Get for filteredBugList.
+	 * 
+	 * @return
+	 */
 	public List<BugDTO> getFilteredBugList() {
 		return filteredBugList;
 	}
 
+	/**
+	 * Set for filteredBugList.
+	 * 
+	 * @param filteredBugList
+	 */
 	public void setFilteredBugList(List<BugDTO> filteredBugList) {
 		this.filteredBugList = filteredBugList;
 	}
 
+	/**
+	 * Get for newBug.
+	 * 
+	 * @return
+	 */
 	public BugDTO getNewBug() {
 		return newBug;
 	}
 
+	/**
+	 * Set for newBug.
+	 * 
+	 * @param bug
+	 */
 	public void setNewBug(BugDTO bug) {
 		this.newBug = bug;
 	}
 
+	/**
+	 * Get for selectedBug.
+	 * 
+	 * @return
+	 */
 	public BugDTO getSelectedBug() {
 		return selectedBug;
 	}
 
+	/**
+	 * Set for selectedBug.
+	 * 
+	 * @param selectedBug
+	 */
 	public void setSelectedBug(BugDTO selectedBug) {
 		this.selectedBug = selectedBug;
 	}
 
+	/**
+	 * + Method for getting back all {@link Bug}s.
+	 * 
+	 * @return
+	 */
 	public List<BugDTO> getAllBugs() {
 		return bugFacade.getAllbugs();
 	}
@@ -112,6 +156,12 @@ public class BugBean extends AbstractBean {
 		return "bugCreate";
 	}
 
+	/**
+	 * Method for deleting a {@link Bug}.
+	 * 
+	 * @param bug
+	 * @return
+	 */
 	public String deleteBug(BugDTO bug) {
 		bugFacade.deleteBug(bug);
 		addMessage("Bugul " + newBug.getTitle() + " a fost sters!");
@@ -119,20 +169,43 @@ public class BugBean extends AbstractBean {
 		return "bugs";
 	}
 
+	/**
+	 * Method for entering update mode.
+	 * 
+	 * @param bug
+	 * @return
+	 */
 	public String enterUpdateMode(BugDTO bug) {
 		this.selectedBug = bug;
 		return "bugs";
 	}
 
+	/**
+	 * Method for leaving update mode.
+	 * 
+	 * @return
+	 */
 	public String leaveUpdateMode() {
 		selectedBug = new BugDTO();
 		return "bugs";
 	}
 
+	/**
+	 * Method for verifying if needed to render element.
+	 * 
+	 * @param bug
+	 * @return
+	 */
 	public boolean verifyBugRendere(BugDTO bug) {
 		return selectedBug != null && bug.getId().equals(selectedBug.getId());
 	}
 
+	/**
+	 * Method for editing {@link Bug}.
+	 * 
+	 * @return
+	 * @throws TechnicalExeption
+	 */
 	public String editBug() throws TechnicalExeption {
 		try {
 			bugFacade.updateBug(selectedBug);
@@ -144,40 +217,88 @@ public class BugBean extends AbstractBean {
 	}
 
 	// for bug filter
+	/**
+	 * Method for gett all {@link BugStatus}.
+	 * 
+	 * @return
+	 */
 	public BugStatus[] getStatusList() {
 		return BugStatus.values();
 	}
 
+	/**
+	 * Set for statusList.
+	 * 
+	 * @param statusList
+	 */
 	public void setStatusList(BugStatus[] statusList) {
 		this.statusList = statusList;
 	}
 
+	/**
+	 * Get for statuses.
+	 * 
+	 * @return
+	 */
 	public int getStatuses() {
 		return statuses;
 	}
 
+	/**
+	 * Set for statuses.
+	 * 
+	 * @param statuses
+	 */
 	public void setStatuses(int statuses) {
 		this.statuses = statuses;
 	}
 
+	/**
+	 * Method for get all {@link BugSeverity}.
+	 * 
+	 * @return
+	 */
 	public BugSeverity[] getSeverityList() {
 		return BugSeverity.values();
 	}
 
+	/**
+	 * Set for severityList.
+	 * 
+	 * @param severityList
+	 */
 	public void setSeverityList(BugSeverity[] severityList) {
 		this.severityList = severityList;
 	}
 
+	/**
+	 * Get for severities.
+	 * 
+	 * @return
+	 */
 	public int getSeverities() {
 		return severities;
 	}
 
+	/**
+	 * Set for severities.
+	 * 
+	 * @param severities
+	 */
 	public void setSeverities(int severities) {
 		this.severities = severities;
 	}
 
 	// validation for creating bug
 
+	/**
+	 * Method for validation for creating a {@link Bug}.
+	 * 
+	 * @param context
+	 * @param uic
+	 * @param value
+	 * @throws ValidationException
+	 */
 	public void validate(FacesContext context, UIComponent uic, Object value) throws ValidationException {
 
 		String input = (String) value;

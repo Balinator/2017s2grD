@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.RoleService;
 import edu.msg.ro.business.user.dto.RoleDTO;
+import edu.msg.ro.persistence.user.entity.Role;
 
 /**
  * Boundary for role component.
@@ -28,6 +29,14 @@ public class RoleFacade {
 		return roleService.getAllRoles();
 	}
 
+	/**
+	 * Method for updating an {@link Role}.
+	 * 
+	 * @param roleDTO
+	 *            - the DTO for the {@link Role}.
+	 * @return updated {@link Role}.
+	 * @throws TechnicalExeption
+	 */
 	public RoleDTO update(RoleDTO roleDTO) throws TechnicalExeption {
 		return roleService.update(roleDTO);
 	}

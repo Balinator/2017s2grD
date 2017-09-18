@@ -27,6 +27,14 @@ public class BugService {
 	@EJB
 	private BugDTOMapper bugDTOMapper;
 
+	/**
+	 * Method for creating new {@link Bug}.
+	 * 
+	 * @param bugDTO
+	 * @return
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	public BugDTO createBug(BugDTO bugDTO) throws BusinessException, TechnicalExeption {
 
 		Bug bugEntity = new Bug();
@@ -36,17 +44,35 @@ public class BugService {
 		return bugDTOMapper.mapToDTO(persistedBug);
 	}
 
+	/**
+	 * Method for updateing an {@link Bug}.
+	 * 
+	 * @param bugDTO
+	 * @return
+	 * @throws TechnicalExeption
+	 */
 	public BugDTO updateBug(BugDTO bugDTO) throws TechnicalExeption {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
 		bugDTOMapper.mapToEntity(bugDTO, persistedBug);
 		return bugDTOMapper.mapToDTO(persistedBug);
 	}
 
+	/**
+	 * Method for deteting an {@link Bug}.
+	 * 
+	 * @param bugDTO
+	 * @return
+	 */
 	public BugDTO deleteBug(BugDTO bugDTO) {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
 		return bugDTOMapper.mapToDTO(persistedBug);
 	}
 
+	/**
+	 * Method for getting back all {@link Bug}s.
+	 * 
+	 * @return
+	 */
 	public List<BugDTO> getAllBugs() {
 		return bugDTOMapper.mapToDTOs(bugDAO.getAll());
 	}

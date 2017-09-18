@@ -14,16 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Class for redirrecting unauthenticated users.
+ * 
  * @author balinc
  */
 @WebFilter(filterName = "AuthenticationFilter", urlPatterns = { "*.xhtml" })
 public class AuthenticationFilter implements Filter {
 
+	/**
+	 * Init method(not userd).
+	 */
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
 	}
 
+	/**
+	 * Filter method for redirrecting to login page.
+	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -50,6 +58,9 @@ public class AuthenticationFilter implements Filter {
 		}
 	}
 
+	/**
+	 * Destroy method(not used).
+	 */
 	@Override
 	public void destroy() {
 
