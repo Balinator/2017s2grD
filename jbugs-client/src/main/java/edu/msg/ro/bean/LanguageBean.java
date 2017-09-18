@@ -1,5 +1,6 @@
 package edu.msg.ro.bean;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
@@ -8,7 +9,12 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class LanguageBean {
+public class LanguageBean extends AbstractBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8657090779305459598L;
 
 	public enum Language {
 		DEFAULT("en"), ENGLISH("en"), ROMANIAN("ro");
