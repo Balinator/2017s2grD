@@ -25,10 +25,21 @@ public class RoleService {
 	@EJB
 	private RoleDTOMapper roleDTOMapper;
 
+	/**
+	 * Method for getting back all {@link Role}s.
+	 * 
+	 * @return
+	 */
 	public List<RoleDTO> getAllRoles() {
 		return roleDTOMapper.mapToDTOs(roleDAO.getAll());
 	}
 
+	/**
+	 * Method for updating an {@link Role}.
+	 * 
+	 * @param roleDTO
+	 * @return
+	 */
 	public RoleDTO update(RoleDTO roleDTO) {
 		Role persistedRole = roleDAO.findEntity(roleDTO.getId());
 		roleDTOMapper.mapToEntity(roleDTO, persistedRole);

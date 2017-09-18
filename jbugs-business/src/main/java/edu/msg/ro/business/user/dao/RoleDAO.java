@@ -17,11 +17,19 @@ import edu.msg.ro.persistence.user.entity.Role;
 @Stateless
 public class RoleDAO extends AbstractDao<Role> {
 
+	/**
+	 * Method for getting the class.
+	 */
 	@Override
 	public Class<Role> getEntityClass() {
 		return Role.class;
 	}
 
+	/**
+	 * Method for getting back all the {@link Role}s.
+	 * 
+	 * @return
+	 */
 	public List<Role> getAll() {
 		TypedQuery<Role> query = this.em.createNamedQuery(Role.FIND_All_ROLES, Role.class);
 		return query.getResultList();

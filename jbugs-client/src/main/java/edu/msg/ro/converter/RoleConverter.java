@@ -11,12 +11,21 @@ import javax.faces.convert.FacesConverter;
 import edu.msg.ro.bean.roleService;
 import edu.msg.ro.business.user.dto.RoleDTO;
 
+/**
+ * Converter for Role.
+ * 
+ * @author laszll
+ *
+ */
 @FacesConverter("roleConverter")
 public class RoleConverter implements Converter {
 
 	@EJB
 	private roleService service;
 
+	/**
+	 * String to Role.
+	 */
 	@Override
 	public RoleDTO getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
@@ -32,6 +41,9 @@ public class RoleConverter implements Converter {
 		}
 	}
 
+	/**
+	 * Role to String.
+	 */
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 		if (object != null) {

@@ -1,7 +1,7 @@
 package edu.msg.ro.enums;
 
 /**
- * enum for bug severity
+ * Enum for bug severity.
  * 
  * @author varadp
  *
@@ -12,10 +12,20 @@ public enum BugSeverity {
 
 	private final int label;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param label
+	 */
 	private BugSeverity(int label) {
 		this.label = label;
 	}
 
+	/**
+	 * Get for label.
+	 * 
+	 * @return
+	 */
 	public int getLabel() {
 		return label;
 	}

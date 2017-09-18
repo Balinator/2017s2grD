@@ -11,6 +11,7 @@ import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
  * Boundary for bug component.
@@ -25,18 +26,45 @@ public class BugFacade {
 	@EJB
 	private BugService bugService;
 
+	/**
+	 * Method for creating new {@link Bug}.
+	 * 
+	 * @param bug
+	 * @return
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	public BugDTO createBug(BugDTO bug) throws BusinessException, TechnicalExeption {
 		return bugService.createBug(bug);
 	}
 
+	/**
+	 * Method for updating {@link Bug}.
+	 * 
+	 * @param bug
+	 * @return
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	public BugDTO updateBug(BugDTO bug) throws BusinessException, TechnicalExeption {
 		return bugService.updateBug(bug);
 	}
 
+	/**
+	 * Method for deleting {@link Bug}.
+	 * 
+	 * @param bugDTO
+	 * @return
+	 */
 	public BugDTO deleteBug(BugDTO bugDTO) {
 		return bugService.deleteBug(bugDTO);
 	}
 
+	/**
+	 * Method for getting back all {@link Bug}s.
+	 * 
+	 * @return
+	 */
 	public List<BugDTO> getAllbugs() {
 		return bugService.getAllBugs();
 	}
