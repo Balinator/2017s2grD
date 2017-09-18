@@ -16,7 +16,7 @@ public class RoleConverter implements Converter {
 	public RoleDTO getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				roleService service = (roleService) fc.getExternalContext().getApplicationMap().get("roleBean");
+				roleService service = (roleService) fc.getExternalContext().getApplicationMap().get("roleService");
 				return service.getRoleItemMap().get(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
