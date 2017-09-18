@@ -2,97 +2,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions">
 
 <h:head>
 	<title><h:outputText value="#{msg['login.title']}" /></title>
 	<h:outputStylesheet library="css" name="style.css" />
-	<script name="jquery/jquery.js" library="primefaces"></script>
 </h:head>
 <h:body>
 	<f:view>
 		<ui:include src="/header.xhtml" />
-		<h:form id="bugForm">
+		<h:form id="userForm">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="#{msg['bug.title']}" />
+				<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
 
-			<p:messages autoUpdate="true" />
+				<p:outputLabel value="#{msg['bug.description']}" />
+				<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
 
-			<p:dataTable value="createBug" var="createbug">
+				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+				<p:calendar value="#{bugBean.newBug.targetDate}" />
 
-				<p:column headerText="#{msg['bug.title']}">
-					<h:inputText value="#{bugBean.newBug.title}"
-						validator="#{bugBean.validate}"></h:inputText>
-				</p:column>
+				<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+				<p:selectOneMenu value="#{bugBean.newBug.severity}"
+					style="width:90px">
 
-				<p:column headerText="#{msg['bug.description']}">
-					<h:inputText value="#{bugBean.newBug.description}"
-						validator="#{bugBean.validate}"></h:inputText>
-				</p:column>
+					<f:selectItem value="#{null}"
+						itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+					<f:selectItems value="#{bugBean.severityList}" var="severities"
+						itemLabel="#{msg['bug.severity.' += severities]}" />
 
-				<p:column headerText="#{msg['bug.targetDate']}">
-					<p:calendar value="#{bugBean.newBug.targetDate}" />
-				</p:column>
+					<p:ajax event="change" update="@this"></p:ajax>
 
-				<p:column headerText=" #{msg['bug.severity']}">
-					<p:selectOneMenu value="#{bugBean.newBug.severity}" style="width:90px">
+				</p:selectOneMenu>
 
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
-						<f:selectItems value="#{bugBean.severityList}" var="severities"
-							itemLabel="#{msg['bug.severity.' += severities]}" />
+				<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+				<p:selectOneMenu value="#{bugBean.newBug.status}" style="width:90px">
 
-						<p:ajax event="change" update="@this"></p:ajax>
+					<f:selectItem value="#{null}"
+						itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+					<f:selectItems value="#{bugBean.statusList}" var="statuses"
+						itemLabel="#{msg['bug.status.' += statuses]}" />
 
-					</p:selectOneMenu>
-				</p:column>
+					<p:ajax event="change" update="@this"></p:ajax>
 
-				<p:column headerText="#{msg['bug.status']}">
-					<p:selectOneMenu value="#{bugBean.newBug.status}" style="width:90px">
+				</p:selectOneMenu>
 
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
-						<f:selectItems value="#{bugBean.statusList}" var="statuses"
-							itemLabel="#{msg['bug.status.' += statuses]}" />
 
-						<p:ajax event="change" update="@this"></p:ajax>
+				<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+				<f:view>
+					<p:autoComplete value="#{bugBean.assignedUser}"
+						completeMethod="#{userBean.complete}" var="user"
+						itemLabel="#{user.username}" itemValue="#{user}"
+						converter="#{userConverter}" forceSelection="true">
+					</p:autoComplete>
+				</f:view>
 
-					</p:selectOneMenu>
-				</p:column>
+				<p:outputLabel value="#{msg['bug.version']}" />
+				<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
 
-				<p:column headerText="#{msg['bug.assigned']}">
-					<f:view>
-						<p:autoComplete value="#{bugBean.assignedUser}"
-							completeMethod="#{userBean.complete}" var="user"
-							itemLabel="#{user.username}" itemValue="#{user}"
-							converter="#{userConverter}" forceSelection="true">
-						</p:autoComplete>
-					</f:view>
-				</p:column>
-
-				<p:column headerText="#{msg['bug.version']}">
-					<h:inputText value="#{bugBean.newBug.version}"></h:inputText>
-				</p:column>
-
-				<p:column headerText="#{msg['bug.fixedIn']}">
-					<h:inputText value="#{bugBean.newBug.fixedIn}"></h:inputText>
-				</p:column>
+				<p:outputLabel value="#{msg['bug.fixedIn']}" />
+				<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
 
 				<!-- 
-				<p:column headerText="#{msg['bug.attechment']}">
-					<h:inputText value="#{bugBean.newBug.attachment}"></h:inputText>
-				</p:column>
-				-->
+				<p:outputLabel value="#{msg['bug.attechment']}" />
+				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
+ -->
+				<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
 
-				<p:column headerText="#{msg['button.action']}">
-					<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
-				</p:column>
 
-			</p:dataTable>
-
+			</h:panelGrid>
 		</h:form>
-
 	</f:view>
 </h:body>
 </html>

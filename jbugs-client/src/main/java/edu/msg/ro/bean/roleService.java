@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import edu.msg.ro.business.user.boundary.RoleFacade;
 import edu.msg.ro.business.user.dao.RoleDAO;
@@ -21,7 +21,7 @@ import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
  *
  */
 @ManagedBean(name = "roleService", eager = true)
-@ApplicationScoped
+@RequestScoped
 public class roleService {
 
 	@EJB
