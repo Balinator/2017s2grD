@@ -1,5 +1,6 @@
 package edu.msg.ro.converter;
 
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -13,10 +14,14 @@ import edu.msg.ro.business.user.dto.RoleDTO;
 @FacesConverter("roleConverter")
 public class RoleConverter implements Converter {
 
+	@EJB
+	private roleService service;
+
+	@Override
 	public RoleDTO getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				roleService service = (roleService) fc.getExternalContext().getApplicationMap().get("roleService");
+				roleService service = (roleService) fc.getExternalContext().getRequestMap().get("roleService");
 				return service.getRoleItemMap().get(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
@@ -27,6 +32,7 @@ public class RoleConverter implements Converter {
 		}
 	}
 
+	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 		if (object != null) {
 			return String.valueOf(((RoleDTO) object).getId());

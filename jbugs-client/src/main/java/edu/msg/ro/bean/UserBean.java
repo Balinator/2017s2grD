@@ -126,12 +126,4 @@ public class UserBean extends AbstractBean {
 	public void setService(roleService service) {
 		this.service = service;
 	}
-
-	public List<RoleDTO> getSelectedRoles() {
-		return selectedRoles;
-	}
-
-	public void setSelectedThemes(List<RoleDTO> selectedRoles) {
-		this.selectedRoles = selectedRoles;
-	}
 }
