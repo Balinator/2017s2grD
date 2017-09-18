@@ -12,7 +12,9 @@ import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.PermissionDAO;
 import edu.msg.ro.business.user.dao.RoleDAO;
+import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.persistence.user.entity.Permission;
 import edu.msg.ro.persistence.user.entity.Role;
@@ -125,6 +127,8 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	private PermissionDAO permDAO;
 	@EJB
 	private RoleDAO roleDAO;
+	@EJB
+	private RoleDTOMapper roleDTOmapper;
 
 	@Test
 	public void checkPermission() throws BusinessException {
@@ -139,11 +143,13 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 		Role adminRole = roleDAO.findEntity(1L);
 		roles.add(adminRole);
 
+		List<RoleDTO> rolesDTO = roleDTOmapper.mapToDTOs(roles);
+
 		UserDTO user = new UserDTO();
 		user.setFirstname("Thierry");
 		user.setLastname("Henry");
 		user.setPassword("12345");
-		user.setRoles(roles);
+		user.setRoles(rolesDTO);
 		try {
 			user.setEmail("henry@msggroup.com");
 		} catch (Exception e) {
