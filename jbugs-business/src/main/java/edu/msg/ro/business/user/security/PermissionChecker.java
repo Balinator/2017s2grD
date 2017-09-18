@@ -12,7 +12,7 @@ import edu.msg.ro.persistence.user.entity.Role;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * Checks if user has permission to perform specific task
+ * Checks if user has permission to perform specific task.
  * 
  * @author nemeta
  *

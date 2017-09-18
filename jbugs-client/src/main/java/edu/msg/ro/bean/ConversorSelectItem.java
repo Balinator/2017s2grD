@@ -5,8 +5,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
+/**
+ * Converter class for SelectItem.
+ * 
+ * @author laszll
+ *
+ */
 public class ConversorSelectItem implements Converter {
 
+	/**
+	 * String to SelectItem.
+	 */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value != null && value.isEmpty())
@@ -17,6 +26,9 @@ public class ConversorSelectItem implements Converter {
 		return selectItem;
 	}
 
+	/**
+	 * SelectItem to String.
+	 */
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object object) {
 		return ((SelectItem) object).getLabel();

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.RoleDAO;
 import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
@@ -26,11 +25,22 @@ public class RoleService {
 	@EJB
 	private RoleDTOMapper roleDTOMapper;
 
+	/**
+	 * Method for getting back all {@link Role}s.
+	 * 
+	 * @return
+	 */
 	public List<RoleDTO> getAllRoles() {
 		return roleDTOMapper.mapToDTOs(roleDAO.getAll());
 	}
 
-	public RoleDTO update(RoleDTO roleDTO) throws TechnicalExeption {
+	/**
+	 * Method for updating an {@link Role}.
+	 * 
+	 * @param roleDTO
+	 * @return
+	 */
+	public RoleDTO update(RoleDTO roleDTO) {
 		Role persistedRole = roleDAO.findEntity(roleDTO.getId());
 		roleDTOMapper.mapToEntity(roleDTO, persistedRole);
 		return roleDTOMapper.mapToDTO(persistedRole);

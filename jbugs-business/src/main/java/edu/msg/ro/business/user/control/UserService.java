@@ -35,6 +35,13 @@ public class UserService {
 	@EJB
 	UserGenerator userUtils;
 
+	/**
+	 * Method for creating a new {@link User}.
+	 * 
+	 * @param user
+	 * @return
+	 * @throws BusinessException
+	 */
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 		try {
 			validateUserData(user);
@@ -56,12 +63,26 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * Method for updating an {@link User}.
+	 * 
+	 * @param user
+	 * @return
+	 * @throws TechnicalExeption
+	 */
 	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
 		User persistedUser = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, persistedUser);
 		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
+	/**
+	 * Method for deleting(deactivating) an {@link User}.
+	 * 
+	 * @param userDTO
+	 * @return
+	 * @throws TechnicalExeption
+	 */
 	public UserDTO deleteUser(UserDTO userDTO) throws TechnicalExeption {
 		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
 		if (userValidator.checkIfUserHasActiveTasks(userEntity) == false) {
@@ -70,6 +91,12 @@ public class UserService {
 		return userDTOMapper.mapToDTO(userEntity);
 	}
 
+	/**
+	 * Method for validating if an {@link User} exist by his email.
+	 * 
+	 * @param user
+	 * @throws BusinessException
+	 */
 	private void validateUserData(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
 		if (existingUserWithSameEmail != null) {
@@ -77,10 +104,23 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * Method for verifying that the user with the given username and password
+	 * exist(for login).
+	 * 
+	 * @param username
+	 * @param pass
+	 * @return
+	 */
 	public boolean findUserExists(String username, String pass) {
 		return userDAO.verifyUserExist(username, pass);
 	}
 
+	/**
+	 * Method for getting back all the {@link User}s.
+	 * 
+	 * @return
+	 */
 	public List<UserDTO> getAllUsers() {
 		return userDTOMapper.mapToDTOs(userDAO.getAll());
 	}

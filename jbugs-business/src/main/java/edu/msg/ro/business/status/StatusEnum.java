@@ -42,6 +42,11 @@ public enum StatusEnum {
 
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param s
+	 */
 	StatusEnum(String s) {
 		key = s;
 	}

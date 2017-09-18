@@ -17,16 +17,30 @@ import edu.msg.ro.persistence.bug.entity.Bug;
 @Stateless
 public class BugDAO extends AbstractDao<Bug> {
 
+	/**
+	 * Method for getting class.
+	 */
 	@Override
 	public Class<Bug> getEntityClass() {
 		return Bug.class;
 	}
 
+	/**
+	 * Method for getting back all {@link Bug}s.
+	 * 
+	 * @return
+	 */
 	public List<Bug> getAll() {
 		TypedQuery<Bug> query = this.em.createNamedQuery(Bug.FIND_ALL, Bug.class);
 		return query.getResultList();
 	}
 
+	/**
+	 * Method for finding {@link Bug} by id.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Bug getBug(Long id) {
 		return this.findEntity(id);
 	}
