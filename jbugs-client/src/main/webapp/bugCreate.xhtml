@@ -2,8 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -13,120 +14,85 @@
 </h:head>
 <h:body>
 	<f:view>
+		<ui:include src="/header.xhtml" />
 		<h:form id="bugForm">
 
 			<p:messages autoUpdate="true" />
 
 			<p:dataTable value="createBug" var="createbug">
-				<f:facet name="header">
 
-				</f:facet>
-				<p:column>
-					<f:facet name="header">
-						Title
-						<br />
-						<h:inputText value="#{bugBean.newBug.title}"></h:inputText>
-					</f:facet>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						Description
-						<br />
-						<h:inputText value="#{bugBean.newBug.description}"></h:inputText>
-					</f:facet>
-
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						TargetDate
-						<br />
-						<p:calendar id="popup" value="#{bugBean.newBug.targetDate}" />
-					</f:facet>
+				<p:column headerText="#{msg['bug.title']}">
+					<h:inputText value="#{bugBean.newBug.title}"
+						validator="#{bugBean.validate}"></h:inputText>
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						severity
-						<br />
-						<h:inputText value="#{bugBean.newBug.severity}"></h:inputText>
-					</f:facet>
+				<p:column headerText="#{msg['bug.description']}">
+					<h:inputText value="#{bugBean.newBug.description}"
+						validator="#{bugBean.validate}"></h:inputText>
 				</p:column>
+
+				<p:column headerText="#{msg['bug.targetDate']}">
+					<p:calendar value="#{bugBean.newBug.targetDate}" />
+				</p:column>
+
+				<p:column headerText=" #{msg['bug.severity']}">
+					<p:selectOneMenu value="#{bugBean.newBug.severity}" style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.severityList}" var="severities"
+							itemLabel="#{msg['bug.severity.' += severities]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.status']}">
+					<p:selectOneMenu value="#{bugBean.newBug.status}" style="width:90px">
+
+						<f:selectItem value="#{null}"
+							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						<f:selectItems value="#{bugBean.statusList}" var="statuses"
+							itemLabel="#{msg['bug.status.' += statuses]}" />
+
+						<p:ajax event="change" update="@this"></p:ajax>
+
+					</p:selectOneMenu>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.assigned']}">
+					<f:view>
+						<p:autoComplete value="#{bugBean.assignedUser}"
+							completeMethod="#{userBean.complete}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user}"
+							converter="#{userConverter}" forceSelection="true">
+						</p:autoComplete>
+					</f:view>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.version']}">
+					<h:inputText value="#{bugBean.newBug.version}"></h:inputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.fixedIn']}">
+					<h:inputText value="#{bugBean.newBug.fixedIn}"></h:inputText>
+				</p:column>
+
 				<!-- 
-					<p:column>
-					<f:facet name="header">
-						author
-						<br />
-						<h:outputText value="#{loginBean.user.username}"></h:outputText>
-					</f:facet>
-				</p:column> 
-				
-				 -->
+				<p:column headerText="#{msg['bug.attechment']}">
+					<h:inputText value="#{bugBean.newBug.attachment}"></h:inputText>
+				</p:column>
+				-->
 
-
-
-				<p:column>
-					<f:facet name="header">
-						status
-						<br />
-						<h:inputText value="#{bugBean.newBug.status}"></h:inputText>
-					</f:facet>
+				<p:column headerText="#{msg['button.action']}">
+					<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						assigned
-						<br />
-						<f:view>
-							<p:autoComplete value="#{bugBean.assignedUser}"
-								completeMethod="#{userBean.complete}" var="user" itemLabel="#{user.username}"
-								itemValue="#{user}" converter="#{userConverter}" forceSelection="true">
-							</p:autoComplete>
-						
-						</f:view>
-					</f:facet>
-				</p:column>
-
-
-				<p:column>
-					<f:facet name="header">
-						version
-						<br />
-						<h:inputText value="#{bugBean.newBug.version}"></h:inputText>
-					</f:facet>
-				</p:column>
-
-				<p:column>
-					<f:facet name="header">
-						fixedIn
-						<br />
-						<h:inputText value="#{bugBean.newBug.fixedIn}"></h:inputText>
-					</f:facet>
-				</p:column>
-				<!-- 
-				<p:column>
-					<f:facet name="header">
-						attachment
-						<br />
-						<h:inputText value="#{bugBean.newBug.attachment}"></h:inputText>
-					</f:facet>
-				</p:column>
-				
-				 -->
-
-
-				<p:column>
-					<f:facet name="header">
-						Action
-						<br />
-						<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
-					</f:facet>
-				</p:column>
 			</p:dataTable>
 
-
-
-
 		</h:form>
+
 	</f:view>
 </h:body>
 </html>

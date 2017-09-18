@@ -1,5 +1,7 @@
 package edu.msg.ro.persistence.bug.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 import edu.msg.ro.persistence.user.entity.User;
@@ -18,8 +22,7 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b"),
-		@NamedQuery(name = Bug.FIND_ALL_SEVERITY, query = "SELECT b.severity from Bug b") })
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
 @Entity
 public class Bug extends AbstractEntity {
 
@@ -34,14 +37,15 @@ public class Bug extends AbstractEntity {
 
 	private String description;
 
-	private String targetDate;
+	@Temporal(TemporalType.DATE)
+	private Date targetDate;
 
 	private String severity;
 
 	@OneToOne
 	private User author;
 
-	private int status;
+	private String status;
 
 	@ManyToOne
 	private User assigned;
@@ -76,11 +80,11 @@ public class Bug extends AbstractEntity {
 		this.description = description;
 	}
 
-	public String getTargetDate() {
+	public Date getTargetDate() {
 		return targetDate;
 	}
 
-	public void setTargetDate(String targetDate) {
+	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
 	}
 
@@ -100,11 +104,11 @@ public class Bug extends AbstractEntity {
 		this.author = author;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

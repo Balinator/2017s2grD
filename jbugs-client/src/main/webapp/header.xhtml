@@ -8,16 +8,28 @@
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
 				<h2>
-					<h:outputText value="#{msg['header.loginName']}"/><h:outputText value="#{sessionScope['username']}"/>
+					<h:outputText value="#{msg['header.loginName']}" />
+					<h:outputText value="#{sessionScope['username']}" />
 				</h2>
 				<h:form>
 					<h:commandLink action="#{loginBean.processLogout}"
-						value="#{msg['general.logout']}"/>
+						value="#{msg['general.logout']}" />
+
+
+					<a href="http://localhost:8080/jbugs/bugs.xhtml">Bugs</a>
+
+
+					<a href="http://localhost:8080/jbugs/bugCreate.xhtml">Create
+						Bug</a>
+					<a href="http://localhost:8080/jbugs/permissionManager.xhtml">Create
+						Permission Manager</a>
+
+
 				</h:form>
 			</h:panelGroup>
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] == null}">
-				<h:outputText value="#{msg['header.loggedout']}"/>
+				<h:outputText value="#{msg['header.loggedout']}" />
 			</h:panelGroup>
 		</h:panelGroup>
 		<h:panelGroup layout="block" styleClass="header-class-right">

@@ -1,5 +1,7 @@
 package edu.msg.ro.business.bug.dto.mapper;
 
+import java.util.Date;
+
 import javax.ejb.EJB;
 
 import org.junit.Assert;
@@ -31,10 +33,10 @@ public class BugDTOMapperTest extends AbstractIntegrationTest {
 		entity.setAuthor(testUser);
 		entity.setVersion("v2.0");
 		entity.setFixedIn("v2.2");
-		entity.setTargetDate("2012-01-01");
+		entity.setTargetDate(new Date());
 		entity.setLockVersion(1L);
 		entity.setSeverity("bug");
-		entity.setStatus(1);
+		entity.setStatus("Open");
 
 		BugDTO bugDTO = bdm.mapToDTO(entity);
 

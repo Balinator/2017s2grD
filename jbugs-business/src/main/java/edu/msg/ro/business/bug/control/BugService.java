@@ -51,8 +51,4 @@ public class BugService {
 		return bugDTOMapper.mapToDTOs(bugDAO.getAll());
 	}
 
-	public List<BugDTO> getAllSeverity() {
-		return bugDTOMapper.mapToDTOs(bugDAO.getAllSeverity());
-	}
-
 }
