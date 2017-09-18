@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<f:view locale="#{languageBean.locale}">
 	<h:panelGroup layout="block">
 		<h:form>
 			<h:commandLink action="#{languageBean.setLanguage('ENGLISH')}">
@@ -13,4 +14,5 @@
 			</h:commandLink>
 		</h:form>
 	</h:panelGroup>
+	</f:view>
 </ui:composition>

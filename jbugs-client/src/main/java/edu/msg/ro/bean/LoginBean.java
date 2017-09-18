@@ -8,7 +8,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
-import edu.msg.ro.bean.LanguageBean.Language;
 import edu.msg.ro.business.user.boundary.LoginFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
@@ -83,7 +82,6 @@ public class LoginBean extends AbstractBean implements Serializable {
 	public String processLogout() {
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 		session.invalidate();
-		LanguageBean.setLanguage(Language.DEFAULT);
 		return "login";
 	}
 }

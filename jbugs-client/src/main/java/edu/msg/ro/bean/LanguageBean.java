@@ -3,11 +3,11 @@ package edu.msg.ro.bean;
 import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LanguageBean {
 
 	public enum Language {
@@ -20,8 +20,19 @@ public class LanguageBean {
 		private final String key;
 	}
 
-	public static void setLanguage(Language lang) {
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(lang.key));
+	private Locale locale = new Locale(Language.DEFAULT.key);
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale lang) {
+		locale = lang;
+	}
+
+	public void setLanguage(Language lang) {
+		locale = new Locale(lang.key);
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 	}
 
 }
