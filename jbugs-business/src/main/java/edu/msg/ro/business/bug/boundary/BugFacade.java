@@ -33,7 +33,7 @@ public class BugFacade {
 		return bugService.updateBug(bug);
 	}
 
-	public BugDTO deleteBug(BugDTO bugDTO) throws TechnicalExeption {
+	public BugDTO deleteBug(BugDTO bugDTO) {
 		return bugService.deleteBug(bugDTO);
 	}
 

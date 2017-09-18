@@ -5,7 +5,6 @@ import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
@@ -44,7 +43,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 	}
 
 	@Override
-	protected void mapDTOToEntityFields(BugDTO dto, Bug entity) throws TechnicalExeption {
+	protected void mapDTOToEntityFields(BugDTO dto, Bug entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setDescription(dto.getDescription());
 		entity.setAuthor(userDAO.findEntity(dto.getAuthor().getId()));
