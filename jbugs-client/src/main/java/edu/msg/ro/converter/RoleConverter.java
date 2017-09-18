@@ -1,27 +1,27 @@
 package edu.msg.ro.converter;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.faces.convert.FacesConverter;
 
-import edu.msg.ro.bean.roleService;
+import edu.msg.ro.bean.UserRoleService;
 import edu.msg.ro.business.user.dto.RoleDTO;
 
 /**
  * Converter for Role.
  * 
- * @author laszll
+ * @author balinc
  *
  */
-@FacesConverter("roleConverter")
+@ManagedBean
 public class RoleConverter implements Converter {
 
-	@EJB
-	private roleService service;
+	@ManagedProperty("#{userRoleService}")
+	private UserRoleService service;
 
 	/**
 	 * String to Role.
@@ -30,7 +30,6 @@ public class RoleConverter implements Converter {
 	public RoleDTO getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				roleService service = (roleService) fc.getExternalContext().getRequestMap().get("roleService");
 				return service.getRoleItemMap().get(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
@@ -51,5 +50,14 @@ public class RoleConverter implements Converter {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Set User Role Service.
+	 * 
+	 * @param service
+	 */
+	public void setService(UserRoleService service) {
+		this.service = service;
 	}
 }

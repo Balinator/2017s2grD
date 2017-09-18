@@ -1,45 +1,30 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.bean.user;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
-import edu.msg.ro.business.user.boundary.UserFacade;
-import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
  * Bean for managing {@link User}s.
  * 
- * @author laszll
+ * @author balinc
  *
  */
 @ManagedBean
 @RequestScoped
-public class UserBean extends AbstractBean {
-
-	@EJB
-	UserFacade userFacade;
+public class UserBean extends AbstractUserBean {
 
 	private UserDTO newUser = new UserDTO();
 
 	private UserDTO selectedUser = new UserDTO();
-
-	private List<RoleDTO> roles;
-
-	private List<RoleDTO> selectedRoles;
-
-	@ManagedProperty("#{roleService}")
-	private roleService service;
 
 	/**
 	 * Get for newUser.
@@ -98,7 +83,7 @@ public class UserBean extends AbstractBean {
 	}
 
 	/**
-	 * Method for get all usesrnaem for autocomplete.
+	 * Method for get all username for autocomplete.
 	 * 
 	 * @param usernameQuery
 	 * @return
@@ -122,6 +107,7 @@ public class UserBean extends AbstractBean {
 			userFacade.createUser(newUser);
 			addMessage("Userul " + newUser.getFirstname() + " a fost creat!");
 			newUser = new UserDTO();
+			rebuildRoleService();
 		} catch (BusinessException e) {
 			Object[] messageArguments = { newUser.toString() };
 			addI18nMessage(e.getMessage(), messageArguments);
@@ -190,31 +176,5 @@ public class UserBean extends AbstractBean {
 		}
 		selectedUser = new UserDTO();
 		return "users";
-	}
-
-	/**
-	 * Init function.
-	 */
-	@PostConstruct
-	public void init() {
-		roles = service.getRoles();
-	}
-
-	/**
-	 * Get for roles.
-	 * 
-	 * @return
-	 */
-	public List<RoleDTO> getRoles() {
-		return roles;
-	}
-
-	/**
-	 * Set for roles.
-	 * 
-	 * @param service
-	 */
-	public void setService(roleService service) {
-		this.service = service;
 	}
 }

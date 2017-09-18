@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
-    
-    <application>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+	<application>
 		<resource-bundle>
 			<base-name>i18n.messages</base-name>
 			<var>msg</var>
@@ -13,7 +12,6 @@
 		<locale-config>
 			<default-locale>en</default-locale>
 		</locale-config>
-		
 	</application>
 
 	<navigation-rule>
@@ -22,7 +20,7 @@
 			<from-action>#{loginBean.processLogin}</from-action>
 			<from-outcome>loginSuccess</from-outcome>
 			<to-view-id>users.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{loginBean.processLogin}</from-action>
@@ -30,5 +28,10 @@
 			<to-view-id>login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
+	<converter>
+		<converter-id>roleConverter</converter-id>
+		<converter-class>edu.msg.ro.converter.RoleConverter</converter-class>
+	</converter>
 
 </faces-config>
