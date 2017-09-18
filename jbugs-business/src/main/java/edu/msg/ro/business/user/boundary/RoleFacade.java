@@ -29,7 +29,6 @@ public class RoleFacade {
 	}
 
 	public RoleDTO update(RoleDTO roleDTO) throws TechnicalExeption {
-		RoleDTO ret = roleService.update(roleDTO);
-		return ret;
+		return roleService.update(roleDTO);
 	}
 }

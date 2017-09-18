@@ -73,12 +73,6 @@ public class PermissionManagerBean extends AbstractBean {
 		return allPermissions;
 	}
 
-	// public void permissionRoleChangedListener(ValueChangeEvent event,
-	// PermissionDTO permission, RoleDTO role)
-	// throws TechnicalExeption {
-	//
-	// }
-
 	public Long[] isChackboxChacked(RoleDTO role) {
 		Long[] list = new Long[role.getPermissions().size()];
 		for (int i = 0; i < role.getPermissions().size(); ++i) {
@@ -96,7 +90,7 @@ public class PermissionManagerBean extends AbstractBean {
 			newValue[i] = Long.valueOf(newValueString[i]);
 		}
 
-		if (newValue == null || oldValue == null) {
+		if (oldValue == null) {
 			throw new TechnicalExeption();
 		}
 
