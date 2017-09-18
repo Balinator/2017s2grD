@@ -57,8 +57,8 @@ public class UserServiceTest {
 	@Test
 	public void createUser_UniqueEmailFail() throws BusinessException {
 		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("John");
-		testUser.setLastname("Doe");
+		testUser.setFirstname("John1");
+		testUser.setLastname("Doe1");
 		testUser.setEmail("unique@msggroup.com");
 		testUser.setPassword("123456");
 

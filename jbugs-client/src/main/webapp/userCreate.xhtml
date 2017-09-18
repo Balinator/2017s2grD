@@ -16,6 +16,7 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
+		<p:messages autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="#{msg['users.firstname']}" />
 				<p:inputText value="#{userBean.newUser.firstname}"></p:inputText>
@@ -37,6 +38,7 @@
 					action="#{userBean.createNewUser}" />
 
 			</h:panelGrid>
+			
 		</h:form>
 	</f:view>
 </h:body>

@@ -23,11 +23,17 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 	@EJB
 	private UserDAO userDAO;
 
+	/**
+	 * Method for instaciating {@link BugDTO}.
+	 */
 	@Override
 	public BugDTO getDTOInstance() {
 		return new BugDTO();
 	}
 
+	/**
+	 * Method for filling {@link BugDTO}.
+	 */
 	@Override
 	protected void mapEntityToDTOFields(Bug entity, BugDTO dto) {
 		dto.setTitle(entity.getTitle());
@@ -42,6 +48,9 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		dto.setVersion(entity.getVersion());
 	}
 
+	/**
+	 * Method for filling {@link Bug}.
+	 */
 	@Override
 	protected void mapDTOToEntityFields(BugDTO dto, Bug entity) {
 		entity.setTitle(dto.getTitle());

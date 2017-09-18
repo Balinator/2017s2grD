@@ -14,6 +14,8 @@ import edu.msg.ro.business.user.boundary.PermissionFacade;
 import edu.msg.ro.business.user.boundary.RoleFacade;
 import edu.msg.ro.business.user.dto.PermissionDTO;
 import edu.msg.ro.business.user.dto.RoleDTO;
+import edu.msg.ro.persistence.user.entity.Permission;
+import edu.msg.ro.persistence.user.entity.Role;
 
 /**
  * 
@@ -37,22 +39,47 @@ public class PermissionManagerBean extends AbstractBean {
 
 	private Long[] checkboxMap;
 
+	/**
+	 * Get for checkboxMap
+	 * 
+	 * @return
+	 */
 	public Long[] getCheckboxMap() {
 		return checkboxMap;
 	}
 
+	/**
+	 * Set for checkboxMap.
+	 * 
+	 * @param checkboxMap
+	 */
 	public void setCheckboxMap(Long[] checkboxMap) {
 		this.checkboxMap = checkboxMap;
 	}
 
+	/**
+	 * Method for get all {@link Role}s.
+	 * 
+	 * @return
+	 */
 	public List<RoleDTO> getAllRoles() {
 		return roleFacade.getAllRoles();
 	}
 
+	/**
+	 * Method for get all {@link Permission}s.
+	 * 
+	 * @return
+	 */
 	public List<PermissionDTO> getAllPermissions() {
 		return permissionFacade.getAll();
 	}
 
+	/**
+	 * Get for allRoles.
+	 * 
+	 * @return
+	 */
 	public HashMap<Long, RoleDTO> getRoles() {
 		if (allRoles == null) {
 			allRoles = new HashMap<>();
@@ -63,6 +90,11 @@ public class PermissionManagerBean extends AbstractBean {
 		return allRoles;
 	}
 
+	/**
+	 * Get for allPermissions.
+	 * 
+	 * @return
+	 */
 	public HashMap<Long, PermissionDTO> getPermissions() {
 		if (allPermissions == null) {
 			allPermissions = new HashMap<>();
@@ -73,12 +105,12 @@ public class PermissionManagerBean extends AbstractBean {
 		return allPermissions;
 	}
 
-	// public void permissionRoleChangedListener(ValueChangeEvent event,
-	// PermissionDTO permission, RoleDTO role)
-	// throws TechnicalExeption {
-	//
-	// }
-
+	/**
+	 * Method for chacking if chackbox needed to be chacked.
+	 * 
+	 * @param role
+	 * @return
+	 */
 	public Long[] isChackboxChacked(RoleDTO role) {
 		Long[] list = new Long[role.getPermissions().size()];
 		for (int i = 0; i < role.getPermissions().size(); ++i) {
@@ -87,6 +119,13 @@ public class PermissionManagerBean extends AbstractBean {
 		return list;
 	}
 
+	/**
+	 * Listener method for chackbox has changed his value.
+	 * 
+	 * @param event
+	 * @param role
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener(ValueChangeEvent event, RoleDTO role) throws TechnicalExeption {
 		String[] newValueString = (String[]) event.getNewValue();
 		Long[] newValue = new Long[newValueString.length];
@@ -96,7 +135,7 @@ public class PermissionManagerBean extends AbstractBean {
 			newValue[i] = Long.valueOf(newValueString[i]);
 		}
 
-		if (newValue == null || oldValue == null) {
+		if (oldValue == null) {
 			throw new TechnicalExeption();
 		}
 
@@ -118,22 +157,52 @@ public class PermissionManagerBean extends AbstractBean {
 		addI18nMessage(SUCESSFUL_UPDATE);
 	}
 
+	/**
+	 * Listener helper for 1 row.
+	 * 
+	 * @param event
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener0(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(0));
 	}
 
+	/**
+	 * Listener helper for 2 row.
+	 * 
+	 * @param event
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener1(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(1));
 	}
 
+	/**
+	 * Listener helper for 3 row.
+	 * 
+	 * @param event
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener2(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(2));
 	}
 
+	/**
+	 * Listener helper for 4 row.
+	 * 
+	 * @param event
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener3(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(3));
 	}
 
+	/**
+	 * Listener helper for 5 row.
+	 * 
+	 * @param event
+	 * @throws TechnicalExeption
+	 */
 	public void permissionRoleChangedListener4(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(4));
 	}

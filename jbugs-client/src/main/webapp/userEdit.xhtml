@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions">
 
-</body>
+<h:head>
+	<title><h:outputText value="#{msg['login.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<f:view>
+		<ui:include src="/header.xhtml" />
+		<h:form id="userForm">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="#{msg['users.firstname']}" />
+				<p:inputText value="#{userBean.selectedUser.firstname}"></p:inputText>
+				<p:outputLabel value="#{msg['users.lastname']}" />
+				<p:inputText value="#{userBean.selectedUser.lastname}"></p:inputText>
+				<p:outputLabel value="Email" />
+				<p:inputText value="#{userBean.selectedUser.email}"></p:inputText>
+				<p:outputLabel value="#{msg['users.phonenumber']}" />
+				<p:inputText value="#{userBean.selectedUser.phoneNumber}"></p:inputText>
+				<p:outputLabel value="#{msg['login.password']}" />
+				<p:inputText value="#{userBean.selectedUser.password}"></p:inputText>
+				<p:outputLabel value="#{msg['users.role']}" />
+				<p:selectManyMenu id="basic" value="#{userBean.selectedUser.roles}"
+					converter="roleConverter">
+					<f:selectItems value="#{userBean.roles}" var="role"
+						itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+				</p:selectManyMenu>
+				<p:outputLabel value="#{msg['users.active']}" />
+				<p:inputText value="#{userBean.selectedUser.active}"></p:inputText>
+
+				<h:commandButton value="#{msg['users.update']}"
+					action="#{userBean.enterUpdateMode(user)}"
+					rendered="#{!userBean.verifyUserRendere(user)}"></h:commandButton>
+				<h:commandButton value="abort" action="#{userBean.leaveUpdateMode}"
+					rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
+				<h:commandButton value="edit" action="#{userBean.editUser}"
+					rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
+
+			</h:panelGrid>
+		</h:form>
+	</f:view>
+</h:body>
 </html>

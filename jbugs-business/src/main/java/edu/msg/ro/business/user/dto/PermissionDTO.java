@@ -23,27 +23,53 @@ public class PermissionDTO extends AbstractDTO implements Serializable {
 
 	private List<RoleDTO> role;
 
+	/**
+	 * Get fot name.
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Set for name.
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * get for roles.
+	 * 
+	 * @return
+	 */
 	public List<RoleDTO> getRole() {
 		return role;
 	}
 
+	/**
+	 * Set for roles.
+	 * 
+	 * @param role
+	 */
 	public void setRole(List<RoleDTO> role) {
 		this.role = role;
 	}
 
+	/**
+	 * ToString for {@link PermissionDTO}.
+	 */
 	@Override
 	public String toString() {
 		return "PermissionDTO [getId()=" + getId() + ", role=" + role + "]";
 	}
 
+	/**
+	 * Equals for {@link PermissionDTO}.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

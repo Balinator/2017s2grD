@@ -34,8 +34,17 @@
 				<h:inputSecret id="password" value="#{loginBean.user.password}">
 					<f:validator validatorId="passwordValidator" />
 				</h:inputSecret>
-
+				
 			</h:panelGrid>
+			
+			<p:spacer />
+			<p:spacer />
+			
+			
+			
+			<p:spacer />
+			<p:spacer />
+			
 			<h:panelGrid columns="1" cellpadding="10" width="100%">
 
 				<h:commandButton id="submit" value="#{msg['login.loginButton']}"
@@ -45,6 +54,7 @@
 
 			</h:panelGrid>
 		</p:panel>
+		
 	</h:form>
 </h:body>
 </html>

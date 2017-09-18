@@ -15,16 +15,25 @@ import edu.msg.ro.persistence.user.entity.Permission;
 @Stateless
 public class PermissionDTOMapper extends AbstractDTOMapper<Permission, PermissionDTO> {
 
+	/**
+	 * Method for instanciating a {@link PermissionDTO}.
+	 */
 	@Override
 	public PermissionDTO getDTOInstance() {
 		return new PermissionDTO();
 	}
 
+	/**
+	 * Method for filling up the {@link PermissionDTO}.
+	 */
 	@Override
 	protected void mapEntityToDTOFields(Permission entity, PermissionDTO dto) {
 		dto.setName(entity.getName());
 	}
 
+	/**
+	 * Method for filling up the {@link Permission}.
+	 */
 	@Override
 	protected void mapDTOToEntityFields(PermissionDTO dto, Permission entity) {
 		entity.setName(dto.getName());
