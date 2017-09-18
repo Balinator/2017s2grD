@@ -1,5 +1,7 @@
 package edu.msg.ro.business.bug.dto;
 
+import java.util.Date;
+
 import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;
 import edu.msg.ro.persistence.user.entity.User;
@@ -16,13 +18,13 @@ public class BugDTO extends AbstractDTO {
 
 	private String description;
 
-	private String targetDate;
+	private Date targetDate;
 
 	private String severity;
 
 	private User author;
 
-	private int status;
+	private String status;
 
 	private User assigned;
 
@@ -48,11 +50,11 @@ public class BugDTO extends AbstractDTO {
 		this.description = description;
 	}
 
-	public String getTargetDate() {
+	public Date getTargetDate() {
 		return targetDate;
 	}
 
-	public void setTargetDate(String targetDate) {
+	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
 	}
 
@@ -72,11 +74,11 @@ public class BugDTO extends AbstractDTO {
 		this.author = author;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

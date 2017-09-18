@@ -4,14 +4,21 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.validation.ValidationException;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.enums.BugSeverity;
+import edu.msg.ro.enums.BugStatus;
 
 /****
  * Bug Bean.****
@@ -35,7 +42,13 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private List<BugDTO> severity;
+	private BugStatus[] statusList;
+
+	private int statuses;
+
+	private BugSeverity[] severityList;
+
+	private int severities;
 
 	@PostConstruct
 	public void init() {
@@ -52,15 +65,6 @@ public class BugBean extends AbstractBean {
 
 	public void setFilteredBugList(List<BugDTO> filteredBugList) {
 		this.filteredBugList = filteredBugList;
-	}
-
-	public List<BugDTO> getSeverity() {
-		severity = bugFacade.getAllSeverity();
-		return severity;
-	}
-
-	public void setSeverity(List<BugDTO> severity) {
-		this.severity = severity;
 	}
 
 	public BugDTO getNewBug() {
@@ -93,7 +97,7 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		return "bugs";
+		return "bugCreate";
 	}
 
 	public String deleteBug(BugDTO bug) {
@@ -128,6 +132,52 @@ public class BugBean extends AbstractBean {
 		}
 		selectedBug = new BugDTO();
 		return "bugs";
+	}
+
+	// for bug filter
+	public BugStatus[] getStatusList() {
+		return BugStatus.values();
+	}
+
+	public void setStatusList(BugStatus[] statusList) {
+		this.statusList = statusList;
+	}
+
+	public int getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(int statuses) {
+		this.statuses = statuses;
+	}
+
+	public BugSeverity[] getSeverityList() {
+		return BugSeverity.values();
+	}
+
+	public void setSeverityList(BugSeverity[] severityList) {
+		this.severityList = severityList;
+	}
+
+	public int getSeverities() {
+		return severities;
+	}
+
+	public void setSeverities(int severities) {
+		this.severities = severities;
+	}
+
+	// validation for creating bug
+
+	public void validate(FacesContext context, UIComponent uic, Object value) throws ValidationException {
+
+		String input = (String) value;
+
+		if (input.length() == 0) {
+			((UIInput) uic).setValid(false);
+			FacesMessage message = new FacesMessage("Not valid data");
+			context.addMessage(uic.getClientId(context), message);
+		}
 	}
 
 }

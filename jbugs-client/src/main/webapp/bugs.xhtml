@@ -8,26 +8,27 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title><h:outputText value="#{msg['login.title']}" /></title>
+	<title><h:outputText value="#{msg['bugs.title']}" /></title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
 	<f:view>
+		<ui:include src="/header.xhtml" />
 		<h:form id="bugForm">
 
 			<p:messages autoUpdate="true" />
 
-			<p:dataTable value="#{bugBean.bugList}" var="bug"
-				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugWidget"
+			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
+				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
 				paginator="true" rows="25" styleClass="paginated">
 
 				<f:facet name="header">
 					<p:outputPanel>
-						<h:outputText value="Search all:" />
-						<p:inputText id="globalFilter" onkeyup="PF('bugWidget').filter()"
-							style="width:150px" placeholder="Search text" />
+						<h:outputText value="#{msg['bug.search.all']}:" />
+						<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
+							style="width:150px"
+							placeholder="#{msg['bug.search.placeholder']}" />
 					</p:outputPanel>
-
 				</f:facet>
 
 				<p:column headerText="#{msg['bug.title']}" sortBy="#{bug.title}"
@@ -36,7 +37,6 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-
 				<p:column headerText="#{msg['bug.description']}"
 					sortBy="#{bug.description}" filterBy="#{bug.description}"
 					filterMatchMode="contains">
@@ -44,78 +44,89 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						TargetDate
-						<br />
+				<p:column headerText="#{msg['bug.targetDate']}"
+					sortBy="#{bug.targetDate}" filterBy="#{bug.targetDate}">
+					<f:facet name="filter">
+						<p:calendar pattern="yyyy/MM/dd">
+							<p:ajax event="dateSelect" oncomplete="PF('bugTable').filter()" />
+						</p:calendar>
+
 					</f:facet>
 					<h:outputText value="#{bug.targetDate}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+						rendered="#{!bugBean.verifyBugRendere(bug)}">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+					</h:outputText>
 				</p:column>
 
+				<p:column sortBy="#{bug.severity}" filterBy="#{bug.severity}"
+					filterMatchMode="contains" headerText=" #{msg['bug.severity']}">
 
-				<!--  	<p:column filterBy="#{bug.severiy}" filterMatchMode="exact">
-					<f:facet name="header">#{msg['bug.severity']}<br />
-						<p:selectOneMenu onchange="PF('bugWidget').filter()">
-							<f:selectItem itemLabel="Select" itemValue="#{null}"
-								noSelectionOption="true" />
-							<f:selectItems value="#{bugBean.severity}" />
+					<f:facet name="filter">
+
+						<p:selectOneMenu onchange="PF('bugTable').filter();">
+							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
+								itemValue="#{null}" noSelectionOption="true" />
+
+							<f:selectItems value="#{bugBean.severityList}" var="severities"
+								itemLabel="#{msg['bug.severity.' += severities]}" />
 						</p:selectOneMenu>
-
 					</f:facet>
+					<br />
+
 					<h:outputText value="#{bug.severity}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
--->
-				<p:column>
-					<f:facet name="header">
-						author
-						<br />
-					</f:facet>
-					<h:outputText value="#{bug.author.getUser}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						status
-						<br />
+				<p:column sortBy="#{bug.status}" filterBy="#{bug.status}"
+					filterMatchMode="exact" headerText="#{msg['bug.status']}">
+
+					<f:facet name="filter">
+
+						<p:selectOneMenu onchange="PF('bugTable').filter();">
+							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
+								itemValue="#{null}" noSelectionOption="true" />
+
+							<f:selectItems value="#{bugBean.statusList}" var="statuses"
+								itemLabel="#{msg['bug.status.' += statuses]}" />
+
+						</p:selectOneMenu>
+
 					</f:facet>
+					<br />
 					<h:outputText value="#{bug.status}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
 
-				<p:column headerText="#{msg['bug.assigned']}" sortBy="#{bug.assigned}" filterBy="#{bug.assigned}"
-					filterMatchMode="contains">
-					<h:outputText value="#{bug.assigned}"
+				<p:column headerText="#{msg['bug.assigned']}"
+					sortBy="#{bug.assigned.username}"
+					filterBy="#{bug.assigned.username}" filterMatchMode="contains">
+					<h:outputText value="#{bug.assigned.username}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column headerText="#{msg['bug.version']}" sortBy="#{bug.version}" filterBy="#{bug.version}"
-					filterMatchMode="contains">
+				<p:column headerText="#{msg['bug.version']}" sortBy="#{bug.version}"
+					filterBy="#{bug.version}" filterMatchMode="contains">
 					<h:outputText value="#{bug.version}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column headerText="#{msg['bug.fixedIn']}" sortBy="#{bug.fixedIn}" filterBy="#{bug.fixedIn}"
-					filterMatchMode="contains">
+				<p:column headerText="#{msg['bug.fixedIn']}" sortBy="#{bug.fixedIn}"
+					filterBy="#{bug.fixedIn}" filterMatchMode="contains">
 					<h:outputText value="#{bug.fixedIn}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						attachment
-						<br />
-					</f:facet>
+				<p:column headerText="#{msg['bug.attechment']}">
 					<h:outputText value="#{bug.attachment}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
-
 				</p:column>
+
 			</p:dataTable>
+
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
+
 		</h:form>
 	</f:view>
 </h:body>
+
 </html>

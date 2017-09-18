@@ -41,9 +41,4 @@ public class BugFacade {
 		return bugService.getAllBugs();
 	}
 
-	// for filter severity
-	public List<BugDTO> getAllSeverity() {
-		return bugService.getAllSeverity();
-	}
-
 }
