@@ -19,11 +19,12 @@
 			<p:messages autoUpdate="true" />
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
-				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugUpdateTable"
-				paginator="true" rows="25" styleClass="paginated"
-				selectionMode="single" rowKey="#{bug.id}">
+				filteredValue="#{bugBean.filteredBugList}"
+				widgetVar="bugUpdateTable" paginator="true" rows="25"
+				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
 
-				<p:ajax event="rowSelect" oncomplete="PF('bugAddDialog').show()" update=""/>
+				<p:ajax event="rowSelect" oncomplete="PF('bugUpdateDialog').show()"
+					update="" />
 
 				<f:facet name="header">
 					<p:outputPanel>
@@ -135,15 +136,15 @@
 		</h:form>
 
 		<h:form>
-			<p:dialog id="dialog" header="Car Detail" widgetVar="bugAddDialog"
-				resizable="false" position="center center" height="500" width="456"
-				appendToBody="true">
+			<p:dialog id="dialog" header="#{msg['bug.create']}"
+				widgetVar="bugAddDialog" resizable="false" position="center center"
+				height="440" width="456" appendToBody="true">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.description']}" />
-					<p:inputText  value="#{bugBean.newBug.description}"></p:inputText>
+					<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 					<p:calendar value="#{bugBean.newBug.targetDate}" />
@@ -194,16 +195,16 @@
 				<p:outputLabel value="#{msg['bug.attechment']}" />
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
-					<h:commandButton value="Create" action="#{bugBean.createNewBug}"
-						ajax="true"></h:commandButton>
+					<h:commandButton value="#{msg['bug.create']}" action="#{bugBean.createNewBug}"></h:commandButton>
 
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
 
 		<h:form>
-			<p:dialog id="dialog" header="Car Detail" widgetVar="bugUpdateDialog"
-				resizable="false" position="center center" height="500" width="456"
+			<p:dialog id="dialog" header="#{msg['bug.update']}"
+				widgetVar="bugUpdateDialog" resizable="false"
+				position="center center" height="440" width="456"
 				appendToBody="true">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['bug.title']}" />
@@ -261,7 +262,7 @@
 				<p:outputLabel value="#{msg['bug.attechment']}" />
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
-					<h:commandButton value="Create" action="#{bugBean.createNewBug}"></h:commandButton>
+					<h:commandButton value="#{msg['bug.update']}" action="#{bugBean.createNewBug}"></h:commandButton>
 
 
 				</h:panelGrid>
