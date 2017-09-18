@@ -15,7 +15,6 @@ import javax.validation.ValidationException;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.enums.BugSeverity;
@@ -115,12 +114,9 @@ public class BugBean extends AbstractBean {
 	}
 
 	public String deleteBug(BugDTO bug) {
-		try {
-			bugFacade.deleteBug(bug);
-			addMessage("Bugul " + newBug.getTitle() + " a fost sters!");
-		} catch (JBugsExeption e) {
-			handleExeptionI18n(e);
-		}
+		bugFacade.deleteBug(bug);
+		addMessage("Bugul " + newBug.getTitle() + " a fost sters!");
+
 		return "bugs";
 	}
 
