@@ -231,6 +231,7 @@
 						style="width:90px">
 						
 						<p:ajax event="valueChange" update=":form2:display" />
+						
 						<f:selectItems value="#{bugBean.statusList}" var="statuses"
 							itemValue="#{bugBean.selectedBug.status}"
 							itemLabel="#{msg['bug.status.' += statuses]}" />
