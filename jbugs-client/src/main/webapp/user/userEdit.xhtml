@@ -20,10 +20,14 @@
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic"
-						value="#{userUpdateBean.updatedUser.roles}">
+						value="#{userUpdateBean.updatedUser.roles}" var="t" filter="true"
+						filterMatchMode="contains" showCheckbox="true">
 						<f:converter binding="#{roleConverter}" />
 						<f:selectItems value="#{userUpdateBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+						<p:column>
+							<h:outputText value="#{msg[t.name]}" />
+						</p:column>
 					</p:selectManyMenu>
 
 					<h:commandButton value="#{msg['users.update']}"

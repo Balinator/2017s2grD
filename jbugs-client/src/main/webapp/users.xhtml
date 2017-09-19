@@ -17,14 +17,14 @@
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
 			<p:messages autoUpdate="true" />
-			<p:dataTable value="#{userListBean.allUsers}" var="user" 
+			<p:dataTable value="#{userListBean.allUsers}" var="user"
 				id="userList" paginator="true" selectionMode="single"
 				rowKey="#{user.id}" rows="15" styleClass="paginated">
 
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
 						actionListener="#{userNewBean.clearUser()}"
-						oncomplete="PF('userCreateDialog').show();"  />
+						oncomplete="PF('userCreateDialog').show();" />
 				</f:facet>
 
 				<p:column style="text-align: center;">
@@ -56,11 +56,14 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['login.password']}<br />
 					</f:facet>
-					<h:outputText value=""></h:outputText>
+
 				</p:column>
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.role']}<br />
 					</f:facet>
+					<ui:repeat value="#{user.roles}" var="role">
+						<h:outputText value="#{msg[role.name]}"></h:outputText><br />
+					</ui:repeat>
 				</p:column>
 
 				<p:column style="text-align: center;">
@@ -73,7 +76,8 @@
 						rendered="#{!user.active and !userListBean.verifyUserRendere(user)}"></h:outputText>
 				</p:column>
 				<p:column style="text-align: center;">
-
+					<f:facet name="header">#{msg['users.operation']}<br />
+					</f:facet>
 					<p:commandLink id="ajax" update=":viewForm:display"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()">
