@@ -17,15 +17,14 @@
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
 			<p:messages autoUpdate="true" />
-			<p:dataTable value="#{userListBean.allUsers}" var="user"
-				paginator="true" selectionMode="single" rowKey="#{user.id}"
-				rows="15" styleClass="paginated">
+			<p:dataTable value="#{userListBean.allUsers}" var="user" 
+				id="userList" paginator="true" selectionMode="single"
+				rowKey="#{user.id}" rows="15" styleClass="paginated">
 
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
 						actionListener="#{userNewBean.clearUser()}"
-						oncomplete="PF('userCreateDialog').show();"
-						update=":addForm:display" />
+						oncomplete="PF('userCreateDialog').show();"  />
 				</f:facet>
 
 				<p:column style="text-align: center;">

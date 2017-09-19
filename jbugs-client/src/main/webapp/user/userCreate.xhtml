@@ -27,7 +27,8 @@
 					</p:selectManyMenu>
 
 					<p:commandButton value="#{msg['users.create']}"
-						action="#{userNewBean.createNewUser}" oncomplete="PF('userCreateDialog').hide();" />
+						action="#{userNewBean.createNewUser}" oncomplete="PF('userCreateDialog').hide();" 
+						update="userForm:userList" ajax="true"/>
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>
