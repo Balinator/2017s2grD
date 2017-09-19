@@ -151,7 +151,7 @@ public class BugBean extends AbstractBean {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(assignedUser);// todo: change it
 		bugFacade.createBug(newBug);
-		addMessage("Bug " + newBug.getTitle() + " created!");
+		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
 		return "bugs";
 	}
