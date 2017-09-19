@@ -14,9 +14,13 @@
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
 					<p:outputLabel value="Email" />
-					<p:inputText value="#{userUpdateBean.updatedUser.email}"></p:inputText>
+					<p:inputText value="#{userUpdateBean.updatedUser.email}">
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}"></p:inputText>
+					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}">
+						<f:validator validatorId="phoneNumberValidator" />
+					</p:inputText>
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic"

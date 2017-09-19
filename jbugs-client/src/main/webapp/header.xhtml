@@ -14,17 +14,6 @@
 				<h:form>
 					<h:commandLink action="#{loginBean.processLogout}"
 						value="#{msg['general.logout']}" />
-
-
-					<a href="http://localhost:8080/jbugs/bugs.xhtml">Bugs</a>
-
-
-					<a href="http://localhost:8080/jbugs/bugCreate.xhtml">Create
-						Bug</a>
-					<a href="http://localhost:8080/jbugs/permissionManager.xhtml">Create
-						Permission Manager</a>
-
-
 				</h:form>
 			</h:panelGroup>
 			<h:panelGroup layout="block"
@@ -32,6 +21,14 @@
 				<h:outputText value="#{msg['header.loggedout']}" />
 			</h:panelGroup>
 		</h:panelGroup>
+		
+		<h:panelGroup styleClass="header-class-left">
+			<h:panelGroup layout="block"
+				rendered="#{sessionScope['username'] != null}">
+				<ui:include src="/header-menu.xhtml"/>
+			</h:panelGroup>
+		</h:panelGroup>
+		
 		<h:panelGroup layout="block" styleClass="header-class-right">
 			<ui:include src="/header-lang.xhtml"></ui:include>
 		</h:panelGroup>
