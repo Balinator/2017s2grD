@@ -26,7 +26,7 @@ public class AuthenticationFilter implements Filter {
 	 */
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		// Do nothing because of implemented Filter but not used.
 	}
 
 	/**
@@ -63,6 +63,6 @@ public class AuthenticationFilter implements Filter {
 	 */
 	@Override
 	public void destroy() {
-
+		// Do nothing because of implemented Filter but not used.
 	}
 }
