@@ -25,7 +25,6 @@
 						<f:selectItems value="#{userNewBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-
 					<p:commandButton value="#{msg['users.create']}"
 						action="#{userNewBean.createNewUser}" oncomplete="PF('userCreateDialog').hide();" 
 						update="userForm:userList" ajax="false"/>
