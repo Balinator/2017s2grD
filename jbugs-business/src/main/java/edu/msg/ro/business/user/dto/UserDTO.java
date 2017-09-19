@@ -1,5 +1,6 @@
 package edu.msg.ro.business.user.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
@@ -11,7 +12,12 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-public class UserDTO extends AbstractDTO {
+public class UserDTO extends AbstractDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1202580493348283198L;
 
 	private String firstname;
 

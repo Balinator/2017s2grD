@@ -20,6 +20,8 @@ import edu.msg.ro.business.user.dto.UserDTO;
 @RequestScoped
 public class LoginBean extends AbstractBean implements Serializable {
 
+	private static final String LOGIN = "login";
+
 	private static final long serialVersionUID = -2617767540112561117L;
 
 	private UserDTO user = new UserDTO();
@@ -49,7 +51,9 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @param event
 	 */
 	public void loginActionListener(ActionEvent event) {
-		System.err.println("something something event from " + event.getComponent().getClientId());
+		// System.err.println("something something event from " +
+		// event.getComponent().getClientId());
+		// TODO: useless function or need logger
 	}
 
 	/**
@@ -66,11 +70,11 @@ public class LoginBean extends AbstractBean implements Serializable {
 				return "users";
 			} else {
 				addI18nMessage("loginForm:username", "login.error");
-				return "login";
+				return LOGIN;
 			}
 		} catch (Exception e) {
 			addI18nMessage("login.unexpected");
-			return "login";
+			return LOGIN;
 		}
 	}
 
@@ -82,6 +86,6 @@ public class LoginBean extends AbstractBean implements Serializable {
 	public String processLogout() {
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 		session.invalidate();
-		return "login";
+		return LOGIN;
 	}
 }
