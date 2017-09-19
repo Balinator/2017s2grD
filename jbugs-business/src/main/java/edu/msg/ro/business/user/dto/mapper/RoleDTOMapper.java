@@ -23,11 +23,17 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 	@EJB
 	private PermissionDAO pd;
 
+	/**
+	 * Method for instaciating an {@link Role}.
+	 */
 	@Override
 	public RoleDTO getDTOInstance() {
 		return new RoleDTO();
 	}
 
+	/**
+	 * Method for filling up the {@link RoleDTO}.
+	 */
 	@Override
 	protected void mapEntityToDTOFields(Role entity, RoleDTO dto) {
 		dto.setPermission(pdm.mapToDTOs(entity.getPermissions()));
@@ -35,6 +41,9 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 
 	}
 
+	/**
+	 * Method for filling up the {@link Role}.
+	 */
 	@Override
 	protected void mapDTOToEntityFields(RoleDTO dto, Role entity) {
 		entity.setPermissions(pdm.mapToEntities(dto.getPermissions(), pd));

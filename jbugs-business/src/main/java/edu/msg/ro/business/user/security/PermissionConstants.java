@@ -1,7 +1,7 @@
 package edu.msg.ro.business.user.security;
 
 /**
- * Permissions for users
+ * Permissions for users.
  * 
  * @author nemeta
  *

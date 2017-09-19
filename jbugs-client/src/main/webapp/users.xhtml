@@ -20,9 +20,14 @@
 			<p:messages autoUpdate="true" />
 
 			<p:dataTable value="#{userBean.allUsers}" var="user" paginator="true"
-				rows="5" styleClass="paginated">
-				<f:facet name="header">
+				selectionMode="single" rowKey="#{user.id}" rows="5"
+				styleClass="paginated">
 
+				<f:facet name="header">
+					<p:commandLink value="#{msg['users.add']}" type="button"
+						actionListener="#{userNewBean.clearUser()}"
+						oncomplete="PF('userCreateDialog').show();"
+						update=":addForm:display" />
 				</f:facet>
 
 				<p:column style="text-align: center;">
@@ -91,8 +96,8 @@
 
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.role']}<br />
-						<p:selectManyMenu id="basic" value="#{userBean.newUser.roles}"
-							converter="roleConverter">
+						<p:selectManyMenu id="basic" value="#{userBean.newUser.roles}">
+							<f:converter binding="#{roleConverter}" />
 							<f:selectItems value="#{userBean.roles}" var="role"
 								itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 						</p:selectManyMenu>
@@ -112,7 +117,6 @@
 
 
 				</p:column>
-
 				<p:column style="text-align: center;">
 
 					<f:facet name="header">#{msg['users.action']}<br />
@@ -120,17 +124,18 @@
 							action="#{userBean.createNewUser}"></h:commandButton>
 					</f:facet>
 
-					<h:commandButton value="#{msg['users.update']}"
-						action="#{userBean.enterUpdateMode(user)}"
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:commandButton>
-					<h:commandButton value="abort" action="#{userBean.leaveUpdateMode}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
-					<h:commandButton value="edit" action="#{userBean.editUser}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:commandButton>
+					<p:commandLink id="ajax" update=":viewForm:display"
+						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
+						oncomplete="PF('userEditDialog').show()">
+						<h:outputText value="#{msg['users.update']}" />
+					</p:commandLink>
 				</p:column>
 
 			</p:dataTable>
 		</h:form>
+
+		<ui:include src="/user/userCreate.xhtml" />
+		<ui:include src="/user/userEdit.xhtml" />
 
 	</f:view>
 </h:body>

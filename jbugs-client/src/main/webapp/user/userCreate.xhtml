@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<p:dialog id="createUserDialog" header="Create User"
+		widgetVar="userCreateDialog" resizable="false"
+		position="center center" height="500" width="456" appendToBody="true">
+		<h:form id="addForm">
+			<p:outputPanel id="display">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="#{msg['users.firstname']}" />
+					<p:inputText value="#{userNewBean.newUser.firstname}"></p:inputText>
+					<p:outputLabel value="#{msg['users.lastname']}" />
+					<p:inputText value="#{userNewBean.newUser.lastname}"></p:inputText>
+					<p:outputLabel value="Email" />
+					<p:inputText value="#{userNewBean.newUser.email}"></p:inputText>
+					<p:outputLabel value="#{msg['users.phonenumber']}" />
+					<p:inputText value="#{userNewBean.newUser.phoneNumber}"></p:inputText>
+					<p:outputLabel value="#{msg['login.password']}" />
+					<p:inputText value="#{userNewBean.newUser.password}"></p:inputText>
+					<p:outputLabel value="#{msg['users.role']}" />
+					<p:selectManyMenu id="basic" value="#{userNewBean.newUser.roles}">
+						<f:converter binding="#{roleConverter}" />
+						<f:selectItems value="#{userNewBean.roles}" var="role"
+							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+					</p:selectManyMenu>
+
+					<p:commandButton value="#{msg['users.create']}"
+						action="#{userNewBean.createNewUser}" />
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>

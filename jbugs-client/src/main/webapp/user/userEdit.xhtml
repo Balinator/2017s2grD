@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<p:dialog id="editUserDialog" header="Edit User"
+		widgetVar="userEditDialog" resizable="false" position="center center"
+		height="500" width="456" appendToBody="true">
+		<h:form id="viewForm">
+			<p:outputPanel id="display">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="#{msg['users.firstname']}" />
+					<p:inputText value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:outputLabel value="#{msg['users.lastname']}" />
+					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					<p:outputLabel value="Email" />
+					<p:inputText value="#{userUpdateBean.updatedUser.email}"></p:inputText>
+					<p:outputLabel value="#{msg['users.phonenumber']}" />
+					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}"></p:inputText>
+
+					<p:outputLabel value="#{msg['users.role']}" />
+					<p:selectManyMenu id="basic"
+						value="#{userUpdateBean.updatedUser.roles}">
+						<f:converter binding="#{roleConverter}" />
+						<f:selectItems value="#{userUpdateBean.roles}" var="role"
+							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+					</p:selectManyMenu>
+
+					<h:commandButton value="#{msg['users.update']}"
+						action="#{userUpdateBean.editUser}"></h:commandButton>
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>

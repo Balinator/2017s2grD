@@ -8,6 +8,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
+ * Class for Validating phone numbers.
  * 
  * @author nagya
  *

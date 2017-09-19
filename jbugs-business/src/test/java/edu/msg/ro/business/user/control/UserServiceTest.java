@@ -1,12 +1,15 @@
 package edu.msg.ro.business.user.control;
 
-import javax.ejb.EJB;
+import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -16,9 +19,10 @@ import edu.msg.ro.business.user.dto.UserDTO;
  * @author balinc
  *
  */
-public class UserServiceTest extends AbstractIntegrationTest {
+@RunWith(MockitoJUnitRunner.class)
+public class UserServiceTest {
 
-	@EJB
+	@InjectMocks
 	private UserService uService;
 
 	/**
@@ -29,6 +33,8 @@ public class UserServiceTest extends AbstractIntegrationTest {
 		UserDTO testUser = new UserDTO();
 		testUser.setFirstname("John");
 		testUser.setLastname("Doe");
+		testUser.setPassword("123456");
+		testUser.setRoles(new ArrayList<RoleDTO>());
 
 		// Invalid email, needts to be @msggroup.com
 		testUser.setEmail("unique@mail.com");
@@ -51,8 +57,8 @@ public class UserServiceTest extends AbstractIntegrationTest {
 	@Test
 	public void createUser_UniqueEmailFail() throws BusinessException {
 		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("John");
-		testUser.setLastname("Doe");
+		testUser.setFirstname("John1");
+		testUser.setLastname("Doe1");
 		testUser.setEmail("unique@msggroup.com");
 		testUser.setPassword("123456");
 

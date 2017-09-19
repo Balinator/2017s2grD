@@ -16,6 +16,7 @@ import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
 import edu.msg.ro.business.user.security.PermissionChecker;
+import edu.msg.ro.business.user.security.PermissionConstants;
 import edu.msg.ro.persistence.user.entity.Permission;
 import edu.msg.ro.persistence.user.entity.Role;
 
@@ -130,6 +131,11 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	@EJB
 	private RoleDTOMapper roleDTOmapper;
 
+	/**
+	 * check if user has given permission
+	 * 
+	 * @throws BusinessException
+	 */
 	@Test
 	public void checkPermission() throws BusinessException {
 		List<Role> roles = new ArrayList();
@@ -156,10 +162,12 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 			e.printStackTrace();
 		}
 		UserDTO createdUser = sut.createUser(user);
-		// boolean hasPermission = permCheck.checkPermission(createdUser,
-		// PermissionConstants.PM);
-		Assert.assertEquals("email", managementPerm.getId(), createdUser.getRoles().get(0));
-		// Assert.assertEquals("PERMISSION: ", true, hasPermission);
+		boolean hasManagementPermission = permCheck.checkPermission(createdUser, PermissionConstants.PM);
+		boolean hasBugManagementPermission = permCheck.checkPermission(createdUser, PermissionConstants.BM);
+		boolean hasBugClosePermission = permCheck.checkPermission(createdUser, PermissionConstants.BC);
+		Assert.assertEquals("User should have management permission: ", true, hasManagementPermission);
+		Assert.assertEquals("User should have bug close permission ", true, hasBugClosePermission);
+		Assert.assertEquals("User should not have bug management permission ", false, hasBugManagementPermission);
 	}
 
 }

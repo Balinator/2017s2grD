@@ -20,11 +20,8 @@
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}"
 				widgetVar="bugUpdateTable" paginator="true" rows="25"
-				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}"
-				selection="#{bugBean.selectedBug}">
+				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
 
-				<p:ajax event="rowSelect" oncomplete="PF('bugUpdateDialog').show()"
-					update=":form2:display" />
 
 				<f:facet name="header">
 					<p:outputPanel>
@@ -130,9 +127,11 @@
 				</p:column>
 
 				<p:column headerText="ize">
-					<p:commandButton value="#{msg['bug.update']}" type="button" action="#{bugBean.enterUpdateMode(bug)}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"
-						onclick="PF('bugUpdateDialog').show();" update=":form2:display" />
+					<p:commandLink id="ajax" update=":form2:display"
+						actionListener="#{bugBean.setSelectedBug(bug)}"
+						oncomplete="PF('bugUpdateDialog').show()">
+						<h:outputText value="#{msg['bug.update']}" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 
@@ -228,14 +227,14 @@
 
 					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
 
-					<p:selectOneMenu value="#{bugBean.selectedBug}" style="width:90px">
-
-						<f:selectItem itemLabel="#{bugBean.selectedBug.status}"
-							value="#{null}"></f:selectItem>
+					<p:selectOneMenu value="#{bugBean.selectedBug.status}"
+						style="width:90px">
+						
+						<p:ajax event="valueChange" update=":form2:display" />
 						<f:selectItems value="#{bugBean.statusList}" var="statuses"
+							itemValue="#{bugBean.selectedBug.status}"
 							itemLabel="#{msg['bug.status.' += statuses]}" />
 
-						<p:ajax event="change" update="@this"></p:ajax>
 					</p:selectOneMenu>
 
 
@@ -259,7 +258,7 @@
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
 
-					
+
 					<h:commandButton value="#{msg['bug.update']}"
 						action="#{bugBean.editBug}"></h:commandButton>
 
