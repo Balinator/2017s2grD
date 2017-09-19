@@ -143,4 +143,5 @@ public class Bug extends AbstractEntity {
 	public void setAttachment(byte[] attachment) {
 		this.attachment = attachment;
 	}
+
 }

@@ -157,30 +157,6 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
-	 * Method for deleting a {@link Bug}.
-	 * 
-	 * @param bug
-	 * @return
-	 */
-	public String deleteBug(BugDTO bug) {
-		bugFacade.deleteBug(bug);
-		addMessage("Bugul " + newBug.getTitle() + " a fost sters!");
-
-		return "bugs";
-	}
-
-	/**
-	 * Method for entering update mode.
-	 * 
-	 * @param bug
-	 * @return
-	 */
-	public String enterUpdateMode(BugDTO bug) {
-		this.selectedBug = bug;
-		return "bugs";
-	}
-
-	/**
 	 * Method for leaving update mode.
 	 * 
 	 * @return

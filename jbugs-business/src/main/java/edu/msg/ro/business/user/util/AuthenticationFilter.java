@@ -47,9 +47,13 @@ public class AuthenticationFilter implements Filter {
 			boolean isUserLoggedIn = httpSession != null && httpSession.getAttribute("username") != null;
 			boolean isResource = requestUrl.contains("javax.faces.resource");
 
-			if (isLoginPage || isUserLoggedIn || isResource)
-				chain.doFilter(request, response);
-			else {
+			if (isLoginPage || isUserLoggedIn || isResource) {
+				if (isLoginPage && isUserLoggedIn) {
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugs.xhtml");
+				} else {
+					chain.doFilter(request, response);
+				}
+			} else {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.xhtml");
 			}
 
