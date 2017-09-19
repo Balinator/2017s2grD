@@ -35,6 +35,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	 * @param userDTO
 	 */
 	public void setUpdatedUser(UserDTO userDTO) {
+		rebuildRoleService();
 		this.updatedUser = userDTO;
 	}
 
