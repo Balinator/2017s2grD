@@ -22,6 +22,8 @@ import edu.msg.ro.persistence.user.entity.User;
 @RequestScoped
 public class UserBean extends AbstractUserBean {
 
+	private static final String USERS = "users";
+
 	private UserDTO newUser = new UserDTO();
 
 	private UserDTO selectedUser = new UserDTO();
@@ -112,7 +114,7 @@ public class UserBean extends AbstractUserBean {
 			Object[] messageArguments = { newUser.toString() };
 			addI18nMessage(e.getMessage(), messageArguments);
 		}
-		return "users";
+		return USERS;
 	}
 
 	/**
@@ -128,7 +130,7 @@ public class UserBean extends AbstractUserBean {
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
-		return "users";
+		return USERS;
 	}
 
 	/**
@@ -139,7 +141,7 @@ public class UserBean extends AbstractUserBean {
 	 */
 	public String enterUpdateMode(UserDTO user) {
 		this.selectedUser = user;
-		return "users";
+		return USERS;
 	}
 
 	/**
@@ -149,7 +151,7 @@ public class UserBean extends AbstractUserBean {
 	 */
 	public String leaveUpdateMode() {
 		selectedUser = new UserDTO();
-		return "users";
+		return USERS;
 	}
 
 	/**
@@ -175,6 +177,6 @@ public class UserBean extends AbstractUserBean {
 			handleExeptionI18n(e);
 		}
 		selectedUser = new UserDTO();
-		return "users";
+		return USERS;
 	}
 }

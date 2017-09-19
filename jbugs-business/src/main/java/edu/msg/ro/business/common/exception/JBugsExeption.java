@@ -36,6 +36,7 @@ public class JBugsExeption extends Exception {
 	/**
 	 * Method for getting the message.
 	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}

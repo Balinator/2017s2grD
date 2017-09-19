@@ -51,8 +51,6 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @param event
 	 */
 	public void loginActionListener(ActionEvent event) {
-		// System.err.println("something something event from " +
-		// event.getComponent().getClientId());
 		// TODO: useless function or need logger
 	}
 

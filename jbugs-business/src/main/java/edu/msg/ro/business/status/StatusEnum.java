@@ -1,6 +1,6 @@
 package edu.msg.ro.business.status;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * Enum for bug status
@@ -19,26 +19,26 @@ public enum StatusEnum {
 	 * Every state every state has next state.
 	 */
 	static {
-		OPEN.neighbors = new Vector<>();
+		OPEN.neighbors = new ArrayList<>();
 		OPEN.neighbors.add(REJECTED);
 		OPEN.neighbors.add(INPROGRESS);
 
-		REJECTED.neighbors = new Vector<>();
+		REJECTED.neighbors = new ArrayList<>();
 		REJECTED.neighbors.add(CLOSE);
 
-		INPROGRESS.neighbors = new Vector<>();
+		INPROGRESS.neighbors = new ArrayList<>();
 		INPROGRESS.neighbors.add(REJECTED);
 		INPROGRESS.neighbors.add(INFONEEDED);
 		INPROGRESS.neighbors.add(CLOSE);
 
-		INFONEEDED.neighbors = new Vector<>();
+		INFONEEDED.neighbors = new ArrayList<>();
 		INFONEEDED.neighbors.add(INPROGRESS);
 
-		FIXED.neighbors = new Vector<>();
+		FIXED.neighbors = new ArrayList<>();
 		FIXED.neighbors.add(OPEN);
 		FIXED.neighbors.add(CLOSE);
 
-		CLOSE.neighbors = new Vector<>();
+		CLOSE.neighbors = new ArrayList<>();
 
 	}
 
@@ -52,6 +52,6 @@ public enum StatusEnum {
 	}
 
 	public String key;
-	public Vector<StatusEnum> neighbors;
+	public ArrayList<StatusEnum> neighbors;
 
 }

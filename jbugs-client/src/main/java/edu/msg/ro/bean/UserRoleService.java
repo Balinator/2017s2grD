@@ -34,7 +34,8 @@ public class UserRoleService {
 	private List<RoleDTO> roleItems;
 
 	public List<RoleDTO> getAllRoles() {
-		return roleItems = roleDTOMapper.mapToDTOs(roleDAO.getAll());
+		roleItems = roleDTOMapper.mapToDTOs(roleDAO.getAll());
+		return roleItems;
 	}
 
 	public List<RoleDTO> getRoles() {
