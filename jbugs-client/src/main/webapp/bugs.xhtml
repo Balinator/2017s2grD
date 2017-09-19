@@ -126,7 +126,7 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column headerText="ize">
+				<p:column headerText="#{msg['bug.update']}">
 					<p:commandLink id="ajax" update=":form2:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()">
@@ -140,9 +140,9 @@
 		</h:form>
 		<h:form>
 
-			<p:dialog id="dialog" header="#{msg['bug.create']}"
-				widgetVar="bugAddDialog" resizable="false" position="center center"
-				height="440" width="456" appendToBody="true">
+			<p:dialog header="#{msg['bug.create']}" widgetVar="bugAddDialog"
+				resizable="false" modal="true" showEffect="clip" hideEffect="fold"
+				height="440" width="456">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
@@ -208,9 +208,9 @@
 		</h:form>
 		<h:form id="form2">
 
-			<p:dialog id="dialog2" header="#{msg['bug.update']}"
-				widgetVar="bugUpdateDialog" resizable="false" modal="true"
-				showEffect="clip" hideEffect="fold" height="440" width="456">
+			<p:dialog header="#{msg['bug.update']}" widgetVar="bugUpdateDialog"
+				resizable="false" modal="true" showEffect="clip" hideEffect="fold"
+				height="440" width="456">
 
 				<h:panelGrid columns="2" cellpadding="5" id="display">
 					<p:outputLabel value="#{msg['bug.title']}" />
@@ -223,17 +223,21 @@
 					<p:calendar value="#{bugBean.selectedBug.targetDate}" />
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
-					<p:inputText value="#{bugBean.selectedBug.severity}"></p:inputText>
+
+					<p:selectOneMenu value="#{bugBean.selectedBug.severity}"
+						style="width:90px">
+
+						<f:selectItems value="#{bugBean.severityList}" var="severities"
+							itemLabel="#{msg['bug.severity.' += severities]}" />
+
+					</p:selectOneMenu>
 
 					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
 
 					<p:selectOneMenu value="#{bugBean.selectedBug.status}"
 						style="width:90px">
-						
-						<p:ajax event="valueChange" update=":form2:display" />
-						
+
 						<f:selectItems value="#{bugBean.statusList}" var="statuses"
-							itemValue="#{bugBean.selectedBug.status}"
 							itemLabel="#{msg['bug.status.' += statuses]}" />
 
 					</p:selectOneMenu>
