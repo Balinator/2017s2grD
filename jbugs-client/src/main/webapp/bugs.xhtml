@@ -183,7 +183,7 @@
 					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
 					<f:view>
 						<p:autoComplete value="#{bugBean.assignedUser}"
-							completeMethod="#{userBean.complete}" var="user"
+							completeMethod="#{userListBean.complete}" var="user"
 							itemLabel="#{user.username}" itemValue="#{user}"
 							converter="#{userConverter}" forceSelection="true">
 						</p:autoComplete>
@@ -242,7 +242,7 @@
 					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
 					<f:view>
 						<p:autoComplete value="#{bugBean.selectedBug.assigned}"
-							completeMethod="#{userBean.complete}" var="user"
+							completeMethod="#{userListBean.complete}" var="user"
 							itemLabel="#{user.username}" itemValue="#{user}"
 							converter="#{userConverter}" forceSelection="true">
 						</p:autoComplete>

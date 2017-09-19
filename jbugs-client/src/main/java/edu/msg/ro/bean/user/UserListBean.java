@@ -42,4 +42,8 @@ public class UserListBean extends AbstractUserBean {
 		return userFacade.getAllUsers();
 	}
 
+	public List<UserDTO> complete(String query) {
+		return userFacade.getAllUserByQuery(query);
+	}
+
 }

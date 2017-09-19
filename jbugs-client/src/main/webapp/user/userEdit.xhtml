@@ -14,16 +14,24 @@
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
 					<p:outputLabel value="Email" />
-					<p:inputText value="#{userUpdateBean.updatedUser.email}"></p:inputText>
+					<p:inputText value="#{userUpdateBean.updatedUser.email}">
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}"></p:inputText>
+					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}">
+						<f:validator validatorId="phoneNumberValidator" />
+					</p:inputText>
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic"
-						value="#{userUpdateBean.updatedUser.roles}">
+						value="#{userUpdateBean.updatedUser.roles}" var="t" filter="true"
+						filterMatchMode="contains" showCheckbox="true">
 						<f:converter binding="#{roleConverter}" />
 						<f:selectItems value="#{userUpdateBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+						<p:column>
+							<h:outputText value="#{msg[t.name]}" />
+						</p:column>
 					</p:selectManyMenu>
 
 					<h:commandButton value="#{msg['users.update']}"

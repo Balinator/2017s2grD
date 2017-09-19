@@ -14,9 +14,13 @@
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<p:inputText value="#{userNewBean.newUser.lastname}"></p:inputText>
 					<p:outputLabel value="Email" />
-					<p:inputText value="#{userNewBean.newUser.email}"></p:inputText>
+					<p:inputText value="#{userNewBean.newUser.email}">
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userNewBean.newUser.phoneNumber}"></p:inputText>
+					<p:inputText value="#{userNewBean.newUser.phoneNumber}">
+						<f:validator validatorId="phoneNumberValidator" />
+					</p:inputText>
 					<p:outputLabel value="#{msg['login.password']}" />
 					<p:inputText value="#{userNewBean.newUser.password}"></p:inputText>
 					<p:outputLabel value="#{msg['users.role']}" />
@@ -26,8 +30,9 @@
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
 					<p:commandButton value="#{msg['users.create']}"
-						action="#{userNewBean.createNewUser}" oncomplete="PF('userCreateDialog').hide();" 
-						update="userForm:userList" ajax="false"/>
+						action="#{userNewBean.createNewUser}"
+						oncomplete="PF('userCreateDialog').hide();"
+						update="userForm:userList" ajax="false" />
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>

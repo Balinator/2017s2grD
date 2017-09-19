@@ -12,7 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.Pattern;
 
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
@@ -48,7 +47,6 @@ public class User extends AbstractEntity {
 	private String lastname;
 
 	@Column
-	@Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@+[msggroup.com]{12}$")
 	private String email;
 
 	@Column
