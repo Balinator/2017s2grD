@@ -53,8 +53,8 @@ public class AuthenticationFilter implements Filter {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.xhtml");
 			}
 
-		} catch (Throwable t) {
-			System.out.println(t.getMessage());
+		} catch (Exception t) {
+			System.err.println(t.getMessage());
 		}
 	}
 
