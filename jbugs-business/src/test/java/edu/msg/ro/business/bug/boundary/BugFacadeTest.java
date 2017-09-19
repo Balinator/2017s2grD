@@ -48,24 +48,6 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	}
 
 	@Test
-	public void updateBug_UpdatedTestBug() throws BusinessException, TechnicalExeption {
-
-		UserDTO testUser = th.initializUser(4L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		UserDTO testUser2 = th.initializUser(6L, "Mary2", "Jane2", "assd@msggroup.com", "asd2", "0756748395");
-		BugDTO testBug = th.initializingBug(123L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
-		BugDTO createdBug = sut.createBug(testBug);
-
-		BugDTO newBug = th.initializingBug(245L, "Bug title2", "Description2", "v2.2", "v2.2.2", "bug2", "Closed",
-				testUser2);
-
-		String createdBugTitle = createdBug.getTitle();
-
-		createdBug = sut.updateBug(newBug);
-
-		Assert.assertEquals("Update bug issue!", createdBugTitle, newBug.getTitle());
-	}
-
-	@Test
 	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
 		UserDTO testUser = th.initializUser(8L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		uf.createUser(testUser);
