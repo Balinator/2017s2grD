@@ -1,4 +1,4 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.converter;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;

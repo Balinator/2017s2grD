@@ -28,7 +28,7 @@ public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 	RoleDAO roleDAO;
 
 	/**
-	 * Method for instanciating the {@link User}.
+	 * Method for initiating the {@link User}.
 	 */
 	@Override
 	public UserDTO getDTOInstance() {

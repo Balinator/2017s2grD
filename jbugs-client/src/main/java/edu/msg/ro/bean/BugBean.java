@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -29,7 +29,7 @@ import edu.msg.ro.persistence.bug.entity.Bug;
  */
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class BugBean extends AbstractBean {
 
 	@EJB
@@ -151,9 +151,9 @@ public class BugBean extends AbstractBean {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(assignedUser);// todo: change it
 		bugFacade.createBug(newBug);
-		addMessage("Bug " + newBug.getTitle() + " created!");
+		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		return "bugCreate";
+		return "bugs";
 	}
 
 	/**
@@ -288,8 +288,6 @@ public class BugBean extends AbstractBean {
 	public void setSeverities(int severities) {
 		this.severities = severities;
 	}
-
-	// validation for creating bug
 
 	/**
 	 * Method for validation for creating a {@link Bug}.

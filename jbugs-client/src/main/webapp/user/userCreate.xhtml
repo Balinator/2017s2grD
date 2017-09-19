@@ -28,7 +28,7 @@
 
 					<p:commandButton value="#{msg['users.create']}"
 						action="#{userNewBean.createNewUser}" oncomplete="PF('userCreateDialog').hide();" 
-						update="userForm:userList" ajax="true"/>
+						update="userForm:userList" ajax="false"/>
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>

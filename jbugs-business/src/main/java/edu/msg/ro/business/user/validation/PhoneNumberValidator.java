@@ -23,16 +23,10 @@ public class PhoneNumberValidator implements Validator {
 
 		String phoneNumber = value.toString();
 
-		if (!phoneNumber.matches("[0-9]+")) {
-			FacesMessage message = new FacesMessage("just numbers");
-			throw new ValidatorException(message);
-		}
-		if (phoneNumber.length() != 13) {
-			FacesMessage message = new FacesMessage("Not enough numbers");
-			throw new ValidatorException(message);
-		}
-		if (phoneNumber.startsWith("") == false && phoneNumber.startsWith("") == false) {
-			FacesMessage message = new FacesMessage("Phone number must be from Romania or Germany");
+		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {// pl:0040123456789
+																							// or
+																							// +49123456
+			FacesMessage message = new FacesMessage("Not valid phone number in germany or romania.");
 			throw new ValidatorException(message);
 		}
 
