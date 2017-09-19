@@ -7,6 +7,10 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.boundary.UserFacade;
+import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.util.TestHelper;
 
 /**
  * 
@@ -18,6 +22,12 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	@EJB
 	private UserDAO dao;
 
+	@EJB
+	private UserFacade uf;
+
+	@EJB
+	private TestHelper th;
+
 	/**
 	 * Check if list is returned for roles.
 	 *
@@ -25,6 +35,51 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void getUsers_succesfull() {
+
 		Assert.assertNotEquals("getUsers is not working", dao.getAll(), null);
 	}
+
+	/**
+	 * Check if user is returned for an username.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	@Test
+	public void findUserByUsername_succesfull() throws BusinessException, TechnicalExeption {
+		UserDTO user = th.initializUser(8L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		uf.createUser(user);
+
+		Assert.assertEquals("Should have an user with JanosF username",
+				dao.findUserByUsername(user.getUsername()).getUsername(), user.getUsername());
+
+	}
+
+	/**
+	 * Check if user is returned for an email.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	@Test
+	public void findUserByEmail_succesfull() throws TechnicalExeption, BusinessException {
+		UserDTO user = th.initializUser(18L, "Fulop", "Lajos", "lajoska2@msggroup.com", "asd", "0756748395");
+		uf.createUser(user);
+		Assert.assertEquals("Should have an user with lajoska2@msggroup.com email ",
+				dao.findUserByEmail(user.getEmail()).getEmail(), user.getEmail());
+	}
+
+	/**
+	 * Check if the user exist.
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	@Test
+	public void verifyUserExist_succesfull() throws BusinessException {
+		UserDTO user = th.initializUser(12L, "Fulop", "Gabor", "gabika@msggroup.com", "asd", "0756748395");
+		uf.createUser(user);
+		Assert.assertEquals("User should exist  ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
+	}
+
 }

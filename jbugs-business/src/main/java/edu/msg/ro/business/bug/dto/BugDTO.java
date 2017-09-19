@@ -1,5 +1,6 @@
 package edu.msg.ro.business.bug.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
@@ -212,6 +213,18 @@ public class BugDTO extends AbstractDTO {
 	 */
 	public void setAttachment(byte[] attachment) {
 		this.attachment = attachment;
+	}
+
+	/**
+	 * toString.
+	 * 
+	 * @param attachment
+	 */
+	@Override
+	public String toString() {
+		return "BugDTO [title=" + title + ", description=" + description + ", targetDate=" + targetDate + ", severity="
+				+ severity + ", author=" + author + ", status=" + status + ", assigned=" + assigned + ", version="
+				+ version + ", fixedIn=" + fixedIn + ", attachment=" + Arrays.toString(attachment) + "]";
 	}
 
 }
