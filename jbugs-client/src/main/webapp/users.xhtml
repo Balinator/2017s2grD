@@ -16,12 +16,10 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
-
 			<p:messages autoUpdate="true" />
-
-			<p:dataTable value="#{userBean.allUsers}" var="user" paginator="true"
-				selectionMode="single" rowKey="#{user.id}" rows="5"
-				styleClass="paginated">
+			<p:dataTable value="#{userListBean.allUsers}" var="user"
+				paginator="true" selectionMode="single" rowKey="#{user.id}"
+				rows="15" styleClass="paginated">
 
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
@@ -32,75 +30,37 @@
 
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.firstname']}<br />
-						<h:inputText value="#{userBean.newUser.firstname}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{user.firstname}"
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
-					<h:inputText value="#{userBean.selectedUser.firstname}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+					<h:outputText value="#{user.firstname}"></h:outputText>
+
 				</p:column>
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.lastname']}<br />
-
-						<h:inputText value="#{userBean.newUser.lastname}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{user.lastname}"
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
-					<h:inputText value="#{userBean.selectedUser.lastname}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+					<h:outputText value="#{user.lastname}"></h:outputText>
 				</p:column>
-
-
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['login.username']}<br />
 					</f:facet>
 					<h:outputText value="#{user.username}"></h:outputText>
 				</p:column>
-
-
 				<p:column style="text-align: center;">
 					<f:facet name="header">Email<br />
-						<h:inputText value="#{userBean.newUser.email}"></h:inputText>
-
 					</f:facet>
-					<h:outputText value="#{user.email}"
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
-					<h:inputText value="#{userBean.selectedUser.email}"
-						rendered="#{userBean.verifyUserRendere(user)}">
-						<!--<f:validator validatorId="emailValidator" />-->
-					</h:inputText>
+					<h:outputText value="#{user.email}"></h:outputText>
 				</p:column>
-
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.phonenumber']}<br />
-
-						<h:inputText value="#{userBean.newUser.phoneNumber}"></h:inputText>
 					</f:facet>
-					<h:outputText value="#{user.phoneNumber}"
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
-					<h:inputText value="#{userBean.selectedUser.phoneNumber}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+					<h:outputText value="#{user.phoneNumber}"></h:outputText>
 				</p:column>
-
-
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['login.password']}<br />
-
-						<h:inputText value="#{userBean.newUser.password}"></h:inputText>
 					</f:facet>
-					<h:outputText value=""
-						rendered="#{!userBean.verifyUserRendere(user)}"></h:outputText>
-					<h:inputText value="#{userBean.selectedUser.password}"
-						rendered="#{userBean.verifyUserRendere(user)}"></h:inputText>
+					<h:outputText value=""></h:outputText>
 				</p:column>
-
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.role']}<br />
-						<p:selectManyMenu id="basic" value="#{userBean.newUser.roles}">
-							<f:converter binding="#{roleConverter}" />
-							<f:selectItems value="#{userBean.roles}" var="role"
-								itemLabel="#{msg[role.name]}" itemValue="#{role}" />
-						</p:selectManyMenu>
 					</f:facet>
 				</p:column>
 
@@ -109,20 +69,11 @@
 					<f:facet name="header">#{msg['users.active']}<br />
 					</f:facet>
 					<h:outputText value="#{msg['users.active']}"
-						rendered="#{user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
+						rendered="#{user.active and !userListBean.verifyUserRendere(user)}"></h:outputText>
 					<h:outputText value="#{msg['users.inactive']}"
-						rendered="#{!user.active and !userBean.verifyUserRendere(user)}"></h:outputText>
-					<p:selectBooleanCheckbox value="#{userBean.selectedUser.active}"
-						rendered="#{userBean.verifyUserRendere(user)}"></p:selectBooleanCheckbox>
-
-
+						rendered="#{!user.active and !userListBean.verifyUserRendere(user)}"></h:outputText>
 				</p:column>
 				<p:column style="text-align: center;">
-
-					<f:facet name="header">#{msg['users.action']}<br />
-						<h:commandButton value="#{msg['users.create']}" 
-							action="#{userBean.createNewUser}" ></h:commandButton>
-					</f:facet>
 
 					<p:commandLink id="ajax" update=":viewForm:display"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
