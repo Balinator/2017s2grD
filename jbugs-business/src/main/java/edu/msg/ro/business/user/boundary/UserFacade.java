@@ -84,7 +84,6 @@ public class UserFacade {
 			}
 		}
 		return queried;
-		// return bugService.getAllBugs();
 	}
 
 	/**

@@ -20,11 +20,11 @@ import edu.msg.ro.persistence.common.entity.AbstractEntity;
  * @author balinc
  *
  */
-@NamedQuery(name = Role.FIND_All_ROLES, query = "SELECT r from Role r")
+@NamedQuery(name = Role.FIND_ALL_ROLES, query = "SELECT r from Role r")
 @Entity
 public class Role extends AbstractEntity {
 
-	public static final String FIND_All_ROLES = "Role.findAll";
+	public static final String FIND_ALL_ROLES = "Role.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
