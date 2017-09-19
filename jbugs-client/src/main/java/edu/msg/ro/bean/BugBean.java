@@ -37,7 +37,7 @@ public class BugBean extends AbstractBean {
 
 	private BugDTO newBug = new BugDTO();
 
-	private BugDTO selectedBug = new BugDTO();
+	private BugDTO selectedBug;
 
 	private List<BugDTO> buglist;
 

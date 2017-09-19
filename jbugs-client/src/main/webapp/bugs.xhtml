@@ -14,17 +14,17 @@
 <h:body>
 	<f:view>
 		<ui:include src="/header.xhtml" />
-		<h:form id="bugForm">
 
-			<p:messages autoUpdate="true" />
+		<h:form id="form">
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}"
 				widgetVar="bugUpdateTable" paginator="true" rows="25"
-				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
+				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}"
+				selection="#{bugBean.selectedBug}">
 
 				<p:ajax event="rowSelect" oncomplete="PF('bugUpdateDialog').show()"
-					update="" />
+					update=":form2:display" />
 
 				<f:facet name="header">
 					<p:outputPanel>
@@ -129,13 +129,18 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
+				<p:column headerText="ize">
+					<p:commandButton value="#{msg['bug.update']}" type="button" action="#{bugBean.enterUpdateMode(bug)}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"
+						onclick="PF('bugUpdateDialog').show();" update=":form2:display" />
+				</p:column>
 			</p:dataTable>
 
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 
 		</h:form>
-
 		<h:form>
+
 			<p:dialog id="dialog" header="#{msg['bug.create']}"
 				widgetVar="bugAddDialog" resizable="false" position="center center"
 				height="440" width="456" appendToBody="true">
@@ -195,57 +200,48 @@
 				<p:outputLabel value="#{msg['bug.attechment']}" />
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
-					<h:commandButton value="#{msg['bug.create']}" action="#{bugBean.createNewBug}"></h:commandButton>
+					<h:commandButton value="#{msg['bug.create']}"
+						action="#{bugBean.createNewBug}"></h:commandButton>
 
 				</h:panelGrid>
 			</p:dialog>
-		</h:form>
 
-		<h:form>
-			<p:dialog id="dialog" header="#{msg['bug.update']}"
-				widgetVar="bugUpdateDialog" resizable="false"
-				position="center center" height="440" width="456"
-				appendToBody="true">
-				<h:panelGrid columns="2" cellpadding="5">
+		</h:form>
+		<h:form id="form2">
+
+			<p:dialog id="dialog2" header="#{msg['bug.update']}"
+				widgetVar="bugUpdateDialog" resizable="false" modal="true"
+				showEffect="clip" hideEffect="fold" height="440" width="456">
+
+				<h:panelGrid columns="2" cellpadding="5" id="display">
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<p:inputText value="#{bugBean.selectedBug.title}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.description']}" />
-					<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
+					<p:inputText value="#{bugBean.selectedBug.description}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-					<p:calendar value="#{bugBean.newBug.targetDate}" />
+					<p:calendar value="#{bugBean.selectedBug.targetDate}" />
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
-					<p:selectOneMenu value="#{bugBean.newBug.severity}"
-						style="width:90px">
-
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
-						<f:selectItems value="#{bugBean.severityList}" var="severities"
-							itemLabel="#{msg['bug.severity.' += severities]}" />
-
-						<p:ajax event="change" update="@this"></p:ajax>
-
-					</p:selectOneMenu>
+					<p:inputText value="#{bugBean.selectedBug.severity}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
-					<p:selectOneMenu value="#{bugBean.newBug.status}"
-						style="width:90px">
 
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+					<p:selectOneMenu value="#{bugBean.selectedBug}" style="width:90px">
+
+						<f:selectItem itemLabel="#{bugBean.selectedBug.status}"
+							value="#{null}"></f:selectItem>
 						<f:selectItems value="#{bugBean.statusList}" var="statuses"
 							itemLabel="#{msg['bug.status.' += statuses]}" />
 
 						<p:ajax event="change" update="@this"></p:ajax>
-
 					</p:selectOneMenu>
 
 
 					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
 					<f:view>
-						<p:autoComplete value="#{bugBean.assignedUser}"
+						<p:autoComplete value="#{bugBean.selectedBug.assigned}"
 							completeMethod="#{userBean.complete}" var="user"
 							itemLabel="#{user.username}" itemValue="#{user}"
 							converter="#{userConverter}" forceSelection="true">
@@ -253,16 +249,19 @@
 					</f:view>
 
 					<p:outputLabel value="#{msg['bug.version']}" />
-					<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
+					<p:inputText value="#{bugBean.selectedBug.version}"></p:inputText>
 
 					<p:outputLabel value="#{msg['bug.fixedIn']}" />
-					<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
+					<p:inputText value="#{bugBean.selectedBug.fixedIn}"></p:inputText>
 
 					<!-- 
 				<p:outputLabel value="#{msg['bug.attechment']}" />
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
-					<h:commandButton value="#{msg['bug.update']}" action="#{bugBean.createNewBug}"></h:commandButton>
+
+					
+					<h:commandButton value="#{msg['bug.update']}"
+						action="#{bugBean.editBug}"></h:commandButton>
 
 
 				</h:panelGrid>
