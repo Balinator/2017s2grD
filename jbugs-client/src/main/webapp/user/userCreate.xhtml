@@ -13,17 +13,33 @@
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['users.firstname']}" />
-					<p:inputText value="#{userNewBean.newUser.firstname}"></p:inputText>
+					<p:inputText id="firstname" required="true"
+						requiredMessage="#{msg['error.emptyfirstname']}"
+						value="#{userNewBean.newUser.firstname}"></p:inputText>
+					<p:message for="firstname" />
+
 					<p:outputLabel value="#{msg['users.lastname']}" />
-					<p:inputText value="#{userNewBean.newUser.lastname}"></p:inputText>
+					<p:inputText id="lastname" required="true"
+						requiredMessage="#{msg['error.emptylastname']}"
+						value="#{userNewBean.newUser.lastname}"></p:inputText>
+					<p:message for="lastname" />
+
 					<p:outputLabel value="Email" />
-					<p:inputText value="#{userNewBean.newUser.email}">
+					<p:inputText id="email" required="true"
+						requiredMessage="#{msg['error.emptyemail']}"
+						value="#{userNewBean.newUser.email}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					<p:message for="email" />
+
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userNewBean.newUser.phoneNumber}">
-						<f:validator validatorId="phoneNumberValidator" />
+					<p:inputText id="phonenumber" required="true"
+						requiredMessage="#{msg['error.emptyphoneNumber']}"
+						value="#{userNewBean.newUser.phoneNumber}">
+						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					<p:message for="phonenumber" />
+
 					<p:outputLabel value="#{msg['login.password']}" />
 					<p:inputText value="#{userNewBean.newUser.password}"></p:inputText>
 					<p:outputLabel value="#{msg['users.role']}" />
