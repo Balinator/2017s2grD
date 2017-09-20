@@ -13,7 +13,7 @@
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['users.firstname']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:inputText required="true" value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
 					<p:outputLabel value="Email" />
@@ -45,7 +45,8 @@
 					</p:selectBooleanButton>
 
 					<h:commandButton value="#{msg['users.update']}"
-						action="#{userUpdateBean.editUser}"></h:commandButton>
+						action="#{userUpdateBean.editUser}">
+						 </h:commandButton>
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>

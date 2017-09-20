@@ -82,4 +82,13 @@ public class UserDAOTest extends AbstractIntegrationTest {
 		Assert.assertEquals("User should exist  ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
 	}
 
+	/*
+	 * @Test public void checkIfUserHasAssignedBugs() { UserDTO user =
+	 * th.initializUser(99L, "Denis", "Vasile", "denis@msggroup.com", "123456",
+	 * "0040743189869"); boolean hasAssignedBug =
+	 * dao.checkIfUserHasAssignedBugs();
+	 * Assert.assertEquals("User should have assigned bug(s)!", false,
+	 * hasAssignedBug); }
+	 */
+
 }
