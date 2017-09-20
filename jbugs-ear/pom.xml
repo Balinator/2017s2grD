@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>edu.msg.ro</groupId>
-			<artifactId>jbugs-client</artifactId>
+			<artifactId>jbugs-s2d-client</artifactId>
 			<type>war</type>
 			<version>${project.version}</version>
 		</dependency>

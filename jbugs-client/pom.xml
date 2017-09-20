@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>edu.msg.ro</groupId>
-			<artifactId>jbugs-business</artifactId>
+			<artifactId>jbugs-s2d-business</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version>
 		</dependency>

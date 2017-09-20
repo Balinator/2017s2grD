@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>edu.msg.ro</groupId>
-			<artifactId>jbugs-persistence</artifactId>
+			<artifactId>jbugs-s2d-persistence</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
