@@ -7,7 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>jbugs-persistence</artifactId>
+	<artifactId>jbugs-s2d-persistence</artifactId>
 	<name>JBugs Persistence</name>
 	<description>Persistence layer</description>
 	<packaging>jar</packaging>

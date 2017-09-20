@@ -7,7 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>jbugs-business</artifactId>
+	<artifactId>jbugs-s2d-business</artifactId>
 	<name>JBugs Business</name>
 	<description>Business layer</description>
 	<packaging>ejb</packaging>
