@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['bug.update']}" widgetVar="bugUpdateDialog"
+		resizable="false" modal="true" showEffect="clip" hideEffect="fold"
+		height="440" width="456">
+
+		<h:form id="formBugEdit">
+
+			<h:panelGrid columns="2" cellpadding="5" id="display">
+				<p:outputLabel value="#{msg['bug.title']}" />
+				<p:inputText value="#{bugBean.selectedBug.title}"></p:inputText>
+
+				<p:outputLabel value="#{msg['bug.description']}" />
+				<p:inputText value="#{bugBean.selectedBug.description}"></p:inputText>
+
+				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+				<p:calendar value="#{bugBean.selectedBug.targetDate}" />
+
+				<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+
+				<p:selectOneMenu value="#{bugBean.selectedBug.severity}"
+					style="width:90px">
+
+					<f:selectItems value="#{bugBean.severityList}" var="severities"
+						itemLabel="#{msg['bug.severity.' += severities]}" />
+
+				</p:selectOneMenu>
+
+				<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+
+				<p:selectOneMenu value="#{bugBean.selectedBug.status}"
+					style="width:90px">
+
+					<f:selectItems value="#{bugBean.statusList}" var="statuses"
+						itemLabel="#{msg['bug.status.' += statuses]}" />
+
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+				<f:view>
+					<p:autoComplete value="#{bugBean.selectedBug.assigned}"
+						completeMethod="#{userListBean.complete}" var="user"
+						itemLabel="#{user.username}" itemValue="#{user}"
+						converter="#{userConverter}" forceSelection="true">
+					</p:autoComplete>
+				</f:view>
+
+				<p:outputLabel value="#{msg['bug.version']}" />
+				<p:inputText value="#{bugBean.selectedBug.version}"></p:inputText>
+
+				<p:outputLabel value="#{msg['bug.fixedIn']}" />
+				<p:inputText value="#{bugBean.selectedBug.fixedIn}"></p:inputText>
+
+				<!-- 
+				<p:outputLabel value="#{msg['bug.attechment']}" />
+				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
+ -->
+
+
+				<h:commandButton value="#{msg['bug.update']}"
+					action="#{bugBean.editBug}"></h:commandButton>
+
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
