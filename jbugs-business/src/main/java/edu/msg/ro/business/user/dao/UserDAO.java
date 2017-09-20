@@ -82,4 +82,18 @@ public class UserDAO extends AbstractDao<User> {
 		return query.getResultList();
 	}
 
+	/**
+	 * Checks if user has assigned bug(s) that are not closed.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean checkIfUserHasAssignedBugs(User user) {
+		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> 'Closed'");
+		query.setParameter("User", user);
+		// query.setParameter("status", "Closed");
+		List result = query.getResultList();
+		return !result.isEmpty();
+	}
+
 }

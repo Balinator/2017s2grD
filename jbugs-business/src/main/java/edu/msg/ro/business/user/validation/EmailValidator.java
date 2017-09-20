@@ -24,7 +24,7 @@ public class EmailValidator implements Validator {
 		String email = value.toString();
 
 		if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@+[msggroup.com]{12}$")) {
-			FacesMessage message = new FacesMessage("Email format needed: [adress]@msggroup.com");
+			FacesMessage message = new FacesMessage("Email format needed: [adress]@msggroup.com");//TODO: i18n
 			throw new ValidatorException(message);
 		}
 

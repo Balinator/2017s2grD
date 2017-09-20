@@ -57,7 +57,7 @@ public class UserGenerator {
 	 * Checks if username is already taken.
 	 * 
 	 * @param username
-	 * @return true/false
+	 * @return {@link Boolean}
 	 */
 	private boolean checkIfUsernameExists(String username) {
 		User existingUser = userDao.findUserByUsername(username);

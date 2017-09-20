@@ -56,4 +56,5 @@ public class UserUpdateBean extends AbstractUserBean {
 			handleExeptionI18n(e);
 		}
 	}
+
 }

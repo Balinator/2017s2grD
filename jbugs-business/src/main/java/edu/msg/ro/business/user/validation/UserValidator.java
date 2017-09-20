@@ -26,12 +26,8 @@ public class UserValidator {
 	 * @param entity
 	 * @return
 	 */
-	public boolean checkIfUserHasActiveTasks(User entity) {
-		// @TODO
-		// get list of users bugs
-		// if null return false
-		// else check for every bug if status not equals CLOSED then return true
-		return false;
+	public boolean checkIfUserHasActiveTasks(User user) {
+		return userDAO.checkIfUserHasAssignedBugs(user);
 	}
 
 	/**
@@ -44,7 +40,8 @@ public class UserValidator {
 	public void validateUserData(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + user.getEmail());
+			throw new BusinessException("User already exists with given email " + user.getEmail());// TODO:
+																									// i18n
 		}
 	}
 
@@ -58,7 +55,8 @@ public class UserValidator {
 	public boolean validateEmail(String email) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(email);
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + email);
+			throw new BusinessException("User already exists with given email " + email);// TODO:
+																							// i18n
 		}
 		return true;
 	}

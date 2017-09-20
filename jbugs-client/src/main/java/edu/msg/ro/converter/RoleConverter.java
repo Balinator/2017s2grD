@@ -33,7 +33,8 @@ public class RoleConverter implements Converter {
 				return service.getRoleItemMap().get(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid role."));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid role."));// TODO:
+																												// i18n
 			}
 		} else {
 			return null;

@@ -162,9 +162,15 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 			e.printStackTrace();
 		}
 		UserDTO createdUser = sut.createUser(user);
-		boolean hasManagementPermission = permCheck.checkPermission(createdUser, PermissionConstants.PM);
-		boolean hasBugManagementPermission = permCheck.checkPermission(createdUser, PermissionConstants.BM);
-		boolean hasBugClosePermission = permCheck.checkPermission(createdUser, PermissionConstants.BC);
+		List<Long> list = new ArrayList<>();
+		list.add((long) PermissionConstants.PM);
+		boolean hasManagementPermission = permCheck.canAccess(createdUser, list);
+		list.clear();
+		list.add((long) PermissionConstants.BM);
+		boolean hasBugManagementPermission = permCheck.canAccess(createdUser, list);
+		list.clear();
+		list.add((long) PermissionConstants.BC);
+		boolean hasBugClosePermission = permCheck.canAccess(createdUser, list);
 		Assert.assertEquals("User should have management permission: ", true, hasManagementPermission);
 		Assert.assertEquals("User should have bug close permission ", true, hasBugClosePermission);
 		Assert.assertEquals("User should not have bug management permission ", false, hasBugManagementPermission);
