@@ -12,13 +12,15 @@
 					<h:outputText value="#{sessionScope['username']}" />
 				</h2>
 				<h:form>
-					<h:commandLink action="#{loginBean.processLogout}"
+					<h:commandLink action="#{loginBean.processLogout}" styleClass="header-button-logout"
 						value="#{msg['general.logout']}" />
 				</h:form>
 			</h:panelGroup>
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] == null}">
-				<h:outputText value="#{msg['header.loggedout']}" />
+				<h2>
+					<h:outputText value="#{msg['header.loggedout']}"/>
+				</h2>
 			</h:panelGroup>
 		</h:panelGroup>
 		

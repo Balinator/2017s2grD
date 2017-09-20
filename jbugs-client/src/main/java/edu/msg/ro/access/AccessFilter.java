@@ -19,6 +19,12 @@ import javax.servlet.http.HttpSession;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.security.PermissionChecker;
 
+/**
+ * Filter for redirrecting unautorized users.
+ * 
+ * @author laszll
+ *
+ */
 @WebFilter(filterName = "AccessFilter", urlPatterns = { "*.xhtml" })
 public class AccessFilter implements Filter {
 
@@ -36,6 +42,9 @@ public class AccessFilter implements Filter {
 		// Do nothing because of implemented Filter but not used.
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

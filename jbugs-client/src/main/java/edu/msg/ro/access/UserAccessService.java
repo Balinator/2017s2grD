@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import edu.msg.ro.business.user.boundary.UserFacade;
@@ -14,7 +14,7 @@ import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionEnum;
 
 @ManagedBean(name = "userAccessService")
-@SessionScoped
+@ApplicationScoped
 public class UserAccessService {
 
 	@EJB
