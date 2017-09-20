@@ -74,12 +74,8 @@ public class UserGenerator {
 			return false;
 		}
 		String existingUsername = existingUser.getUsername();
-		if (existingUsername.equals(username)) {
-			return true;
-		} else {
-			return false;
-		}
 
+		return existingUsername.equals(username);
 	}
 
 	/**

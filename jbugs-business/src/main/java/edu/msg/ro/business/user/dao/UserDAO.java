@@ -8,7 +8,6 @@ import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
-import edu.msg.ro.business.status.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -91,14 +90,11 @@ public class UserDAO extends AbstractDao<User> {
 	 * @return
 	 */
 	public boolean checkIfUserHasAssignedBugs(User user) {
-		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> :status");
+		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> 'Closed'");
 		query.setParameter("User", user);
-		query.setParameter("status", StatusEnum.CLOSE);
+		// query.setParameter("status", "Closed");
 		List result = query.getResultList();
-		if (!result.isEmpty()) {
-			return true;
-		}
-		return false;
+		return !result.isEmpty();
 	}
 
 }
