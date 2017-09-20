@@ -31,7 +31,7 @@
 					<modules>
 						<webModule>
 							<groupId>edu.msg.ro</groupId>
-							<artifactId>jbugs-client</artifactId>
+							<artifactId>jbugs-s2d-client</artifactId>
 							<contextRoot>jbugs</contextRoot>
 						</webModule>
 					</modules>
