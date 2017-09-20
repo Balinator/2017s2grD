@@ -23,7 +23,7 @@ public class PasswordValidator implements Validator {
 	public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
 		String stringValue = value.toString();
 		if (stringValue.length() < 3) {
-			FacesMessage message = new FacesMessage("We have a wrong password!");
+			FacesMessage message = new FacesMessage("We have a wrong password!");//TODO: i18n
 			throw new ValidatorException(message);
 		}
 

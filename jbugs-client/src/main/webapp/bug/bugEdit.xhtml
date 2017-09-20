@@ -12,13 +12,18 @@
 
 			<h:panelGrid columns="2" cellpadding="5" id="display">
 				<p:outputLabel value="#{msg['bug.title']}" />
-				<p:inputText value="#{bugBean.selectedBug.title}"></p:inputText>
-
+				<p:inputText id="title" required="true"
+						requiredMessage="#{msg['error.emptytitle']}"
+						value="#{bugBean.selectedBug.title}"></p:inputText>
+					<p:message for="title" />
 
 
 				<p:outputLabel value="#{msg['bug.description']}" />
-				<p:inputText value="#{bugBean.selectedBug.description}"></p:inputText>
-
+				<p:inputText id="description" required="true"
+						requiredMessage="#{msg['error.emptydescription']}"
+						value="#{bugBean.selectedBug.description}"></p:inputText>
+					<p:message for="description" />
+					
 				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 				<p:calendar value="#{bugBean.selectedBug.targetDate}" />
 

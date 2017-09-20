@@ -38,21 +38,20 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void createBug_succesfull() throws BusinessException, TechnicalExeption {
-		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		uf.createUser(testUser);
-		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
+		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO createdUser = uf.createUser(testUser);
+
+		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", "Open", createdUser);
 		BugDTO createdBug = sut.createBug(testBug);
 		Assert.assertNotNull("The newly persisted Bug should have an id!", createdBug.getId());
 	}
 
 	@Test
 	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
-		UserDTO testUser = th.initializUser(8L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		uf.createUser(testUser);
-		BugDTO testBug = th.initializingBug(2L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
-		sut.createBug(testBug);
-		BugDTO deletedBug = null;
-		deletedBug = sut.deleteBug(testBug);
+		UserDTO createdUser = uf.createUser(th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395"));
+		BugDTO createdBug = sut
+				.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", "Open", createdUser));
+		BugDTO deletedBug = sut.deleteBug(createdBug);
 		Assert.assertNull("Bug should be null", deletedBug);
 	}
 

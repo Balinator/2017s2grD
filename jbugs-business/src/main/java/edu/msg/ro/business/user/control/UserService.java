@@ -100,7 +100,8 @@ public class UserService {
 	private void validateUserData(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + user.getEmail());
+			throw new BusinessException("User already exists with given email " + user.getEmail());// TODO:
+																									// i18n
 		}
 	}
 

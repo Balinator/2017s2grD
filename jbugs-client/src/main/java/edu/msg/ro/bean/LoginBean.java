@@ -20,6 +20,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 @RequestScoped
 public class LoginBean extends AbstractBean implements Serializable {
 
+	private static int FAILEDATTEMPS;
 	private static final String LOGIN = "login";
 
 	private static final long serialVersionUID = -2617767540112561117L;
@@ -61,12 +62,23 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 */
 	public String processLogin() {
 		try {
+			String loggingUser = user.getUsername();
 			if (loginFacade.isValidUser(user)) {
 				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 				session.setAttribute("username", user.getUsername());
 				addI18nMessage("login.welcome");
 				return "bugManagment";
 			} else {
+				String loggingUser2 = user.getUsername();
+				if (loggingUser.equals(loggingUser2)) {
+					FAILEDATTEMPS++;
+					if (FAILEDATTEMPS >= 5) {
+						user.setActive(false);
+						user.getEmail();
+					}
+				} else {
+					FAILEDATTEMPS = 0;
+				}
 				addI18nMessage("loginForm:username", "login.error");
 				return LOGIN;
 			}

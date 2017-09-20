@@ -56,7 +56,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void findUserByUsername_succesfull() throws BusinessException, TechnicalExeption {
-		UserDTO user = th.initializUser(8L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO user = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
 
 		Assert.assertEquals("Should have an user with JanosF username",
@@ -72,7 +72,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void findUserByEmail_succesfull() throws TechnicalExeption, BusinessException {
-		UserDTO user = th.initializUser(18L, "Fulop", "Lajos", "lajoska2@msggroup.com", "asd", "0756748395");
+		UserDTO user = th.initializUser("Fulop", "Lajos", "lajoska2@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
 		Assert.assertEquals("Should have an user with lajoska2@msggroup.com email ",
 				dao.findUserByEmail(user.getEmail()).getEmail(), user.getEmail());
@@ -86,7 +86,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void verifyUserExist_succesfull() throws BusinessException {
-		UserDTO user = th.initializUser(12L, "Fulop", "Gabor", "gabika@msggroup.com", "asd", "0756748395");
+		UserDTO user = th.initializUser("Fulop", "Gabor", "gabika@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
 		Assert.assertEquals("User should exist  ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
 	}
