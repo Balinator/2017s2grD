@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>edu.msg.ro</groupId>
-		<artifactId>jbugs</artifactId>
+		<artifactId>jbugs-s2d</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>jbugs-business</artifactId>
+	<artifactId>jbugs-s2d-business</artifactId>
 	<name>JBugs Business</name>
 	<description>Business layer</description>
 	<packaging>ejb</packaging>
@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>edu.msg.ro</groupId>
-			<artifactId>jbugs-persistence</artifactId>
+			<artifactId>jbugs-s2d-persistence</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

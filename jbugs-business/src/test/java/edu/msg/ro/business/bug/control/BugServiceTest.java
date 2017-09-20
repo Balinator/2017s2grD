@@ -74,8 +74,6 @@ public class BugServiceTest extends AbstractIntegrationTest {
 			uf.createUser(testUser1);
 		} catch (Exception e) {
 			e.getCause();
-			// TODO Auto-generated catch block
-			// e1.printStackTrace();
 			System.err.println(e.getCause().getMessage());
 			System.err.println(testUser.getId());
 		}
@@ -93,10 +91,8 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		try {
 			createdBug = bf.createBug(testBug);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -148,7 +144,6 @@ public class BugServiceTest extends AbstractIntegrationTest {
 			uf.createUser(testUser);
 			uf.createUser(testUser1);
 		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -159,10 +154,8 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		try {
 			createdBug = bf.createBug(testBug);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -170,7 +163,6 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		try {
 			bugUpdate = bf.updateBug(newBug);
 		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -210,7 +202,6 @@ public class BugServiceTest extends AbstractIntegrationTest {
 			uf.createUser(testUser);
 			uf.createUser(testUser1);
 		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 

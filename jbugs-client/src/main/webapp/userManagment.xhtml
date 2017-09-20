@@ -32,7 +32,7 @@
 					<h:outputText value="#{user.firstname}"></h:outputText>
 				</p:column>
 				<p:column style="text-align: center;" sortBy="#{user.lastname}"
-					filterBy="#{user.lastname}" filterMatchMode="contains">
+					filterBy="#{user.lastname}" filterMatchMode="contains" >
 					<f:facet name="header">#{msg['users.lastname']}<br />
 					</f:facet>
 					<h:outputText value="#{user.lastname}"></h:outputText>
@@ -83,6 +83,14 @@
 						<h:outputText value="#{msg['users.update']}" />
 					</p:commandLink>
 
+					<h:commandLink value="#{msg['user.activate']}"
+						action="#{userListBean.activateUser(user)}"
+						rendered="#{!user.active}" style="float:right" />
+
+					<h:commandLink  value="#{msg['user.deactivate']}"
+					action="#{userListBean.deleteUser(user)}" 
+					rendered="#{user.active}" style="float:right"/>
+		
 				</p:column>
 			</p:dataTable>
 		</h:form>

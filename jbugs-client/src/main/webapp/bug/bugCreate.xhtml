@@ -10,12 +10,19 @@
 
 		<h:form>
 
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid id="addBug" columns="2" cellpadding="5">
 				<p:outputLabel value="#{msg['bug.title']}" />
-				<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
+				<p:inputText id="title" required="true"
+					requiredMessage="#{msg['error.emptytitle']}"
+					value="#{bugBean.newBug.title}"></p:inputText>
+				<p:message for="title" />
+
 
 				<p:outputLabel value="#{msg['bug.description']}" />
-				<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
+				<p:inputText id="description" required="true"
+					requiredMessage="#{msg['error.emptydescription']}"
+					value="#{bugBean.newBug.description}"></p:inputText>
+				<p:message for="description" />
 
 				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 				<p:calendar value="#{bugBean.newBug.targetDate}" />
@@ -24,8 +31,7 @@
 				<p:selectOneMenu value="#{bugBean.newBug.severity}"
 					style="width:90px">
 
-					<f:selectItem value="#{null}"
-						itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+
 					<f:selectItems value="#{bugBean.severityList}" var="severities"
 						itemLabel="#{msg['bug.severity.' += severities]}" />
 
@@ -56,26 +62,28 @@
 				</f:view>
 
 				<p:outputLabel value="#{msg['bug.version']}" />
-				<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
+
+					<p:inputText id="version" required="true"
+					requiredMessage="#{msg['error.emptyversion']}"
+					value="#{bugBean.newBug.version}"></p:inputText>
+				<p:message for="version" />
 
 				<p:outputLabel value="#{msg['bug.fixedIn']}" />
 				<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
-
-
+				
 				<p:outputLabel value="#{msg['bug.attachment']}" />
-
-
 				<p:fileUpload fileUploadListener="#{bugBean.handleFileUpload}"
 					dragDropSupport="false" update="messages" sizeLimit="26214400"
-					fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
+					fileLimit="1"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
 
 				<p:growl id="messages" showDetail="true" />
 
+
 				<h:commandButton value="#{msg['bug.create']}"
-					action="#{bugBean.createNewBug}"></h:commandButton>
+					action="#{bugBean.createNewBug}" update="addBug"></h:commandButton>
 
 			</h:panelGrid>
-
 		</h:form>
 
 	</p:dialog>

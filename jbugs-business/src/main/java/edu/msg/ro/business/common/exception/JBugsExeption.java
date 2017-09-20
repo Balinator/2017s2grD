@@ -12,14 +12,27 @@ public class JBugsExeption extends Exception {
 
 	private String message;
 
+	private Object arguments = null;
+
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param message
 	 */
 	public JBugsExeption(String message) {
 		super();
 		this.message = message;
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param message
+	 */
+	public JBugsExeption(String message, Object arguments) {
+		super();
+		this.message = message;
+		this.arguments = arguments;
 	}
 
 	/**
@@ -34,6 +47,18 @@ public class JBugsExeption extends Exception {
 	}
 
 	/**
+	 * Constructor.
+	 * 
+	 * @param message
+	 * @param cause
+	 */
+	public JBugsExeption(String message, Object arguments, Throwable cause) {
+		super(cause);
+		this.message = message;
+		this.arguments = arguments;
+	}
+
+	/**
 	 * Method for getting the message.
 	 */
 	@Override
@@ -41,4 +66,12 @@ public class JBugsExeption extends Exception {
 		return message;
 	}
 
+	/**
+	 * Get arguments for translation the message.
+	 * 
+	 * @return
+	 */
+	public Object getArguments() {
+		return arguments;
+	}
 }

@@ -3,12 +3,11 @@ package edu.msg.ro.business.user.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
-import edu.msg.ro.business.status.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -33,15 +32,14 @@ public class UserDAO extends AbstractDao<User> {
 	 * 
 	 * @param username
 	 * @return
-	 * @throws TechnicalExeption
 	 */
-	public User findUserByUsername(String username) throws TechnicalExeption {
+	public User findUserByUsername(String username) {
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username");
 		query.setParameter("username", username);
 		try {
 			return (User) query.getSingleResult();
-		} catch (Exception e) {
-			throw new TechnicalExeption(e.getCause());
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 
@@ -63,7 +61,7 @@ public class UserDAO extends AbstractDao<User> {
 	 * 
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return {@link Boolean}
 	 */
 	public boolean verifyUserExist(String username, String password) {
 		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASS, User.class);
@@ -91,14 +89,11 @@ public class UserDAO extends AbstractDao<User> {
 	 * @return
 	 */
 	public boolean checkIfUserHasAssignedBugs(User user) {
-		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> :status");
+		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> 'Closed'");
 		query.setParameter("User", user);
-		query.setParameter("status", StatusEnum.CLOSE);
+		// query.setParameter("status", "Closed");
 		List result = query.getResultList();
-		if (!result.isEmpty()) {
-			return true;
-		}
-		return false;
+		return !result.isEmpty();
 	}
 
 }

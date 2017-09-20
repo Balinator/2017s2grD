@@ -50,8 +50,7 @@ public class UserNewBean extends AbstractUserBean {
 			addI18nMessage("user.crud.save.success", messageArguments);
 			clearUser();
 		} catch (BusinessException e) {
-			Object[] messageArguments = { newUser.toString() };
-			addI18nMessage(e.getMessage(), messageArguments);
+			addI18nMessage(e.getMessage(), e.getArguments());
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package edu.msg.ro.business.user.util;
+package edu.msg.ro.access;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Class for redirrecting unauthenticated users.
+ * Filter for redirrecting unauthenticated users.
  * 
  * @author balinc
  */
@@ -49,7 +49,7 @@ public class AuthenticationFilter implements Filter {
 
 			if (isLoginPage || isUserLoggedIn || isResource) {
 				if (isLoginPage && isUserLoggedIn) {
-					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugs.xhtml");
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 				} else {
 					chain.doFilter(request, response);
 				}
