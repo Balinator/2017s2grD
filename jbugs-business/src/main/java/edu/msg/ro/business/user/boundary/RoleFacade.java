@@ -37,7 +37,7 @@ public class RoleFacade {
 	 * @return updated {@link Role}.
 	 * @throws TechnicalExeption
 	 */
-	public RoleDTO update(RoleDTO roleDTO) throws TechnicalExeption {
+	public RoleDTO update(RoleDTO roleDTO) {
 		return roleService.update(roleDTO);
 	}
 }

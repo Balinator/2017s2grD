@@ -60,18 +60,13 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @return
 	 */
 	public String processLogin() {
-		try {
-			if (loginFacade.isValidUser(user)) {
-				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-				session.setAttribute("username", user.getUsername());
-				addI18nMessage("login.welcome");
-				return "bugs";
-			} else {
-				addI18nMessage("loginForm:username", "login.error");
-				return LOGIN;
-			}
-		} catch (Exception e) {
-			addI18nMessage("login.unexpected");
+		if (loginFacade.isValidUser(user)) {
+			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+			session.setAttribute("username", user.getUsername());
+			addI18nMessage("login.welcome");
+			return "bugs";
+		} else {
+			addI18nMessage("loginForm:username", "login.error");
 			return LOGIN;
 		}
 	}

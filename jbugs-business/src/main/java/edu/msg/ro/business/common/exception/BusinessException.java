@@ -2,8 +2,8 @@ package edu.msg.ro.business.common.exception;
 
 /**
  * Exception class for business problems.
- * 
- * @author laszll
+ *
+ * @author balinc
  *
  */
 public class BusinessException extends JBugsExeption {
@@ -17,5 +17,14 @@ public class BusinessException extends JBugsExeption {
 	 */
 	public BusinessException(String message) {
 		super(message);
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param message
+	 */
+	public BusinessException(String message, Object arguments) {
+		super(message, arguments);
 	}
 }

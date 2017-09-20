@@ -15,7 +15,7 @@ import edu.msg.ro.business.user.validation.UserValidator;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * Controller for User component.
+ * Controller for {@link User} component.
  * 
  * @author balinc
  *
@@ -35,6 +35,8 @@ public class UserService {
 	@EJB
 	UserGenerator userUtils;
 
+	public static final String I18N_USER_EMAIL_EXISTS = "users.email.exists";
+
 	/**
 	 * Method for creating a new {@link User}.
 	 * 
@@ -43,24 +45,19 @@ public class UserService {
 	 * @throws BusinessException
 	 */
 	public UserDTO createUser(UserDTO user) throws BusinessException {
-		try {
-			validateUserData(user);
 
-			User userEntity = new User();
-			String username = userUtils.createUsername(user);
-			user.setUsername(username);
-			String password = userUtils.encryptPassword(user);
-			user.setPassword(password);
-			userDTOMapper.mapToEntity(user, userEntity);
-			userEntity.setActive(true);
-			userDAO.persistEntity(userEntity);
-			User persistedUser = userDAO.findEntity(userEntity.getId());
-			return userDTOMapper.mapToDTO(persistedUser);
-		} catch (BusinessException e) {
-			throw new BusinessException(e.getMessage());
-		} catch (Exception e) {
-			throw new BusinessException("user.crud.save.error");
-		}
+		validateUserData(user);
+
+		User userEntity = new User();
+		String username = userUtils.createUsername(user);
+		user.setUsername(username);
+		String password = userUtils.encryptPassword(user);
+		user.setPassword(password);
+		userDTOMapper.mapToEntity(user, userEntity);
+		userEntity.setActive(true);
+		userDAO.persistEntity(userEntity);
+		User persistedUser = userDAO.findEntity(userEntity.getId());
+		return userDTOMapper.mapToDTO(persistedUser);
 	}
 
 	/**
@@ -100,7 +97,8 @@ public class UserService {
 	private void validateUserData(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + user.getEmail());
+			Object[] arguments = { user.getEmail() };
+			throw new BusinessException(UserService.I18N_USER_EMAIL_EXISTS, arguments);
 		}
 	}
 
@@ -110,7 +108,7 @@ public class UserService {
 	 * 
 	 * @param username
 	 * @param pass
-	 * @return
+	 * @return {@link Boolean}
 	 */
 	public boolean findUserExists(String username, String pass) {
 		return userDAO.verifyUserExist(username, pass);
