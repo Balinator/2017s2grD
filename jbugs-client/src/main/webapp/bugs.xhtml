@@ -148,12 +148,19 @@
 			<p:dialog header="#{msg['bug.create']}" widgetVar="bugAddDialog"
 				resizable="false" modal="true" showEffect="clip" hideEffect="fold"
 				height="440" width="456">
-				<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid id="addBug" columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['bug.title']}" />
-					<p:inputText value="#{bugBean.newBug.title}"></p:inputText>
+					<p:inputText id="title" required="true"
+						requiredMessage="#{msg['error.emptytitle']}"
+						value="#{bugBean.newBug.title}"></p:inputText>
+					<p:message for="title" />
+
 
 					<p:outputLabel value="#{msg['bug.description']}" />
-					<p:inputText value="#{bugBean.newBug.description}"></p:inputText>
+					<p:inputText id="description" required="true"
+						requiredMessage="#{msg['error.emptydescription']}"
+						value="#{bugBean.newBug.description}"></p:inputText>
+					<p:message for="description" />
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 					<p:calendar value="#{bugBean.newBug.targetDate}" />
@@ -162,8 +169,7 @@
 					<p:selectOneMenu value="#{bugBean.newBug.severity}"
 						style="width:90px">
 
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
+						
 						<f:selectItems value="#{bugBean.severityList}" var="severities"
 							itemLabel="#{msg['bug.severity.' += severities]}" />
 
@@ -195,7 +201,12 @@
 					</f:view>
 
 					<p:outputLabel value="#{msg['bug.version']}" />
-					<p:inputText value="#{bugBean.newBug.version}"></p:inputText>
+
+
+					<p:inputText id="version" required="true"
+						requiredMessage="#{msg['error.emptyversion']}"
+						value="#{bugBean.newBug.version}"></p:inputText>
+					<p:message for="version" />
 
 					<p:outputLabel value="#{msg['bug.fixedIn']}" />
 					<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
@@ -205,7 +216,7 @@
 				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
  -->
 					<h:commandButton value="#{msg['bug.create']}"
-						action="#{bugBean.createNewBug}"></h:commandButton>
+						action="#{bugBean.createNewBug}" update="addBug"></h:commandButton>
 
 				</h:panelGrid>
 			</p:dialog>
@@ -242,11 +253,9 @@
 					<p:selectOneMenu value="#{bugBean.selectedBug.status}"
 						style="width:90px">
 
-<<<<<<< HEAD
+
 						<p:ajax event="valueChange" update=":form2:display" />
 
-=======
->>>>>>> 6dd198898b16afa346d4ce01076fbd6521111380
 						<f:selectItems value="#{bugBean.statusList}" var="statuses"
 							itemLabel="#{msg['bug.status.' += statuses]}" />
 
