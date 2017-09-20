@@ -1,4 +1,4 @@
-package edu.msg.ro.business.user.util;
+package edu.msg.ro.access;
 
 import java.io.IOException;
 

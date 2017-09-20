@@ -43,4 +43,25 @@ public class PermissionChecker {
 		return false;
 	}
 
+	/**
+	 * Method for checking if {@link User} has all permissions.
+	 * 
+	 * @param curentUser
+	 * @param permissionIds
+	 * @return
+	 */
+	public boolean canAccess(UserDTO curentUser, List<Long> permissionIds) {
+		if (curentUser == null) {
+			return false;
+		}
+
+		boolean canAccess = true;
+
+		for (Long l : permissionIds) {
+			canAccess &= checkPermission(curentUser, l.intValue());
+		}
+
+		return canAccess;
+	}
+
 }
