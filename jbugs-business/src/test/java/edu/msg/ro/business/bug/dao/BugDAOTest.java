@@ -43,7 +43,6 @@ public class BugDAOTest extends AbstractIntegrationTest {
 	public void getBugbyId_succesfull() throws BusinessException {
 		UserDTO testUser = th.initializUser(4L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
-
 		Assert.assertNotEquals("GetBug by Id is not working", bdao.getBug(1L), null);
 
 	}

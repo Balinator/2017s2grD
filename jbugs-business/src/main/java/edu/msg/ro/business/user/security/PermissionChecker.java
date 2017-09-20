@@ -30,7 +30,7 @@ public class PermissionChecker {
 	 * @param permissionId
 	 * @return boolean
 	 */
-	private boolean checkPermission(UserDTO userDTO, int permissionId) {
+	public boolean checkPermission(UserDTO userDTO, int permissionId) {
 		String email = userDTO.getEmail();
 		User user = userDAO.findUserByEmail(email);
 		List<Role> roles = user.getRoles();
