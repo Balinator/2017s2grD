@@ -19,7 +19,7 @@
 		<navigation-case>
 			<from-action>#{loginBean.processLogin}</from-action>
 			<from-outcome>loginSuccess</from-outcome>
-			<to-view-id>users.xhtml</to-view-id>
+			<to-view-id>userManagment.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
