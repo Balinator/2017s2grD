@@ -25,23 +25,24 @@
 					<p:message for="lastname" />
 
 					<p:outputLabel value="Email" />
-					<p:inputText id="email" required="true"
-						requiredMessage="#{msg['error.emptyemail']}"
-						value="#{userNewBean.newUser.email}">
+					<p:inputText value="#{userNewBean.newUser.email}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
-					<p:message for="email" />
 
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText id="phonenumber" required="true"
-						requiredMessage="#{msg['error.emptyphoneNumber']}"
-						value="#{userNewBean.newUser.phoneNumber}">
+					<p:inputText value="#{userNewBean.newUser.phoneNumber}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
-					<p:message for="phonenumber" />
 
 					<p:outputLabel value="#{msg['login.password']}" />
-					<p:inputText value="#{userNewBean.newUser.password}"></p:inputText>
+					<p:inputText id="password" required="true"
+						requiredMessage="#{msg['error.password']}"
+						value="#{userNewBean.newUser.password}">
+						<f:validateLength minimum="6" />
+					</p:inputText>
+					<p:message for="password" />
+
+
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic" value="#{userNewBean.newUser.roles}">
 						<f:converter binding="#{roleConverter}" />

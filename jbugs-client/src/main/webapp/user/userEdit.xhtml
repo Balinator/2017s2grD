@@ -13,13 +13,21 @@
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['users.firstname']}" />
-					<p:inputText required="true" value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:inputText id="firstname" required="true"
+						requiredMessage="#{msg['error.emptyfirstname']}"
+						value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:message for="firstname" />
+
 					<p:outputLabel value="#{msg['users.lastname']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					<p:inputText id="lastname" required="true"
+						requiredMessage="#{msg['error.emptylastname']}"
+						value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					<p:message for="lastname" />
 					<p:outputLabel value="Email" />
 					<p:inputText value="#{userUpdateBean.updatedUser.email}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
 					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}">
 						<f:validator validatorId="phoneNumberValidator" />
