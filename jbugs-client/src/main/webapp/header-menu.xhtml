@@ -7,8 +7,8 @@
 			<h:form>
 				
 				<p:link outcome="bugs" value="Bugs" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
-				<p:link outcome="users" value="Users" styleClass="header-menu-button" rendered="#{userAccessService.canAccess([2])}"/>
-				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccess([1])}"/>
+				<p:link outcome="users" value="Users" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}"/>
+				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}"/>
 			</h:form>
 		</h:panelGroup>
 </ui:composition>
