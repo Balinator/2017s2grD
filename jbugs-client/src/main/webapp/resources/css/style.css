@@ -1,12 +1,25 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background-color: #F0F0F0;
+	background-color: #FFFFFF;
 	margin: 0;
+	font-family: Arial,sans-serif;
+}
+button,a{
+	padding: 10px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
 }
 .header-class{
-	background: #906090;
-	padding: 1%;
+	padding-right: 1%;
+	padding-left: 1%;
+	background: #5f5f5f;
 	overflow: auto;
 }
 .header-class-right{
@@ -16,56 +29,18 @@ body {
 	float: left;
 }
 .header-class-flag{
-	width: 70px;
-	height: 50px;
-	padding: 10px;
-	padding-bottom:15px;
-	-webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-}
-.header-class-flag:hover{
-	width: 77px;
-	height: 55px;
-	padding: 10px;
-	padding-bottom:10px;
+	width: 1.3em;
+	height: 0.95em;
 }
 .header-menu-button{
-	padding: 10px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    border-radius: 4px;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px;
-    cursor: pointer;
-    background-color: #4C8C50;
+    background-color: inherit;
 }
 .header-menu-button:hover {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #000000;
 }
 .header-button-logout{
-	padding: 10px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    border-radius: 4px;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px;
-    cursor: pointer;
-    background-color: #8C4C50;
+    background-color: inherit;
 }
 .header-button-logout:hover {
-    background-color: #AF4C50;
-    color: white;
-}
-.header-menu{
-	margin: 30px;
-	margin-top: 10px;
+    background-color: #000000;
 }
