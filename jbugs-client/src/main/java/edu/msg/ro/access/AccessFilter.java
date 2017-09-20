@@ -52,7 +52,7 @@ public class AccessFilter implements Filter {
 				if (canAcessPage(httpRequest.getRequestURI(), (String) httpSession.getAttribute("username"))) {
 					chain.doFilter(request, response);
 				} else {
-					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugs.xhtml");
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 				}
 			}
 		} catch (Exception t) {
@@ -66,7 +66,7 @@ public class AccessFilter implements Filter {
 
 		if (requestUrl.indexOf("/permissionManager.xhtml") >= 0) {
 			permissionList.add(1L);
-		} else if (requestUrl.indexOf("/users.xhtml") >= 0) {
+		} else if (requestUrl.indexOf("/userManagment.xhtml") >= 0) {
 			permissionList.add(2L);
 		} else {
 			return true;
