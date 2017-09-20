@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Class for redirrecting unauthenticated users.
+ * Filter for redirrecting unauthenticated users.
  * 
  * @author balinc
  */
