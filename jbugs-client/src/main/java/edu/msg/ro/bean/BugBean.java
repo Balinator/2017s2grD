@@ -269,7 +269,8 @@ public class BugBean extends AbstractBean {
 
 		if (input.length() == 0) {
 			((UIInput) uic).setValid(false);
-			FacesMessage message = new FacesMessage("Not valid data");
+			FacesMessage message = new FacesMessage("Not valid data");// TODO:
+																		// i18n
 			context.addMessage(uic.getClientId(context), message);
 		}
 	}

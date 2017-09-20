@@ -13,7 +13,8 @@ public enum StatusEnum {
 	/**
 	 * The bug possible statuses.
 	 */
-	OPEN("open"), REJECTED("rejected"), INPROGRESS("inprogress"), INFONEEDED("infoneeded"), FIXED("fixed"), CLOSE("close");
+	OPEN("open"), REJECTED("rejected"), INPROGRESS("inprogress"), INFONEEDED("infoneeded"), FIXED("fixed"), CLOSE("close");// TODO:
+																															// i18n
 
 	/**
 	 * Every state every state has next state.
