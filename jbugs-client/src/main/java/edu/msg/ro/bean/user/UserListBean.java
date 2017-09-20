@@ -62,6 +62,11 @@ public class UserListBean extends AbstractUserBean {
 		}
 	}
 
+	/**
+	 * Method for activating user {@link User}.
+	 * 
+	 * @param user
+	 */
 	public void activateUser(UserDTO user) {
 		user.setActive(true);
 		try {
