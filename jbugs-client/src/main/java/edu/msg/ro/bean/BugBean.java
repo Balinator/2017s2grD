@@ -12,6 +12,9 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.validation.ValidationException;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
+
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
@@ -52,6 +55,8 @@ public class BugBean extends AbstractBean {
 	private int severities;
 
 	private UserDTO assignedUser = new UserDTO();
+
+	private StreamedContent file;
 
 	public UserDTO getAssignedUser() {
 		return assignedUser;
@@ -272,6 +277,38 @@ public class BugBean extends AbstractBean {
 			FacesMessage message = new FacesMessage("Not valid data");
 			context.addMessage(uic.getClientId(context), message);
 		}
+	}
+
+	/**
+	 * Method for upload file to database
+	 * 
+	 * @param event
+	 */
+	public void handleFileUpload(FileUploadEvent event) {
+		byte[] file = new byte[event.getFile().getContents().length];
+		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
+
+		newBug.setAttachment(file);
+
+		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	/**
+	 * Method for upload file to database
+	 * 
+	 * @param event
+	 */
+
+	//need to refactor --handleFileUplod
+	public void handleFileEdit(FileUploadEvent event) {
+
+		byte[] file = new byte[event.getFile().getContents().length];
+		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
+
+		selectedBug.setAttachment(file);
+
+		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 }

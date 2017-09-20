@@ -6,7 +6,7 @@
 
 	<p:dialog header="#{msg['bug.create']}" widgetVar="bugAddDialog"
 		resizable="false" modal="true" showEffect="clip" hideEffect="fold"
-		height="440" width="456">
+		height="650" width="650">
 
 		<h:form>
 
@@ -63,8 +63,13 @@
 
 
 				<p:outputLabel value="#{msg['bug.attachment']}" />
-				<p:fileUpload value="#{bugBean.newBug.attachment}" mode="simple"
-					skinSimple="true" />
+
+
+				<p:fileUpload fileUploadListener="#{bugBean.handleFileUpload}"
+					dragDropSupport="false" update="messages" sizeLimit="26214400"
+					fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
+
+				<p:growl id="messages" showDetail="true" />
 
 				<h:commandButton value="#{msg['bug.create']}"
 					action="#{bugBean.createNewBug}"></h:commandButton>

@@ -72,6 +72,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	 */
 	public void editUser() throws TechnicalExeption {
 		try {
+
 			userFacade.updateUser(updatedUser);
 			Object[] messageArguments = { updatedUser.getUsername() };
 			// @Todo: Check way is error with ViewScope Beans.
@@ -88,9 +89,9 @@ public class UserUpdateBean extends AbstractUserBean {
 	 * @param user
 	 * @return
 	 */
-	public void deleteUser(UserDTO user) {
+	public void deleteUser() throws TechnicalExeption {
 		try {
-			userFacade.deleteUser(user);
+			userFacade.deleteUser(updatedUser);
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
