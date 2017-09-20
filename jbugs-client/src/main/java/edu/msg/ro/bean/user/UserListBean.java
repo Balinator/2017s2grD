@@ -25,11 +25,11 @@ public class UserListBean extends AbstractUserBean {
 	}
 
 	/**
-	 * get for selectedUser.
+	 * get for User.
 	 * 
 	 * @return
 	 */
-	public UserDTO getSelectedUser() {
+	public UserDTO geUser() {
 		return userDTO;
 	}
 

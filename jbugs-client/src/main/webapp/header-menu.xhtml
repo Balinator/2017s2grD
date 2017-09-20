@@ -5,10 +5,16 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 		<h:panelGroup layout="block" styleClass="header-menu">
 			<h:form>
+<<<<<<< HEAD
 				
 				<p:link outcome="bugs" value="Bugs" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
 				<p:link outcome="users" value="Users" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}"/>
 				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}"/>
+=======
+				<p:link outcome="bugManagment" value="BugManagment" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
+				<p:link outcome="userManagment" value="UserManagemnt" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
+				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
+>>>>>>> develop
 			</h:form>
 		</h:panelGroup>
 </ui:composition>

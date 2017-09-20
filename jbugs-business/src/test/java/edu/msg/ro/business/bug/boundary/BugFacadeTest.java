@@ -40,9 +40,7 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	public void createBug_succesfull() throws BusinessException, TechnicalExeption {
 		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		uf.createUser(testUser);
-		Assert.assertNotNull("The user should have an id", testUser.getId());
 		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
-		Assert.assertNotNull("Bug should have an id", testBug.getId());
 		BugDTO createdBug = sut.createBug(testBug);
 		Assert.assertNotNull("The newly persisted Bug should have an id!", createdBug.getId());
 	}
@@ -55,7 +53,7 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 		sut.createBug(testBug);
 		BugDTO deletedBug = null;
 		deletedBug = sut.deleteBug(testBug);
-		Assert.assertNull(deletedBug.toString(), deletedBug.getId());
+		Assert.assertNull("Bug should be null", deletedBug);
 	}
 
 	@Test

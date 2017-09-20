@@ -81,4 +81,18 @@ public class UserUpdateBean extends AbstractUserBean {
 			handleExeptionI18n(e);
 		}
 	}
+
+	/**
+	 * Method for deleting(deactivating) {@link User}.
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public void deleteUser(UserDTO user) {
+		try {
+			userFacade.deleteUser(user);
+		} catch (JBugsExeption e) {
+			handleExeptionI18n(e);
+		}
+	}
 }
