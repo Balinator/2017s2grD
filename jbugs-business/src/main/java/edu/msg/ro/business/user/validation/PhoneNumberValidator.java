@@ -22,11 +22,11 @@ public class PhoneNumberValidator implements Validator {
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
 		String phoneNumber = value.toString();
+		final String wrongNumberMessage = "error.phoneNumber";
 
-		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {// pl:0040123456789
-																							// or
-																							// +49123456
-			FacesMessage message = new FacesMessage("Not valid phone number in germany or romania.");
+		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {
+
+			FacesMessage message = new FacesMessage(wrongNumberMessage);
 			throw new ValidatorException(message);
 		}
 

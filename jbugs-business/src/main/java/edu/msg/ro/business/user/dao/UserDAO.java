@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.status.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -81,6 +82,23 @@ public class UserDAO extends AbstractDao<User> {
 	public List<User> getAll() {
 		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_ALL, User.class);
 		return query.getResultList();
+	}
+
+	/**
+	 * Checks if user has assigned bug(s) that are not closed.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean checkIfUserHasAssignedBugs(User user) {
+		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> :status");
+		query.setParameter("User", user);
+		query.setParameter("status", StatusEnum.CLOSE);
+		List result = query.getResultList();
+		if (!result.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 
 }

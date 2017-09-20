@@ -26,12 +26,8 @@ public class UserValidator {
 	 * @param entity
 	 * @return
 	 */
-	public boolean checkIfUserHasActiveTasks(User entity) {
-		// @TODO
-		// get list of users bugs
-		// if null return false
-		// else check for every bug if status not equals CLOSED then return true
-		return false;
+	public boolean checkIfUserHasActiveTasks(User user) {
+		return userDAO.checkIfUserHasAssignedBugs(user);
 	}
 
 	/**
