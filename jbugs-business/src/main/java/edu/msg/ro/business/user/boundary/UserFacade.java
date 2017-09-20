@@ -61,6 +61,11 @@ public class UserFacade {
 
 	}
 
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) throws TechnicalExeption {
+		return userService.deleteUserNoCheck(userDTO);
+
+	}
+
 	/**
 	 * Method for getting back all {@link User}s.
 	 * 

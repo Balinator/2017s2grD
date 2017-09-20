@@ -91,6 +91,12 @@ public class UserService {
 		return userDTOMapper.mapToDTO(userEntity);
 	}
 
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) throws TechnicalExeption {
+		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
+		userEntity.setActive(false);
+		return userDTOMapper.mapToDTO(userEntity);
+	}
+
 	/**
 	 * Method for validating if an {@link User} exist by his email.
 	 * 

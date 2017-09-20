@@ -9,6 +9,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import edu.msg.ro.business.user.boundary.LoginFacade;
+import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -21,14 +22,21 @@ import edu.msg.ro.business.user.dto.UserDTO;
 public class LoginBean extends AbstractBean implements Serializable {
 
 	private static int FAILEDATTEMPS;
+	private static String OLDUSERNAME = null;
 	private static final String LOGIN = "login";
 
 	private static final long serialVersionUID = -2617767540112561117L;
+	private static final int HashMap = 0;
+	private static final int UserDTO = 0;
+	private static final int Integer = 0;
 
 	private UserDTO user = new UserDTO();
 
 	@EJB
 	private LoginFacade loginFacade;
+
+	@EJB
+	private UserFacade userFacade;
 
 	/**
 	 * @return the user
@@ -62,22 +70,24 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 */
 	public String processLogin() {
 		try {
-			String loggingUser = user.getUsername();
+
 			if (loginFacade.isValidUser(user)) {
 				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 				session.setAttribute("username", user.getUsername());
 				addI18nMessage("login.welcome");
+				FAILEDATTEMPS = 0;
 				return "bugManagment";
 			} else {
-				String loggingUser2 = user.getUsername();
-				if (loggingUser.equals(loggingUser2)) {
+				String loggingUser = user.getUsername();
+				if (loggingUser.equals(OLDUSERNAME)) {
 					FAILEDATTEMPS++;
 					if (FAILEDATTEMPS >= 5) {
-						user.setActive(false);
-						user.getEmail();
+						userFacade.deleteUserNoCheck(user);
+						FAILEDATTEMPS = 0;
 					}
 				} else {
 					FAILEDATTEMPS = 0;
+					OLDUSERNAME = user.getUsername();
 				}
 				addI18nMessage("loginForm:username", "login.error");
 				return LOGIN;
