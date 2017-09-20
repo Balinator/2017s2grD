@@ -82,7 +82,15 @@
 						oncomplete="PF('userEditDialog').show()">
 						<h:outputText value="#{msg['users.update']}" />
 					</p:commandLink>
-				
+					
+					<h:commandButton  value="activate"
+					action="#{userListBean.activateUser(user)}" 
+					rendered="#{!user.active}"/>
+					
+					<h:commandButton  value="deactivate"
+					action="#{userListBean.deleteUser(user)}" 
+					rendered="#{user.active}"/>
+		
 				</p:column>
 			</p:dataTable>
 		</h:form>

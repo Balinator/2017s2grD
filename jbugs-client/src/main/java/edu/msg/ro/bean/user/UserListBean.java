@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -44,6 +46,30 @@ public class UserListBean extends AbstractUserBean {
 
 	public List<UserDTO> complete(String query) {
 		return userFacade.getAllUserByQuery(query);
+	}
+
+	/**
+	 * Method for deleting(deactivating) {@link User}.
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public void deleteUser(UserDTO user) {
+		try {
+			userFacade.deleteUser(user);
+		} catch (JBugsExeption e) {
+			handleExeptionI18n(e);
+		}
+	}
+
+	public void activateUser(UserDTO user) {
+		user.setActive(true);
+		try {
+			userFacade.updateUser(user);
+		} catch (TechnicalExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
