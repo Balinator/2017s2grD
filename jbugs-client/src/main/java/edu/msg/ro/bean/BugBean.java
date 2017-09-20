@@ -153,17 +153,7 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-		return "bugs";
-	}
-
-	/**
-	 * Method for leaving update mode.
-	 * 
-	 * @return
-	 */
-	public String leaveUpdateMode() {
-		selectedBug = new BugDTO();
-		return "bugs";
+		return "bugManagment";
 	}
 
 	/**
@@ -189,7 +179,7 @@ public class BugBean extends AbstractBean {
 			e.printStackTrace();
 		}
 		selectedBug = new BugDTO();
-		return "bugs";
+		return "bugManagment";
 	}
 
 	// for bug filter

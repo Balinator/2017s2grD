@@ -3,10 +3,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<p:dialog id="createUserDialog" header="Create User"
-		widgetVar="userCreateDialog" resizable="false"
-		position="center center" height="500" width="456" appendToBody="true">
+
+	<p:dialog id="createUserDialog" header="#{msg['user.create']}"
+		widgetVar="userCreateDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold" height="440" width="456">
+
 		<h:form id="addForm">
+
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['users.firstname']}" />

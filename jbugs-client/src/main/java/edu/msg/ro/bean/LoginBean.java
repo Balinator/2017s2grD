@@ -65,7 +65,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 				session.setAttribute("username", user.getUsername());
 				addI18nMessage("login.welcome");
-				return "bugs";
+				return "bugManagment";
 			} else {
 				addI18nMessage("loginForm:username", "login.error");
 				return LOGIN;
