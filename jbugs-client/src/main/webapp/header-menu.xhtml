@@ -6,8 +6,8 @@
 		<h:panelGroup layout="block" styleClass="header-menu">
 			<h:form>
 				<p:link outcome="bugManagment" value="BugManagment" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
-				<p:link outcome="userManagment" value="UserManagemnt" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
-				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccess(null)}"/>
+				<p:link outcome="userManagment" value="UserManagemnt" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}"/>
+				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-menu-button" rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}"/>
 			</h:form>
 		</h:panelGroup>
 </ui:composition>
