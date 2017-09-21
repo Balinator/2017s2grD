@@ -161,11 +161,7 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-<<<<<<< HEAD
-		return "bugs";
-=======
 		return "bugManagment";
->>>>>>> 2ef23f6584259f31d7e5e0988482955eee5c24e1
 	}
 
 	/**
@@ -328,13 +324,14 @@ public class BugBean extends AbstractBean {
 		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
 	/**
 	 * Method for upload file to database
 	 * 
 	 * @param event
 	 */
 
-	//need to refactor --handleFileUplod
+	// need to refactor --handleFileUplod
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];
