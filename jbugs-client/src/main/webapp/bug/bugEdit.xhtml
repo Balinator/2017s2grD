@@ -6,7 +6,7 @@
 
 	<p:dialog header="#{msg['bug.update']}" widgetVar="bugUpdateDialog"
 		resizable="false" modal="true" showEffect="clip" hideEffect="fold"
-		height="440" width="456">
+		height="600" width="600">
 
 		<h:form id="formBugEdit">
 
@@ -61,15 +61,26 @@
 				<p:outputLabel value="#{msg['bug.fixedIn']}" />
 				<p:inputText value="#{bugBean.selectedBug.fixedIn}"></p:inputText>
 
-
 				<p:outputLabel value="#{msg['bug.attachment']}" />
+
+				<p:outputLabel value="#{bugBean.selectedBug.attachmentName}"
+					rendered="#{not empty bugBean.selectedBug.attachment}" />
+
+				<h:commandButton value="#{msg['bug.attachment.delete']}"
+					action="#{bugBean.deleteAttachment}"
+					rendered="#{not empty bugBean.selectedBug.attachment}"></h:commandButton>
+
 				<p:fileUpload fileUploadListener="#{bugBean.handleFileEdit}"
-					dragDropSupport="false" update="messages" sizeLimit="26214400"
-					fileLimit="1"
+					dragDropSupport="false" sizeLimit="26214400"
+					update="alreadyUploaded, @this" fileLimit="1"
+					disabled="#{not empty bugBean.selectedBug.attachment}"
 					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
 					value="#{bugBean.selectedBug.attachment}" />
 
-				<p:growl id="messages" showDetail="true" />
+				<h:panelGroup id="alreadyUploaded">
+					<p:outputLabel value="#{msg['bug.attachment.updoded']}"
+						rendered="#{not empty bugBean.selectedBug.attachment}" />
+				</h:panelGroup>
 
 				<h:commandButton value="#{msg['bug.update']}"
 					action="#{bugBean.editBug}"></h:commandButton>

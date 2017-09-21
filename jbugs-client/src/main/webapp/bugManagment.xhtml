@@ -17,6 +17,7 @@
 		<ui:include src="/header.xhtml" />
 		<ui:include src="/bug/bugCreate.xhtml" />
 		<ui:include src="/bug/bugEdit.xhtml" />
+		<ui:include src="/bug/attachmentDownload.xhtml" />
 
 		<h:form id="form">
 
@@ -134,36 +135,18 @@
 							rendered="#{!bugBean.verifyBugRendere(bug)}" />
 					</p:commandButton>
 
-
 				</p:column>
 
-				<p:column headerText="#{msg['bug.update']}" 
+				<p:column headerText="#{msg['bug.update']}"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandButton id="ajax" update=":formBugEdit:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"
-						oncomplete="PF('bugUpdateDialog').show()" value="#{msg['bug.update']}" >
+						oncomplete="PF('bugUpdateDialog').show()"
+						value="#{msg['bug.update']}">
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 
-			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
-
-			<p:dialog modal="true" widgetVar="statusDialog"
-				header="#{msg['bug.attachment.downloading']}" draggable="false"
-				closable="false" resizable="false">
-				<p:graphicImage name="/primefaces-jbugs/images/ajaxloadingbar.gif" />
-			</p:dialog>
-
-
-			<script type="text/javascript">
-				function start() {
-					PF('statusDialog').show();
-				}
-
-				function stop() {
-					PF('statusDialog').hide();
-				}
-			</script>
 		</h:form>
 
 	</f:view>

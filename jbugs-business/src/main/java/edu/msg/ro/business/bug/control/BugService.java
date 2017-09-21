@@ -80,4 +80,15 @@ public class BugService {
 		return bugDTOMapper.mapToDTOs(bugDAO.getAll());
 	}
 
+	/**
+	 * Method for deleting Bug attachemnt.
+	 * 
+	 * @param bugDTO
+	 * @return
+	 * @throws TechnicalExeption
+	 */
+	public void deleteAttachment(Long id) throws TechnicalExeption {
+		bugDAO.deleteAttachemtn(id);
+	}
+
 }
