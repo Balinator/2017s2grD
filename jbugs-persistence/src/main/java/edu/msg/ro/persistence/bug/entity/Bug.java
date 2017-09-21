@@ -24,12 +24,13 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b"),
+		@NamedQuery(name = Bug.DELETE_ATTACHMENT, query = "Update Bug b SET b.attachment = NULL, b.attachmentName = NULL where b.id =:id") })
 @Entity
 public class Bug extends AbstractEntity {
 
 	public static final String FIND_ALL = "Bug.FIND_ALL";
-	public static final String FIND_ALL_SEVERITY = "Bug.FIND_ALL_SEVERITY";
+	public static final String DELETE_ATTACHMENT = "Bug.DELETE_ATTACHMENT";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

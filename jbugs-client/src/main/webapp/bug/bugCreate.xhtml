@@ -58,15 +58,21 @@
 
 				<p:outputLabel value="#{msg['bug.attachment']}" />
 				<p:fileUpload fileUploadListener="#{bugBean.handleFileUpload}"
-					dragDropSupport="false" update="messages" sizeLimit="26214400"
-					fileLimit="1"
-					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
+					dragDropSupport="false" sizeLimit="26214400"
+					update="alreadyUploaded, @this" fileLimit="1"
+					disabled="#{not empty bugBean.newBug.attachment}"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"/>
 
-				<p:growl id="messages" showDetail="true" />
+				<h:panelGroup id="alreadyUploaded">
+					<p:outputLabel value="#{msg['bug.attachment.updoded']}"
+						rendered="#{not empty bugBean.newBug.attachment}"/>
+				</h:panelGroup>
+				
 				<h:commandButton value="#{msg['bug.create']}"
-					action="#{bugBean.createNewBug}" update="addBug"></h:commandButton>
+					action="#{bugBean.createNewBug}" update="addBug"/>
 
 			</h:panelGrid>
+			
 		</h:form>
 
 	</p:dialog>
