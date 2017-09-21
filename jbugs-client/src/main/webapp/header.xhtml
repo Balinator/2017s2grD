@@ -29,12 +29,12 @@
 		<h:panelGroup styleClass="header-class-left">
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
-				<ui:include src="/header-menu.xhtml"/>
+				<ui:include src="/header/header-menu.xhtml"/>
 			</h:panelGroup>
 		</h:panelGroup>
 		
 		<h:panelGroup layout="block" styleClass="header-class-right">
-			<ui:include src="/header-lang.xhtml"></ui:include>
+			<ui:include src="/header/header-lang.xhtml"></ui:include>
 		</h:panelGroup>
 		<p:growl id="message" showDetail="true" />
 		<p:growl id="messages" showDetail="true" />
