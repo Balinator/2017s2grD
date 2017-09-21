@@ -94,9 +94,8 @@
 							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
 								itemValue="#{null}" noSelectionOption="true" />
 
-							<f:selectItems value="#{bugBean.statusList}" var="statuses"
-								itemLabel="#{msg['bug.status.' += statuses]}" />
-
+							<f:selectItems value="#{bugBean.getStatusList()}" var="status"
+								itemLabel="#{status}" itemValue="#{status}" />
 						</p:selectOneMenu>
 
 					</f:facet>
@@ -138,7 +137,8 @@
 
 				</p:column>
 
-				<p:column headerText="#{msg['bug.update']}" rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
+				<p:column headerText="#{msg['bug.update']}"
+					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandLink id="ajax" update=":formBugEdit:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()">
@@ -149,8 +149,9 @@
 
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 
-			<p:dialog modal="true" widgetVar="statusDialog" header="#{msg['bug.attachment.downloading']}"
-				draggable="false" closable="false" resizable="false">
+			<p:dialog modal="true" widgetVar="statusDialog"
+				header="#{msg['bug.attachment.downloading']}" draggable="false"
+				closable="false" resizable="false">
 				<p:graphicImage name="/primefaces-jbugs/images/ajaxloadingbar.gif" />
 			</p:dialog>
 
