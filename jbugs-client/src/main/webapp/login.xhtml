@@ -23,17 +23,17 @@
 
 			<h:panelGrid id="loginPanel" columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="#{msg['login.username']}" />
-				<h:inputText id="username" value="#{loginBean.user.username}">
+				<p:inputText id="username" value="#{loginBean.user.username}">
 					<f:validateLength minimum="5" maximum="7" />
-				</h:inputText>
+				</p:inputText>
 
 				<p:spacer />
 				<p:spacer />
 
 				<h:outputLabel for="password" value="#{msg['login.password']}" />
-				<h:inputSecret id="password" value="#{loginBean.user.password}">
+				<p:password id="password" value="#{loginBean.user.password}">
 					<f:validator validatorId="passwordValidator" />
-				</h:inputSecret>
+				</p:password>
 				
 			</h:panelGrid>
 			
@@ -47,7 +47,7 @@
 			
 			<h:panelGrid columns="1" cellpadding="10" width="100%">
 
-				<h:commandButton id="submit" value="#{msg['login.loginButton']}"
+				<p:commandButton id="submit" value="#{msg['login.loginButton']}"
 					action="#{loginBean.processLogin}"
 					actionListener="#{loginBean.loginActionListener}"
 					style="float: right;" />

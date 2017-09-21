@@ -7,9 +7,11 @@
 		<h:panelGroup styleClass="header-class-left">
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] == null}">
-				<h:panelGroup layout="block" style="margin: 10px;">
-					<h:outputText value="#{msg['header.loggedout']}"/>
-				</h:panelGroup>
+				<h:form styleClass="header-element">
+					<h:panelGroup layout="block">
+						<h:outputText value="#{msg['header.loggedout']}"/>
+					</h:panelGroup>
+				</h:form>
 			</h:panelGroup>
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
@@ -18,7 +20,7 @@
 						<h:outputText value="#{msg['header.loginName']}" />
 						<h:outputText value="#{sessionScope['username']}" style="font-weight: bold;"/>
 					</span>
-					<h:commandLink action="#{loginBean.processLogout}" styleClass="header-button-logout ui-widget"
+					<h:commandLink action="#{loginBean.processLogout}" styleClass="header-button ui-widget"
 						value="#{msg['general.logout']}" />
 				</h:form>
 			</h:panelGroup>
@@ -35,5 +37,7 @@
 			<ui:include src="/header-lang.xhtml"></ui:include>
 		</h:panelGroup>
 		<p:growl id="message" showDetail="true" />
+		<p:growl id="messages" showDetail="true" />
+		<p:growl showDetail="true" />
 	</h:panelGroup>
 </ui:composition>
