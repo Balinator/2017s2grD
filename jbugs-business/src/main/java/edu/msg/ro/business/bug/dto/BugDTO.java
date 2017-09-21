@@ -6,6 +6,7 @@ import java.util.Date;
 import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * Mapper for {@link Bug} and {@link BugDTO}.
@@ -25,7 +26,7 @@ public class BugDTO extends AbstractDTO {
 
 	private UserDTO author;
 
-	private String status;
+	private StatusEnum status;
 
 	private UserDTO assigned;
 
@@ -130,17 +131,17 @@ public class BugDTO extends AbstractDTO {
 	 * 
 	 * @return
 	 */
-	public String getStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 
 	/**
 	 * Set for status.
 	 * 
-	 * @param status
+	 * @param statusEnum
 	 */
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(StatusEnum statusEnum) {
+		this.status = statusEnum;
 	}
 
 	/**
@@ -173,10 +174,10 @@ public class BugDTO extends AbstractDTO {
 	/**
 	 * Set for version.
 	 * 
-	 * @param version
+	 * @param version2
 	 */
-	public void setVersion(String version) {
-		this.version = version;
+	public void setVersion(String version2) {
+		this.version = version2;
 	}
 
 	/**

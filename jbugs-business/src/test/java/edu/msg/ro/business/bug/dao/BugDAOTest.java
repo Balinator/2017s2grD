@@ -10,6 +10,7 @@ import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.util.TestHelper;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * 
@@ -42,7 +43,13 @@ public class BugDAOTest extends AbstractIntegrationTest {
 	@Test
 	public void getBugbyId_succesfull() throws BusinessException {
 		UserDTO testUser = th.initializUser(4L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+<<<<<<< HEAD
+		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "Open", "bug",
+				StatusEnum.INPROGRESS, testUser);
+
+=======
 		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "v2.2", "bug", "Open", testUser);
+>>>>>>> 2ef23f6584259f31d7e5e0988482955eee5c24e1
 		Assert.assertNotEquals("GetBug by Id is not working", bdao.getBug(1L), null);
 
 	}

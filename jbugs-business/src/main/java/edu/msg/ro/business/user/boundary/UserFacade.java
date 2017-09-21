@@ -60,6 +60,11 @@ public class UserFacade {
 
 	}
 
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
+		return userService.deleteUserNoCheck(userDTO);
+
+	}
+
 	/**
 	 * Method for getting back all {@link User}s.
 	 * 
