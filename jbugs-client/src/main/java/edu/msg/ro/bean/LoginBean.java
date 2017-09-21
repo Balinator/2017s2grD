@@ -78,6 +78,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 				FAILEDATTEMPS++;
 				if (FAILEDATTEMPS >= 5) {
 					userFacade.deleteUserNoCheck(user);
+					addI18nMessage("login.wrongpassword");
 					FAILEDATTEMPS = 0;
 				}
 			} else {
