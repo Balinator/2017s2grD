@@ -63,14 +63,14 @@
 
 				<p:outputLabel value="#{msg['bug.version']}" />
 
-					<p:inputText id="version" required="true"
+				<p:inputText id="version" required="true"
 					requiredMessage="#{msg['error.emptyversion']}"
 					value="#{bugBean.newBug.version}"></p:inputText>
 				<p:message for="version" />
 
 				<p:outputLabel value="#{msg['bug.fixedIn']}" />
 				<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
-				
+
 				<p:outputLabel value="#{msg['bug.attachment']}" />
 				<p:fileUpload fileUploadListener="#{bugBean.handleFileUpload}"
 					dragDropSupport="false" update="messages" sizeLimit="26214400"

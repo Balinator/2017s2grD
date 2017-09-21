@@ -35,6 +35,8 @@ public class BugDTO extends AbstractDTO {
 
 	private byte[] attachment;
 
+	private String attachmentName;
+
 	/**
 	 * Get for title.
 	 * 
@@ -213,6 +215,24 @@ public class BugDTO extends AbstractDTO {
 	 */
 	public void setAttachment(byte[] attachment) {
 		this.attachment = attachment;
+	}
+
+	/**
+	 * getter for attachment name
+	 * 
+	 * @return
+	 */
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	/**
+	 * setter for attachemtn name
+	 * 
+	 * @param attachmentName
+	 */
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 	/**

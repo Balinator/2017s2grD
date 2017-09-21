@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -54,7 +55,10 @@ public class Bug extends AbstractEntity {
 
 	private String fixedIn;
 
+	@Lob
 	private byte[] attachment;
+
+	private String attachmentName;
 
 	public Long getId() {
 		return id;
@@ -142,6 +146,14 @@ public class Bug extends AbstractEntity {
 
 	public void setAttachment(byte[] attachment) {
 		this.attachment = attachment;
+	}
+
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 }
