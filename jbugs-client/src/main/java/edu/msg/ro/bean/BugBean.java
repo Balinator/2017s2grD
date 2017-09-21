@@ -1,5 +1,7 @@
 package edu.msg.ro.bean;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.validation.ValidationException;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
@@ -59,7 +62,7 @@ public class BugBean extends AbstractBean {
 
 	private UserDTO assignedUser = new UserDTO();
 
-	private StreamedContent file;
+	private StreamedContent downloadAttachment;
 
 	public UserDTO getAssignedUser() {
 		return assignedUser;
@@ -150,6 +153,24 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
+	 * get download attachment
+	 * 
+	 * @return
+	 */
+	public StreamedContent getDownloadAttachment() {
+		return downloadAttachment;
+	}
+
+	/**
+	 * return download attachment
+	 * 
+	 * @param downloadAttachment
+	 */
+	public void setDownloadAttachment(StreamedContent downloadAttachment) {
+		this.downloadAttachment = downloadAttachment;
+	}
+
+	/**
 	 * Just create a bug without return.
 	 * 
 	 * @throws BusinessException
@@ -161,11 +182,8 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-<<<<<<< HEAD
-		return "bugs";
-=======
 		return "bugManagment";
->>>>>>> 2ef23f6584259f31d7e5e0988482955eee5c24e1
+
 	}
 
 	/**
@@ -324,26 +342,31 @@ public class BugBean extends AbstractBean {
 		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
 
 		newBug.setAttachment(file);
+		newBug.setAttachmentName(event.getFile().getFileName());
 
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
 	/**
 	 * Method for upload file to database
 	 * 
 	 * @param event
 	 */
 
-	//need to refactor --handleFileUplod
+	// need to refactor --handleFileUplod
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];
 		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
 
 		selectedBug.setAttachment(file);
+		selectedBug.setAttachmentName(event.getFile().getFileName());
 
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	public void fileDownload(BugDTO bug) {
+		byte[] convertToInputStream = bug.getAttachment();
+		InputStream myInputStream = new ByteArrayInputStream(convertToInputStream);
+		downloadAttachment = new DefaultStreamedContent(myInputStream, bug.getAttachmentName(),
+				bug.getAttachmentName());
+	}
 }
