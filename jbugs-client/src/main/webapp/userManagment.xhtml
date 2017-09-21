@@ -78,7 +78,7 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandButton id="ajax" update=":viewForm:display"
+					<p:commandButton id="ajax" update=":viewForm:display" style="margin-bottom:5px;"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()" value="#{msg['users.update']}" >
 					</p:commandButton>
