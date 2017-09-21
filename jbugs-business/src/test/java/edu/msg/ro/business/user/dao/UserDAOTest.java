@@ -14,6 +14,7 @@ import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.business.util.TestHelper;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -112,7 +113,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 		UserDTO user = th.initializUser("Denis", "Viorel", "denisV@msggroup.com", "123456", "00400743188876");
 		UserDTO userDTO = uf.createUser(user);
 		User userEntity = new User();
-		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", "Open", userDTO);
+		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 		udm.mapToEntity(userDTO, userEntity);
 		boolean hasAssignedBug = dao.checkIfUserHasAssignedBugs(userEntity);

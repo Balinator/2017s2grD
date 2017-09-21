@@ -39,41 +39,26 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void createBug_succesfull() throws BusinessException, TechnicalExeption {
-<<<<<<< HEAD
+
 		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		uf.createUser(testUser);
-		Assert.assertNotNull("The user should have an id", testUser.getId());
+
 		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "Open", "bug",
 				StatusEnum.INPROGRESS, testUser);
-		Assert.assertNotNull("Bug should have an id", testBug.getId());
-=======
-		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		UserDTO createdUser = uf.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", "Open", createdUser);
->>>>>>> 2ef23f6584259f31d7e5e0988482955eee5c24e1
-		BugDTO createdBug = sut.createBug(testBug);
-		Assert.assertNotNull("The newly persisted Bug should have an id!", createdBug.getId());
+		Assert.assertNotNull("Bug should have an id", testBug.getId());
+
 	}
 
 	@Test
 	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
-<<<<<<< HEAD
-		UserDTO testUser = th.initializUser(8L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		uf.createUser(testUser);
-		BugDTO testBug = th.initializingBug(2L, "Bug title", "Description", "v2.0", "v2.2", "bug",
-				StatusEnum.INPROGRESS, testUser);
-		sut.createBug(testBug);
-		BugDTO deletedBug = null;
-		deletedBug = sut.deleteBug(testBug);
-		Assert.assertNull(deletedBug.toString(), deletedBug.getId());
-=======
+
 		UserDTO createdUser = uf.createUser(th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395"));
-		BugDTO createdBug = sut
-				.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", "Open", createdUser));
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
+				StatusEnum.INFONEEDED, createdUser));
 		BugDTO deletedBug = sut.deleteBug(createdBug);
 		Assert.assertNull("Bug should be null", deletedBug);
->>>>>>> 2ef23f6584259f31d7e5e0988482955eee5c24e1
+
 	}
 
 	@Test
