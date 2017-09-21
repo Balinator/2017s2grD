@@ -23,7 +23,8 @@
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
 						actionListener="#{userNewBean.clearUser()}"
-						oncomplete="PF('userCreateDialog').show();" />
+						oncomplete="PF('userCreateDialog').show();" 
+						style="padding: .3em 1em;" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"/>
 				</f:facet>
 				<p:column style="text-align: center;" sortBy="#{user.firstname}"
 					filterBy="#{user.firstname}" filterMatchMode="contains">
@@ -77,19 +78,18 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandLink id="ajax" update=":viewForm:display"
+					<p:commandButton id="ajax" update=":viewForm:display"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
-						oncomplete="PF('userEditDialog').show()">
-						<h:outputText value="#{msg['users.update']}" />
-					</p:commandLink>
+						oncomplete="PF('userEditDialog').show()" value="#{msg['users.update']}" >
+					</p:commandButton>
 
-					<h:commandLink value="#{msg['user.activate']}"
+					<p:commandButton value="#{msg['user.activate']}"
 						action="#{userListBean.activateUser(user)}"
-						rendered="#{!user.active}" style="float:right" />
+						rendered="#{!user.active}" />
 
-					<h:commandLink value="#{msg['user.deactivate']}"
+					<p:commandButton value="#{msg['user.deactivate']}"
 						action="#{userListBean.deleteUser(user)}"
-						rendered="#{user.active}" style="float:right" />
+						rendered="#{user.active}" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

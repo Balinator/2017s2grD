@@ -139,11 +139,10 @@
 				</p:column>
 
 				<p:column headerText="#{msg['bug.update']}" rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
-					<p:commandLink id="ajax" update=":formBugEdit:display"
+					<p:commandButton id="ajax" update=":formBugEdit:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"
-						oncomplete="PF('bugUpdateDialog').show()">
-						<h:outputText value="#{msg['bug.update']}" />
-					</p:commandLink>
+						oncomplete="PF('bugUpdateDialog').show()" value="#{msg['bug.update']}" >
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 
