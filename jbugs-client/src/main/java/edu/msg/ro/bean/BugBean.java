@@ -1,5 +1,7 @@
 package edu.msg.ro.bean;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +16,17 @@ import javax.faces.context.FacesContext;
 import javax.validation.ValidationException;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionChecker;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
 import edu.msg.ro.persistence.bug.entity.StatusEnum;
@@ -31,13 +37,18 @@ import edu.msg.ro.persistence.bug.entity.StatusEnum;
  * @author fulops
  *
  */
-
 @ManagedBean
 @ViewScoped
 public class BugBean extends AbstractBean {
 
 	@EJB
-	BugFacade bugFacade;
+	private BugFacade bugFacade;
+
+	@EJB
+	private PermissionChecker permissionChecker;
+
+	@EJB
+	private UserService userService;
 
 	private BugDTO newBug = new BugDTO();
 
@@ -47,11 +58,7 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private ArrayList<StatusEnum> selectedStatusList;
-
 	private StatusEnum[] statusList;
-
-	private int statuses;
 
 	private BugSeverity[] severityList;
 
@@ -59,7 +66,7 @@ public class BugBean extends AbstractBean {
 
 	private UserDTO assignedUser = new UserDTO();
 
-	private StreamedContent file;
+	private StreamedContent downloadAttachment;
 
 	public UserDTO getAssignedUser() {
 		return assignedUser;
@@ -150,6 +157,24 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
+	 * get download attachment
+	 * 
+	 * @return
+	 */
+	public StreamedContent getDownloadAttachment() {
+		return downloadAttachment;
+	}
+
+	/**
+	 * return download attachment
+	 * 
+	 * @param downloadAttachment
+	 */
+	public void setDownloadAttachment(StreamedContent downloadAttachment) {
+		this.downloadAttachment = downloadAttachment;
+	}
+
+	/**
 	 * Just create a bug without return.
 	 * 
 	 * @throws BusinessException
@@ -190,13 +215,11 @@ public class BugBean extends AbstractBean {
 		return "bugManagment";
 	}
 
-	// for bug filter
 	/**
 	 * Method for gett all {@link BugStatus}.
 	 * 
 	 * @return
 	 */
-
 	public ArrayList<StatusEnum> getStatusList() {
 		ArrayList<StatusEnum> response = new ArrayList<StatusEnum>();
 		if (selectedBug.getId() == null) {
@@ -206,52 +229,25 @@ public class BugBean extends AbstractBean {
 		response.add(selected);
 		response.addAll(selected.neighbors);
 
+		List<PermissionEnum> permissionList = new ArrayList<>();
+		permissionList.add(PermissionEnum.BUG_CLOSE);
+
+		UserDTO curentUser = null;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().equals(username)) {
+				curentUser = userDTO;
+				break;
+			}
+		}
+
+		if (!permissionChecker.canAccess(permissionList, curentUser)) {
+			response.removeIf(e -> e.equals(StatusEnum.CLOSE));
+		}
+
 		return response;
-	}
-
-	/**
-	 * Status Enum by ID
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public StatusEnum getEnumById(int id) {
-		return StatusEnum.values()[id];
-	}
-
-	public StatusEnum[] getAllStatusList() {
-		return StatusEnum.values();
-	}
-
-	public void setStatusList(StatusEnum[] statusList) {
-		this.statusList = statusList;
-	}
-
-	/**
-	 * Set for selectedStatusList.
-	 * 
-	 * @param selectedStatusList
-	 */
-	public void setStatusList(ArrayList<StatusEnum> selectedStatusList) {
-		this.selectedStatusList = selectedStatusList;
-	}
-
-	/**
-	 * Get for statuses.
-	 * 
-	 * @return
-	 */
-	public int getStatuses() {
-		return statuses;
-	}
-
-	/**
-	 * Set for statuses.
-	 * 
-	 * @param statuses
-	 */
-	public void setStatuses(int statuses) {
-		this.statuses = statuses;
 	}
 
 	/**
@@ -320,9 +316,8 @@ public class BugBean extends AbstractBean {
 		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
 
 		newBug.setAttachment(file);
+		newBug.setAttachmentName(event.getFile().getFileName());
 
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	/**
@@ -332,15 +327,25 @@ public class BugBean extends AbstractBean {
 	 */
 
 	// need to refactor --handleFileUplod
+
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];
 		System.arraycopy(event.getFile().getContents(), 0, file, 0, event.getFile().getContents().length);
 
 		selectedBug.setAttachment(file);
+		selectedBug.setAttachmentName(event.getFile().getFileName());
 
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	/**
+	 * 
+	 * @param bug
+	 */
+	public void fileDownload(BugDTO bug) {
+		byte[] convertToInputStream = bug.getAttachment();
+		InputStream myInputStream = new ByteArrayInputStream(convertToInputStream);
+		downloadAttachment = new DefaultStreamedContent(myInputStream, bug.getAttachmentName(),
+				bug.getAttachmentName());
+	}
 }

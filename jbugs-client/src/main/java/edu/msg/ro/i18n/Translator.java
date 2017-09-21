@@ -1,6 +1,7 @@
 package edu.msg.ro.i18n;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.ejb.Stateless;
@@ -14,7 +15,7 @@ import javax.faces.context.FacesContext;
 @Stateless
 public class Translator {
 
-	public static final String i18n_BUNDLE = "msg";
+	public static final String i18n_BUNDLE = "i18n.messages";
 
 	protected FacesContext context = FacesContext.getCurrentInstance();
 
@@ -45,7 +46,10 @@ public class Translator {
 	 * @return {@link ResourceBundle}
 	 */
 	public ResourceBundle getResourceBundle() {
-		return context.getApplication().getResourceBundle(getContext(), i18n_BUNDLE);
+		FacesContext context = FacesContext.getCurrentInstance();
+		Locale locale = context.getViewRoot().getLocale();
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		return ResourceBundle.getBundle("i18n.messages", locale, loader);
 	}
 
 	/**

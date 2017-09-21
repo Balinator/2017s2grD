@@ -40,20 +40,23 @@ public class UserValidator {
 	 * @throws BusinessException
 	 */
 	public void validateUserData(UserDTO user) throws BusinessException {
-		validateEmail(user.getEmail());
+		validateEmail(user);
 	}
 
 	/**
 	 * Check if {@link User} with this email already exist.
 	 *
-	 * @param email
+	 * @param user
 	 * @return
 	 * @throws BusinessException
 	 */
-	public void validateEmail(String email) throws BusinessException {
-		User existingUserWithSameEmail = userDAO.findUserByEmail(email);
-		if (existingUserWithSameEmail != null) {
-			throw new BusinessException(UserValidator.I18N_USER_EMAIL_EXISTS, new Object[] { email });
+	public void validateEmail(UserDTO user) throws BusinessException {
+		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
+		if (!existingUserWithSameEmail.getId().equals(user.getId())) {
+			if (existingUserWithSameEmail != null) {
+				throw new BusinessException(UserValidator.I18N_USER_EMAIL_EXISTS, new Object[] { user.getEmail() });
+			}
 		}
+
 	}
 }

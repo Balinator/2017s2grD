@@ -4,13 +4,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<h:panelGroup layout="block" styleClass="header-class">
-		<h:panelGroup styleClass="header-class-left">
-			<h:panelGroup layout="block"
-				rendered="#{sessionScope['username'] == null}">
-				<h:panelGroup layout="block" style="margin: 10px;">
-					<h:outputText value="#{msg['header.loggedout']}"/>
-				</h:panelGroup>
-			</h:panelGroup>
+		
+		<h:panelGroup layout="block" styleClass="header-class-right">
+			<ui:include src="/header/header-lang.xhtml"></ui:include>
+		</h:panelGroup>
+		
+		<h:panelGroup styleClass="header-class-right">
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
 				<h:form>
@@ -18,7 +17,7 @@
 						<h:outputText value="#{msg['header.loginName']}" />
 						<h:outputText value="#{sessionScope['username']}" style="font-weight: bold;"/>
 					</span>
-					<h:commandLink action="#{loginBean.processLogout}" styleClass="header-button-logout ui-widget"
+					<h:commandLink action="#{loginBean.processLogout}" styleClass="header-button ui-widget"
 						value="#{msg['general.logout']}" />
 				</h:form>
 			</h:panelGroup>
@@ -27,13 +26,9 @@
 		<h:panelGroup styleClass="header-class-left">
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
-				<ui:include src="/header-menu.xhtml"/>
+				<ui:include src="/header/header-menu.xhtml"/>
 			</h:panelGroup>
 		</h:panelGroup>
-		
-		<h:panelGroup layout="block" styleClass="header-class-right">
-			<ui:include src="/header-lang.xhtml"></ui:include>
-		</h:panelGroup>
-		<p:growl id="message" showDetail="true"/>
+
 	</h:panelGroup>
 </ui:composition>
