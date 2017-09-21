@@ -129,7 +129,7 @@
 
 				</p:column>
 
-				<p:column headerText="#{msg['bug.update']}">
+				<p:column headerText="#{msg['bug.update']}" rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandLink id="ajax" update=":formBugEdit:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()">
