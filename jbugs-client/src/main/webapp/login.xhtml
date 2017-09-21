@@ -31,20 +31,21 @@
 				<p:spacer />
 
 				<h:outputLabel for="password" value="#{msg['login.password']}" />
-				<h:inputSecret id="password" value="#{loginBean.user.password}">
+				<h:inputSecret id="password" required="true"
+					requiredMessage="#{msg['error.emptyloginpassword']}"
+					value="#{loginBean.user.password}">
 					<f:validator validatorId="passwordValidator" />
 				</h:inputSecret>
-				
 			</h:panelGrid>
-			
+
 			<p:spacer />
 			<p:spacer />
-			
-			
-			
+
+
+
 			<p:spacer />
 			<p:spacer />
-			
+
 			<h:panelGrid columns="1" cellpadding="10" width="100%">
 
 				<h:commandButton id="submit" value="#{msg['login.loginButton']}"
@@ -54,7 +55,7 @@
 
 			</h:panelGrid>
 		</p:panel>
-		
+
 	</h:form>
 </h:body>
 </html>
