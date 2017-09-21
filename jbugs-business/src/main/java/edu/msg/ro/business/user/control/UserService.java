@@ -92,7 +92,7 @@ public class UserService {
 		return userDTOMapper.mapToDTO(userEntity);
 	}
 
-	public UserDTO deleteUserNoCheck(UserDTO userDTO) throws TechnicalExeption {
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
 		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
 		userEntity.setActive(false);
 		return userDTOMapper.mapToDTO(userEntity);

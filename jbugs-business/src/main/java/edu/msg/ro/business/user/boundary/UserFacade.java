@@ -60,7 +60,7 @@ public class UserFacade {
 
 	}
 
-	public UserDTO deleteUserNoCheck(UserDTO userDTO) throws TechnicalExeption {
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
 		return userService.deleteUserNoCheck(userDTO);
 
 	}
