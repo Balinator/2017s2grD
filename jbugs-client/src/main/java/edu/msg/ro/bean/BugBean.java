@@ -23,7 +23,10 @@ import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionChecker;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
 import edu.msg.ro.persistence.bug.entity.StatusEnum;
@@ -39,7 +42,13 @@ import edu.msg.ro.persistence.bug.entity.StatusEnum;
 public class BugBean extends AbstractBean {
 
 	@EJB
-	BugFacade bugFacade;
+	private BugFacade bugFacade;
+
+	@EJB
+	private PermissionChecker permissionChecker;
+
+	@EJB
+	private UserService userService;
 
 	private BugDTO newBug = new BugDTO();
 
@@ -178,7 +187,6 @@ public class BugBean extends AbstractBean {
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
 		return "bugManagment";
-
 	}
 
 	/**
@@ -220,6 +228,24 @@ public class BugBean extends AbstractBean {
 		StatusEnum selected = getSelectedBug().getStatus();
 		response.add(selected);
 		response.addAll(selected.neighbors);
+
+		List<PermissionEnum> permissionList = new ArrayList<>();
+		permissionList.add(PermissionEnum.BUG_CLOSE);
+
+		UserDTO curentUser = null;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().equals(username)) {
+				curentUser = userDTO;
+				break;
+			}
+		}
+
+		if (!permissionChecker.canAccess(permissionList, curentUser)) {
+			response.removeIf(e -> e.equals(StatusEnum.CLOSE));
+		}
 
 		return response;
 	}
