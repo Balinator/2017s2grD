@@ -66,31 +66,25 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @return
 	 */
 	public String processLogin() {
-		try {
-
-			if (loginFacade.isValidUser(user)) {
-				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-				session.setAttribute("username", user.getUsername());
-				addI18nMessage("login.welcome");
-				FAILEDATTEMPS = 0;
-				return "bugManagment";
-			} else {
-				String loggingUser = user.getUsername();
-				if (loggingUser.equals(OLDUSERNAME)) {
-					FAILEDATTEMPS++;
-					if (FAILEDATTEMPS >= 5) {
-						userFacade.deleteUserNoCheck(user);
-						FAILEDATTEMPS = 0;
-					}
-				} else {
+		if (loginFacade.isValidUser(user)) {
+			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+			session.setAttribute("username", user.getUsername());
+			addI18nMessage("login.welcome");
+			FAILEDATTEMPS = 0;
+			return "bugManagment";
+		} else {
+			String loggingUser = user.getUsername();
+			if (loggingUser.equals(OLDUSERNAME)) {
+				FAILEDATTEMPS++;
+				if (FAILEDATTEMPS >= 5) {
+					userFacade.deleteUserNoCheck(user);
 					FAILEDATTEMPS = 0;
-					OLDUSERNAME = user.getUsername();
 				}
-				addI18nMessage("loginForm:username", "login.error");
-				return LOGIN;
+			} else {
+				FAILEDATTEMPS = 0;
+				OLDUSERNAME = user.getUsername();
 			}
-		} catch (Exception e) {
-			addI18nMessage("login.unexpected");
+			addI18nMessage("loginForm:username", "login.error");
 			return LOGIN;
 		}
 	}
