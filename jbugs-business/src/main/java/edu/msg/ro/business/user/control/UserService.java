@@ -92,6 +92,12 @@ public class UserService {
 		return userDTOMapper.mapToDTO(userEntity);
 	}
 
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
+		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
+		userEntity.setActive(false);
+		return userDTOMapper.mapToDTO(userEntity);
+	}
+
 	/**
 	 * Method for verifying that the user with the given username and password
 	 * exist(for login).
