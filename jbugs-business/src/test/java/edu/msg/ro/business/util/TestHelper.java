@@ -38,7 +38,7 @@ public class TestHelper {
 	}
 
 	public BugDTO initializingBug(String title, String description, String severity, String version, String fixedIn,
-			String status, UserDTO testUser) {
+			StatusEnum status, UserDTO testUser) {
 		return initializingBug(null, title, description, severity, version, fixedIn, status, testUser);
 	}
 

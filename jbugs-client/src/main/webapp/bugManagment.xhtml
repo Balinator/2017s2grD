@@ -33,9 +33,9 @@
 								style="width:150px"
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
-	
+
 						<p:commandButton value="#{msg['add']}" type="button"
-							onclick="PF('bugAddDialog').show();"/>
+							onclick="PF('bugAddDialog').show();" />
 					</h:panelGroup>
 				</f:facet>
 
@@ -127,6 +127,15 @@
 
 				<p:column headerText="#{msg['bug.attachment']}">
 
+					<p:commandButton value="#{bug.attachmentName}" ajax="false"
+						actionListener="#{bugBean.fileDownload(bug)}"
+						rendered="#{not empty bug.attachmentName}"
+						onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{bugBean.downloadAttachment}"
+							rendered="#{!bugBean.verifyBugRendere(bug)}" />
+					</p:commandButton>
+
+
 				</p:column>
 
 				<p:column headerText="#{msg['bug.update']}" rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
@@ -140,6 +149,21 @@
 
 			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
 
+			<p:dialog modal="true" widgetVar="statusDialog" header="#{msg['bug.attachment.downloading']}"
+				draggable="false" closable="false" resizable="false">
+				<p:graphicImage name="/primefaces-jbugs/images/ajaxloadingbar.gif" />
+			</p:dialog>
+
+
+			<script type="text/javascript">
+				function start() {
+					PF('statusDialog').show();
+				}
+
+				function stop() {
+					PF('statusDialog').hide();
+				}
+			</script>
 		</h:form>
 
 	</f:view>
