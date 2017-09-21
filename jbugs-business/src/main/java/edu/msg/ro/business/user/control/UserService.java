@@ -6,7 +6,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
@@ -35,7 +34,7 @@ public class UserService {
 	@EJB
 	UserGenerator userUtils;
 
-	public static final String I18N_USER_EMAIL_EXISTS = "users.email.exists";
+	public static final String I18N_DELETE_USER_FAIL = "user.crud.delete.error";
 
 	/**
 	 * Method for creating a new {@link User}.
@@ -46,7 +45,7 @@ public class UserService {
 	 */
 	public UserDTO createUser(UserDTO user) throws BusinessException {
 
-		validateUserData(user);
+		userValidator.validateUserData(user);
 
 		User userEntity = new User();
 		String username = userUtils.createUsername(user);
@@ -65,9 +64,12 @@ public class UserService {
 	 * 
 	 * @param user
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws BusinessException
 	 */
-	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
+
+		userValidator.validateUserData(user);
+
 		User persistedUser = userDAO.findEntity(user.getId());
 		userDTOMapper.mapToEntity(user, persistedUser);
 		return userDTOMapper.mapToDTO(persistedUser);
@@ -78,28 +80,22 @@ public class UserService {
 	 * 
 	 * @param userDTO
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws BusinessException
 	 */
-	public UserDTO deleteUser(UserDTO userDTO) throws TechnicalExeption {
+	public UserDTO deleteUser(UserDTO userDTO) throws BusinessException {
 		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
 		if (userValidator.checkIfUserHasActiveTasks(userEntity) == false) {
 			userEntity.setActive(false);
+		} else {
+			throw new BusinessException(I18N_DELETE_USER_FAIL, new Object[] { userDTO.getUsername() });
 		}
 		return userDTOMapper.mapToDTO(userEntity);
 	}
 
-	/**
-	 * Method for validating if an {@link User} exist by his email.
-	 * 
-	 * @param user
-	 * @throws BusinessException
-	 */
-	private void validateUserData(UserDTO user) throws BusinessException {
-		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
-		if (existingUserWithSameEmail != null) {
-			Object[] arguments = { user.getEmail() };
-			throw new BusinessException(UserService.I18N_USER_EMAIL_EXISTS, arguments);
-		}
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
+		User userEntity = userDAO.findUserByUsername(userDTO.getUsername());
+		userEntity.setActive(false);
+		return userDTOMapper.mapToDTO(userEntity);
 	}
 
 	/**

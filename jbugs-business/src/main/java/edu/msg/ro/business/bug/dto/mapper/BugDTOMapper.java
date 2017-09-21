@@ -8,6 +8,7 @@ import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		dto.setAttachment(entity.getAttachment());
 		dto.setFixedIn(entity.getFixedIn());
 		dto.setSeverity(entity.getSeverity());
-		dto.setStatus(entity.getStatus());
+		dto.setStatus(StatusEnum.values()[entity.getStatus()]);
 		dto.setTargetDate(entity.getTargetDate());
 		dto.setVersion(entity.getVersion());
 		dto.setAttachmentName(entity.getAttachmentName());
@@ -61,7 +62,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		entity.setAttachment(dto.getAttachment());
 		entity.setFixedIn(dto.getFixedIn());
 		entity.setSeverity(dto.getSeverity());
-		entity.setStatus(dto.getStatus());
+		entity.setStatus(dto.getStatus().key);
 		entity.setTargetDate(dto.getTargetDate());
 		entity.setVersion(dto.getVersion());
 		entity.setAttachmentName(dto.getAttachmentName());

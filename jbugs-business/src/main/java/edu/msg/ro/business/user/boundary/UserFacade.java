@@ -9,7 +9,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -43,9 +42,9 @@ public class UserFacade {
 	 * 
 	 * @param user
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws BusinessException
 	 */
-	public UserDTO updateUser(UserDTO user) throws TechnicalExeption {
+	public UserDTO updateUser(UserDTO user) throws BusinessException {
 		return userService.updateUser(user);
 	}
 
@@ -54,10 +53,15 @@ public class UserFacade {
 	 * 
 	 * @param userDTO
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws BusinessException
 	 */
-	public UserDTO deleteUser(UserDTO userDTO) throws TechnicalExeption {
+	public UserDTO deleteUser(UserDTO userDTO) throws BusinessException {
 		return userService.deleteUser(userDTO);
+
+	}
+
+	public UserDTO deleteUserNoCheck(UserDTO userDTO) {
+		return userService.deleteUserNoCheck(userDTO);
 
 	}
 

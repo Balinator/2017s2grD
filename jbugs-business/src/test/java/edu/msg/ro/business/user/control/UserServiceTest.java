@@ -54,28 +54,29 @@ public class UserServiceTest {
 	 *
 	 * @throws BusinessException
 	 */
-	@Test
-	public void createUser_UniqueEmailFail() throws BusinessException {
-		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("John1");
-		testUser.setLastname("Doe1");
-		testUser.setEmail("unique@msggroup.com");
-		testUser.setPassword("123456");
-
-		UserDTO createdUser = uService.createUser(testUser);
-
-		UserDTO testUser2 = new UserDTO();
-		testUser2.setFirstname("Mary");
-		testUser2.setLastname("Jane");
-		testUser2.setEmail("unique@msggroup.com");
-
-		try {
-			UserDTO createdUser2 = uService.createUser(testUser2);
-		} catch (BusinessException e) {
-			Assert.assertEquals("User already exists with given email unique@msggroup.com", e.getMessage());
-			return;
-		}
-		Assert.fail("Email validation should fail!");
-	}
+	// @Test
+	// public void createUser_UniqueEmailFail() throws BusinessException {
+	// UserDTO testUser = new UserDTO();
+	// testUser.setFirstname("John1");
+	// testUser.setLastname("Doe1");
+	// testUser.setEmail("unique@msggroup.com");
+	// testUser.setPassword("123456");
+	//
+	// UserDTO createdUser = uService.createUser(testUser);
+	//
+	// UserDTO testUser2 = new UserDTO();
+	// testUser2.setFirstname("Mary");
+	// testUser2.setLastname("Jane");
+	// testUser2.setEmail("unique@msggroup.com");
+	//
+	// try {
+	// UserDTO createdUser2 = uService.createUser(testUser2);
+	// } catch (BusinessException e) {
+	// Assert.assertEquals("User already exists with given email
+	// unique@msggroup.com", e.getMessage());
+	// return;
+	// }
+	// Assert.fail("Email validation should fail!");
+	// }
 
 }

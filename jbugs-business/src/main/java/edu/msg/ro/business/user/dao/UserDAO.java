@@ -57,7 +57,7 @@ public class UserDAO extends AbstractDao<User> {
 
 	/**
 	 * Method for verifying that an {@link User} exist with the given username
-	 * and password.
+	 * and password and is active.
 	 * 
 	 * @param username
 	 * @param password
@@ -69,7 +69,10 @@ public class UserDAO extends AbstractDao<User> {
 		query.setParameter("password", password);
 
 		List<User> userList = query.getResultList();
-		return userList.isEmpty() == false;
+		if (userList.isEmpty() == false) {
+			return userList.get(0).isActive();
+		}
+		return false;
 	}
 
 	/**

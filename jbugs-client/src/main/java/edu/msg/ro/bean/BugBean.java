@@ -24,7 +24,6 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.enums.BugSeverity;
-import edu.msg.ro.enums.BugStatus;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /****
@@ -48,8 +47,6 @@ public class BugBean extends AbstractBean {
 	private List<BugDTO> buglist;
 
 	private List<BugDTO> filteredBugList;
-
-	private BugStatus[] statusList;
 
 	private int statuses;
 
@@ -179,7 +176,9 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
+
 		return "bugManagment";
+
 	}
 
 	/**
@@ -206,25 +205,6 @@ public class BugBean extends AbstractBean {
 		}
 		selectedBug = new BugDTO();
 		return "bugManagment";
-	}
-
-	// for bug filter
-	/**
-	 * Method for gett all {@link BugStatus}.
-	 * 
-	 * @return
-	 */
-	public BugStatus[] getStatusList() {
-		return BugStatus.values();
-	}
-
-	/**
-	 * Set for statusList.
-	 * 
-	 * @param statusList
-	 */
-	public void setStatusList(BugStatus[] statusList) {
-		this.statusList = statusList;
 	}
 
 	/**
