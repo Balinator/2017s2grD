@@ -325,6 +325,9 @@ public class BugBean extends AbstractBean {
 	 * 
 	 * @param event
 	 */
+
+	// need to refactor --handleFileUplod
+
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];

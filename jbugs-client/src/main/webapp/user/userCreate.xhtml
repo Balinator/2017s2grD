@@ -25,14 +25,20 @@
 					<p:message for="lastname" />
 
 					<p:outputLabel value="Email" />
-					<p:inputText value="#{userNewBean.newUser.email}">
+					<p:inputText id="email"
+						requiredMessage="#{msg['error.email']}"
+						value="#{userNewBean.newUser.email}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					<p:message for="email" />
 
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userNewBean.newUser.phoneNumber}">
+					<p:inputText id="phonenumber"
+						requiredMessage="#{msg['error.phoneNumber']}"
+						value="#{userNewBean.newUser.phoneNumber}">
 						<f:validator validatorId="phoneNumberValidator" />
 					</p:inputText>
+					<p:message for="phonenumber" />
 
 					<p:outputLabel value="#{msg['login.password']}" />
 					<p:inputText id="password" required="true"

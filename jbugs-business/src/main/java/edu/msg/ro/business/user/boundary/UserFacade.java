@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;

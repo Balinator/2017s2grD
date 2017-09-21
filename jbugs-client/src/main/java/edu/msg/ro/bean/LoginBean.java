@@ -24,6 +24,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 	private static int FAILEDATTEMPS;
 	private static String OLDUSERNAME = null;
 	private static final String LOGIN = "login";
+	private HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 
 	private static final long serialVersionUID = -2617767540112561117L;
 
@@ -51,6 +52,27 @@ public class LoginBean extends AbstractBean implements Serializable {
 		this.user = userDTO;
 	}
 
+	private void toManyFailedPAssword() {
+		String loggingUser = user.getUsername();
+		if (loggingUser.equals(session.getAttribute("OLDUSERNAME"))) {
+			int failedlogins = Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString());
+			failedlogins++;
+			session.setAttribute("FAILEDATTEMPS", failedlogins);
+			if (failedlogins == 4) {
+				userFacade.deleteUserNoCheck(user);
+			}
+		} else {
+			FAILEDATTEMPS = 0;
+			session.setAttribute("FAILEDATTEMPS", FAILEDATTEMPS);
+			session.setAttribute("OLDUSERNAME", user.getUsername());
+		}
+		if (Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString()) < 4) {
+			addI18nMessage("loginForm:username", "login.error");
+		} else {
+			addI18nMessage("loginForm:username", "login.wrongpassword");
+		}
+	}
+
 	/**
 	 * Login action listener.
 	 *
@@ -67,25 +89,15 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 */
 	public String processLogin() {
 		if (loginFacade.isValidUser(user)) {
-			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 			session.setAttribute("username", user.getUsername());
 			addI18nMessage("login.welcome");
 			FAILEDATTEMPS = 0;
+			session.setAttribute("FAILEDATTEMPS", FAILEDATTEMPS);
 			return "bugManagment";
 		} else {
-			String loggingUser = user.getUsername();
-			if (loggingUser.equals(OLDUSERNAME)) {
-				FAILEDATTEMPS++;
-				if (FAILEDATTEMPS >= 5) {
-					userFacade.deleteUserNoCheck(user);
-					FAILEDATTEMPS = 0;
-				}
-			} else {
-				FAILEDATTEMPS = 0;
-				OLDUSERNAME = user.getUsername();
-			}
-			addI18nMessage("loginForm:username", "login.error");
+			toManyFailedPAssword();
 			return LOGIN;
+
 		}
 	}
 
