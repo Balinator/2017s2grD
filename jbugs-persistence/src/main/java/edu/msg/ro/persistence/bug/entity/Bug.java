@@ -2,6 +2,7 @@ package edu.msg.ro.persistence.bug.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,27 +34,34 @@ public class Bug extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column
 	private String title;
 
+	@Column
 	private String description;
 
 	@Temporal(TemporalType.DATE)
 	private Date targetDate;
 
+	@Column
 	private String severity;
 
 	@OneToOne
 	private User author;
 
-	private String status;
+	@Column
+	private int status;
 
 	@ManyToOne
 	private User assigned;
 
+	@Column
 	private String version;
 
+	@Column
 	private String fixedIn;
 
+	@Column
 	private byte[] attachment;
 
 	public Long getId() {
@@ -104,12 +112,12 @@ public class Bug extends AbstractEntity {
 		this.author = author;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(int i) {
+		this.status = i;
 	}
 
 	public User getAssigned() {
