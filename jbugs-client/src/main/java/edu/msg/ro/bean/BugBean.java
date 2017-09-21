@@ -2,6 +2,7 @@ package edu.msg.ro.bean;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,7 @@ import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /****
  * Bug Bean.****
@@ -47,6 +49,10 @@ public class BugBean extends AbstractBean {
 	private List<BugDTO> buglist;
 
 	private List<BugDTO> filteredBugList;
+
+	private ArrayList<StatusEnum> selectedStatusList;
+
+	private StatusEnum[] statusList;
 
 	private int statuses;
 
@@ -176,7 +182,6 @@ public class BugBean extends AbstractBean {
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
-
 		return "bugManagment";
 
 	}
@@ -205,6 +210,52 @@ public class BugBean extends AbstractBean {
 		}
 		selectedBug = new BugDTO();
 		return "bugManagment";
+	}
+
+	// for bug filter
+	/**
+	 * Method for gett all {@link BugStatus}.
+	 * 
+	 * @return
+	 */
+
+	public ArrayList<StatusEnum> getStatusList() {
+		ArrayList<StatusEnum> response = new ArrayList<StatusEnum>();
+		if (selectedBug.getId() == null) {
+			return response;
+		}
+		StatusEnum selected = getSelectedBug().getStatus();
+		response.add(selected);
+		response.addAll(selected.neighbors);
+
+		return response;
+	}
+
+	/**
+	 * Status Enum by ID
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public StatusEnum getEnumById(int id) {
+		return StatusEnum.values()[id];
+	}
+
+	public StatusEnum[] getAllStatusList() {
+		return StatusEnum.values();
+	}
+
+	public void setStatusList(StatusEnum[] statusList) {
+		this.statusList = statusList;
+	}
+
+	/**
+	 * Set for selectedStatusList.
+	 * 
+	 * @param selectedStatusList
+	 */
+	public void setStatusList(ArrayList<StatusEnum> selectedStatusList) {
+		this.selectedStatusList = selectedStatusList;
 	}
 
 	/**
