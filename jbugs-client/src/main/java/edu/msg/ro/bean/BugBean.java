@@ -34,7 +34,6 @@ import edu.msg.ro.persistence.bug.entity.StatusEnum;
  * @author fulops
  *
  */
-
 @ManagedBean
 @ViewScoped
 public class BugBean extends AbstractBean {
@@ -50,11 +49,7 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private ArrayList<StatusEnum> selectedStatusList;
-
 	private StatusEnum[] statusList;
-
-	private int statuses;
 
 	private BugSeverity[] severityList;
 
@@ -212,13 +207,11 @@ public class BugBean extends AbstractBean {
 		return "bugManagment";
 	}
 
-	// for bug filter
 	/**
 	 * Method for gett all {@link BugStatus}.
 	 * 
 	 * @return
 	 */
-
 	public ArrayList<StatusEnum> getStatusList() {
 		ArrayList<StatusEnum> response = new ArrayList<StatusEnum>();
 		if (selectedBug.getId() == null) {
@@ -229,51 +222,6 @@ public class BugBean extends AbstractBean {
 		response.addAll(selected.neighbors);
 
 		return response;
-	}
-
-	/**
-	 * Status Enum by ID
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public StatusEnum getEnumById(int id) {
-		return StatusEnum.values()[id];
-	}
-
-	public StatusEnum[] getAllStatusList() {
-		return StatusEnum.values();
-	}
-
-	public void setStatusList(StatusEnum[] statusList) {
-		this.statusList = statusList;
-	}
-
-	/**
-	 * Set for selectedStatusList.
-	 * 
-	 * @param selectedStatusList
-	 */
-	public void setStatusList(ArrayList<StatusEnum> selectedStatusList) {
-		this.selectedStatusList = selectedStatusList;
-	}
-
-	/**
-	 * Get for statuses.
-	 * 
-	 * @return
-	 */
-	public int getStatuses() {
-		return statuses;
-	}
-
-	/**
-	 * Set for statuses.
-	 * 
-	 * @param statuses
-	 */
-	public void setStatuses(int statuses) {
-		this.statuses = statuses;
 	}
 
 	/**
@@ -351,8 +299,6 @@ public class BugBean extends AbstractBean {
 	 * 
 	 * @param event
 	 */
-
-	// need to refactor --handleFileUplod
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];
@@ -363,6 +309,10 @@ public class BugBean extends AbstractBean {
 
 	}
 
+	/**
+	 * 
+	 * @param bug
+	 */
 	public void fileDownload(BugDTO bug) {
 		byte[] convertToInputStream = bug.getAttachment();
 		InputStream myInputStream = new ByteArrayInputStream(convertToInputStream);
