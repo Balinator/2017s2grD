@@ -3,6 +3,7 @@ package edu.msg.ro.business.user.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -42,15 +43,27 @@ public class UserGenerator {
 		username.append(lastName.substring(0, Math.min(lastNameLength, 5)));
 		username.append(firstName.substring(0, firstNamePos));
 
-		while (checkIfUsernameExists(username.toString()) == true && firstNameLength != 1) {
-			username.append(firstName.substring(firstNamePos, firstNamePos + 1));
-			firstNamePos++;
-			firstNameLength--;
+		while (checkIfUsernameExists(username.toString()) == true) {
+			if (firstNameLength != 1) {
+				username.append(firstName.substring(firstNamePos, firstNamePos + 1));
+				firstNamePos++;
+				firstNameLength--;
+			} else {
+				int randomNum = generateRandomNumber();
+				username.append(randomNum);
+			}
 		}
-		// TODO if after this it is still not unique create another generator
-		// method
-
 		return username.toString();
+	}
+
+	/**
+	 * Generates random int between 0-9
+	 * 
+	 * @return
+	 */
+	private int generateRandomNumber() {
+		Random rand = new Random();
+		return rand.nextInt(10);
 	}
 
 	/**
