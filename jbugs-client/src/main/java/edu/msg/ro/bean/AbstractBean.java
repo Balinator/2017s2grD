@@ -1,11 +1,11 @@
 package edu.msg.ro.bean;
 
-import java.text.MessageFormat;
-
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.i18n.Translator;
 
 /**
  * AbstractBean class.
@@ -17,13 +17,17 @@ public abstract class AbstractBean {
 
 	protected FacesContext context = FacesContext.getCurrentInstance();
 
+	@EJB
+	protected Translator t;
+
 	/**
 	 * Translate JBugsExeption exeption message.
 	 * 
 	 * @param e
 	 */
 	protected void handleExeptionI18n(JBugsExeption e) {
-		addI18nMessage(e.getMessage());
+		String translated = t.setContext(context).translate(e.getMessage(), e.getArguments());
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, translated, translated));
 	}
 
 	/**
@@ -38,6 +42,7 @@ public abstract class AbstractBean {
 	/**
 	 * Translate message send to interface.
 	 * 
+	 * @param key
 	 * @param message
 	 */
 	protected void addI18nMessage(String key, String message) {
@@ -48,9 +53,10 @@ public abstract class AbstractBean {
 	 * Translate message send to interface.
 	 * 
 	 * @param message
+	 * @param arguments
 	 */
-	protected void addI18nMessage(String message, Object messageArguments) {
-		addI18nMessage(null, message, messageArguments);
+	protected void addI18nMessage(String message, Object arguments) {
+		addI18nMessage(null, message, arguments);
 	}
 
 	/**
@@ -58,17 +64,10 @@ public abstract class AbstractBean {
 	 * 
 	 * @param key
 	 * @param message
+	 * @param arguments
 	 */
-	protected void addI18nMessage(String key, String message, Object messageArguments) {
-		String eMessage = context.getApplication().evaluateExpressionGet(context, "#{msg['" + message + "']}",
-				String.class);
-		if (messageArguments != null) {
-			MessageFormat formatter = new MessageFormat("");
-			formatter.setLocale(context.getViewRoot().getLocale());
-			formatter.applyPattern(eMessage);
-			eMessage = formatter.format(messageArguments);
-		}
-		addMessage(key, eMessage);
+	protected void addI18nMessage(String key, String message, Object arguments) {
+		addMessage(key, t.setContext(context).translate(message, arguments));
 	}
 
 	/**

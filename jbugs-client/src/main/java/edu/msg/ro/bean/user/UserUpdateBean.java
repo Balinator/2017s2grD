@@ -18,6 +18,9 @@ import edu.msg.ro.persistence.user.entity.User;
 @ViewScoped
 public class UserUpdateBean extends AbstractUserBean {
 
+	/**
+	 * {@link UserDTO}
+	 */
 	private UserDTO updatedUser = new UserDTO();
 
 	/**
@@ -45,12 +48,10 @@ public class UserUpdateBean extends AbstractUserBean {
 	 * @return
 	 * @throws TechnicalExeption
 	 */
-	public void editUser() throws TechnicalExeption {
+	public void editUser() {
 		try {
 			userFacade.updateUser(updatedUser);
-			Object[] messageArguments = { updatedUser.getUsername() };
-			// @Todo: Check way is error with ViewScope Beans.
-			// addI18nMessage("user.crud.update.success", messageArguments);
+			addI18nMessage(I18N_SAVED, new Object[] { updatedUser.getUsername() });
 			rebuildRoleService();
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
