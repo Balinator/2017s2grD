@@ -6,14 +6,6 @@
 	<h:panelGroup layout="block" styleClass="header-class">
 		<h:panelGroup styleClass="header-class-left">
 			<h:panelGroup layout="block"
-				rendered="#{sessionScope['username'] == null}">
-				<h:form styleClass="header-element">
-					<h:panelGroup layout="block">
-						<h:outputText value="#{msg['header.loggedout']}"/>
-					</h:panelGroup>
-				</h:form>
-			</h:panelGroup>
-			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">
 				<h:form>
 					<span>

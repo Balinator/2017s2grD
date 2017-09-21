@@ -41,3 +41,6 @@ button,a{
 .header-button:hover {
     background-color: #000000;
 }
+body > :not(.header-class){
+	padding: 1%;
+}
