@@ -26,9 +26,6 @@ public class LoginBean extends AbstractBean implements Serializable {
 	private static final String LOGIN = "login";
 
 	private static final long serialVersionUID = -2617767540112561117L;
-	private static final int HashMap = 0;
-	private static final int UserDTO = 0;
-	private static final int Integer = 0;
 
 	private UserDTO user = new UserDTO();
 
