@@ -1,5 +1,6 @@
 package edu.msg.ro.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,8 +19,8 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.enums.BugSeverity;
-import edu.msg.ro.enums.BugStatus;
 import edu.msg.ro.persistence.bug.entity.Bug;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /****
  * Bug Bean.****
@@ -43,7 +44,9 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private BugStatus[] statusList;
+	private ArrayList<StatusEnum> selectedStatusList;
+
+	private StatusEnum[] statusList;
 
 	private int statuses;
 
@@ -157,16 +160,6 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
-	 * Method for leaving update mode.
-	 * 
-	 * @return
-	 */
-	public String leaveUpdateMode() {
-		selectedBug = new BugDTO();
-		return "bugs";
-	}
-
-	/**
 	 * Method for verifying if needed to render element.
 	 * 
 	 * @param bug
@@ -198,17 +191,44 @@ public class BugBean extends AbstractBean {
 	 * 
 	 * @return
 	 */
-	public BugStatus[] getStatusList() {
-		return BugStatus.values();
+
+	public ArrayList<StatusEnum> getStatusList() {
+		ArrayList<StatusEnum> response = new ArrayList<StatusEnum>();
+		if (selectedBug.getId() == null) {
+			return response;
+		}
+		StatusEnum selected = getSelectedBug().getStatus();
+		response.add(selected);
+		response.addAll(selected.neighbors);
+
+		return response;
 	}
 
 	/**
-	 * Set for statusList.
+	 * Status Enum by ID
 	 * 
-	 * @param statusList
+	 * @param id
+	 * @return
 	 */
-	public void setStatusList(BugStatus[] statusList) {
+	public StatusEnum getEnumById(int id) {
+		return StatusEnum.values()[id];
+	}
+
+	public StatusEnum[] getAllStatusList() {
+		return StatusEnum.values();
+	}
+
+	public void setStatusList(StatusEnum[] statusList) {
 		this.statusList = statusList;
+	}
+
+	/**
+	 * Set for selectedStatusList.
+	 * 
+	 * @param selectedStatusList
+	 */
+	public void setStatusList(ArrayList<StatusEnum> selectedStatusList) {
+		this.selectedStatusList = selectedStatusList;
 	}
 
 	/**

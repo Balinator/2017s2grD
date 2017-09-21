@@ -1,4 +1,4 @@
-package edu.msg.ro.business.status;
+package edu.msg.ro.persistence.bug.entity;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public enum StatusEnum {
 	/**
 	 * The bug possible statuses.
 	 */
-	OPEN("open"), REJECTED("rejected"), INPROGRESS("inprogress"), INFONEEDED("infoneeded"), FIXED("fixed"), CLOSE("close");
+	OPEN, REJECTED, INPROGRESS, INFONEEDED, FIXED, CLOSE;
 
 	/**
 	 * Every state every state has next state.
@@ -47,11 +47,15 @@ public enum StatusEnum {
 	 * 
 	 * @param s
 	 */
-	StatusEnum(String s) {
-		key = s;
+	StatusEnum() {
+		this.key = ordinal();
 	}
 
-	public String key;
+	public StatusEnum getEnumById(int id) {
+		return StatusEnum.values()[id];
+	}
+
+	public int key;
 	public ArrayList<StatusEnum> neighbors;
 
 }

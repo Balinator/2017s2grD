@@ -86,15 +86,8 @@
 					filterMatchMode="exact" headerText="#{msg['bug.status']}">
 
 					<f:facet name="filter">
+						<h:outputText value="#{bug.status}"></h:outputText>
 
-						<p:selectOneMenu onchange="PF('bugTable').filter();">
-							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
-								itemValue="#{null}" noSelectionOption="true" />
-
-							<f:selectItems value="#{bugBean.statusList}" var="statuses"
-								itemLabel="#{msg['bug.status.' += statuses]}" />
-
-						</p:selectOneMenu>
 
 					</f:facet>
 					<br />
@@ -166,20 +159,6 @@
 
 					</p:selectOneMenu>
 
-					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
-					<p:selectOneMenu value="#{bugBean.newBug.status}"
-						style="width:90px">
-
-						<f:selectItem value="#{null}"
-							itemLabel="#{msg['bug.search.selectone']}"></f:selectItem>
-						<f:selectItems value="#{bugBean.statusList}" var="statuses"
-							itemLabel="#{msg['bug.status.' += statuses]}" />
-
-						<p:ajax event="change" update="@this"></p:ajax>
-
-					</p:selectOneMenu>
-
-
 					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
 					<f:view>
 						<p:autoComplete value="#{bugBean.assignedUser}"
@@ -234,11 +213,11 @@
 
 					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
 
-					<p:selectOneMenu value="#{bugBean.selectedBug.status}"
+					<p:selectOneMenu value="#{bugBean.selectedBug.status}" converter="#{bugConverter}" 
 						style="width:90px">
 
-						<f:selectItems value="#{bugBean.statusList}" var="statuses"
-							itemLabel="#{msg['bug.status.' += statuses]}" />
+						<f:selectItems value="#{bugBean.getStatusList()}" var="status"
+							itemLabel = "#{status}" itemValue="#{status}"  />
 
 					</p:selectOneMenu>
 

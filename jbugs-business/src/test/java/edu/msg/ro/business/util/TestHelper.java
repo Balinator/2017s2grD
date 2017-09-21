@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * 
@@ -32,7 +33,7 @@ public class TestHelper {
 	}
 
 	public BugDTO initializingBug(Long id, String title, String description, String severity, String version,
-			String fixedIn, String status, UserDTO testUser) {
+			String fixedIn, StatusEnum status, UserDTO testUser) {
 		BugDTO testBug = new BugDTO();
 		testBug.setId(id);
 		testBug.setTitle(title);

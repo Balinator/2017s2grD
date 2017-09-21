@@ -1,22 +1,19 @@
 package edu.msg.ro.business.bug.control;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
-import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
-import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
+import edu.msg.ro.business.util.TestHelper;
+import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * Test for BugService
@@ -27,10 +24,10 @@ import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 public class BugServiceTest extends AbstractIntegrationTest {
 
 	@EJB
-	private BugFacade bf;
+	private BugService bf;
 
 	@EJB
-	private UserFacade uf;
+	private UserService uf;
 
 	@EJB
 	private UserDTOMapper userDTOMapper;
@@ -38,194 +35,118 @@ public class BugServiceTest extends AbstractIntegrationTest {
 	@EJB
 	private UserService userService;
 
+	@EJB
+	private TestHelper th;
+
 	@Test
-	public void createBug_CreatedID() throws BusinessException {
-		BugDTO testBug = new BugDTO();
+	public void createBug_CreatedID() throws BusinessException, TechnicalExeption {
+		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO testUser1 = th.initializUser(6L, "Marsdy", "Jasdne", "asdsd@msggroup.com", "asdsd", "0756748395");
 
-		testBug.setTitle("title test bug");
-		testBug.setDescription("Bug test description!");
-		testBug.setSeverity("Bug test severity!");
-		testBug.setVersion("v1.0");
-		testBug.setFixedIn("Fixed bug test");
+		uf.createUser(testUser);
+		uf.createUser(testUser1);
 
-		Date newDate = new Date();
-		newDate.getDate();
-		testBug.setTargetDate(newDate);
+		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.2", "Open", "bug",
+				StatusEnum.INPROGRESS, testUser);
+		Assert.assertNotNull("Bug should have an id", testBug.getId());
 
-		testBug.setStatus("Bug status test");
-		testBug.setVersion("Version!");
-
-		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("Bsdfds");
-		testUser.setLastname("dsfsd");
-		testUser.setEmail("dsfsd@msggroup.com");
-		testUser.setPassword("asd");
-		testUser.setRoles(new ArrayList<>());
-
-		UserDTO testUser1 = new UserDTO();
-		testUser1.setFirstname("Bsfddfds");
-		testUser1.setLastname("dssdfsdfsd");
-		testUser1.setEmail("dsdsffsd@msggroup.com");
-		testUser1.setPassword("assadd");
-		testUser1.setRoles(new ArrayList<>());
-
-		try {
-			uf.createUser(testUser);
-			uf.createUser(testUser1);
-		} catch (Exception e) {
-			e.getCause();
-			// TODO Auto-generated catch block
-			// e1.printStackTrace();
-			System.err.println(e.getCause().getMessage());
-			System.err.println(testUser.getId());
-		}
-
-		Assert.assertNotNull("User ID: ", testUser.getId());
-		Assert.assertNotNull("User1 ID: ", testUser1.getId());
-
-		System.err.println(testUser.getId());
-		System.err.println(testUser.getId());
+		BugDTO createdBug = bf.createBug(testBug);
+		Assert.assertNotNull("The newly persisted Bug should have an id!", createdBug.getId());
 
 		testBug.setAuthor(testUser);
 		testBug.setAssigned(testUser1);
 
-		BugDTO createdBug = null;
-		try {
-			createdBug = bf.createBug(testBug);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		Assert.assertNotNull("Shold have id: ", createdBug.getId());
 	}
 
+	// /**
+	// * if update is not working
+	// *
+	// * @throws BusinessException
+	// * @throws TechnicalExeption
+	// */
+	// @Test
+	// public void updateBug_UpdatedTestBug() throws BusinessException,
+	// TechnicalExeption {
+	//
+	// UserDTO testUser = th.initializUser(5L, "Mary", "Jane",
+	// "asd@msggroup.com", "asd", "0756748395");
+	// UserDTO testUser1 = th.initializUser(6L, "Marsdy", "Jasdne",
+	// "asdsd@msggroup.com", "asdsd", "0756748395");
+	//
+	// uf.createUser(testUser);
+	// uf.createUser(testUser1);
+	//
+	// Assert.assertNotNull("User ID: ", testUser.getId());
+	// Assert.assertNotNull("User1 ID: ", testUser1.getId());
+	//
+	// BugDTO testBug = th.initializingBug(1L, "Bug title", "Description",
+	// "v2.0", "v2.2", "bug", "Open", testUser);
+	// Assert.assertNotNull("Bug should have an id", testBug.getId());
+	//
+	// BugDTO newBug = th.initializingBug(1L, "Bug title updated", "Description
+	// updated", "v2.0 updated",
+	// "v2.2 updated", "bug updated", "Open updated", testUser);
+	//
+	// testBug.setAuthor(testUser);
+	// testBug.setAssigned(testUser1);
+	// newBug.setAuthor(testUser);
+	// newBug.setAssigned(testUser1);
+	//
+	// BugDTO createdBug = null;
+	// createdBug = bf.createBug(testBug);
+	// Assert.assertNotNull("Bug ID: ", createdBug.getId());
+	// String createdBugTitle = createdBug.getTitle();
+	//
+	// createdBug = bf.updateBug(newBug);
+	//
+	// Assert.assertNotEquals("Update bug issue!", createdBugTitle,
+	// createdBug.getTitle());
+	// }
+
+	/**
+	 * If deleted bug is not null
+	 *
+	 * @throws TechnicalExeption
+	 * @throws BusinessException
+	 */
 	@Test
-	public void updateBug_UpdatedTestBug() throws BusinessException {
-		BugDTO testBug = new BugDTO();
+	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
 
-		testBug.setTitle("title test bug");
-		testBug.setDescription("Bug test description!");
-		testBug.setSeverity("Bug test severity!");
-		testBug.setVersion("v1.0");
-		testBug.setFixedIn("Fixed bug test");
-		Date newDate = new Date();
-		newDate.getDate();
-		testBug.setTargetDate(newDate);
-		testBug.setStatus("Bug status test updated");
-		testBug.setVersion("Version updated!");
+		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO testUser1 = th.initializUser(6L, "Marsdy", "Jasdne", "asdsd@msggroup.com", "asdsd", "0756748395");
 
-		BugDTO newBug = new BugDTO();
-
-		newBug.setTitle("title test bug updated");
-		newBug.setDescription("Bug test description updated!");
-		newBug.setSeverity("Bug test severity updated!");
-		newBug.setVersion("v1.0 updated");
-		newBug.setFixedIn("Fixed bug test updated");
-
-		Date newDate1 = new Date();
-		newDate1.getDate();
-		testBug.setTargetDate(newDate1);
-
-		newBug.setStatus("Bug status test updated");
-		newBug.setVersion("Version updated!");
-
-		UserDTO testUser = new UserDTO();
-		testUser.setUsername("sadas");
-		testUser.setRoles(new ArrayList<>());
-
-		UserDTO testUser1 = new UserDTO();
-		testUser1.setUsername("AssignedMan");
-		testUser1.setRoles(new ArrayList<>());
+		uf.createUser(testUser);
+		uf.createUser(testUser1);
 
 		Assert.assertNotNull("User ID: ", testUser.getId());
 		Assert.assertNotNull("User1 ID: ", testUser1.getId());
 
-		try {
-			uf.createUser(testUser);
-			uf.createUser(testUser1);
-		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		Assert.assertNotNull("User ID: ", testUser.getId());
-		Assert.assertNotNull("User1 ID: ", testUser1.getId());
-
-		BugDTO createdBug = null;
-		try {
-			createdBug = bf.createBug(testBug);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		BugDTO bugUpdate = null;
-		try {
-			bugUpdate = bf.updateBug(newBug);
-		} catch (TechnicalExeption e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Assert.assertEquals("Update bug issue!", bugUpdate.getTitle());
-	}
-
-	@Test
-	public void deleteBug_deleteBugTest() throws TechnicalExeption {
-		BugDTO testBug = new BugDTO();
-
-		testBug.setTitle("title test bug");
-		testBug.setDescription("Bug test description!");
-		testBug.setSeverity("Bug test severity!");
-		testBug.setVersion("v1.0");
-		testBug.setFixedIn("Fixed bug test");
-		Date newDate = new Date();
-		newDate.getDate();
-		testBug.setTargetDate(newDate);
-		testBug.setStatus("Bug status test updated");
-		testBug.setVersion("Version updated!");
-
-		UserDTO testUser = new UserDTO();
-		testUser.setUsername("sadas");
-		testUser.setRoles(new ArrayList<>());
-
-		UserDTO testUser1 = new UserDTO();
-		testUser1.setUsername("AssignedMan");
-		testUser1.setRoles(new ArrayList<>());
-
-		Assert.assertNotNull("User ID: ", testUser.getId());
-		Assert.assertNotNull("User1 ID: ", testUser1.getId());
+		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "v2.2", "bug",
+				StatusEnum.INPROGRESS, testUser);
+		Assert.assertNotNull("Bug should have an id", testBug.getId());
 
 		testBug.setAuthor(testUser);
 		testBug.setAuthor(testUser1);
 
-		try {
-			uf.createUser(testUser);
-			uf.createUser(testUser1);
-		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		BugDTO deleteBug = null;
+		deleteBug = bf.createBug(testBug);
+		Assert.assertNotNull("Shold have id: ", deleteBug.getId());
 
-		Assert.assertNotNull("User ID: ", testUser.getId());
-		Assert.assertNotNull("User1 ID: ", testUser1.getId());
+		deleteBug = bf.deleteBug(testBug);
 
-		BugDTO deletedBug = null;
-		deletedBug = bf.deleteBug(testBug);
-
-		Assert.assertNotNull("Deleted bug is not null!", deletedBug);
+		Assert.assertEquals("Closed bug!", "CLOSED", deleteBug.getStatus());
 	}
 
+	/**
+	 * if bugs null
+	 * 
+	 * @throws TechnicalExeption
+	 * @throws BusinessException
+	 */
 	@Test
-	public void getAllBug_test() {
-		Assert.assertNotNull("Get all bugs issue:", bf.getAllbugs());
+	public void getAllBug_test() throws BusinessException, TechnicalExeption {
+		Assert.assertNotNull("Get all bugs issue:", bf.getAllBugs());
 	}
 
 }
