@@ -3,20 +3,31 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<p:dialog id="editUserDialog" header="Edit User"
-		widgetVar="userEditDialog" resizable="false" position="center center"
-		height="500" width="456" appendToBody="true">
+
+	<p:dialog id="editUserDialog" header="#{msg['user.update']}"
+		widgetVar="userEditDialog" resizable="false" modal="true" height="440"
+		width="456" showEffect="clip" hideEffect="fold">
+
 		<h:form id="viewForm">
+
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{msg['users.firstname']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:inputText id="firstname" required="true"
+						requiredMessage="#{msg['error.emptyfirstname']}"
+						value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					<p:message for="firstname" />
+
 					<p:outputLabel value="#{msg['users.lastname']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					<p:inputText id="lastname" required="true"
+						requiredMessage="#{msg['error.emptylastname']}"
+						value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					<p:message for="lastname" />
 					<p:outputLabel value="Email" />
 					<p:inputText value="#{userUpdateBean.updatedUser.email}">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
 					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}">
 						<f:validator validatorId="phoneNumberValidator" />
@@ -34,8 +45,16 @@
 						</p:column>
 					</p:selectManyMenu>
 
+					<h:outputText value="#{msg['user.activate']}" />
+					<p:selectBooleanButton onLabel="#{msg['users.active']}"
+						offLabel="#{msg['users.inactive']}" onIcon="ui-icon-check"
+						offIcon="ui-icon-close" style="width:110px">
+						<p:ajax />
+					</p:selectBooleanButton>
+
 					<h:commandButton value="#{msg['users.update']}"
-						action="#{userUpdateBean.editUser}"></h:commandButton>
+						action="#{userUpdateBean.editUser}">
+						 </h:commandButton>
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>

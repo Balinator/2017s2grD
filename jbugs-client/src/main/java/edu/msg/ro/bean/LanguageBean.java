@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import edu.msg.ro.enums.Language;
+
 /**
  * Class for managing languages.
  * 
@@ -22,28 +24,7 @@ public class LanguageBean extends AbstractBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -8657090779305459598L;
 
-	/**
-	 * Enum for avabil languages.
-	 * 
-	 * @author laszll
-	 *
-	 */
-	public enum Language {
-		DEFAULT("en"), ENGLISH("en"), ROMANIAN("ro");
-
-		/**
-		 * Constructor
-		 * 
-		 * @param key
-		 */
-		private Language(String key) {
-			this.key = key;
-		}
-
-		private final String key;
-	}
-
-	private Locale locale = new Locale(Language.DEFAULT.key);
+	private Locale locale = new Locale(Language.DEFAULT.getKey());
 
 	/**
 	 * Get for locale.
@@ -69,7 +50,7 @@ public class LanguageBean extends AbstractBean implements Serializable {
 	 * @param lang
 	 */
 	public void setLanguage(Language lang) {
-		locale = new Locale(lang.key);
+		locale = new Locale(lang.getKey());
 		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 	}
 

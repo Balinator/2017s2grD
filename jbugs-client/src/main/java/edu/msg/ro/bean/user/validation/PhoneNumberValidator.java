@@ -1,10 +1,8 @@
-package edu.msg.ro.business.user.validation;
+package edu.msg.ro.bean.user.validation;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
-import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
@@ -14,7 +12,13 @@ import javax.faces.validator.ValidatorException;
  *
  */
 @FacesValidator("phoneNumberValidator")
-public class PhoneNumberValidator implements Validator {
+public class PhoneNumberValidator extends AbstractValidator {
+
+	/**
+	 * Error message key.
+	 */
+	public static final String I18N_ERROR = "users.phone.error";
+
 	/**
 	 * Check the phone number
 	 */
@@ -22,13 +26,9 @@ public class PhoneNumberValidator implements Validator {
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
 		String phoneNumber = value.toString();
-
-		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {// pl:0040123456789
-																							// or
-																							// +49123456
-			FacesMessage message = new FacesMessage("Not valid phone number in germany or romania.");
-			throw new ValidatorException(message);
+		// Examples 0040123456789 or +49123456
+		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {
+			throw new ValidatorException(translate(context, I18N_ERROR));
 		}
-
 	}
 }

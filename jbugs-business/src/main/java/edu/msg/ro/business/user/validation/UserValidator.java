@@ -20,46 +20,40 @@ public class UserValidator {
 	@EJB
 	private UserDAO userDAO;
 
+	public static final String I18N_USER_EMAIL_EXISTS = "users.email.exists";
+
 	/**
 	 * Check for active user tasks.
 	 *
 	 * @param entity
 	 * @return
 	 */
-	public boolean checkIfUserHasActiveTasks(User entity) {
-		// @TODO
-		// get list of users bugs
-		// if null return false
-		// else check for every bug if status not equals CLOSED then return true
-		return false;
+	public boolean checkIfUserHasActiveTasks(User user) {
+		return userDAO.checkIfUserHasAssignedBugs(user);
 	}
 
 	/**
-	 * Check if user with email already exist.
+	 * Check {@link User} integrity.
 	 *
 	 * @param email
 	 * @return
 	 * @throws BusinessException
 	 */
 	public void validateUserData(UserDTO user) throws BusinessException {
-		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
-		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + user.getEmail());
-		}
+		validateEmail(user.getEmail());
 	}
 
 	/**
-	 * Check if user with email already exist.
+	 * Check if {@link User} with this email already exist.
 	 *
 	 * @param email
 	 * @return
 	 * @throws BusinessException
 	 */
-	public boolean validateEmail(String email) throws BusinessException {
+	public void validateEmail(String email) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(email);
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + email);
+			throw new BusinessException(UserValidator.I18N_USER_EMAIL_EXISTS, new Object[] { email });
 		}
-		return true;
 	}
 }

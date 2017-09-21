@@ -18,6 +18,11 @@ import edu.msg.ro.persistence.bug.entity.StatusEnum;
 @Stateless
 public class TestHelper {
 
+	public UserDTO initializUser(String firstname, String lastname, String email, String password, String phoneNumber)
+			throws BusinessException {
+		return initializUser(null, firstname, lastname, email, password, phoneNumber);
+	}
+
 	public UserDTO initializUser(Long id, String firstname, String lastname, String email, String password,
 			String phoneNumber) throws BusinessException {
 		UserDTO testUser = new UserDTO();
@@ -30,6 +35,11 @@ public class TestHelper {
 		testUser.setPhoneNumber(phoneNumber);
 		testUser.setRoles(new ArrayList<>());
 		return testUser;
+	}
+
+	public BugDTO initializingBug(String title, String description, String severity, String version, String fixedIn,
+			String status, UserDTO testUser) {
+		return initializingBug(null, title, description, severity, version, fixedIn, status, testUser);
 	}
 
 	public BugDTO initializingBug(Long id, String title, String description, String severity, String version,
@@ -47,4 +57,5 @@ public class TestHelper {
 		testBug.setStatus(status);
 		return testBug;
 	}
+
 }

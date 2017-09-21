@@ -3,18 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>edu.msg.ro</groupId>
-		<artifactId>jbugs</artifactId>
+		<artifactId>jbugs-s2d</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>jbugs-ear</artifactId>
+	<artifactId>jbugs-s2d-ear</artifactId>
 	<packaging>ear</packaging>
 	<name>EAR PRoject</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>edu.msg.ro</groupId>
-			<artifactId>jbugs-client</artifactId>
+			<artifactId>jbugs-s2d-client</artifactId>
 			<type>war</type>
 			<version>${project.version}</version>
 		</dependency>
@@ -31,7 +31,7 @@
 					<modules>
 						<webModule>
 							<groupId>edu.msg.ro</groupId>
-							<artifactId>jbugs-client</artifactId>
+							<artifactId>jbugs-s2d-client</artifactId>
 							<contextRoot>jbugs</contextRoot>
 						</webModule>
 					</modules>

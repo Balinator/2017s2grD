@@ -3,11 +3,11 @@ package edu.msg.ro.business.user.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.common.dao.AbstractDao;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -32,15 +32,14 @@ public class UserDAO extends AbstractDao<User> {
 	 * 
 	 * @param username
 	 * @return
-	 * @throws TechnicalExeption
 	 */
-	public User findUserByUsername(String username) throws TechnicalExeption {
+	public User findUserByUsername(String username) {
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username");
 		query.setParameter("username", username);
 		try {
 			return (User) query.getSingleResult();
-		} catch (Exception e) {
-			throw new TechnicalExeption(e.getCause());
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 
@@ -58,11 +57,11 @@ public class UserDAO extends AbstractDao<User> {
 
 	/**
 	 * Method for verifying that an {@link User} exist with the given username
-	 * and password.
+	 * and password and is active.
 	 * 
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return {@link Boolean}
 	 */
 	public boolean verifyUserExist(String username, String password) {
 		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASS, User.class);
@@ -70,7 +69,10 @@ public class UserDAO extends AbstractDao<User> {
 		query.setParameter("password", password);
 
 		List<User> userList = query.getResultList();
-		return userList.isEmpty() == false;
+		if (userList.isEmpty() == false) {
+			return userList.get(0).isActive();
+		}
+		return false;
 	}
 
 	/**
@@ -81,6 +83,20 @@ public class UserDAO extends AbstractDao<User> {
 	public List<User> getAll() {
 		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_ALL, User.class);
 		return query.getResultList();
+	}
+
+	/**
+	 * Checks if user has assigned bug(s) that are not closed.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean checkIfUserHasAssignedBugs(User user) {
+		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> 'Closed'");
+		query.setParameter("User", user);
+		// query.setParameter("status", "Closed");
+		List result = query.getResultList();
+		return !result.isEmpty();
 	}
 
 }

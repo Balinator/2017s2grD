@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg['bugs.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<f:view>
+
+		<ui:include src="/header.xhtml" />
+		<ui:include src="/bug/bugCreate.xhtml" />
+		<ui:include src="/bug/bugEdit.xhtml" />
+
+		<h:form id="form">
+
+			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
+				filteredValue="#{bugBean.filteredBugList}"
+				widgetVar="bugUpdateTable" paginator="true" rows="25"
+				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
+
+				<f:facet name="header">
+					<h:panelGroup layout="block" style=" overflow: auto;">
+						<p:outputPanel>
+							<h:outputText value="#{msg['bug.search.all']}" />
+							<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
+								style="width:150px"
+								placeholder="#{msg['bug.search.placeholder']}" />
+						</p:outputPanel>
+	
+						<p:commandButton value="#{msg['add']}" type="button"
+							onclick="PF('bugAddDialog').show();"/>
+					</h:panelGroup>
+				</f:facet>
+
+				<p:column headerText="#{msg['bug.title']}" sortBy="#{bug.title}"
+					filterBy="#{bug.title}" filterMatchMode="contains">
+					<h:outputText value="#{bug.title}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.description']}"
+					sortBy="#{bug.description}" filterBy="#{bug.description}"
+					filterMatchMode="contains">
+					<h:outputText value="#{bug.description}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.targetDate']}"
+					sortBy="#{bug.targetDate}" filterBy="#{bug.targetDate}">
+					<f:facet name="filter">
+						<p:calendar pattern="yyyy/MM/dd">
+							<p:ajax event="dateSelect" oncomplete="PF('bugTable').filter()" />
+						</p:calendar>
+
+					</f:facet>
+					<h:outputText value="#{bug.targetDate}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+					</h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{bug.severity}" filterBy="#{bug.severity}"
+					filterMatchMode="contains" headerText=" #{msg['bug.severity']}">
+
+					<f:facet name="filter">
+
+						<p:selectOneMenu onchange="PF('bugTable').filter();">
+							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
+								itemValue="#{null}" noSelectionOption="true" />
+
+							<f:selectItems value="#{bugBean.severityList}" var="severities"
+								itemLabel="#{msg['bug.severity.' += severities]}" />
+						</p:selectOneMenu>
+					</f:facet>
+					<br />
+
+					<h:outputText value="#{bug.severity}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{bug.status}" filterBy="#{bug.status}"
+					filterMatchMode="exact" headerText="#{msg['bug.status']}">
+
+					<f:facet name="filter">
+
+						<p:selectOneMenu onchange="PF('bugTable').filter();">
+							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
+								itemValue="#{null}" noSelectionOption="true" />
+
+							<f:selectItems value="#{bugBean.statusList}" var="statuses"
+								itemLabel="#{msg['bug.status.' += statuses]}" />
+
+						</p:selectOneMenu>
+
+					</f:facet>
+					<br />
+					<h:outputText value="#{bug.status}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.assigned']}"
+					sortBy="#{bug.assigned.username}"
+					filterBy="#{bug.assigned.username}" filterMatchMode="contains">
+					<h:outputText value="#{bug.assigned.username}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.version']}" sortBy="#{bug.version}"
+					filterBy="#{bug.version}" filterMatchMode="contains">
+					<h:outputText value="#{bug.version}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['bug.fixedIn']}" sortBy="#{bug.fixedIn}"
+					filterBy="#{bug.fixedIn}" filterMatchMode="contains">
+					<h:outputText value="#{bug.fixedIn}"
+						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+				</p:column>
+
+
+				<p:column headerText="#{msg['bug.attachment']}">
+
+				</p:column>
+
+				<p:column headerText="#{msg['bug.update']}">
+					<p:commandLink id="ajax" update=":formBugEdit:display"
+						actionListener="#{bugBean.setSelectedBug(bug)}"
+						oncomplete="PF('bugUpdateDialog').show()">
+						<h:outputText value="#{msg['bug.update']}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+
+			<h:outputText value="#{bugBean.selectedBug.title}"></h:outputText>
+
+		</h:form>
+
+	</f:view>
+</h:body>
+
+</html>

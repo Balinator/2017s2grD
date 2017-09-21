@@ -9,6 +9,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import edu.msg.ro.business.user.boundary.LoginFacade;
+import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 
 /**
@@ -20,6 +21,8 @@ import edu.msg.ro.business.user.dto.UserDTO;
 @RequestScoped
 public class LoginBean extends AbstractBean implements Serializable {
 
+	private static int FAILEDATTEMPS;
+	private static String OLDUSERNAME = null;
 	private static final String LOGIN = "login";
 
 	private static final long serialVersionUID = -2617767540112561117L;
@@ -28,6 +31,9 @@ public class LoginBean extends AbstractBean implements Serializable {
 
 	@EJB
 	private LoginFacade loginFacade;
+
+	@EJB
+	private UserFacade userFacade;
 
 	/**
 	 * @return the user
@@ -60,18 +66,25 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @return
 	 */
 	public String processLogin() {
-		try {
-			if (loginFacade.isValidUser(user)) {
-				HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-				session.setAttribute("username", user.getUsername());
-				addI18nMessage("login.welcome");
-				return "bugs";
+		if (loginFacade.isValidUser(user)) {
+			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+			session.setAttribute("username", user.getUsername());
+			addI18nMessage("login.welcome");
+			FAILEDATTEMPS = 0;
+			return "bugManagment";
+		} else {
+			String loggingUser = user.getUsername();
+			if (loggingUser.equals(OLDUSERNAME)) {
+				FAILEDATTEMPS++;
+				if (FAILEDATTEMPS >= 5) {
+					userFacade.deleteUserNoCheck(user);
+					FAILEDATTEMPS = 0;
+				}
 			} else {
-				addI18nMessage("loginForm:username", "login.error");
-				return LOGIN;
+				FAILEDATTEMPS = 0;
+				OLDUSERNAME = user.getUsername();
 			}
-		} catch (Exception e) {
-			addI18nMessage("login.unexpected");
+			addI18nMessage("loginForm:username", "login.error");
 			return LOGIN;
 		}
 	}
