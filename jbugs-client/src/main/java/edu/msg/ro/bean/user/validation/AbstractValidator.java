@@ -1,7 +1,6 @@
 package edu.msg.ro.bean.user.validation;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 
 import edu.msg.ro.i18n.Translator;
@@ -22,25 +21,23 @@ public abstract class AbstractValidator implements Validator {
 	/**
 	 * Translate message.
 	 * 
-	 * @param context
 	 * @param message
 	 * @return {@link FacesMessage}
 	 */
-	protected FacesMessage translate(FacesContext context, String message) {
-		String translated = t.setContext(context).translate(message);
+	protected FacesMessage translate(String message) {
+		String translated = t.translate(message);
 		return newMessage(translated);
 	}
 
 	/**
 	 * Translate message and replace arguments.
 	 * 
-	 * @param context
 	 * @param message
 	 * @param arguments
 	 * @return {@link FacesMessage}
 	 */
-	protected FacesMessage translate(FacesContext context, String message, Object arguments) {
-		String translated = t.setContext(context).translate(message, arguments);
+	protected FacesMessage translate(String message, Object arguments) {
+		String translated = t.translate(message, arguments);
 		return newMessage(translated);
 	}
 

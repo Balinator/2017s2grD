@@ -35,7 +35,7 @@
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic"
-						value="#{userUpdateBean.roles}" var="t">
+						value="#{userUpdateBean.selectedRoles}">
 						<f:converter binding="#{roleConverter}" />
 						<f:selectItems value="#{userUpdateBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />

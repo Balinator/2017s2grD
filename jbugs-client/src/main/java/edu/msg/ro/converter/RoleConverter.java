@@ -5,7 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 import edu.msg.ro.bean.UserRoleService;
@@ -18,7 +17,7 @@ import edu.msg.ro.business.user.dto.RoleDTO;
  *
  */
 @ManagedBean
-public class RoleConverter implements Converter {
+public class RoleConverter extends AbstractConverter {
 
 	@ManagedProperty("#{userRoleService}")
 	private UserRoleService service;
@@ -33,8 +32,8 @@ public class RoleConverter implements Converter {
 				return service.getRoleItemMap().get(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid role."));// TODO:
-																												// i18n
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, translator.translate("conversion.error"),
+								translator.translate("conversion.error.object.role")));
 			}
 		} else {
 			return null;

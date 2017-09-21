@@ -26,7 +26,7 @@ public class EmailValidator extends AbstractValidator {
 	public void validate(FacesContext context, UIComponent uiComponent, Object value) throws ValidatorException {
 		String email = value.toString().trim();
 		if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@+[msggroup.com]{12}$")) {
-			throw new ValidatorException(translate(context, I18N_ERROR));
+			throw new ValidatorException(translate(I18N_ERROR));
 		}
 
 	}
