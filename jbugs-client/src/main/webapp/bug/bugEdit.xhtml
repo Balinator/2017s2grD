@@ -63,11 +63,15 @@
 				<p:outputLabel value="#{msg['bug.fixedIn']}" />
 				<p:inputText value="#{bugBean.selectedBug.fixedIn}"></p:inputText>
 
-				<!-- 
-				<p:outputLabel value="#{msg['bug.attechment']}" />
-				<p:inputText value="#{bugBean.newBug.attachment}"></p:inputText>
- -->
 
+				<p:outputLabel value="#{msg['bug.attachment']}" />
+				<p:fileUpload fileUploadListener="#{bugBean.handleFileEdit}"
+					dragDropSupport="false" update="messages" sizeLimit="26214400"
+					fileLimit="1"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
+					value="#{bugBean.selectedBug.attachment}" />
+
+				<p:growl id="messages" showDetail="true" />
 
 				<h:commandButton value="#{msg['bug.update']}"
 					action="#{bugBean.editBug}"></h:commandButton>

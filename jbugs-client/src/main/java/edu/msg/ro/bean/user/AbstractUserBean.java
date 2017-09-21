@@ -11,6 +11,12 @@ import edu.msg.ro.bean.UserRoleService;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.RoleDTO;
 
+/**
+ * User bean abstract functionality.
+ * 
+ * @author balinc
+ *
+ */
 abstract class AbstractUserBean extends AbstractBean {
 
 	@EJB
@@ -20,6 +26,11 @@ abstract class AbstractUserBean extends AbstractBean {
 	protected UserRoleService service;
 
 	protected List<RoleDTO> roles;
+
+	/**
+	 * Notification message key.
+	 */
+	public static final String I18N_SAVED = "user.crud.save.success";
 
 	/**
 	 * Init function.

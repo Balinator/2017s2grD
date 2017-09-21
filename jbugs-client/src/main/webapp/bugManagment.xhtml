@@ -13,7 +13,7 @@
 </h:head>
 <h:body>
 	<f:view>
-	
+
 		<ui:include src="/header.xhtml" />
 		<ui:include src="/bug/bugCreate.xhtml" />
 		<ui:include src="/bug/bugEdit.xhtml" />
@@ -124,9 +124,9 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-				<p:column headerText="#{msg['bug.attechment']}">
-					<h:outputText value="#{bug.attachment}"
-						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
+
+				<p:column headerText="#{msg['bug.attachment']}">
+
 				</p:column>
 
 				<p:column headerText="#{msg['bug.update']}">

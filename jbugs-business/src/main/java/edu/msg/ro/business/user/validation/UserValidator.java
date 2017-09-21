@@ -20,6 +20,8 @@ public class UserValidator {
 	@EJB
 	private UserDAO userDAO;
 
+	public static final String I18N_USER_EMAIL_EXISTS = "users.email.exists";
+
 	/**
 	 * Check for active user tasks.
 	 *
@@ -31,33 +33,27 @@ public class UserValidator {
 	}
 
 	/**
-	 * Check if user with email already exist.
+	 * Check {@link User} integrity.
 	 *
 	 * @param email
 	 * @return
 	 * @throws BusinessException
 	 */
 	public void validateUserData(UserDTO user) throws BusinessException {
-		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
-		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + user.getEmail());// TODO:
-																									// i18n
-		}
+		validateEmail(user.getEmail());
 	}
 
 	/**
-	 * Check if user with email already exist.
+	 * Check if {@link User} with this email already exist.
 	 *
 	 * @param email
 	 * @return
 	 * @throws BusinessException
 	 */
-	public boolean validateEmail(String email) throws BusinessException {
+	public void validateEmail(String email) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(email);
 		if (existingUserWithSameEmail != null) {
-			throw new BusinessException("User already exists with given email " + email);// TODO:
-																							// i18n
+			throw new BusinessException(UserValidator.I18N_USER_EMAIL_EXISTS, new Object[] { email });
 		}
-		return true;
 	}
 }

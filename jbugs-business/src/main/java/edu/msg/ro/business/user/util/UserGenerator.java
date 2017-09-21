@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -29,16 +28,11 @@ public class UserGenerator {
 	 * 
 	 * @param user
 	 * @return
-	 * @throws TechnicalExeption
 	 */
-	public String createUsername(UserDTO user) throws TechnicalExeption {
+	public String createUsername(UserDTO user) {
 
 		String firstName = user.getFirstname();
 		String lastName = user.getLastname();
-
-		if (firstName == null || lastName == null) {
-			throw new TechnicalExeption();
-		}
 
 		int lastNameLength = lastName.length();
 		int firstNameLength = firstName.length();
@@ -63,42 +57,36 @@ public class UserGenerator {
 	 * Checks if username is already taken.
 	 * 
 	 * @param username
-	 * @return true/false
-	 * @throws TechnicalExeption
+	 * @return {@link Boolean}
 	 */
 	private boolean checkIfUsernameExists(String username) {
-		User existingUser = new User();
-		try {
-			existingUser = userDao.findUserByUsername(username);
-		} catch (TechnicalExeption e) {
-			return false;
+		User existingUser = userDao.findUserByUsername(username);
+		if (existingUser != null) {
+			String existingUsername = existingUser.getUsername();
+			return existingUsername.equals(username);
 		}
-		String existingUsername = existingUser.getUsername();
-
-		return existingUsername.equals(username);
+		return false;
 	}
 
 	/**
 	 * Creates hash for user password.
-	 * 
+	 *
 	 * @param userDTO
 	 * @return
-	 * @throws NoSuchAlgorithmException
-	 * @throws UnsupportedEncodingException
-	 * @throws TechnicalExeption
 	 */
-	public String encryptPassword(UserDTO userDTO)
-			throws NoSuchAlgorithmException, UnsupportedEncodingException, TechnicalExeption {
-		if (userDTO.getPassword().isEmpty()) {
-			throw new TechnicalExeption();
+	public String encryptPassword(UserDTO userDTO) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] md_password = md.digest(userDTO.getPassword().getBytes("UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < md_password.length; i++) {
+				sb.append(Integer.toString((md_password[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			return sb.toString();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			System.err.println(e.getMessage());
 		}
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] md_password = md.digest(userDTO.getPassword().getBytes("UTF-8"));
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < md_password.length; i++) {
-			sb.append(Integer.toString((md_password[i] & 0xff) + 0x100, 16).substring(1));
-		}
-		return sb.toString();
+		return null;
 	}
 
 }

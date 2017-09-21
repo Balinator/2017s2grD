@@ -36,12 +36,11 @@
 
 					<p:outputLabel value="#{msg['login.password']}" />
 					<p:inputText id="password" required="true"
-						requiredMessage="#{msg['error.password']}"
+						requiredMessage="#{msg['users.password.error']}"
 						value="#{userNewBean.newUser.password}">
-						<f:validateLength minimum="6" />
+						<f:validator validatorId="passwordValidator" />
 					</p:inputText>
 					<p:message for="password" />
-
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic" value="#{userNewBean.newUser.roles}">
