@@ -47,7 +47,7 @@ public enum StatusEnum {
 	 * 
 	 * @param s
 	 */
-	StatusEnum() {
+	private StatusEnum() {
 		this.key = ordinal();
 	}
 

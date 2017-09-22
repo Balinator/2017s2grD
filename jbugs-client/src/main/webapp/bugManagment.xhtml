@@ -23,7 +23,7 @@
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}"
-				widgetVar="bugUpdateTable" paginator="true" rows="25"
+				widgetVar="bugTable" paginator="true" rows="25"
 				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
 
 				<f:facet name="header">
@@ -95,8 +95,8 @@
 							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
 								itemValue="#{null}" noSelectionOption="true" />
 
-							<f:selectItems value="#{bugBean.getStatusList()}" var="status"
-								itemLabel="#{status}" itemValue="#{status}" />
+							<f:selectItems value="#{bugBean.statusListFilter}" var="statuses"
+								itemLabel="#{msg['bug.status.' += statuses]}" />
 						</p:selectOneMenu>
 
 					</f:facet>
