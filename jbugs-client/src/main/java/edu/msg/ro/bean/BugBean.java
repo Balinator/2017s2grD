@@ -183,6 +183,7 @@ public class BugBean extends AbstractBean {
 	public String createNewBug() throws BusinessException, TechnicalExeption {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(assignedUser);// todo: change it
+		newBug.setStatus(StatusEnum.OPEN);
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
