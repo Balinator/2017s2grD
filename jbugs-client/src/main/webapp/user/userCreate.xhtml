@@ -6,7 +6,8 @@
 
 	<p:dialog id="createUserDialog" header="#{msg['user.create']}"
 		widgetVar="userCreateDialog" resizable="false" modal="true"
-		showEffect="clip" hideEffect="fold">
+		showEffect="clip" hideEffect="fold"
+		visible="#{addForm.submitted and facesContext.validationFailed}">
 
 		<h:form id="addForm">
 
@@ -89,8 +90,8 @@
 					</p:selectManyMenu>
 					<p:commandButton value="#{msg['users.create']}"
 						action="#{userNewBean.createNewUser}"
-						oncomplete="PF('userCreateDialog').hide();"
-						update="userForm:userList" ajax="false" />
+						onsuccess="PF('userCreateDialog').hide();"
+						update="userForm:userList" ajax="true" />
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>
