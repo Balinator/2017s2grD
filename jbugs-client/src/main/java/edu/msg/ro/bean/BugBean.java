@@ -60,9 +60,13 @@ public class BugBean extends AbstractBean {
 
 	private StatusEnum[] statusList;
 
+	private StatusEnum[] statusListFilter;
+
 	private BugSeverity[] severityList;
 
 	private int severities;
+
+	private int stasuses;
 
 	private UserDTO assignedUser = new UserDTO();
 
@@ -270,6 +274,25 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
+	 * Method for get all {@link BugStatus}
+	 * 
+	 * @return
+	 */
+
+	public StatusEnum[] getStatusListFilter() {
+		return StatusEnum.values();
+	}
+
+	/**
+	 * Set for statusListFilter
+	 * 
+	 * @param statusListFilter
+	 */
+	public void setStatusListFilter(StatusEnum[] statusListFilter) {
+		this.statusListFilter = statusListFilter;
+	}
+
+	/**
 	 * Method for get all {@link BugSeverity}.
 	 * 
 	 * @return
@@ -303,6 +326,24 @@ public class BugBean extends AbstractBean {
 	 */
 	public void setSeverities(int severities) {
 		this.severities = severities;
+	}
+
+	/**
+	 * Get for statuses
+	 * 
+	 * @return
+	 */
+	public int getStasuses() {
+		return stasuses;
+	}
+
+	/**
+	 * Set for statuses
+	 * 
+	 * @param stasuses
+	 */
+	public void setStasuses(int stasuses) {
+		this.stasuses = stasuses;
 	}
 
 	/**
