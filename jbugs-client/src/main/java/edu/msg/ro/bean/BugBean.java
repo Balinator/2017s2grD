@@ -21,6 +21,7 @@ import org.primefaces.model.StreamedContent;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -28,7 +29,6 @@ import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionEnum;
-import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /****

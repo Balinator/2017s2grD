@@ -22,9 +22,9 @@
 		<h:form id="form">
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
-				filteredValue="#{bugBean.filteredBugList}"
-				widgetVar="bugTable" paginator="true" rows="25"
-				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
+				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
+				paginator="true" rows="25" styleClass="paginated"
+				selectionMode="single" rowKey="#{bug.id}">
 
 				<f:facet name="header">
 					<h:panelGroup layout="block" style=" overflow: auto;">
@@ -76,13 +76,13 @@
 							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
 								itemValue="#{null}" noSelectionOption="true" />
 
-							<f:selectItems value="#{bugBean.severityList}" var="severities"
-								itemLabel="#{msg['bug.severity.' += severities]}" />
+							<f:selectItems value="#{bugBean.severityList}" var="severity"
+								itemLabel="#{msg['bug.severity.' += severity]}" />
 						</p:selectOneMenu>
 					</f:facet>
 					<br />
 
-					<h:outputText value="#{bug.severity}"
+					<h:outputText value="#{msg['bug.severity.' += bug.severity]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
@@ -101,7 +101,7 @@
 
 					</f:facet>
 					<br />
-					<h:outputText value="#{bug.status}"
+					<h:outputText value="#{msg['bug.status.' += bug.status]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
