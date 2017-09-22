@@ -11,18 +11,23 @@
 		<h:form id="viewForm">
 
 			<p:outputPanel id="display">
-				<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum, panel-colum">
 					<p:outputLabel value="#{msg['users.firstname']}" />
-					<p:inputText id="firstname" required="true"
-						requiredMessage="#{msg['error.emptyfirstname']}"
-						value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
-					<p:message for="firstname" />
+					<h:panelGroup layout="block">
+						<p:message for="firstname" />
+						<p:inputText id="firstname" required="true"
+							requiredMessage="#{msg['error.emptyfirstname']}"
+							value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['users.lastname']}" />
-					<p:inputText id="lastname" required="true"
-						requiredMessage="#{msg['error.emptylastname']}"
-						value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
-					<p:message for="lastname" />
+					<h:panelGroup layout="block">
+						<p:message for="lastname" />
+						<p:inputText id="lastname" required="true"
+							requiredMessage="#{msg['error.emptylastname']}"
+							value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					</h:panelGroup>
+					
 					<p:outputLabel value="Email" />
 					<p:inputText value="#{userUpdateBean.updatedUser.email}">
 						<f:validator validatorId="emailValidator" />

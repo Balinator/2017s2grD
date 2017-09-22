@@ -10,19 +10,23 @@
 
 		<h:form id="formBugEdit">
 
-			<h:panelGrid columns="2" cellpadding="5" id="display">
+			<h:panelGrid columns="2" cellpadding="5" id="display" style="width: 100%" columnClasses="panel-colum, panel-colum">
 				<p:outputLabel value="#{msg['bug.title']}" />
-				<p:inputText id="title" required="true"
-					requiredMessage="#{msg['error.emptytitle']}"
-					value="#{bugBean.selectedBug.title}"></p:inputText>
-				<p:message for="title" />
+				<h:panelGroup layout="block">
+					<p:message for="title" />
+					<p:inputText id="title" required="true"
+						requiredMessage="#{msg['error.emptytitle']}"
+						value="#{bugBean.selectedBug.title}"></p:inputText>
+				</h:panelGroup>
 
 
 				<p:outputLabel value="#{msg['bug.description']}" />
-				<p:inputText id="description" required="true"
-					requiredMessage="#{msg['error.emptydescription']}"
-					value="#{bugBean.selectedBug.description}"></p:inputText>
-				<p:message for="description" />
+				<h:panelGroup layout="block">
+					<p:message for="description" />
+					<p:inputText id="description" required="true"
+						requiredMessage="#{msg['error.emptydescription']}"
+						value="#{bugBean.selectedBug.description}"></p:inputText>
+				</h:panelGroup>
 
 				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 				<p:calendar value="#{bugBean.selectedBug.targetDate}" />
