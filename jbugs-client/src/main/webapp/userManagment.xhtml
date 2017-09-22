@@ -88,7 +88,7 @@
 
 					<p:commandButton value="#{msg['user.activate']}"
 						action="#{userListBean.activateUser(user)}"
-						rendered="#{!user.active}"  update=":userForm"/>
+						rendered="#{!user.active}" update=":userForm" />
 
 					<p:commandButton value="#{msg['user.deactivate']}"
 						action="#{userListBean.deleteUser(user)}"

@@ -1,4 +1,4 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.bean.bug;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -19,6 +19,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import edu.msg.ro.bean.AbstractBean;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.util.StatusEnum;

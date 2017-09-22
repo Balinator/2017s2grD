@@ -1,6 +1,6 @@
 package edu.msg.ro.autocompleteview;
 
-import edu.msg.ro.bean.BugBean;
+import edu.msg.ro.bean.bug.BugBean;
 
 public class AutoCompleteView {
 

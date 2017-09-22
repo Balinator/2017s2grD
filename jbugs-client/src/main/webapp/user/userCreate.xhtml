@@ -10,8 +10,9 @@
 
 		<h:form id="addForm">
 
-			<p:outputPanel id="display" >
-				<h:panelGrid columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum, panel-colum">
+			<p:outputPanel id="display">
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum, panel-colum">
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
 						<p:message for="firstname" />
@@ -31,8 +32,7 @@
 					<p:outputLabel value="Email" />
 					<h:panelGroup layout="block">
 						<p:message for="email" />
-						<p:inputText id="email"
-							requiredMessage="#{msg['error.email']}"
+						<p:inputText id="email" requiredMessage="#{msg['error.email']}"
 							value="#{userNewBean.newUser.email}">
 							<f:validator validatorId="emailValidator" />
 						</p:inputText>
