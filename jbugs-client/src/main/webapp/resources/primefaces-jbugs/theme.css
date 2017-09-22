@@ -390,3 +390,14 @@
 	filter: Alpha(Opacity=30);
 	border-radius: 8px;
 }
+/* Custom */
+.ui-tooltip-text{
+	padding: 0px !important;
+}
+.ui-tooltip-text > div{
+	margin: 0px !important;
+}
+.ui-tooltip-arrow{
+	border-bottom-color: #f2dede;
+}
+
