@@ -8,6 +8,7 @@ import org.junit.Test;
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -119,7 +120,8 @@ public class UserDAOTest extends AbstractIntegrationTest {
 		UserDTO userDTO = uf.createUser(user);
 
 		User userEntity = new User();
-		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
+		BugDTO bug = th.initializingBug("Title", "Description", BugSeverity.LOW, "v1", "fixed", StatusEnum.INFONEEDED,
+				userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 		udm.mapToEntity(userDTO, userEntity);
 		boolean hasAssignedBug = dao.checkIfUserHasAssignedBugs(userEntity);
@@ -138,7 +140,8 @@ public class UserDAOTest extends AbstractIntegrationTest {
 		UserDTO user = th.initializUser("Denis", "Viorel", "denisV@msggroup.com", "123456", "00400743188876");
 		UserDTO userDTO = uf.createUser(user);
 
-		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
+		BugDTO bug = th.initializingBug("Title", "Description", BugSeverity.LOW, "v1", "fixed", StatusEnum.INFONEEDED,
+				userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 
 		Assert.assertEquals("User should have assigned bug(s)!", bugDTO.getAssigned().getUsername(),

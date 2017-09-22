@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -43,8 +44,8 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistedUser = uf.createUser(testUser);
 
-		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
-				StatusEnum.INFONEEDED, persistedUser));
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", BugSeverity.MEDIUM, "v2.2",
+				"v23.2", StatusEnum.INFONEEDED, persistedUser));
 		BugDTO persistedBug = sut.createBug(createdBug);
 
 		Assert.assertNotNull("Bug should have an id", persistedBug.getId());
@@ -61,8 +62,8 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
 
 		UserDTO createdUser = uf.createUser(th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395"));
-		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
-				StatusEnum.INFONEEDED, createdUser));
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", BugSeverity.HIGH, "v2.2",
+				"v2.3", StatusEnum.INFONEEDED, createdUser));
 		BugDTO deletedBug = sut.deleteBug(createdBug);
 
 		Assert.assertNull("Bug should be null", deletedBug);

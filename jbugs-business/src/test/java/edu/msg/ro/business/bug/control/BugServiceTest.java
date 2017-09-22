@@ -8,6 +8,7 @@ import org.junit.Test;
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -51,8 +52,8 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.LOW, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bs.createBug(testBug);
 
 		Assert.assertNotNull("Shold have id: ", persistBug.getId());
@@ -70,8 +71,8 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.MEDIUM, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bs.createBug(testBug);
 		String createdBugTitle = persistBug.getTitle();
 
@@ -93,8 +94,8 @@ public class BugServiceTest extends AbstractIntegrationTest {
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.HIGH, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bf.createBug(testBug);
 
 		BugDTO deletedBug = bs.deleteBug(persistBug);
