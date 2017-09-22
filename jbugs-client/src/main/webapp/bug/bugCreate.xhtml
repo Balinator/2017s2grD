@@ -9,19 +9,24 @@
 		height="650" width="650">
 
 		<h:form>
-			<h:panelGrid id="addBug" columns="2" cellpadding="5">
+			<h:panelGrid id="addBug" columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum, panel-colum">
 				<p:outputLabel value="#{msg['bug.title']}" />
-				<p:inputText id="title" required="true"
-					requiredMessage="#{msg['error.emptytitle']}"
-					value="#{bugBean.newBug.title}"></p:inputText>
-				<p:message for="title" />
+				<h:panelGroup layout="block">
+					<p:message for="title"/>
+					<p:inputText id="title" required="true"
+						requiredMessage="#{msg['error.emptytitle']}"
+						value="#{bugBean.newBug.title}"></p:inputText>
+				</h:panelGroup>
+				
 
 
 				<p:outputLabel value="#{msg['bug.description']}" />
-				<p:inputText id="description" required="true"
-					requiredMessage="#{msg['error.emptydescription']}"
-					value="#{bugBean.newBug.description}"></p:inputText>
-				<p:message for="description" />
+				<h:panelGroup layout="block">
+					<p:message for="description" />
+					<p:inputText id="description" required="true"
+						requiredMessage="#{msg['error.emptydescription']}"
+						value="#{bugBean.newBug.description}"></p:inputText>
+				</h:panelGroup>
 
 				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
 				<p:calendar value="#{bugBean.newBug.targetDate}" />
@@ -48,10 +53,12 @@
 				</f:view>
 
 				<p:outputLabel value="#{msg['bug.version']}" />
-				<p:inputText id="version" required="true"
-					requiredMessage="#{msg['error.emptyversion']}"
-					value="#{bugBean.newBug.version}"></p:inputText>
-				<p:message for="version" />
+				<h:panelGroup layout="block">
+					<p:message for="version" />
+					<p:inputText id="version" required="true"
+						requiredMessage="#{msg['error.emptyversion']}"
+						value="#{bugBean.newBug.version}"></p:inputText>
+				</h:panelGroup>
 
 				<p:outputLabel value="#{msg['bug.fixedIn']}" />
 				<p:inputText value="#{bugBean.newBug.fixedIn}"></p:inputText>
