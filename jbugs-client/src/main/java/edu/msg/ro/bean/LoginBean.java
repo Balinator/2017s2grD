@@ -52,7 +52,10 @@ public class LoginBean extends AbstractBean implements Serializable {
 		this.user = userDTO;
 	}
 
-	private void toManyFailedPAssword() {
+	/**
+	 * 
+	 */
+	private void toManyFailedPassword() {
 		String loggingUser = user.getUsername();
 		if (loggingUser.equals(session.getAttribute("OLDUSERNAME"))) {
 			int failedlogins = Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString());
@@ -63,7 +66,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 			}
 		} else {
 			FAILEDATTEMPS = 0;
-			session.setAttribute("FAILEDATTEMPS", FAILEDATTEMPS);
+			session.setAttribute("FAILEDATTEMPS", 0);
 			session.setAttribute("OLDUSERNAME", user.getUsername());
 		}
 		if (Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString()) < 4) {
@@ -95,7 +98,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 			session.setAttribute("FAILEDATTEMPS", FAILEDATTEMPS);
 			return "bugManagment";
 		} else {
-			toManyFailedPAssword();
+			toManyFailedPassword();
 			return LOGIN;
 
 		}
