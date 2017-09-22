@@ -17,11 +17,14 @@ import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionConstants;
+import edu.msg.ro.business.util.TestHelper;
 import edu.msg.ro.persistence.user.entity.Permission;
 import edu.msg.ro.persistence.user.entity.Role;
 
-/**
- * Test for {@link UserFacade} facede.
+/***
+ * Test for{
+ * 
+ * @link UserFacade} facede.
  *
  * @author balinc
  *
@@ -30,8 +33,21 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 
 	@EJB
 	private UserFacade sut;
+
 	@EJB
 	private PermissionChecker permCheck;
+
+	@EJB
+	private TestHelper th;
+
+	@EJB
+	private PermissionDAO permDAO;
+
+	@EJB
+	private RoleDAO roleDAO;
+
+	@EJB
+	private RoleDTOMapper roleDTOmapper;
 
 	/**
 	 * Check if user insert is working.
@@ -40,106 +56,75 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void createUser_succesfull() throws BusinessException {
-		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("John");
-		testUser.setLastname("Doe");
-		testUser.setPassword("123456");
 
+		UserDTO testUser = th.initializUser("Mard", "Yoe", "aqwd@msggroup.com", "asd", "0756748395");
 		UserDTO createdUser = sut.createUser(testUser);
 
 		Assert.assertNotNull("The newly persisted user should have an id!", createdUser.getId());
 	}
 
 	/**
-	 * 
+	 *
 	 * Check if the user is active by default.
 	 *
 	 * @throws BusinessException
 	 */
 	@Test
 	public void createUser_ActiveByDefault() throws BusinessException {
-		UserDTO testUser = new UserDTO();
-		testUser.setFirstname("John");
-		testUser.setLastname("Doe");
-		testUser.setEmail("test@msggroup.com");
-		testUser.setPassword("123456");
+
+		UserDTO testUser = th.initializUser("Mary", "Jane", "asrtd@msggroup.com", "asd", "0756748395");
 		UserDTO createdUser = sut.createUser(testUser);
 		Assert.assertTrue("The newly persisted user should be active!", createdUser.isActive());
 	}
 
 	/**
 	 * Test if username is not NULL
-	 * 
+	 *
 	 * @throws BusinessException
 	 */
 	@Test
 	public void createUserWithUsername() throws BusinessException {
-		UserDTO user = new UserDTO();
-		user.setFirstname("Mihai");
-		user.setLastname("Popescu");
-		user.setPassword("123456");
-		UserDTO createdUser = sut.createUser(user);
+		UserDTO testUser = th.initializUser("First", "Last", "aqazsd@msggroup.com", "asd", "0756748395");
+		UserDTO createdUser = sut.createUser(testUser);
 		Assert.assertNotNull("The created user should have username!", createdUser.getUsername());
 	}
 
 	/**
 	 * Check if username is correct
-	 * 
+	 *
 	 * @throws BusinessException
 	 */
 	@Test
 	public void createUserWithCorrectUsername() throws BusinessException {
-		UserDTO user = new UserDTO();
-		user.setFirstname("Nemeth");
-		user.setLastname("Attila");
-		user.setPassword("123456");
-		UserDTO createdUser = sut.createUser(user);
+		UserDTO testUser = th.initializUser("Nemeth", "Attila", "asacvcvsd@msggroup.com", "asd", "0756748395");
+		UserDTO createdUser = sut.createUser(testUser);
 		Assert.assertEquals("The created username should match the exrpesssion !", "AttilN", createdUser.getUsername());
 	}
 
 	/**
 	 * Check if username generator works correctly when username already exists
-	 * 
+	 *
 	 * @throws BusinessException
 	 */
 	@Test
 	public void createUserWithExistingUsername() throws BusinessException {
-		UserDTO user = new UserDTO();
-		user.setFirstname("Fulop");
-		user.setLastname("Szabi");
-		user.setPassword("123456");
-		UserDTO createdUser = sut.createUser(user);
-		UserDTO user2 = new UserDTO();
-		user2.setFirstname("Fulop");
-		user2.setLastname("Szabi");
-		user2.setPassword("123456");
-		UserDTO createdUser2 = sut.createUser(user2);
+		UserDTO testUser = th.initializUser("Fulop", "Szabi", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO testUser1 = th.initializUser("Fulop", "Szabi", "adfsd@msggroup.com", "assd", "0756748395");
+		UserDTO createdUser = sut.createUser(testUser);
+		UserDTO createdUser2 = sut.createUser(testUser1);
 		Assert.assertEquals("The created username should match the exrpesssion !", "SzabiFu",
 				createdUser2.getUsername());
 	}
 
 	/**
-	 * Check if user with current role has specific permission
-	 * 
-	 * @throws BusinessException
-	 */
-
-	@EJB
-	private PermissionDAO permDAO;
-	@EJB
-	private RoleDAO roleDAO;
-	@EJB
-	private RoleDTOMapper roleDTOmapper;
-
-	/**
 	 * check if user has given permission
-	 * 
+	 *
 	 * @throws BusinessException
 	 */
 	@Test
 	public void checkPermission() throws BusinessException {
-		List<Role> roles = new ArrayList();
-		List<Permission> permissions = new ArrayList();
+		List<Role> roles = new ArrayList<Role>();
+		List<Permission> permissions = new ArrayList<Permission>();
 
 		Permission managementPerm = permDAO.findEntity(1L);
 		permissions.add(managementPerm);
@@ -151,29 +136,26 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 
 		List<RoleDTO> rolesDTO = roleDTOmapper.mapToDTOs(roles);
 
-		UserDTO user = new UserDTO();
-		user.setFirstname("Thierry");
-		user.setLastname("Henry");
-		user.setPassword("12345");
+		UserDTO user = th.initializUser("Test", "Name", "ad23sd@msggroup.com", "adsd", "0756748495");
 		user.setRoles(rolesDTO);
-		try {
-			user.setEmail("henry@msggroup.com");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		UserDTO createdUser = sut.createUser(user);
 		List<Long> list = new ArrayList<>();
+
 		list.add((long) PermissionConstants.PM);
 		boolean hasManagementPermission = permCheck.canAccess(createdUser, list);
 		list.clear();
+
 		list.add((long) PermissionConstants.BM);
 		boolean hasBugManagementPermission = permCheck.canAccess(createdUser, list);
 		list.clear();
+
 		list.add((long) PermissionConstants.BC);
 		boolean hasBugClosePermission = permCheck.canAccess(createdUser, list);
+		list.clear();
+
 		Assert.assertEquals("User should have management permission: ", true, hasManagementPermission);
 		Assert.assertEquals("User should have bug close permission ", true, hasBugClosePermission);
-		Assert.assertEquals("User should not have bug management permission ", false, hasBugManagementPermission);
+		Assert.assertEquals("User should have bug management permission ", true, hasBugManagementPermission);
 	}
 
 }

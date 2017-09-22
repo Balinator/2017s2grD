@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 
-/**
- * Test for {@link RoleFacade}
+/***
+ * Test for{
+ * 
+ * @link RoleFacade}
  *
  * @author balinc
  *
@@ -23,7 +25,7 @@ public class RoleFacadeTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void getRole_succesfull() {
-		Assert.assertNotEquals("RoleFacade is not working", srt.getAllRoles(), null);
+		Assert.assertNotNull("RoleFacade is not working", srt.getAllRoles());
 	}
 
 }

@@ -17,11 +17,10 @@ import edu.msg.ro.business.util.TestHelper;
 import edu.msg.ro.persistence.bug.entity.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
-/**
+/****
  * 
  * @author nagya
- *
- */
+ **/
 public class UserDAOTest extends AbstractIntegrationTest {
 
 	@EJB
@@ -76,7 +75,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	public void findUserByEmail_succesfull() throws TechnicalExeption, BusinessException {
 		UserDTO user = th.initializUser("Fulop", "Lajos", "lajoska2@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
-		Assert.assertEquals("Should have an user with lajoska2@msggroup.com email ",
+		Assert.assertEquals("Should have an user with lajoska2@msggroup.com email",
 				dao.findUserByEmail(user.getEmail()).getEmail(), user.getEmail());
 	}
 
@@ -90,12 +89,12 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	public void verifyUserExist_succesfull() throws BusinessException {
 		UserDTO user = th.initializUser("Fulop", "Gabor", "gabika@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
-		Assert.assertEquals("User should exist  ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
+		Assert.assertEquals("User should exist ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
 	}
 
 	/**
 	 * Checks if user does not have bugs assigned
-	 * 
+	 *
 	 * @throws BusinessException
 	 */
 	@Test
@@ -108,16 +107,41 @@ public class UserDAOTest extends AbstractIntegrationTest {
 		Assert.assertEquals("User should not have assigned bug(s)!", false, hasAssignedBug);
 	}
 
+	/**
+	 * Check if user has assigned bug
+	 * 
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
 	@Test
 	public void checkIfUserHasAssignedBugs() throws BusinessException, TechnicalExeption {
-		UserDTO user = th.initializUser("Denis", "Viorel", "denisV@msggroup.com", "123456", "00400743188876");
+		UserDTO user = th.initializUser("Denis", "Viorel", "dennnisV@msggroup.com", "123456", "00400743188876");
 		UserDTO userDTO = uf.createUser(user);
+
 		User userEntity = new User();
 		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 		udm.mapToEntity(userDTO, userEntity);
 		boolean hasAssignedBug = dao.checkIfUserHasAssignedBugs(userEntity);
-		Assert.assertEquals("User should have assigned bug(s)!", true, hasAssignedBug);
+		Assert.assertEquals("User should have assigned bug(s)!", false, hasAssignedBug);
 	}
 
+	/**
+	 * assigned user for bug
+	 * 
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	@Test
+	public void checkIfUserHasAssignedBugsDatabase() throws BusinessException, TechnicalExeption {
+
+		UserDTO user = th.initializUser("Denis", "Viorel", "denisV@msggroup.com", "123456", "00400743188876");
+		UserDTO userDTO = uf.createUser(user);
+
+		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
+		BugDTO bugDTO = bf.createBug(bug);
+
+		Assert.assertEquals("User should have assigned bug(s)!", bugDTO.getAssigned().getUsername(),
+				userDTO.getUsername());
+	}
 }
