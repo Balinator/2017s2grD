@@ -14,7 +14,7 @@ import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.util.TestHelper;
 
-/**
+/****
  * 
  * @author nagya
  *
@@ -32,7 +32,7 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	private UserFacade uf;
 
 	/**
-	 * Check if bug insert is working.
+	 * Check if bug create is working.
 	 *
 	 * @throws BusinessException
 	 * @throws TechnicalExeption
@@ -40,16 +40,23 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	@Test
 	public void createBug_succesfull() throws BusinessException, TechnicalExeption {
 
-		UserDTO testUser = th.initializUser(5L, "Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
-		uf.createUser(testUser);
+		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO persistedUser = uf.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug(1L, "Bug title", "Description", "v2.0", "Open", "bug",
-				StatusEnum.INPROGRESS, testUser);
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistedUser));
+		BugDTO persistedBug = sut.createBug(createdBug);
 
-		Assert.assertNotNull("Bug should have an id", testBug.getId());
+		Assert.assertNotNull("Bug should have an id", persistedBug.getId());
 
 	}
 
+	/**
+	 * Check if delete working
+	 * 
+	 * @throws TechnicalExeption
+	 * @throws BusinessException
+	 */
 	@Test
 	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
 
@@ -57,10 +64,14 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
 				StatusEnum.INFONEEDED, createdUser));
 		BugDTO deletedBug = sut.deleteBug(createdBug);
+
 		Assert.assertNull("Bug should be null", deletedBug);
 
 	}
 
+	/**
+	 * check if bugs not null
+	 */
 	@Test
 	public void getAllbugs_succesfull() {
 		Assert.assertNotNull("getAllbugs not working", sut.getAllbugs());

@@ -26,6 +26,6 @@ public class PermissionFacadeTest extends AbstractIntegrationTest {
 	 */
 	@Test
 	public void getPermission_succesfull() throws BusinessException {
-		Assert.assertNotEquals("PermissionFacade is not working", sut.getAll(), null);
+		Assert.assertNotNull("PermissionFacade is not working", sut.getAll());
 	}
 }

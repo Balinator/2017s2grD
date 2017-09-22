@@ -1,4 +1,4 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.bean.bug;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -19,8 +19,10 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import edu.msg.ro.bean.AbstractBean;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -28,7 +30,6 @@ import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionEnum;
-import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /****
