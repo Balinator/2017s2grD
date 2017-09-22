@@ -26,8 +26,8 @@ public abstract class AbstractBean {
 	 * @param e
 	 */
 	protected void handleExeptionI18n(JBugsExeption e) {
-		String translated = t.setContext(context).translate(e.getMessage(), e.getArguments());
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, translated, translated));
+		String translated = t.translate(e.getMessage(), e.getArguments());
+		t.getContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, translated, translated));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class AbstractBean {
 	 * @param arguments
 	 */
 	protected void addI18nMessage(String key, String message, Object arguments) {
-		addMessage(key, t.setContext(context).translate(message, arguments));
+		addMessage(key, t.translate(message, arguments));
 	}
 
 	/**
@@ -86,6 +86,6 @@ public abstract class AbstractBean {
 	 * @param message
 	 */
 	protected void addMessage(String key, String message) {
-		context.addMessage(key, new FacesMessage(message));
+		t.getContext().addMessage(key, new FacesMessage(message));
 	}
 }

@@ -243,7 +243,8 @@ public class BugBean extends AbstractBean {
 			}
 		}
 
-		if (!permissionChecker.canAccess(permissionList, curentUser)) {
+		if (!selectedBug.getStatus().equals(StatusEnum.CLOSE)
+				&& !permissionChecker.canAccess(permissionList, curentUser)) {
 			response.removeIf(e -> e.equals(StatusEnum.CLOSE));
 		}
 
@@ -335,10 +336,10 @@ public class BugBean extends AbstractBean {
 
 		selectedBug.setAttachment(file);
 		selectedBug.setAttachmentName(event.getFile().getFileName());
-
 	}
 
 	/**
+	 * downloading attachment from databse
 	 * 
 	 * @param bug
 	 */
@@ -347,5 +348,14 @@ public class BugBean extends AbstractBean {
 		InputStream myInputStream = new ByteArrayInputStream(convertToInputStream);
 		downloadAttachment = new DefaultStreamedContent(myInputStream, bug.getAttachmentName(),
 				bug.getAttachmentName());
+	}
+
+	/**
+	 * delete attachment form database
+	 * 
+	 * @throws TechnicalExeption
+	 */
+	public void deleteAttachment() throws TechnicalExeption {
+		bugFacade.deleteAttachment(selectedBug.getId());
 	}
 }

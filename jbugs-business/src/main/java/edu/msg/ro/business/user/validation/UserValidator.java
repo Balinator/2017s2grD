@@ -52,11 +52,10 @@ public class UserValidator {
 	 */
 	public void validateEmail(UserDTO user) throws BusinessException {
 		User existingUserWithSameEmail = userDAO.findUserByEmail(user.getEmail());
-		if (!existingUserWithSameEmail.getId().equals(user.getId())) {
-			if (existingUserWithSameEmail != null) {
+		if (existingUserWithSameEmail != null) {
+			if (!existingUserWithSameEmail.getId().equals(user.getId())) {
 				throw new BusinessException(UserValidator.I18N_USER_EMAIL_EXISTS, new Object[] { user.getEmail() });
 			}
 		}
-
 	}
 }

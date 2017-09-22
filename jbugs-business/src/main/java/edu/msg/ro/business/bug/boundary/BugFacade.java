@@ -69,4 +69,8 @@ public class BugFacade {
 		return bugService.getAllBugs();
 	}
 
+	public void deleteAttachment(Long id) throws TechnicalExeption {
+		bugService.deleteAttachment(id);
+	}
+
 }

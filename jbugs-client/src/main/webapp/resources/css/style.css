@@ -15,6 +15,9 @@ button,a{
     display: inline-block;
     cursor: pointer;
 }
+td{
+	text-align: center;
+}
 .header-class a,button,.header-element{
 	padding: 10px;
 }

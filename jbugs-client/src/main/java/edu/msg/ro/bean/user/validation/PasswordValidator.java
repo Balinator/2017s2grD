@@ -31,7 +31,7 @@ public class PasswordValidator extends AbstractValidator {
 	public void validate(FacesContext context, UIComponent uiComponent, Object value) throws ValidatorException {
 		String stringValue = value.toString();
 		if (stringValue.length() < LENGHT) {
-			throw new ValidatorException(translate(context, I18N_ERROR, new Object[] { LENGHT }));
+			throw new ValidatorException(translate(I18N_ERROR, new Object[] { LENGHT }));
 		}
 	}
 }
