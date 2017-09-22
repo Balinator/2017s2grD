@@ -243,7 +243,8 @@ public class BugBean extends AbstractBean {
 			}
 		}
 
-		if (!permissionChecker.canAccess(permissionList, curentUser)) {
+		if (!selectedBug.getStatus().equals(StatusEnum.CLOSE)
+				&& !permissionChecker.canAccess(permissionList, curentUser)) {
 			response.removeIf(e -> e.equals(StatusEnum.CLOSE));
 		}
 
