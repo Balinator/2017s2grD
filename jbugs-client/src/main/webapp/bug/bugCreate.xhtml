@@ -5,14 +5,16 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<p:dialog header="#{msg['bug.create']}" widgetVar="bugAddDialog"
-		resizable="false" modal="true" showEffect="clip" hideEffect="fold"
-		height="650" width="650">
+		resizable="false" modal="true" showEffect="clip" hideEffect="fold">
 
-		<h:form>
-			<h:panelGrid id="addBug" columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum, panel-colum">
+		<h:form id="bugAddForm">
+			<h:panelGrid id="addBug" columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
 				<p:outputLabel value="#{msg['bug.title']}" />
 				<h:panelGroup layout="block">
-					<p:message for="title"/>
+					<p:tooltip for="title" hideEvent="blur" position="right" showEvent="focus"
+						rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:title')}">
+						<p:message for="title"/>
+					</p:tooltip>
 					<p:inputText id="title" required="true"
 						requiredMessage="#{msg['error.emptytitle']}"
 						value="#{bugBean.newBug.title}"></p:inputText>
@@ -22,7 +24,10 @@
 
 				<p:outputLabel value="#{msg['bug.description']}" />
 				<h:panelGroup layout="block">
-					<p:message for="description" />
+					<p:tooltip for="description" hideEvent="blur" position="right" showEvent="focus"
+						rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:description')}">
+						<p:message for="description" />
+					</p:tooltip>
 					<p:inputText id="description" required="true"
 						requiredMessage="#{msg['error.emptydescription']}"
 						value="#{bugBean.newBug.description}"></p:inputText>
@@ -54,7 +59,10 @@
 
 				<p:outputLabel value="#{msg['bug.version']}" />
 				<h:panelGroup layout="block">
-					<p:message for="version" />
+					<p:tooltip for="version" hideEvent="blur" position="right" showEvent="focus"
+						rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
+						<p:message for="version" />
+					</p:tooltip>
 					<p:inputText id="version" required="true"
 						requiredMessage="#{msg['error.emptyversion']}"
 						value="#{bugBean.newBug.version}"></p:inputText>

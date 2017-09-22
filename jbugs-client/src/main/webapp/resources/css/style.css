@@ -48,9 +48,13 @@ body > :not(.header-class){
 	padding: 1%;
 }
 .panel-colum{
-	width: 50%;
-	text-align: center;
+	width: 65%;
+	text-align: left;
 }
 .panel-colum > div{
 	margin-bottom: 3px;
+}
+.panel-colum-label{
+	width: 35%;
+	text-align: left;
 }
