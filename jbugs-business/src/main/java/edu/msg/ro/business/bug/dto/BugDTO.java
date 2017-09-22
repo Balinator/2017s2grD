@@ -3,10 +3,10 @@ package edu.msg.ro.business.bug.dto;
 import java.util.Arrays;
 import java.util.Date;
 
+import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;
-import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * Mapper for {@link Bug} and {@link BugDTO}.

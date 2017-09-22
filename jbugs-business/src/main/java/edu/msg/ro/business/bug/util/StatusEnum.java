@@ -1,4 +1,4 @@
-package edu.msg.ro.persistence.bug.entity;
+package edu.msg.ro.business.bug.util;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public enum StatusEnum {
 		INPROGRESS.neighbors = new ArrayList<>();
 		INPROGRESS.neighbors.add(REJECTED);
 		INPROGRESS.neighbors.add(INFONEEDED);
-		INPROGRESS.neighbors.add(CLOSE);
+		INPROGRESS.neighbors.add(FIXED);
 
 		INFONEEDED.neighbors = new ArrayList<>();
 		INFONEEDED.neighbors.add(INPROGRESS);
