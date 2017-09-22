@@ -415,6 +415,8 @@ public class BugBean extends AbstractBean {
 	 * @throws TechnicalExeption
 	 */
 	public void deleteAttachment() throws TechnicalExeption {
-		bugFacade.deleteAttachment(selectedBug.getId());
+		selectedBug.setAttachment(null);
+		selectedBug.setAttachmentName(null);
+
 	}
 }
