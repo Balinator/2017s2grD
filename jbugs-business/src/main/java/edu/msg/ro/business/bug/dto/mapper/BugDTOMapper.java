@@ -59,7 +59,6 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		entity.setTitle(dto.getTitle());
 		entity.setDescription(dto.getDescription());
 		entity.setAuthor(userDAO.findEntity(dto.getAuthor().getId()));
-		entity.setAssigned(userDAO.findEntity(dto.getAssigned().getId()));
 		entity.setAttachment(dto.getAttachment());
 		entity.setFixedIn(dto.getFixedIn());
 		entity.setSeverity(dto.getSeverity().key);
@@ -67,5 +66,10 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		entity.setTargetDate(dto.getTargetDate());
 		entity.setVersion(dto.getVersion());
 		entity.setAttachmentName(dto.getAttachmentName());
+		if (dto.getAssigned() != null) {
+			entity.setAssigned(userDAO.findEntity(dto.getAssigned().getId()));
+		} else {
+			entity.setAssigned(null);
+		}
 	}
 }

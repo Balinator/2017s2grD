@@ -5,6 +5,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.i18n.Translator;
 
 /**
@@ -19,6 +20,25 @@ public abstract class AbstractBean {
 
 	@EJB
 	protected Translator t;
+
+	/**
+	 * Get data by key from session map.
+	 * 
+	 * @param key
+	 * @return
+	 */
+	protected Object getSessionData(String key) {
+		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
+	}
+
+	/**
+	 * Get the logged {@link User}.
+	 * 
+	 * @return
+	 */
+	protected UserDTO getLoggedUser() {
+		return (UserDTO) getSessionData("loggedUser");
+	}
 
 	/**
 	 * Translate JBugsExeption exeption message.
