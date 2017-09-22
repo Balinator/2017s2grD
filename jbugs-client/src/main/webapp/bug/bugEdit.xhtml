@@ -72,28 +72,34 @@
 
 				<p:outputLabel value="#{msg['bug.attachment']}" />
 
-				<p:outputLabel value="#{bugBean.selectedBug.attachmentName}"
-					rendered="#{not empty bugBean.selectedBug.attachment}" />
+				<h:panelGroup id="uploadGrid">
+					<p:outputLabel value="#{bugBean.selectedBug.attachmentName}"
+						rendered="#{not empty bugBean.selectedBug.attachment}" ajax="true" />
 
-				<h:commandButton value="#{msg['bug.attachment.delete']}"
-					action="#{bugBean.deleteAttachment}"
-					rendered="#{not empty bugBean.selectedBug.attachment}"></h:commandButton>
+					<p:commandLink actionListener="#{bugBean.deleteAttachment}"
+						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" 
+						action="#{bugBean.editBug}"
+						rendered="#{not empty bugBean.selectedBug.attachment}"
+						update="uploadFile, uploadGrid">
+						<h:outputText value="#{msg['bug.attachment.delete']}" />
+					</p:commandLink>
 
-				<p:fileUpload fileUploadListener="#{bugBean.handleFileEdit}"
-					dragDropSupport="false" sizeLimit="26214400"
-					update="alreadyUploaded, @this" fileLimit="1"
-					disabled="#{not empty bugBean.selectedBug.attachment}"
-					allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
-					value="#{bugBean.selectedBug.attachment}" />
+					<p:fileUpload id="uploadFile"
+						fileUploadListener="#{bugBean.handleFileEdit}"
+						dragDropSupport="false" sizeLimit="26214400"
+						update="@this, attachmentUploded" fileLimit="1"
+						disabled="#{not empty bugBean.selectedBug.attachment}"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
+						value="#{bugBean.selectedBug.attachment}" />
 
-				<h:panelGroup id="alreadyUploaded">
-					<p:outputLabel value="#{msg['bug.attachment.updoded']}"
-						rendered="#{not empty bugBean.selectedBug.attachment}" />
+					<h:panelGrid id="attachmentUploded">
+						<p:outputLabel value="#{msg['bug.attachment.updoded']}"
+							rendered="#{not empty bugBean.selectedBug.attachment}" />
+					</h:panelGrid>
+
+					<h:commandButton value="#{msg['bug.update']}"
+						action="#{bugBean.editBug}"></h:commandButton>
 				</h:panelGroup>
-
-				<h:commandButton value="#{msg['bug.update']}"
-					action="#{bugBean.editBug}"></h:commandButton>
-
 			</h:panelGrid>
 
 		</h:form>
