@@ -5,17 +5,20 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<p:dialog id="editUserDialog" header="#{msg['user.update']}"
-		widgetVar="userEditDialog" resizable="false" modal="true" height="440"
-		width="456" showEffect="clip" hideEffect="fold">
+		widgetVar="userEditDialog" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
 
 		<h:form id="viewForm">
 
 			<p:outputPanel id="display">
-				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
-					columnClasses="panel-colum, panel-colum">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
+
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
-						<p:message for="firstname" />
+						<p:tooltip for="firstname" hideEvent="blur" position="right" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:firstname')}">
+							<p:message for="firstname" />
+						</p:tooltip>
 						<p:inputText id="firstname" required="true"
 							requiredMessage="#{msg['error.emptyfirstname']}"
 							value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
@@ -23,7 +26,10 @@
 
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<h:panelGroup layout="block">
-						<p:message for="lastname" />
+						<p:tooltip for="lastname" hideEvent="blur" position="right" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:lastname')}">
+							<p:message for="lastname" />
+						</p:tooltip>
 						<p:inputText id="lastname" required="true"
 							requiredMessage="#{msg['error.emptylastname']}"
 							value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>

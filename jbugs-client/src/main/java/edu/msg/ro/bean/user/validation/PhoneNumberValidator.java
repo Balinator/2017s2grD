@@ -5,6 +5,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.ValidatorException;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+
 /**
  * Class for Validating phone numbers.
  * 
@@ -18,16 +22,34 @@ public class PhoneNumberValidator extends AbstractValidator {
 	 * Error message key.
 	 */
 	public static final String I18N_ERROR = "users.phone.error";
+	boolean isValidDE;
+	boolean isValidRO;
 
 	/**
-	 * Check the phone number
+	 * Check if the numbe ris a valid German or Romanian phone number with
+	 * Google API and regexp
 	 */
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
 		String phoneNumber = value.toString();
-		// Examples 0040123456789 or +49123456
-		if (!phoneNumber.matches("^(\\+|00)(((40|400)[0-9]{9})|((49|490)[0-9]{6,13}))$")) {
+		if (!phoneNumber.matches("^\\+?\\d+${6,13}")) {
+			throw new ValidatorException(translate(I18N_ERROR));
+		}
+
+		PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+		try {
+			PhoneNumber phoneNumberDE = phoneUtil.parse(phoneNumber, "DE");
+			PhoneNumber phoneNumberRO = phoneUtil.parse(phoneNumber, "RO");
+
+			isValidDE = phoneUtil.isValidNumberForRegion(phoneNumberDE, "DE");
+			isValidRO = phoneUtil.isValidNumberForRegion(phoneNumberRO, "RO");
+
+			if (!((isValidDE) || (isValidRO))) {
+				throw new ValidatorException(translate(I18N_ERROR));
+
+			}
+		} catch (NumberParseException e) {
 			throw new ValidatorException(translate(I18N_ERROR));
 		}
 	}
