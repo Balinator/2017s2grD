@@ -46,7 +46,7 @@ public class Bug extends AbstractEntity {
 	private Date targetDate;
 
 	@Column
-	private String severity;
+	private int severity;
 
 	@OneToOne
 	private User author;
@@ -102,11 +102,11 @@ public class Bug extends AbstractEntity {
 		this.targetDate = targetDate;
 	}
 
-	public String getSeverity() {
+	public int getSeverity() {
 		return severity;
 	}
 
-	public void setSeverity(String severity) {
+	public void setSeverity(int severity) {
 		this.severity = severity;
 	}
 

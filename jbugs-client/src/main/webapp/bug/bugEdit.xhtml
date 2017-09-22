@@ -41,8 +41,8 @@
 				<p:selectOneMenu value="#{bugBean.selectedBug.severity}"
 					style="width:90px">
 
-					<f:selectItems value="#{bugBean.severityList}" var="severities"
-						itemLabel="#{msg['bug.severity.' += severities]}" />
+					<f:selectItems value="#{bugBean.severityList}" var="severity"
+						itemLabel="#{msg['bug.severity.' += severity]}" />
 
 				</p:selectOneMenu>
 
@@ -51,7 +51,7 @@
 					converter="#{bugConverter}" style="width:90px">
 
 					<f:selectItems value="#{bugBean.getStatusList()}" var="status"
-						itemLabel="#{status}" itemValue="#{status}" />
+						itemLabel="#{msg['bug.status.' += status]}" itemValue="#{status}" />
 
 				</p:selectOneMenu>
 
