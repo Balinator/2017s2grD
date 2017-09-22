@@ -4,11 +4,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
+import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.dto.mapper.AbstractDTOMapper;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.persistence.bug.entity.Bug;
-import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		dto.setAssigned(userDtoMapper.mapToDTO(entity.getAssigned()));
 		dto.setAttachment(entity.getAttachment());
 		dto.setFixedIn(entity.getFixedIn());
-		dto.setSeverity(entity.getSeverity());
+		dto.setSeverity(BugSeverity.values()[entity.getSeverity()]);
 		dto.setStatus(StatusEnum.values()[entity.getStatus()]);
 		dto.setTargetDate(entity.getTargetDate());
 		dto.setVersion(entity.getVersion());
@@ -61,7 +62,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		entity.setAssigned(userDAO.findEntity(dto.getAssigned().getId()));
 		entity.setAttachment(dto.getAttachment());
 		entity.setFixedIn(dto.getFixedIn());
-		entity.setSeverity(dto.getSeverity());
+		entity.setSeverity(dto.getSeverity().key);
 		entity.setStatus(dto.getStatus().key);
 		entity.setTargetDate(dto.getTargetDate());
 		entity.setVersion(dto.getVersion());

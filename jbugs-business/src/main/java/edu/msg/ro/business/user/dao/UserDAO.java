@@ -7,8 +7,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.dao.AbstractDao;
-import edu.msg.ro.persistence.bug.entity.StatusEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**

@@ -22,18 +22,32 @@
 		<h:form id="form">
 
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
-				filteredValue="#{bugBean.filteredBugList}"
-				widgetVar="bugUpdateTable" paginator="true" rows="25"
-				styleClass="paginated" selectionMode="single" rowKey="#{bug.id}">
+				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
+				paginator="true" rows="25" styleClass="paginated"
+				selectionMode="single" rowKey="#{bug.id}">
 
 				<f:facet name="header">
+					<h:commandLink>
+						<p:graphicImage library="icons" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="dataTable" fileName="bugs"
+							postProcessor="#{customizedDocumentsView.postProcessXLS}" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage library="icons" name="pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="dataTable" fileName="bugs" />
+					</h:commandLink>
+
 					<h:panelGroup layout="block" style=" overflow: auto;">
+
 						<p:outputPanel>
+
 							<h:outputText value="#{msg['bug.search.all']}" />
 							<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
 								style="width:150px"
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
+
 
 						<p:commandButton value="#{msg['add']}" type="button"
 							onclick="PF('bugAddDialog').show();" />
@@ -76,13 +90,13 @@
 							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
 								itemValue="#{null}" noSelectionOption="true" />
 
-							<f:selectItems value="#{bugBean.severityList}" var="severities"
-								itemLabel="#{msg['bug.severity.' += severities]}" />
+							<f:selectItems value="#{bugBean.severityList}" var="severity"
+								itemLabel="#{msg['bug.severity.' += severity]}" />
 						</p:selectOneMenu>
 					</f:facet>
 					<br />
 
-					<h:outputText value="#{bug.severity}"
+					<h:outputText value="#{msg['bug.severity.' += bug.severity]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
@@ -95,13 +109,13 @@
 							<f:selectItem itemLabel="#{msg['bug.search.selectone']}"
 								itemValue="#{null}" noSelectionOption="true" />
 
-							<f:selectItems value="#{bugBean.getStatusList()}" var="status"
-								itemLabel="#{status}" itemValue="#{status}" />
+							<f:selectItems value="#{bugBean.statusListFilter}" var="statuses"
+								itemLabel="#{msg['bug.status.' += statuses]}" />
 						</p:selectOneMenu>
 
 					</f:facet>
 					<br />
-					<h:outputText value="#{bug.status}"
+					<h:outputText value="#{msg['bug.status.' += bug.status]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 

@@ -1,4 +1,4 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.bean.bug;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -19,17 +19,18 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import edu.msg.ro.bean.AbstractBean;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
+import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionEnum;
-import edu.msg.ro.enums.BugSeverity;
 import edu.msg.ro.persistence.bug.entity.Bug;
-import edu.msg.ro.persistence.bug.entity.StatusEnum;
 
 /****
  * Bug Bean.****
@@ -60,9 +61,13 @@ public class BugBean extends AbstractBean {
 
 	private StatusEnum[] statusList;
 
+	private StatusEnum[] statusListFilter;
+
 	private BugSeverity[] severityList;
 
 	private int severities;
+
+	private int stasuses;
 
 	private UserDTO assignedUser = new UserDTO();
 
@@ -81,7 +86,24 @@ public class BugBean extends AbstractBean {
 	 */
 	@PostConstruct
 	public void init() {
+		UserDTO curentUser = null;
+		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("username");
+
+		for (UserDTO userDTO : userService.getAllUsers()) {
+			if (userDTO.getUsername().equals(username)) {
+				curentUser = userDTO;
+				break;
+			}
+		}
+
 		buglist = bugFacade.getAllbugs();
+
+		List<PermissionEnum> permissionList = new ArrayList<>();
+		permissionList.add(PermissionEnum.BUG_CLOSE);
+		if (!permissionChecker.canAccess(permissionList, curentUser)) {
+			buglist.removeIf(e -> e.getStatus().equals(StatusEnum.CLOSE));
+		}
 	}
 
 	/**
@@ -183,6 +205,7 @@ public class BugBean extends AbstractBean {
 	public String createNewBug() throws BusinessException, TechnicalExeption {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(assignedUser);// todo: change it
+		newBug.setStatus(StatusEnum.OPEN);
 		bugFacade.createBug(newBug);
 		// addMessage("Bug " + newBug.getTitle() + " created!");
 		newBug = new BugDTO();
@@ -252,6 +275,25 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
+	 * Method for get all {@link BugStatus}
+	 * 
+	 * @return
+	 */
+
+	public StatusEnum[] getStatusListFilter() {
+		return StatusEnum.values();
+	}
+
+	/**
+	 * Set for statusListFilter
+	 * 
+	 * @param statusListFilter
+	 */
+	public void setStatusListFilter(StatusEnum[] statusListFilter) {
+		this.statusListFilter = statusListFilter;
+	}
+
+	/**
 	 * Method for get all {@link BugSeverity}.
 	 * 
 	 * @return
@@ -285,6 +327,24 @@ public class BugBean extends AbstractBean {
 	 */
 	public void setSeverities(int severities) {
 		this.severities = severities;
+	}
+
+	/**
+	 * Get for statuses
+	 * 
+	 * @return
+	 */
+	public int getStasuses() {
+		return stasuses;
+	}
+
+	/**
+	 * Set for statuses
+	 * 
+	 * @param stasuses
+	 */
+	public void setStasuses(int stasuses) {
+		this.stasuses = stasuses;
 	}
 
 	/**
