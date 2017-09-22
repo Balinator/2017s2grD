@@ -40,14 +40,6 @@
 						<f:selectItems value="#{userUpdateBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-
-					<h:outputText value="#{msg['user.activate']}" />
-					<p:selectBooleanButton onLabel="#{msg['users.active']}"
-						offLabel="#{msg['users.inactive']}" onIcon="ui-icon-check"
-						offIcon="ui-icon-close" style="width:110px">
-						<p:ajax />
-					</p:selectBooleanButton>
-
 					<h:commandButton value="#{msg['users.update']}"
 						action="#{userUpdateBean.editUser}">
 					</h:commandButton>
