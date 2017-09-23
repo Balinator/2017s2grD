@@ -14,7 +14,11 @@
 </h:head>
 <h:body>
 	<f:view>
+	
 		<ui:include src="/header.xhtml" />
+		<ui:include src="/user/userCreate.xhtml" />
+		<ui:include src="/user/userEdit.xhtml" />
+
 		<h:form id="userForm">
 			<p:messages autoUpdate="true" />
 			<p:dataTable value="#{userListBean.allUsers}" var="user"
@@ -23,6 +27,7 @@
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
 						actionListener="#{userNewBean.clearUser()}"
+						update=":userAddForm:addUserPanel"
 						oncomplete="PF('userCreateDialog').show();"
 						style="padding: .3em 1em;"
 						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
@@ -96,8 +101,6 @@
 				</p:column>
 			</p:dataTable>
 		</h:form>
-		<ui:include src="/user/userCreate.xhtml" />
-		<ui:include src="/user/userEdit.xhtml" />
 
 	</f:view>
 </h:body>

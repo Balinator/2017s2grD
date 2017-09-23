@@ -24,8 +24,7 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
-@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b"),
-		@NamedQuery(name = Bug.DELETE_ATTACHMENT, query = "Update Bug b SET b.attachment = NULL, b.attachmentName = NULL where b.id =:id") })
+@NamedQueries({ @NamedQuery(name = Bug.FIND_ALL, query = "SELECT b from Bug b") })
 @Entity
 public class Bug extends AbstractEntity {
 

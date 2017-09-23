@@ -8,7 +8,7 @@
 		resizable="false" modal="true" showEffect="clip" hideEffect="fold">
 
 		<h:form id="bugAddForm">
-			<h:panelGrid id="addBug" columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
+			<h:panelGrid id="addBugPanel" columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
 				<p:outputLabel value="#{msg['bug.title']}" />
 				<h:panelGroup layout="block">
 					<p:tooltip for="title" hideEvent="blur" position="right" showEvent="focus"
@@ -20,8 +20,6 @@
 						value="#{bugBean.newBug.title}"></p:inputText>
 				</h:panelGroup>
 				
-
-
 				<p:outputLabel value="#{msg['bug.description']}" />
 				<h:panelGroup layout="block">
 					<p:tooltip for="description" hideEvent="blur" position="right" showEvent="focus"

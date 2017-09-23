@@ -152,6 +152,13 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
+	 * make null value for newBug
+	 */
+	public void refreshNewBug() {
+		newBug = new BugDTO();
+	}
+
+	/**
 	 * Get for selectedBug.
 	 * 
 	 * @return

@@ -48,8 +48,10 @@
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
-						<p:commandButton value="#{msg['bug.add']}" type="button"
-							onclick="PF('bugAddDialog').show();" />
+						<p:commandLink value="#{msg['bug.add']}"
+							styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+							actionListener="#{bugBean.refreshNewBug}"
+							update=":bugAddForm:addBugPanel" onclick="PF('bugAddDialog').show();" />
 					</h:panelGroup>
 				</f:facet>
 

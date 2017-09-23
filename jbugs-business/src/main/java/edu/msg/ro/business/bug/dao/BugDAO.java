@@ -36,16 +36,6 @@ public class BugDAO extends AbstractDao<Bug> {
 	}
 
 	/**
-	 * Method for delete attachment
-	 * 
-	 * @param id
-	 */
-	public void deleteAttachemtn(Long id) {
-		TypedQuery<Bug> query = this.em.createNamedQuery(Bug.DELETE_ATTACHMENT, Bug.class);
-		query.setParameter("id", id);
-	}
-
-	/**
 	 * Method for finding {@link Bug} by id.
 	 * 
 	 * @param id
