@@ -16,7 +16,7 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
-			<p:messages autoUpdate="true" />
+			<p:messages autoUpdate="true" severity="info" />
 			<p:dataTable value="#{userListBean.allUsers}" var="user"
 				id="userList" paginator="true" selectionMode="single"
 				rowKey="#{user.id}" rows="15" styleClass="paginated">

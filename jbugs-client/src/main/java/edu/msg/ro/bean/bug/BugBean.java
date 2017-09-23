@@ -7,13 +7,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.validation.ValidationException;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -24,8 +20,6 @@ import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
-import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
@@ -41,6 +35,8 @@ import edu.msg.ro.persistence.bug.entity.Bug;
 @ManagedBean
 @ViewScoped
 public class BugBean extends AbstractBean {
+
+	public static final String I18N_BUG_SAVED = "bug.crud.save.success";
 
 	@EJB
 	private BugFacade bugFacade;
@@ -198,16 +194,13 @@ public class BugBean extends AbstractBean {
 
 	/**
 	 * Just create a bug without return.
-	 * 
-	 * @throws BusinessException
-	 * @throws TechnicalExeption
 	 */
-	public String createNewBug() throws BusinessException, TechnicalExeption {
+	public String createNewBug() {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(getLoggedUser());
 		newBug.setStatus(StatusEnum.OPEN);
 		bugFacade.createBug(newBug);
-		// addMessage("Bug " + newBug.getTitle() + " created!");
+		addI18nMessage(I18N_BUG_SAVED, new Object[] { newBug.getTitle() });
 		newBug = new BugDTO();
 		return "bugManagment";
 	}
@@ -226,14 +219,10 @@ public class BugBean extends AbstractBean {
 	 * Method for editing {@link Bug}.
 	 * 
 	 * @return
-	 * @throws TechnicalExeption
 	 */
-	public String editBug() throws TechnicalExeption {
-		try {
-			bugFacade.updateBug(selectedBug);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
+	public String editBug() {
+		bugFacade.updateBug(selectedBug);
+		addI18nMessage(I18N_BUG_SAVED, new Object[] { selectedBug.getTitle() });
 		selectedBug = new BugDTO();
 		return "bugManagment";
 	}
@@ -348,26 +337,6 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
-	 * Method for validation for creating a {@link Bug}.
-	 * 
-	 * @param context
-	 * @param uic
-	 * @param value
-	 * @throws ValidationException
-	 */
-	public void validate(FacesContext context, UIComponent uic, Object value) throws ValidationException {
-
-		String input = (String) value;
-
-		if (input.length() == 0) {
-			((UIInput) uic).setValid(false);
-			FacesMessage message = new FacesMessage("Not valid data");// TODO:
-																		// i18n
-			context.addMessage(uic.getClientId(context), message);
-		}
-	}
-
-	/**
 	 * Method for upload file to database
 	 * 
 	 * @param event
@@ -386,9 +355,6 @@ public class BugBean extends AbstractBean {
 	 * 
 	 * @param event
 	 */
-
-	// need to refactor --handleFileUplod
-
 	public void handleFileEdit(FileUploadEvent event) {
 
 		byte[] file = new byte[event.getFile().getContents().length];
@@ -399,7 +365,7 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
-	 * downloading attachment from databse
+	 * Downloading attachment from database.
 	 * 
 	 * @param bug
 	 */
@@ -411,11 +377,9 @@ public class BugBean extends AbstractBean {
 	}
 
 	/**
-	 * delete attachment form database
-	 * 
-	 * @throws TechnicalExeption
+	 * Delete attachment form database.
 	 */
-	public void deleteAttachment() throws TechnicalExeption {
+	public void deleteAttachment() {
 		selectedBug.setAttachment(null);
 		selectedBug.setAttachmentName(null);
 

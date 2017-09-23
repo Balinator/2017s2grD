@@ -9,8 +9,6 @@ import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dto.BugDTO;
-import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -31,10 +29,8 @@ public class BugFacade {
 	 * 
 	 * @param bug
 	 * @return
-	 * @throws BusinessException
-	 * @throws TechnicalExeption
 	 */
-	public BugDTO createBug(BugDTO bug) throws BusinessException, TechnicalExeption {
+	public BugDTO createBug(BugDTO bug) {
 		return bugService.createBug(bug);
 	}
 
@@ -43,10 +39,8 @@ public class BugFacade {
 	 * 
 	 * @param bug
 	 * @return
-	 * @throws BusinessException
-	 * @throws TechnicalExeption
 	 */
-	public BugDTO updateBug(BugDTO bug) throws BusinessException, TechnicalExeption {
+	public BugDTO updateBug(BugDTO bug) {
 		return bugService.updateBug(bug);
 	}
 
@@ -69,7 +63,12 @@ public class BugFacade {
 		return bugService.getAllBugs();
 	}
 
-	public void deleteAttachment(Long id) throws TechnicalExeption {
+	/**
+	 * Delete attachment from bug.
+	 * 
+	 * @param id
+	 */
+	public void deleteAttachment(Long id) {
 		bugService.deleteAttachment(id);
 	}
 

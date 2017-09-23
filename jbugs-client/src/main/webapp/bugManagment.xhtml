@@ -20,7 +20,7 @@
 		<ui:include src="/bug/attachmentDownload.xhtml" />
 
 		<h:form id="form">
-
+			<p:messages autoUpdate="true" severity="info" />
 			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
 				paginator="true" rows="25" styleClass="paginated"
