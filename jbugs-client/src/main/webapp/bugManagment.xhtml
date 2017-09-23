@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title><h:outputText value="#{msg['bugs.title']}" /></title>
+	<title><h:outputText value="#{msg['bug.page.title']}" /></title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
@@ -48,8 +48,7 @@
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
-
-						<p:commandButton value="#{msg['add']}" type="button"
+						<p:commandButton value="#{msg['bug.add']}" type="button"
 							onclick="PF('bugAddDialog').show();" />
 					</h:panelGroup>
 				</f:facet>
@@ -151,7 +150,7 @@
 
 				</p:column>
 
-				<p:column headerText="#{msg['bug.update']}"
+				<p:column headerText="#{msg['bug.operation']}"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandButton id="ajax" update=":formBugEdit:display"
 						actionListener="#{bugBean.setSelectedBug(bug)}"

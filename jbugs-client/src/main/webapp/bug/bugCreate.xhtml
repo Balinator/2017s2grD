@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<p:dialog header="#{msg['bug.create']}" widgetVar="bugAddDialog"
+	<p:dialog header="#{msg['bug.create.dialog.title']}" widgetVar="bugAddDialog"
 		resizable="false" modal="true" showEffect="clip" hideEffect="fold">
 
 		<h:form id="bugAddForm">
@@ -83,7 +83,7 @@
 						rendered="#{not empty bugBean.newBug.attachment}"/>
 				</h:panelGroup>
 				
-				<h:commandButton value="#{msg['bug.create']}"
+				<h:commandButton value="#{msg['bug.create.dialog.add']}"
 					action="#{bugBean.createNewBug}" update="addBug"/>
 
 			</h:panelGrid>

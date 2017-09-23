@@ -4,12 +4,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<p:dialog id="createUserDialog" header="#{msg['user.create']}"
+	<p:dialog id="createUserDialog" header="#{msg['users.create.dialog.title']}"
 		widgetVar="userCreateDialog" resizable="false" modal="true"
 		showEffect="clip" hideEffect="fold">
 
 		<h:form id="addForm">
-
 
 			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
@@ -39,7 +38,7 @@
 							value="#{userNewBean.newUser.lastname}"></p:inputText>
 					</h:panelGroup>
 
-					<p:outputLabel value="Email" />
+					<p:outputLabel value="#{msg['users.email']}" />
 					<h:panelGroup layout="block">
 
 						<p:tooltip for="email" hideEvent="blur" position="right"
@@ -87,7 +86,7 @@
 						<f:selectItems value="#{userNewBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-					<p:commandButton value="#{msg['users.create']}"
+					<p:commandButton value="#{msg['users.create.dialog.create']}"
 						action="#{userNewBean.createNewUser}"
 						oncomplete="PF('userCreateDialog').hide();"
 						update="userForm:userList" ajax="false" />
