@@ -21,7 +21,7 @@ public abstract class AbstractBean {
 	protected Translator t;
 
 	/**
-	 * Translate JBugsExeption exeption message.
+	 * Translate JBugsExeption exception message.
 	 * 
 	 * @param e
 	 */

@@ -106,12 +106,12 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Method for chacking if chackbox needed to be chacked.
+	 * Method for checking if checkbox needed to be checked.
 	 * 
 	 * @param role
 	 * @return
 	 */
-	public Long[] isChackboxChacked(RoleDTO role) {
+	public Long[] isCheckboxChecked(RoleDTO role) {
 		Long[] list = new Long[role.getPermissions().size()];
 		for (int i = 0; i < role.getPermissions().size(); ++i) {
 			list[i] = role.getPermissions().get(i).getId();
@@ -120,7 +120,7 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Listener method for chackbox has changed his value.
+	 * Listener method for checkbox has changed its value.
 	 * 
 	 * @param event
 	 * @param role
@@ -168,7 +168,7 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Listener helper for 2 row.
+	 * Listener helper for 2 rows.
 	 * 
 	 * @param event
 	 * @throws TechnicalException
@@ -178,7 +178,7 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Listener helper for 3 row.
+	 * Listener helper for 3 rows.
 	 * 
 	 * @param event
 	 * @throws TechnicalException
@@ -188,7 +188,7 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Listener helper for 4 row.
+	 * Listener helper for 4 rows.
 	 * 
 	 * @param event
 	 * @throws TechnicalException
@@ -198,7 +198,7 @@ public class PermissionManagerBean extends AbstractBean {
 	}
 
 	/**
-	 * Listener helper for 5 row.
+	 * Listener helper for 5 rows.
 	 * 
 	 * @param event
 	 * @throws TechnicalException
