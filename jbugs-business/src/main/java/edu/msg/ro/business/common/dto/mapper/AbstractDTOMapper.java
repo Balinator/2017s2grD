@@ -8,7 +8,7 @@ import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 
 /**
- * Abstract class for mapping DTOs and Entityes.
+ * Abstract class for mapping DTOs and Entities.
  * 
  * @author laszll
  *

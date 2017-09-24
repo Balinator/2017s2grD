@@ -7,9 +7,10 @@ import org.junit.Test;
 
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.util.TestHelper;
@@ -35,16 +36,16 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	 * Check if bug create is working.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void createBug_succesfull() throws BusinessException, TechnicalExeption {
+	public void createBug_succesfull() throws BusinessException, TechnicalException {
 
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistedUser = uf.createUser(testUser);
 
-		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
-				StatusEnum.INFONEEDED, persistedUser));
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", BugSeverity.CRITICAL, "v2.2",
+				"bug", StatusEnum.INFONEEDED, persistedUser));
 		BugDTO persistedBug = sut.createBug(createdBug);
 
 		Assert.assertNotNull("Bug should have an id", persistedBug.getId());
@@ -54,15 +55,15 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	/**
 	 * Check if delete working
 	 * 
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 * @throws BusinessException
 	 */
 	@Test
-	public void deleteBug_deleteBugTest() throws TechnicalExeption, BusinessException {
+	public void deleteBug_deleteBugTest() throws TechnicalException, BusinessException {
 
 		UserDTO createdUser = uf.createUser(th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395"));
-		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug",
-				StatusEnum.INFONEEDED, createdUser));
+		BugDTO createdBug = sut.createBug(th.initializingBug("Bug title", "Description", BugSeverity.HIGH, "v2.2",
+				"bug", StatusEnum.INFONEEDED, createdUser));
 		BugDTO deletedBug = sut.deleteBug(createdBug);
 
 		Assert.assertNull("Bug should be null", deletedBug);

@@ -8,9 +8,10 @@ import org.junit.Test;
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.util.TestHelper;
@@ -48,15 +49,15 @@ public class BugDAOTest extends AbstractIntegrationTest {
 	 * Check if a bug is returned by the id.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void getBugbyId_succesfull() throws BusinessException, TechnicalExeption {
+	public void getBugbyId_succesfull() throws BusinessException, TechnicalException {
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = uf.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "Open", "bug", StatusEnum.INPROGRESS,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.LOW, "Open", "bug",
+				StatusEnum.INPROGRESS, persistUser);
 		BugDTO persistBug = bf.createBug(testBug);
 		Long generateddId = persistBug.getId();
 

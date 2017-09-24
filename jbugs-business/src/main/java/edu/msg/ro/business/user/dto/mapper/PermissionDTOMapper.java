@@ -16,7 +16,7 @@ import edu.msg.ro.persistence.user.entity.Permission;
 public class PermissionDTOMapper extends AbstractDTOMapper<Permission, PermissionDTO> {
 
 	/**
-	 * Method for instanciating a {@link PermissionDTO}.
+	 * Method for instantiating a {@link PermissionDTO}.
 	 */
 	@Override
 	public PermissionDTO getDTOInstance() {

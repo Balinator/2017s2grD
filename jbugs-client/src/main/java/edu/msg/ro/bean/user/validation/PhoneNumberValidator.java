@@ -26,7 +26,7 @@ public class PhoneNumberValidator extends AbstractValidator {
 	boolean isValidRO;
 
 	/**
-	 * Check if the numbe ris a valid German or Romanian phone number with
+	 * Check if the number is a valid German or Romanian phone number with
 	 * Google API and regexp
 	 */
 	@Override

@@ -90,7 +90,7 @@ public class UserDAO extends AbstractDao<User> {
 	 * Checks if user has assigned bug(s) that are not closed.
 	 * 
 	 * @param id
-	 * @return
+	 * @return boolean
 	 */
 	public boolean checkIfUserHasAssignedBugs(User user) {
 		Query query = this.em.createQuery("SELECT b FROM Bug b WHERE b.assigned = :User AND b.status <> :status");

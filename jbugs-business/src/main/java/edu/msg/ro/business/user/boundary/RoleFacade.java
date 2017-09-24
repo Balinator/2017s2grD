@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.control.RoleService;
 import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.persistence.user.entity.Role;
@@ -30,12 +30,12 @@ public class RoleFacade {
 	}
 
 	/**
-	 * Method for updating an {@link Role}.
+	 * Method for updating a {@link Role}.
 	 * 
 	 * @param roleDTO
 	 *            - the DTO for the {@link Role}.
 	 * @return updated {@link Role}.
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	public RoleDTO update(RoleDTO roleDTO) {
 		return roleService.update(roleDTO);

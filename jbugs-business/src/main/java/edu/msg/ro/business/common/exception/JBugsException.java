@@ -6,7 +6,7 @@ package edu.msg.ro.business.common.exception;
  * @author laszll
  *
  */
-public class JBugsExeption extends Exception {
+public class JBugsException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class JBugsExeption extends Exception {
 	 *
 	 * @param message
 	 */
-	public JBugsExeption(String message) {
+	public JBugsException(String message) {
 		super();
 		this.message = message;
 	}
@@ -29,7 +29,7 @@ public class JBugsExeption extends Exception {
 	 * 
 	 * @param message
 	 */
-	public JBugsExeption(String message, Object arguments) {
+	public JBugsException(String message, Object arguments) {
 		super();
 		this.message = message;
 		this.arguments = arguments;
@@ -41,7 +41,7 @@ public class JBugsExeption extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public JBugsExeption(String message, Throwable cause) {
+	public JBugsException(String message, Throwable cause) {
 		super(cause);
 		this.message = message;
 	}
@@ -52,7 +52,7 @@ public class JBugsExeption extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public JBugsExeption(String message, Object arguments, Throwable cause) {
+	public JBugsException(String message, Object arguments, Throwable cause) {
 		super(cause);
 		this.message = message;
 		this.arguments = arguments;

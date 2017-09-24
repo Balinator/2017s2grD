@@ -1,7 +1,7 @@
 package edu.msg.ro.enums;
 
 /**
- * Enum for avabil languages.
+ * Enum for available languages.
  * 
  * @author laszll
  *

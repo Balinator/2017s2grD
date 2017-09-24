@@ -6,7 +6,7 @@ package edu.msg.ro.business.common.exception;
  * @author balinc
  *
  */
-public class BusinessException extends JBugsExeption {
+public class BusinessException extends JBugsException {
 
 	private static final long serialVersionUID = -5628141671921410481L;
 

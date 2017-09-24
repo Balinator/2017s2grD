@@ -56,7 +56,7 @@ public abstract class AbstractDao<E extends AbstractEntity> {
 	}
 
 	/**
-	 * Method for getting singele element from querry.
+	 * Method for getting single element from query.
 	 * 
 	 * @param query
 	 * @return

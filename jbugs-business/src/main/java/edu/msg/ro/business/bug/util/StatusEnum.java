@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public enum StatusEnum {
 	/**
-	 * The bug possible statuses.
+	 * Possible status of bugs.
 	 */
 	OPEN, REJECTED, INPROGRESS, INFONEEDED, FIXED, CLOSE;
 
 	/**
-	 * Every state every state has next state.
+	 * Every state has next state.
 	 */
 	static {
 		OPEN.neighbors = new ArrayList<>();

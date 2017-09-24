@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.JBugsException;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -67,7 +67,7 @@ public class UserListBean extends AbstractUserBean {
 		try {
 			userFacade.deleteUser(user);
 			addI18nMessage(I18N_DELETE, new Object[] { user.getUsername() });
-		} catch (JBugsExeption e) {
+		} catch (JBugsException e) {
 			handleExeptionI18n(e);
 		}
 	}
@@ -82,7 +82,7 @@ public class UserListBean extends AbstractUserBean {
 		try {
 			userFacade.updateUser(user);
 			addI18nMessage(I18N_ACTIVATE, new Object[] { user.getUsername() });
-		} catch (JBugsExeption e) {
+		} catch (JBugsException e) {
 			handleExeptionI18n(e);
 		}
 	}

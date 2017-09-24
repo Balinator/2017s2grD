@@ -7,8 +7,8 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import edu.msg.ro.business.common.exception.JBugsExeption;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.JBugsException;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -54,14 +54,14 @@ public class UserUpdateBean extends AbstractUserBean {
 	 * Method for saving edited {@link User}.
 	 * 
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	public void editUser() {
 		try {
 			userFacade.updateUser(updatedUser);
 			addI18nMessage(I18N_SAVED, new Object[] { updatedUser.getUsername() });
 			rebuildRoleService();
-		} catch (JBugsExeption e) {
+		} catch (JBugsException e) {
 			handleExeptionI18n(e);
 		}
 	}

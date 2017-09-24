@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.boundary.PermissionFacade;
 import edu.msg.ro.business.user.boundary.RoleFacade;
 import edu.msg.ro.business.user.dto.PermissionDTO;
@@ -124,9 +124,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * 
 	 * @param event
 	 * @param role
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener(ValueChangeEvent event, RoleDTO role) throws TechnicalExeption {
+	public void permissionRoleChangedListener(ValueChangeEvent event, RoleDTO role) throws TechnicalException {
 		String[] newValueString = (String[]) event.getNewValue();
 		Long[] newValue = new Long[newValueString.length];
 		Long[] oldValue = (Long[]) event.getOldValue();
@@ -136,7 +136,7 @@ public class PermissionManagerBean extends AbstractBean {
 		}
 
 		if (oldValue == null) {
-			throw new TechnicalExeption();
+			throw new TechnicalException();
 		}
 
 		List<PermissionDTO> newPermissions = new ArrayList<>();
@@ -161,9 +161,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * Listener helper for 1 row.
 	 * 
 	 * @param event
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener0(ValueChangeEvent event) throws TechnicalExeption {
+	public void permissionRoleChangedListener0(ValueChangeEvent event) throws TechnicalException {
 		permissionRoleChangedListener(event, getAllRoles().get(0));
 	}
 
@@ -171,9 +171,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * Listener helper for 2 row.
 	 * 
 	 * @param event
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener1(ValueChangeEvent event) throws TechnicalExeption {
+	public void permissionRoleChangedListener1(ValueChangeEvent event) throws TechnicalException {
 		permissionRoleChangedListener(event, getAllRoles().get(1));
 	}
 
@@ -181,9 +181,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * Listener helper for 3 row.
 	 * 
 	 * @param event
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener2(ValueChangeEvent event) throws TechnicalExeption {
+	public void permissionRoleChangedListener2(ValueChangeEvent event) throws TechnicalException {
 		permissionRoleChangedListener(event, getAllRoles().get(2));
 	}
 
@@ -191,9 +191,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * Listener helper for 4 row.
 	 * 
 	 * @param event
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener3(ValueChangeEvent event) throws TechnicalExeption {
+	public void permissionRoleChangedListener3(ValueChangeEvent event) throws TechnicalException {
 		permissionRoleChangedListener(event, getAllRoles().get(3));
 	}
 
@@ -201,9 +201,9 @@ public class PermissionManagerBean extends AbstractBean {
 	 * Listener helper for 5 row.
 	 * 
 	 * @param event
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void permissionRoleChangedListener4(ValueChangeEvent event) throws TechnicalExeption {
+	public void permissionRoleChangedListener4(ValueChangeEvent event) throws TechnicalException {
 		permissionRoleChangedListener(event, getAllRoles().get(4));
 	}
 

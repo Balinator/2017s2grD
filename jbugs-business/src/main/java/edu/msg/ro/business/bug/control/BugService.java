@@ -9,7 +9,7 @@ import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.mapper.BugDTOMapper;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -33,9 +33,9 @@ public class BugService {
 	 * @param bugDTO
 	 * @return
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public BugDTO createBug(BugDTO bugDTO) throws BusinessException, TechnicalExeption {
+	public BugDTO createBug(BugDTO bugDTO) throws BusinessException, TechnicalException {
 
 		Bug bugEntity = new Bug();
 		bugDTOMapper.mapToEntity(bugDTO, bugEntity);
@@ -49,9 +49,9 @@ public class BugService {
 	 * 
 	 * @param bugDTO
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public BugDTO updateBug(BugDTO bugDTO) throws TechnicalExeption {
+	public BugDTO updateBug(BugDTO bugDTO) throws TechnicalException {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
 		bugDTOMapper.mapToEntity(bugDTO, persistedBug);
 		return bugDTOMapper.mapToDTO(persistedBug);
@@ -85,9 +85,9 @@ public class BugService {
 	 * 
 	 * @param bugDTO
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void deleteAttachment(Long id) throws TechnicalExeption {
+	public void deleteAttachment(Long id) throws TechnicalException {
 		bugDAO.deleteAttachemtn(id);
 	}
 

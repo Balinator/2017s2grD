@@ -8,9 +8,10 @@ import org.junit.Test;
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
@@ -43,16 +44,16 @@ public class BugServiceTest extends AbstractIntegrationTest {
 	 * bug service test: create bug id
 	 * 
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void createBug_CreatedID() throws BusinessException, TechnicalExeption {
+	public void createBug_CreatedID() throws BusinessException, TechnicalException {
 
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.HIGH, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bs.createBug(testBug);
 
 		Assert.assertNotNull("Shold have id: ", persistBug.getId());
@@ -62,16 +63,16 @@ public class BugServiceTest extends AbstractIntegrationTest {
 	 * if update is not working
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void updateBug_UpdatedTestBug() throws BusinessException, TechnicalExeption {
+	public void updateBug_UpdatedTestBug() throws BusinessException, TechnicalException {
 
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.CRITICAL, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bs.createBug(testBug);
 		String createdBugTitle = persistBug.getTitle();
 
@@ -84,17 +85,17 @@ public class BugServiceTest extends AbstractIntegrationTest {
 	/**
 	 * If deleted bug is not null
 	 *
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 * @throws BusinessException
 	 */
 	@Test
-	public void deleteBug_deleteBugTest() throws BusinessException, TechnicalExeption {
+	public void deleteBug_deleteBugTest() throws BusinessException, TechnicalException {
 
 		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		UserDTO persistUser = us.createUser(testUser);
 
-		BugDTO testBug = th.initializingBug("Bug title", "Description", "v2.0", "v2.2", "bug", StatusEnum.INFONEEDED,
-				persistUser);
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.HIGH, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
 		BugDTO persistBug = bf.createBug(testBug);
 
 		BugDTO deletedBug = bs.deleteBug(persistBug);
@@ -104,11 +105,11 @@ public class BugServiceTest extends AbstractIntegrationTest {
 	/**
 	 * if bugs null
 	 *
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 * @throws BusinessException
 	 */
 	@Test
-	public void getAllBug_test() throws BusinessException, TechnicalExeption {
+	public void getAllBug_test() throws BusinessException, TechnicalException {
 		Assert.assertNotNull("Get all bugs issue:", bs.getAllBugs());
 	}
 

@@ -24,7 +24,7 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 	private PermissionDAO pd;
 
 	/**
-	 * Method for instaciating an {@link Role}.
+	 * Method for instantiating an {@link Role}.
 	 */
 	@Override
 	public RoleDTO getDTOInstance() {

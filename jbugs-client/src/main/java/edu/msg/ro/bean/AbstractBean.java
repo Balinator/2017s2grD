@@ -4,7 +4,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.JBugsException;
 import edu.msg.ro.i18n.Translator;
 
 /**
@@ -25,7 +25,7 @@ public abstract class AbstractBean {
 	 * 
 	 * @param e
 	 */
-	protected void handleExeptionI18n(JBugsExeption e) {
+	protected void handleExeptionI18n(JBugsException e) {
 		String translated = t.translate(e.getMessage(), e.getArguments());
 		t.getContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, translated, translated));
 	}

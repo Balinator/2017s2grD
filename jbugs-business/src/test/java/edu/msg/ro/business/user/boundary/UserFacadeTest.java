@@ -16,7 +16,7 @@ import edu.msg.ro.business.user.dto.RoleDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
 import edu.msg.ro.business.user.security.PermissionChecker;
-import edu.msg.ro.business.user.security.PermissionConstants;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.business.util.TestHelper;
 import edu.msg.ro.persistence.user.entity.Permission;
 import edu.msg.ro.persistence.user.entity.Role;
@@ -141,15 +141,15 @@ public class UserFacadeTest extends AbstractIntegrationTest {
 		UserDTO createdUser = sut.createUser(user);
 		List<Long> list = new ArrayList<>();
 
-		list.add((long) PermissionConstants.PM);
+		list.add(PermissionEnum.PERMISSION_MANAGEMENT.getId());
 		boolean hasManagementPermission = permCheck.canAccess(createdUser, list);
 		list.clear();
 
-		list.add((long) PermissionConstants.BM);
+		list.add(PermissionEnum.BUG_MANAGEMENT.getId());
 		boolean hasBugManagementPermission = permCheck.canAccess(createdUser, list);
 		list.clear();
 
-		list.add((long) PermissionConstants.BC);
+		list.add(PermissionEnum.BUG_CLOSE.getId());
 		boolean hasBugClosePermission = permCheck.canAccess(createdUser, list);
 		list.clear();
 

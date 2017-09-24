@@ -6,7 +6,7 @@ package edu.msg.ro.business.common.exception;
  * @author laszll
  *
  */
-public class TechnicalExeption extends JBugsExeption {
+public class TechnicalException extends JBugsException {
 
 	private static final String MESSAGE_KEY = "exeption.technical";
 
@@ -15,7 +15,7 @@ public class TechnicalExeption extends JBugsExeption {
 	/**
 	 * Constructor.
 	 */
-	public TechnicalExeption() {
+	public TechnicalException() {
 		super(MESSAGE_KEY);
 	}
 
@@ -24,7 +24,7 @@ public class TechnicalExeption extends JBugsExeption {
 	 * 
 	 * @param cause
 	 */
-	public TechnicalExeption(Throwable cause) {
+	public TechnicalException(Throwable cause) {
 		super(MESSAGE_KEY, cause);
 	}
 }

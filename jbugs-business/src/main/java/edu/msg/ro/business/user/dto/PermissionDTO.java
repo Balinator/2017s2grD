@@ -24,7 +24,7 @@ public class PermissionDTO extends AbstractDTO implements Serializable {
 	private List<RoleDTO> role;
 
 	/**
-	 * Get fot name.
+	 * Get for name.
 	 * 
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public class PermissionDTO extends AbstractDTO implements Serializable {
 	}
 
 	/**
-	 * get for roles.
+	 * Get for roles.
 	 * 
 	 * @return
 	 */

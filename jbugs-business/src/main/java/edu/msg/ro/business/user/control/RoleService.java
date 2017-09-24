@@ -35,7 +35,7 @@ public class RoleService {
 	}
 
 	/**
-	 * Method for updating an {@link Role}.
+	 * Method for updating a {@link Role}.
 	 * 
 	 * @param roleDTO
 	 * @return

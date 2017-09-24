@@ -23,7 +23,7 @@ public class UserValidator {
 	public static final String I18N_USER_EMAIL_EXISTS = "users.email.exists";
 
 	/**
-	 * Check for active user tasks.
+	 * Check for active {@link User} tasks.
 	 *
 	 * @param entity
 	 * @return

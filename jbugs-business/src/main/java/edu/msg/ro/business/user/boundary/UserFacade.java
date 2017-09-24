@@ -9,13 +9,12 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * Boundary for user component.
+ * Boundary for {@link User} component.
  * 
  * @author balinc
  * 
@@ -50,11 +49,10 @@ public class UserFacade {
 	}
 
 	/**
-	 * Method for deleting(deactivating) an {@link User}.
+	 * Method for deleting(deactivating) a {@link User}.
 	 * 
 	 * @param userDTO
 	 * @return
-	 * @throws BusinessException
 	 */
 	public UserDTO deleteUser(UserDTO userDTO) throws BusinessException {
 		return userService.deleteUser(userDTO);
@@ -76,7 +74,7 @@ public class UserFacade {
 	}
 
 	/**
-	 * Method for getting back all {@link User}s witch starts with the argument.
+	 * Method for getting back all {@link User}s which starts with the argument.
 	 * 
 	 * @param query
 	 * @return

@@ -27,8 +27,8 @@ public class UserGenerator {
 	/**
 	 * Creates the username
 	 * 
-	 * @param user
-	 * @return
+	 * @param UserDTO
+	 * @return String
 	 */
 	public String createUsername(UserDTO user) {
 
@@ -39,8 +39,9 @@ public class UserGenerator {
 		int firstNameLength = firstName.length();
 		StringBuilder username = new StringBuilder();
 		int firstNamePos = 1;
+		int numOfChars = 5;
 
-		username.append(lastName.substring(0, Math.min(lastNameLength, 5)));
+		username.append(lastName.substring(0, Math.min(lastNameLength, numOfChars)));
 		username.append(firstName.substring(0, firstNamePos));
 
 		while (checkIfUsernameExists(username.toString()) == true) {
@@ -59,7 +60,7 @@ public class UserGenerator {
 	/**
 	 * Generates random int between 0-9
 	 * 
-	 * @return
+	 * @return int
 	 */
 	private int generateRandomNumber() {
 		Random rand = new Random();
@@ -69,7 +70,7 @@ public class UserGenerator {
 	/**
 	 * Checks if username is already taken.
 	 * 
-	 * @param username
+	 * @param String
 	 * @return {@link Boolean}
 	 */
 	private boolean checkIfUsernameExists(String username) {
@@ -85,7 +86,7 @@ public class UserGenerator {
 	 * Creates hash for user password.
 	 *
 	 * @param userDTO
-	 * @return
+	 * @return String
 	 */
 	public String encryptPassword(UserDTO userDTO) {
 		try {

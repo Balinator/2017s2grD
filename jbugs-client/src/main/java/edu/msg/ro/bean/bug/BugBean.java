@@ -25,7 +25,7 @@ import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
@@ -200,9 +200,9 @@ public class BugBean extends AbstractBean {
 	 * Just create a bug without return.
 	 * 
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public String createNewBug() throws BusinessException, TechnicalExeption {
+	public String createNewBug() throws BusinessException, TechnicalException {
 		newBug.setAssigned(assignedUser);
 		newBug.setAuthor(assignedUser);// todo: change it
 		newBug.setStatus(StatusEnum.OPEN);
@@ -226,9 +226,9 @@ public class BugBean extends AbstractBean {
 	 * Method for editing {@link Bug}.
 	 * 
 	 * @return
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public String editBug() throws TechnicalExeption {
+	public String editBug() throws TechnicalException {
 		try {
 			bugFacade.updateBug(selectedBug);
 		} catch (BusinessException e) {
@@ -413,9 +413,9 @@ public class BugBean extends AbstractBean {
 	/**
 	 * delete attachment form database
 	 * 
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
-	public void deleteAttachment() throws TechnicalExeption {
+	public void deleteAttachment() throws TechnicalException {
 		selectedBug.setAttachment(null);
 		selectedBug.setAttachmentName(null);
 

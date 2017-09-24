@@ -8,9 +8,10 @@ import org.junit.Test;
 import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.common.exception.TechnicalException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
@@ -53,10 +54,10 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 * Check if user is returned for an username.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void findUserByUsername_succesfull() throws BusinessException, TechnicalExeption {
+	public void findUserByUsername_succesfull() throws BusinessException, TechnicalException {
 		UserDTO user = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
 
@@ -69,10 +70,10 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 * Check if user is returned for an email.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void findUserByEmail_succesfull() throws TechnicalExeption, BusinessException {
+	public void findUserByEmail_succesfull() throws TechnicalException, BusinessException {
 		UserDTO user = th.initializUser("Fulop", "Lajos", "lajoska2@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
 		Assert.assertEquals("Should have an user with lajoska2@msggroup.com email",
@@ -83,7 +84,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 * Check if the user exist.
 	 *
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
 	public void verifyUserExist_succesfull() throws BusinessException {
@@ -111,15 +112,16 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 * Check if user has assigned bug
 	 * 
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void checkIfUserHasAssignedBugs() throws BusinessException, TechnicalExeption {
+	public void checkIfUserHasAssignedBugs() throws BusinessException, TechnicalException {
 		UserDTO user = th.initializUser("Denis", "Viorel", "dennnisV@msggroup.com", "123456", "00400743188876");
 		UserDTO userDTO = uf.createUser(user);
 
 		User userEntity = new User();
-		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
+		BugDTO bug = th.initializingBug("Title", "Description", BugSeverity.LOW, "v1", "fixed", StatusEnum.INFONEEDED,
+				userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 		udm.mapToEntity(userDTO, userEntity);
 		boolean hasAssignedBug = dao.checkIfUserHasAssignedBugs(userEntity);
@@ -130,15 +132,16 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	 * assigned user for bug
 	 * 
 	 * @throws BusinessException
-	 * @throws TechnicalExeption
+	 * @throws TechnicalException
 	 */
 	@Test
-	public void checkIfUserHasAssignedBugsDatabase() throws BusinessException, TechnicalExeption {
+	public void checkIfUserHasAssignedBugsDatabase() throws BusinessException, TechnicalException {
 
 		UserDTO user = th.initializUser("Denis", "Viorel", "denisV@msggroup.com", "123456", "00400743188876");
 		UserDTO userDTO = uf.createUser(user);
 
-		BugDTO bug = th.initializingBug("Title", "Description", "LOW", "v1", "fixed", StatusEnum.INFONEEDED, userDTO);
+		BugDTO bug = th.initializingBug("Title", "Description", BugSeverity.LOW, "v1", "fixed", StatusEnum.INFONEEDED,
+				userDTO);
 		BugDTO bugDTO = bf.createBug(bug);
 
 		Assert.assertEquals("User should have assigned bug(s)!", bugDTO.getAssigned().getUsername(),

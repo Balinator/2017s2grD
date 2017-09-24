@@ -3,7 +3,7 @@ package edu.msg.ro.bean.user;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.common.exception.JBugsException;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -49,7 +49,7 @@ public class UserNewBean extends AbstractUserBean {
 			userFacade.createUser(newUser);
 			addI18nMessage(I18N_SAVED, new Object[] { newUser.getUsername() });
 			clearUser();
-		} catch (JBugsExeption e) {
+		} catch (JBugsException e) {
 			handleExeptionI18n(e);
 		}
 	}

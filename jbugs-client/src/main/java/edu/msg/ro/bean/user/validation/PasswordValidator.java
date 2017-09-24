@@ -15,7 +15,7 @@ import javax.faces.validator.ValidatorException;
 public class PasswordValidator extends AbstractValidator {
 
 	/**
-	 * Password minimum lenght.
+	 * Password minimum length.
 	 */
 	public static final Integer LENGHT = 6;
 

@@ -13,7 +13,7 @@ import edu.msg.ro.persistence.user.entity.Role;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
- * Checks if user has permission to perform specific task.
+ * Checks if {@link User} has {@link Permission} to perform specific tasks.
  * 
  * @author nemeta
  *
@@ -24,7 +24,7 @@ public class PermissionChecker {
 	UserDAO userDAO;
 
 	/**
-	 * Checks if user has permission to execute operation
+	 * Checks if {@link User} has permission to execute operation
 	 * 
 	 * @param userDTO
 	 * @param permissionId

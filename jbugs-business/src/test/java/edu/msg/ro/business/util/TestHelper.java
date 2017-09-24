@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dto.UserDTO;
@@ -37,12 +38,12 @@ public class TestHelper {
 		return testUser;
 	}
 
-	public BugDTO initializingBug(String title, String description, String severity, String version, String fixedIn,
-			StatusEnum status, UserDTO testUser) {
+	public BugDTO initializingBug(String title, String description, BugSeverity severity, String version,
+			String fixedIn, StatusEnum status, UserDTO testUser) {
 		return initializingBug(null, title, description, severity, version, fixedIn, status, testUser);
 	}
 
-	public BugDTO initializingBug(Long id, String title, String description, String severity, String version,
+	public BugDTO initializingBug(Long id, String title, String description, BugSeverity severity, String version,
 			String fixedIn, StatusEnum status, UserDTO testUser) {
 		BugDTO testBug = new BugDTO();
 		testBug.setId(id);
