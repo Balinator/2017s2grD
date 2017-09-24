@@ -8,102 +8,123 @@
 		resizable="false" modal="true" showEffect="clip" hideEffect="fold">
 
 		<h:form id="formBugEdit">
+			<p:outputPanel id="display">
 
-			<h:panelGrid columns="2" cellpadding="5" id="display" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
-				<p:outputLabel value="#{msg['bug.title']}" />
-				<h:panelGroup layout="block">
-					<p:tooltip for="title" hideEvent="blur" position="right" showEvent="focus"
-						rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:title')}">
-						<p:message for="title" />
-					</p:tooltip>
-					<p:inputText id="title" required="true"
-						requiredMessage="#{msg['error.emptytitle']}"
-						value="#{bugBean.selectedBug.title}"></p:inputText>
-				</h:panelGroup>
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+					<p:outputLabel value="#{msg['bug.title']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="title" hideEvent="blur" position="right"
+							showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:title')}">
+							<p:message for="title" />
+						</p:tooltip>
+						<p:inputText id="title" required="true"
+							requiredMessage="#{msg['error.emptytitle']}"
+							value="#{bugUpdateBean.selectedBug.title}"></p:inputText>
+					</h:panelGroup>
 
+					<p:outputLabel value="#{msg['bug.description']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="description" hideEvent="blur" position="right"
+							showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:description')}">
+							<p:message for="description" />
+						</p:tooltip>
+						<p:inputText id="description" required="true"
+							requiredMessage="#{msg['error.emptydescription']}"
+							value="#{bugUpdateBean.selectedBug.description}"></p:inputText>
+					</h:panelGroup>
 
-				<p:outputLabel value="#{msg['bug.description']}" />
-				<h:panelGroup layout="block">
-					<p:tooltip for="description" hideEvent="blur" position="right" showEvent="focus"
-						rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:description')}">
-						<p:message for="description" />
-					</p:tooltip>
-					<p:inputText id="description" required="true"
-						requiredMessage="#{msg['error.emptydescription']}"
-						value="#{bugBean.selectedBug.description}"></p:inputText>
-				</h:panelGroup>
+					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}" />
 
-				<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-				<p:calendar value="#{bugBean.selectedBug.targetDate}" />
+					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
 
-				<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.severity}"
+						style="width:90px">
 
-				<p:selectOneMenu value="#{bugBean.selectedBug.severity}"
-					style="width:90px">
+						<f:selectItems value="#{bugUpdateBean.severityList}"
+							var="severity" itemLabel="#{msg['bug.severity.' += severity]}" />
 
-					<f:selectItems value="#{bugBean.severityList}" var="severity"
-						itemLabel="#{msg['bug.severity.' += severity]}" />
+					</p:selectOneMenu>
 
-				</p:selectOneMenu>
+					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.status}"
+						converter="#{bugConverter}" style="width:90px">
 
-				<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
-				<p:selectOneMenu value="#{bugBean.selectedBug.status}"
-					converter="#{bugConverter}" style="width:90px">
+						<f:selectItems value="#{bugUpdateBean.getStatusList()}"
+							var="status" itemLabel="#{msg['bug.status.' += status]}"
+							itemValue="#{status}" />
 
-					<f:selectItems value="#{bugBean.getStatusList()}" var="status"
-						itemLabel="#{msg['bug.status.' += status]}" itemValue="#{status}" />
+					</p:selectOneMenu>
 
-				</p:selectOneMenu>
+					<p:outputLabel value="#{msg['bug.version']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="version" hideEvent="blur" position="right"
+							showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
+							<p:message for="version" />
+						</p:tooltip>
+						<p:inputText id="version" required="true"
+							requiredMessage="#{msg['error.emptyversion']}"
+							value="#{bugUpdateBean.selectedBug.version}"></p:inputText>
+					</h:panelGroup>
 
-				<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
-				<f:view>
-					<p:autoComplete value="#{bugBean.selectedBug.assigned}"
-						completeMethod="#{userListBean.complete}" var="user"
-						itemLabel="#{user.username}" itemValue="#{user}"
-						converter="#{userConverter}" forceSelection="true">
-					</p:autoComplete>
-				</f:view>
+					<p:outputLabel value="#{msg['bug.fixedIn']}" />
+					<p:inputText value="#{bugUpdateBean.selectedBug.fixedIn}"></p:inputText>
+				</h:panelGrid>
+			</p:outputPanel>
 
-				<p:outputLabel value="#{msg['bug.version']}" />
-				<p:inputText value="#{bugBean.selectedBug.version}"></p:inputText>
+			<p:outputPanel id="display2">
+				<h:panelGrid id="addBug2" columns="2" cellpadding="5"
+					style="width: 100%" columnClasses="panel-colum-label, panel-colum">
 
-				<p:outputLabel value="#{msg['bug.fixedIn']}" />
-				<p:inputText value="#{bugBean.selectedBug.fixedIn}"></p:inputText>
+					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+					<f:view>
+						<p:autoComplete value="#{bugUpdateBean.selectedBug.assigned}"
+							completeMethod="#{bugUpdateBean.complete}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user}"
+							converter="#{userConverter}" forceSelection="true">
+						</p:autoComplete>
+					</f:view>
 
-				<p:outputLabel value="#{msg['bug.attachment']}" />
+					<p:outputLabel value="#{msg['bug.attachment']}" />
+					<h:panelGroup id="uploadGrid">
+						<p:outputLabel value="#{bugUpdateBean.selectedBug.attachmentName}"
+							rendered="#{not empty bugUpdateBean.selectedBug.attachment}"
+							ajax="true" />
 
-				<h:panelGroup id="uploadGrid">
-					<p:outputLabel value="#{bugBean.selectedBug.attachmentName}"
-						rendered="#{not empty bugBean.selectedBug.attachment}" ajax="true" />
+						<p:commandLink actionListener="#{bugUpdateBean.deleteAttachment}"
+							styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+							action="#{bugUpdateBean.editBug}"
+							rendered="#{not empty bugUpdateBean.selectedBug.attachment}"
+							update="uploadFile, uploadGrid">
+							<h:outputText value="#{msg['bug.attachment.delete']}" />
+						</p:commandLink>
 
-					<p:commandLink actionListener="#{bugBean.deleteAttachment}"
-						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" 
-						action="#{bugBean.editBug}"
-						rendered="#{not empty bugBean.selectedBug.attachment}"
-						update="uploadFile, uploadGrid">
-						<h:outputText value="#{msg['bug.attachment.delete']}" />
-					</p:commandLink>
+						<p:fileUpload id="uploadFile"
+							fileUploadListener="#{bugUpdateBean.handleFileEdit}"
+							dragDropSupport="false" sizeLimit="26214400"
+							update="@this, attachmentUploded" fileLimit="1"
+							disabled="#{not empty bugUpdateBean.selectedBug.attachment}"
+							allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
+							value="#{bugUpdateBean.selectedBug.attachment}" />
 
-					<p:fileUpload id="uploadFile"
-						fileUploadListener="#{bugBean.handleFileEdit}"
-						dragDropSupport="false" sizeLimit="26214400"
-						update="@this, attachmentUploded" fileLimit="1"
-						disabled="#{not empty bugBean.selectedBug.attachment}"
-						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
-						value="#{bugBean.selectedBug.attachment}" />
+						<h:panelGrid id="attachmentUploded">
+							<p:outputLabel value="#{msg['bug.attachment.updoded']}"
+								rendered="#{not empty bugUpdateBean.selectedBug.attachment}" />
+						</h:panelGrid>
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:outputPanel>
 
-					<h:panelGrid id="attachmentUploded">
-						<p:outputLabel value="#{msg['bug.attachment.updoded']}"
-							rendered="#{not empty bugBean.selectedBug.attachment}" />
-					</h:panelGrid>
-
-					<h:commandButton value="#{msg['bug.update']}"
-						action="#{bugBean.editBug}"></h:commandButton>
-				</h:panelGroup>
-			</h:panelGrid>
-
+			<p:commandButton value="#{msg['bug.update']}"
+				action="#{bugUpdateBean.editBug}"
+				oncomplete="handlePopUpRequest('bugUpdateDialog', xhr, status, args)"
+				update="bugForm:bugList, display" ajax="true" />
 		</h:form>
-
+		<p:ajax event="close" resetValues="true"
+			update="formBugEdit:display, formBugEdit:display2" />
 	</p:dialog>
-
 </ui:composition>

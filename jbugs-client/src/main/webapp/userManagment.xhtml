@@ -16,13 +16,12 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
-			<p:messages autoUpdate="true" severity="info" />
+			<p:messages autoUpdate="true" severity="info,error" globalOnly="true" />
 			<p:dataTable value="#{userListBean.allUsers}" var="user"
 				id="userList" paginator="true" selectionMode="single"
 				rowKey="#{user.id}" rows="15" styleClass="paginated">
 				<f:facet name="header">
 					<p:commandLink value="#{msg['users.add']}" type="button"
-						actionListener="#{userNewBean.clearUser()}"
 						oncomplete="PF('userCreateDialog').show();"
 						style="padding: .3em 1em;"
 						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
@@ -79,12 +78,10 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandButton id="ajax" update=":viewForm:display"
-						style="margin-bottom:5px;"
+					<p:commandLink value="#{msg['users.update']}" type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
-						value="#{msg['users.update']}">
-					</p:commandButton>
+						update=":viewForm:display" />
 
 					<p:commandButton value="#{msg['user.activate']}"
 						action="#{userListBean.activateUser(user)}"
@@ -98,7 +95,7 @@
 		</h:form>
 		<ui:include src="/user/userCreate.xhtml" />
 		<ui:include src="/user/userEdit.xhtml" />
-
+		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
 </h:body>
 </html>

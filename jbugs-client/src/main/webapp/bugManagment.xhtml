@@ -13,15 +13,10 @@
 </h:head>
 <h:body>
 	<f:view>
-
 		<ui:include src="/header.xhtml" />
-		<ui:include src="/bug/bugCreate.xhtml" />
-		<ui:include src="/bug/bugEdit.xhtml" />
-		<ui:include src="/bug/attachmentDownload.xhtml" />
-
-		<h:form id="form">
+		<h:form id="bugForm">
 			<p:messages autoUpdate="true" severity="info" />
-			<p:dataTable id="dataTable" value="#{bugBean.bugList}" var="bug"
+			<p:dataTable id="bugList" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
 				paginator="true" rows="25" styleClass="paginated"
 				selectionMode="single" rowKey="#{bug.id}">
@@ -48,9 +43,9 @@
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
-
-						<p:commandButton value="#{msg['add']}" type="button"
-							onclick="PF('bugAddDialog').show();" />
+						<p:commandLink value="#{msg['add']}" type="button"
+							oncomplete="PF('bugAddDialog').show();"
+							update=":bugAddForm:display, :bugAddForm:display2" />
 					</h:panelGroup>
 				</f:facet>
 
@@ -153,16 +148,17 @@
 
 				<p:column headerText="#{msg['bug.update']}"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
-					<p:commandButton id="ajax" update=":formBugEdit:display"
-						actionListener="#{bugBean.setSelectedBug(bug)}"
+					<p:commandLink value="#{msg['bug.update']}" type="button"
+						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
-						value="#{msg['bug.update']}">
-					</p:commandButton>
+						update=":formBugEdit:display, :formBugEdit:display2" />
 				</p:column>
 			</p:dataTable>
-
 		</h:form>
-
+		<ui:include src="/bug/bugCreate.xhtml" />
+		<ui:include src="/bug/bugEdit.xhtml" />
+		<ui:include src="/bug/attachmentDownload.xhtml" />
+		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
 </h:body>
 
