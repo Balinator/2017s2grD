@@ -1,5 +1,6 @@
 package edu.msg.ro.business.junit.bug.bundary;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -28,9 +29,8 @@ public class BugFacadeTest {
 
 	@Test
 	public void testCreateBug() {
-		BugDTO newBugDTO = new BugDTO();
-		bugFacede.createBug(newBugDTO);
-		verify(bugService, times(1)).createBug(newBugDTO);
+		bugFacede.createBug(any(BugDTO.class));
+		verify(bugService, times(1)).createBug(any(BugDTO.class));
 	}
 
 	/**
@@ -38,9 +38,8 @@ public class BugFacadeTest {
 	 */
 	@Test
 	public void testUpdateBug() {
-		BugDTO newBugDTO = new BugDTO();
-		bugFacede.updateBug(newBugDTO);
-		verify(bugService, times(1)).updateBug(newBugDTO);
+		bugFacede.updateBug(any(BugDTO.class));
+		verify(bugService, times(1)).updateBug(any(BugDTO.class));
 	}
 
 	/**
@@ -56,9 +55,8 @@ public class BugFacadeTest {
 	 * test delete bug
 	 */
 	@Test
-	public void testDeeleteBug() {
-		BugDTO newBugDTO = new BugDTO();
-		bugFacede.deleteBug(newBugDTO);
-		verify(bugService, times(1)).deleteBug(newBugDTO);
+	public void testDeleteBug() {
+		bugFacede.deleteBug(any(BugDTO.class));
+		verify(bugService, times(1)).deleteBug(any(BugDTO.class));
 	}
 }

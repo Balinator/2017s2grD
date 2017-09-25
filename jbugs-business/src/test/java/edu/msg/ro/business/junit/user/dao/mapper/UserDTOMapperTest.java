@@ -1,4 +1,4 @@
-package edu.msg.ro.business.integration.user.dto.mapper;
+package edu.msg.ro.business.junit.user.dao.mapper;
 
 import java.util.ArrayList;
 
