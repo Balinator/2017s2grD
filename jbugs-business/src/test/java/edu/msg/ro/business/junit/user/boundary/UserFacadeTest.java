@@ -71,4 +71,27 @@ public class UserFacadeTest {
 		userFacade.getUserByUsername("username");
 		verify(userService, times(1)).findUserByUsername(any(String.class));
 	}
+
+	/**
+	 * test for reset password at User
+	 */
+	@Test
+	public void testResetPassword() throws BusinessException {
+
+		UserDTO toTest = getUser();
+		userFacade.resetPassword(toTest);
+
+		verify(userService, times(1)).resetPassword(eq(toTest));
+	}
+
+	/**
+	 * test for get all Users
+	 */
+	@Test
+	public void getAllUsersTets() throws BusinessException {
+		UserDTO toTest = getUser();
+		userFacade.getAllUsers();
+
+		verify(userService, times(1)).getAllUsers();
+	}
 }
