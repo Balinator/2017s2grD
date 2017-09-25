@@ -118,11 +118,10 @@
 					</h:panelGroup>
 				</h:panelGrid>
 			</p:outputPanel>
-
 			<p:commandButton value="#{msg['bug.update']}"
 				action="#{bugUpdateBean.editBug}"
 				oncomplete="handlePopUpRequest('bugUpdateDialog', xhr, status, args)"
-				update="bugForm:bugList, display" ajax="true" />
+				update="bugForm:bugList, display" ajax="true" style="float:right;"/>
 		</h:form>
 		<p:ajax event="close" resetValues="true"
 			update="formBugEdit:display, formBugEdit:display2" />

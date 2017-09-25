@@ -35,18 +35,20 @@
 
 					<h:panelGroup layout="block" style=" overflow: auto;">
 
-						<p:outputPanel>
-
+						<p:outputPanel style="float: left;">
 							<h:outputText value="#{msg['bug.search.all']}" />
 							<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
-								style="width:150px"
+								style="width:150px; margin-left: 1em;"
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
-						<p:commandLink value="#{msg['bug.add']}" type="button"
+						<p:commandLink type="button"
 							oncomplete="PF('bugAddDialog').show();"
-							actionListener="#{bugNewBean.refreshNewBug}"
-							update=":bugAddForm:display, :bugAddForm:display2" />
+							update=":bugAddForm:display, :bugAddForm:display2"
+							actionListener="#{bugNewBean.refreshNewBug}" style="float:right;"
+							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							<h:outputText value="+" />
+						</p:commandLink>
 					</h:panelGroup>
 				</f:facet>
 
@@ -156,10 +158,13 @@
 
 				<p:column headerText="#{msg['bug.operation']}"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
-					<p:commandLink value="#{msg['bug.update']}" type="button"
+					<p:commandLink type="button"
 						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
-						update=":formBugEdit:display, :formBugEdit:display2" />
+						update=":formBugEdit:display, :formBugEdit:display2"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 		</h:form>
