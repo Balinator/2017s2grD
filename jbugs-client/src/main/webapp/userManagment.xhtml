@@ -70,8 +70,10 @@
 					</ui:repeat>
 				</p:column>
 
-				<p:column filterBy="#{user.active}" filterMatchMode="equals">
-					<f:facet name="filter">#{msg['users.status']}<br />
+
+				<p:column filterBy="#{user.active}" filterMatchMode="equals"
+					headerText="#{msg['users.status']}">
+					<f:facet name="filter">
 						<p:selectOneMenu onchange="PF('userTable').filter()">
 							<f:converter converterId="javax.faces.Boolean" />
 							<f:selectItem itemLabel="All" itemValue="#{null}"
@@ -79,13 +81,12 @@
 							<f:selectItem itemLabel="#{msg['users.active']}" itemValue="true" />
 							<f:selectItem itemLabel="#{msg['users.inactive']}"
 								itemValue="false" />
-							<f:selectItems value="#{user.active}" />
 						</p:selectOneMenu>
-
 					</f:facet>
 					<h:outputText
 						value="#{user.active ? msg['users.active'] : msg['users.inactive']}" />
 				</p:column>
+				
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
