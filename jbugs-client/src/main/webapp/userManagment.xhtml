@@ -23,10 +23,9 @@
 				<f:facet name="header">
 					<h:panelGroup layout="block" style="overflow: auto;">
 						<p:commandLink type="button"
-							oncomplete="PF('userCreateDialog').show();"
-							style="float:right;"
+							oncomplete="PF('userCreateDialog').show();" style="float:right;"
 							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-							<h:outputText value=" " class="ui-icon ui-icon-plus"/>
+							<h:outputText value="+" />
 						</p:commandLink>
 					</h:panelGroup>
 				</f:facet>
@@ -85,23 +84,23 @@
 					<p:commandLink type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
-						update=":viewForm:display" 
+						update=":viewForm:display"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-						<h:outputText value=" " class="ui-icon ui-icon-pencil"/>
+						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
 					</p:commandLink>
 
 					<p:commandLink type="button"
 						action="#{userListBean.activateUser(user)}"
-						rendered="#{!user.active}" update=":userForm" 
+						rendered="#{!user.active}" update=":userForm"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-						<h:outputText value=" " class="ui-icon ui-icon-unlocked"/>
+						<h:outputText value=" " class="ui-icon ui-icon-unlocked" />
 					</p:commandLink>
 
 					<p:commandLink type="button"
 						action="#{userListBean.deleteUser(user)}"
 						rendered="#{user.active}" update=":userForm"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-						<h:outputText value=" " class="ui-icon ui-icon-locked"/>
+						<h:outputText value=" " class="ui-icon ui-icon-locked" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>
