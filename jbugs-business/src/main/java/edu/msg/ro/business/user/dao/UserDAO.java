@@ -87,6 +87,17 @@ public class UserDAO extends AbstractDao<User> {
 	}
 
 	/**
+	 * Method for getting back all the {@link User}s starts with a text.
+	 * 
+	 * @return
+	 */
+	public List<User> getAllUsernameStartsWith(String queryText) {
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.username LIKE :queryText");
+		query.setParameter("queryText", queryText + "%");
+		return query.getResultList();
+	}
+
+	/**
 	 * Checks if user has assigned bug(s) that are not closed.
 	 * 
 	 * @param id

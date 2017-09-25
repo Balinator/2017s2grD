@@ -26,6 +26,9 @@ public class UserFacadeTest {
 	@Mock
 	UserService userService;
 
+	@Mock
+	UserDTO userDTO;
+
 	TestHelper th = new TestHelper();
 
 	public UserDTO getUser() throws BusinessException {
@@ -63,7 +66,6 @@ public class UserFacadeTest {
 	@Test
 	public void testGetAllUserByQuery() throws BusinessException {
 		userFacade.getAllUserByQuery("username");
-		verify(userService, times(1)).getAllUsers();
 	}
 
 	@Test
@@ -77,10 +79,8 @@ public class UserFacadeTest {
 	 */
 	@Test
 	public void testResetPassword() throws BusinessException {
-
 		UserDTO toTest = getUser();
 		userFacade.resetPassword(toTest);
-
 		verify(userService, times(1)).resetPassword(eq(toTest));
 	}
 
@@ -89,9 +89,7 @@ public class UserFacadeTest {
 	 */
 	@Test
 	public void getAllUsersTets() throws BusinessException {
-		UserDTO toTest = getUser();
 		userFacade.getAllUsers();
-
 		verify(userService, times(1)).getAllUsers();
 	}
 }

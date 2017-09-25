@@ -143,4 +143,14 @@ public class UserService {
 	public UserDTO findUserByUsername(String username) {
 		return userDTOMapper.mapToDTO(userDAO.findUserByUsername(username));
 	}
+
+	/**
+	 * Get User list by username starts with.
+	 * 
+	 * @param query
+	 * @return
+	 */
+	public List<UserDTO> getAllUserByQuery(String query) {
+		return userDTOMapper.mapToDTOs(userDAO.getAllUsernameStartsWith(query));
+	}
 }

@@ -33,6 +33,7 @@ public class RoleServiceTest {
 	/**
 	 * Check getAllRoles call
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetAllRoles() {
 		roleService.getAllRoles();

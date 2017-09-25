@@ -1,5 +1,6 @@
 package edu.msg.ro.business.junit.user.boundary;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -36,9 +37,7 @@ public class RoleFacadeTest {
 	 */
 	@Test
 	public void testUpdateRoles() {
-		RoleDTO newRoleDTO = new RoleDTO();
-		roleFacade.update(newRoleDTO);
-		verify(roleService, times(1)).update(newRoleDTO);
-
+		roleFacade.update(any(RoleDTO.class));
+		verify(roleService, times(1)).update(any(RoleDTO.class));
 	}
 }
