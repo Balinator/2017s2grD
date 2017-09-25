@@ -75,7 +75,7 @@
 				<p:column headerText="#{msg['bug.targetDate']}"
 					sortBy="#{bug.targetDate}" filterBy="#{bug.targetDate}">
 					<f:facet name="filter">
-						<p:calendar pattern="yyyy/MM/dd">
+						<p:calendar pattern="dd/MM/yyyy">
 							<p:ajax event="dateSelect" oncomplete="PF('bugTable').filter()" />
 						</p:calendar>
 
