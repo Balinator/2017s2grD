@@ -97,7 +97,6 @@
 
 						<p:commandLink actionListener="#{bugUpdateBean.deleteAttachment}"
 							styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
-							action="#{bugUpdateBean.editBug}"
 							rendered="#{not empty bugUpdateBean.selectedBug.attachment}"
 							update="uploadFile, uploadGrid">
 							<h:outputText value="#{msg['bug.attachment.delete']}" />
