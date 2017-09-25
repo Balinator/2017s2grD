@@ -42,7 +42,7 @@ public class BugService {
 	}
 
 	/**
-	 * Method for updateing an {@link Bug}.
+	 * Method for updating an {@link Bug}.
 	 * 
 	 * @param bugDTO
 	 * @return
