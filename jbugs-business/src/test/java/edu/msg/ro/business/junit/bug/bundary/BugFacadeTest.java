@@ -35,6 +35,9 @@ public class BugFacadeTest {
 		verify(bugService, times(1)).createBug(newBugDTO);
 	}
 
+	/**
+	 * check bug update
+	 */
 	@Test
 	public void testUpdateBug() {
 		BugDTO newBugDTO = new BugDTO();
@@ -42,12 +45,18 @@ public class BugFacadeTest {
 		verify(bugService, times(1)).updateBug(newBugDTO);
 	}
 
+	/**
+	 * test get bug list
+	 */
 	@Test
 	public void testGetAllBug() {
 		List<BugDTO> result = bugFacede.getAllbugs();
 		verify(bugService, times(1)).getAllBugs();
 	}
 
+	/**
+	 * test delete bug
+	 */
 	@Test
 	public void testDeeleteBug() {
 		BugDTO newBugDTO = new BugDTO();
