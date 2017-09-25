@@ -111,11 +111,17 @@
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-locked" />
 					</p:commandLink>
+
+					<p:commandLink value="#{msg['users.resetPassword']}" type="button"
+						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
+						oncomplete="PF('resetPasswordDialog').show()"
+						update=":resetPasswordForm:display" />
 				</p:column>
 			</p:dataTable>
 		</h:form>
 		<ui:include src="/user/userCreate.xhtml" />
 		<ui:include src="/user/userEdit.xhtml" />
+		<ui:include src="/user/userResetPassword.xhtml" />
 		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
 </h:body>
