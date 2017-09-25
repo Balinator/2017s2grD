@@ -22,10 +22,12 @@
 				rowKey="#{user.id}" rows="15" styleClass="paginated">
 				<f:facet name="header">
 					<h:panelGroup layout="block" style="overflow: auto;">
-						<p:commandLink value="#{msg['users.add']}" type="button"
+						<p:commandLink type="button"
 							oncomplete="PF('userCreateDialog').show();"
 							style="float:right;"
-							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
+							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							<h:outputText value=" " class="ui-icon ui-icon-plus"/>
+						</p:commandLink>
 					</h:panelGroup>
 				</f:facet>
 				<p:column style="text-align: center;" sortBy="#{user.firstname}"
@@ -80,19 +82,27 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandLink value="#{msg['users.update']}" type="button"
+					<p:commandLink type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
 						update=":viewForm:display" 
-						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"/>
+						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-pencil"/>
+					</p:commandLink>
 
-					<p:commandButton value="#{msg['user.activate']}"
+					<p:commandLink type="button"
 						action="#{userListBean.activateUser(user)}"
-						rendered="#{!user.active}" update=":userForm" />
+						rendered="#{!user.active}" update=":userForm" 
+						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-unlocked"/>
+					</p:commandLink>
 
-					<p:commandButton value="#{msg['user.deactivate']}"
+					<p:commandLink type="button"
 						action="#{userListBean.deleteUser(user)}"
-						rendered="#{user.active}" update=":userForm" />
+						rendered="#{user.active}" update=":userForm"
+						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-locked"/>
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 		</h:form>
