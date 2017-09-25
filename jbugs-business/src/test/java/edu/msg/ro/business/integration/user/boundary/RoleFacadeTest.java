@@ -1,11 +1,12 @@
-package edu.msg.ro.business.user.boundary;
+package edu.msg.ro.business.integration.user.boundary;
 
 import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
+import edu.msg.ro.business.integration.AbstractIntegrationTest;
+import edu.msg.ro.business.user.boundary.RoleFacade;
 
 /***
  * Test for{

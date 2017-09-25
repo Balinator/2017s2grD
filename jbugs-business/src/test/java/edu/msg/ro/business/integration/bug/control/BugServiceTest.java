@@ -1,17 +1,18 @@
-package edu.msg.ro.business.bug.control;
+package edu.msg.ro.business.integration.bug.control;
 
 import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.bug.boundary.BugFacade;
+import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.util.BugSeverity;
 import edu.msg.ro.business.bug.util.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
+import edu.msg.ro.business.integration.AbstractIntegrationTest;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;

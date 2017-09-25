@@ -39,7 +39,7 @@ public class UserDTOMapper extends AbstractDTOMapper<User, UserDTO> {
 	 * Method for filling up the {@link UserDTO}.
 	 */
 	@Override
-	protected void mapEntityToDTOFields(User entity, UserDTO dto) {
+	public void mapEntityToDTOFields(User entity, UserDTO dto) {
 		dto.setEmail(entity.getEmail());
 		dto.setFirstname(entity.getFirstname());
 		dto.setLastname(entity.getLastname());

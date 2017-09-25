@@ -1,12 +1,13 @@
-package edu.msg.ro.business.user.dao;
+package edu.msg.ro.business.integration.user.dao;
 
 import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.integration.AbstractIntegrationTest;
+import edu.msg.ro.business.user.dao.RoleDAO;
 
 /**
  * Role DAO {@link RoleDAO} test.

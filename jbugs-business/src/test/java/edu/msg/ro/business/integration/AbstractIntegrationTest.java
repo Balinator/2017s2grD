@@ -1,4 +1,4 @@
-package edu.msg.ro.business;
+package edu.msg.ro.business.integration;
 
 import java.io.File;
 import java.io.IOException;

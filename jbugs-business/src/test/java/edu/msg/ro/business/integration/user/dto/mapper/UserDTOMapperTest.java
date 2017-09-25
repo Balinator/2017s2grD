@@ -1,20 +1,27 @@
-package edu.msg.ro.business.user.dto.mapper;
+package edu.msg.ro.business.integration.user.dto.mapper;
 
 import java.util.ArrayList;
 
-import javax.ejb.EJB;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
+import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
 import edu.msg.ro.persistence.user.entity.User;
 
-public class UserDTOMapperTest extends AbstractIntegrationTest {
+@RunWith(MockitoJUnitRunner.class)
+public class UserDTOMapperTest {
 
-	@EJB
+	@InjectMocks
 	UserDTOMapper sut;
+
+	@Mock
+	RoleDTOMapper roleDTOMapper;
 
 	@Test
 	public void mapToDTO_validEntity() {
@@ -31,6 +38,7 @@ public class UserDTOMapperTest extends AbstractIntegrationTest {
 		entity.setRoles(new ArrayList<>());
 
 		UserDTO userDTO = sut.mapToDTO(entity);
+		sut.mapEntityToDTOFields(entity, userDTO);
 
 		Assert.assertEquals("Email mapping failed", entity.getEmail(), userDTO.getEmail());
 		Assert.assertEquals("First name mapping failed", entity.getFirstname(), userDTO.getFirstname());
@@ -40,9 +48,7 @@ public class UserDTOMapperTest extends AbstractIntegrationTest {
 		Assert.assertEquals("Phone Number mapping failed", entity.getPhoneNumber(), userDTO.getPhoneNumber());
 		Assert.assertEquals("Username mapping failed", entity.getUsername(), userDTO.getUsername());
 
-		// @Todo check for roles to when implemented the rols.
-		// Assert.assertEquals("Active mapping failed", entity.get,
-		// userDTO.get);
+		Assert.assertEquals("Active mapping failed", entity.getRoles(), userDTO.getRoles());
 		Assert.assertEquals("Roles mapping failed", entity.isActive(), userDTO.isActive());
 
 	}

@@ -1,4 +1,4 @@
-package edu.msg.ro.business.user.control;
+package edu.msg.ro.business.integration.user.control;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
@@ -6,8 +6,9 @@ import javax.ejb.EJBTransactionRolledbackException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.msg.ro.business.AbstractIntegrationTest;
 import edu.msg.ro.business.common.exception.BusinessException;
+import edu.msg.ro.business.integration.AbstractIntegrationTest;
+import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.util.TestHelper;
 
