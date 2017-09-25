@@ -23,16 +23,13 @@ public class UserDTOMapperTest {
 	@Mock
 	RoleDTOMapper roleDTOMapper;
 
-	/**
-	 * test for entity to DTO field for User
-	 */
 	@Test
-	public void entityToDtoFieldTest() {
+	public void mapToDTO_validEntity() {
 
 		User entity = new User();
 		entity.setEmail("test@msg.com");
-		entity.setFirstname("firstname");
-		entity.setLastname("lastname");
+		entity.setFirstname("Ale");
+		entity.setLastname("Mihai");
 		entity.setPassword("msg");
 		entity.setLockVersion(1L);
 		entity.setPhoneNumber("54545");
@@ -42,6 +39,10 @@ public class UserDTOMapperTest {
 
 		UserDTO userDTO = sut.mapToDTO(entity);
 		sut.mapEntityToDTOFields(entity, userDTO);
+
+		// To complete the entity Junit test.
+		@SuppressWarnings("unused")
+		String stringEntity = entity.toString();
 
 		Assert.assertEquals("Email mapping failed", entity.getEmail(), userDTO.getEmail());
 		Assert.assertEquals("First name mapping failed", entity.getFirstname(), userDTO.getFirstname());
@@ -54,6 +55,15 @@ public class UserDTOMapperTest {
 		Assert.assertEquals("Active mapping failed", entity.getRoles(), userDTO.getRoles());
 		Assert.assertEquals("Roles mapping failed", entity.isActive(), userDTO.isActive());
 
+	}
+
+	/**
+	 * Check for null entity.
+	 */
+	@Test
+	public void mapToDTO_NullEntity() {
+		UserDTO userDTO = sut.mapToDTO(null);
+		Assert.assertNull("Return value of an NULL input should be also NULL", userDTO);
 	}
 
 }

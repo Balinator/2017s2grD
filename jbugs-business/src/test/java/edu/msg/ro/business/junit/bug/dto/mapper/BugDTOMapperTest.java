@@ -31,6 +31,7 @@ public class BugDTOMapperTest {
 	public void entityToDtoFieldTest() {
 
 		Bug entity = new Bug();
+		entity.setId(1L);
 		entity.setTitle("title");
 		entity.setDescription("description");
 		entity.setFixedIn("fixedIn");
@@ -46,6 +47,7 @@ public class BugDTOMapperTest {
 		BugDTO bugDTO = bugDTOMapper.mapToDTO(entity);
 		bugDTOMapper.mapEntityToDTOFields(entity, bugDTO);
 
+		Assert.assertEquals("Id mapping failed", entity.getId(), bugDTO.getId());
 		Assert.assertEquals("Title mapping failed", entity.getTitle(), bugDTO.getTitle());
 		Assert.assertEquals("Description mapping failed", entity.getDescription(), bugDTO.getDescription());
 		Assert.assertEquals("Fixedin mapping failed", entity.getFixedIn(), bugDTO.getFixedIn());
