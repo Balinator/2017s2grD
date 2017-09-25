@@ -90,11 +90,17 @@
 					<p:commandButton value="#{msg['user.deactivate']}"
 						action="#{userListBean.deleteUser(user)}"
 						rendered="#{user.active}" update=":userForm" />
+
+					<p:commandLink value="#{msg['users.resetPassword']}" type="button"
+						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
+						oncomplete="PF('resetPasswordDialog').show()"
+						update=":resetPasswordForm:display" />
 				</p:column>
 			</p:dataTable>
 		</h:form>
 		<ui:include src="/user/userCreate.xhtml" />
 		<ui:include src="/user/userEdit.xhtml" />
+		<ui:include src="/user/userResetPassword.xhtml" />
 		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
 </h:body>

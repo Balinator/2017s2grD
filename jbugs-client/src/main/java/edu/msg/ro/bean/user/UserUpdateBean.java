@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.dto.RoleDTO;
@@ -61,6 +62,19 @@ public class UserUpdateBean extends AbstractUserBean {
 			userFacade.updateUser(updatedUser);
 			addI18nMessage(I18N_SAVED, new Object[] { updatedUser.getUsername() });
 			rebuildRoleService();
+		} catch (JBugsExeption e) {
+			handleExeptionI18n(e);
+		}
+	}
+
+	/**
+	 * Method for reseting the password
+	 * 
+	 * @throws TechnicalExeption
+	 */
+	public void resetPassword() throws BusinessException {
+		try {
+			userFacade.resetPassword(updatedUser);
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
