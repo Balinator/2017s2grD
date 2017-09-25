@@ -93,7 +93,9 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 */
 	public String processLogin() {
 		if (loginFacade.isValidUser(user)) {
-			session.setAttribute("username", user.getUsername());
+			UserDTO persistedUser = userFacade.getUserByUsername(user.getUsername());
+			session.setAttribute("username", persistedUser.getUsername());
+			session.setAttribute("loggedUser", persistedUser);
 			addI18nMessage("login.welcome");
 			session.setAttribute("FAILEDATTEMPS", 0);
 			return "bugManagment";

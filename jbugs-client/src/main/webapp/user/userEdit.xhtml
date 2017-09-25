@@ -5,17 +5,19 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<p:dialog id="editUserDialog" header="#{msg['user.update']}"
-		widgetVar="userEditDialog" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+		widgetVar="userEditDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
 
 		<h:form id="viewForm">
+			<p:outputPanel id="display" autoUpdate="true">
 
-			<p:outputPanel id="display">
-
-				<h:panelGrid columns="2" cellpadding="5" style="width: 100%" columnClasses="panel-colum-label, panel-colum">
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
 
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
-						<p:tooltip for="firstname" hideEvent="blur" position="right" showEvent="focus"
+						<p:tooltip for="firstname" hideEvent="blur" position="right"
+							showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:firstname')}">
 							<p:message for="firstname" />
 						</p:tooltip>
@@ -26,7 +28,8 @@
 
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<h:panelGroup layout="block">
-						<p:tooltip for="lastname" hideEvent="blur" position="right" showEvent="focus"
+						<p:tooltip for="lastname" hideEvent="blur" position="right"
+							showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:lastname')}">
 							<p:message for="lastname" />
 						</p:tooltip>
@@ -35,15 +38,32 @@
 							value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
 					</h:panelGroup>
 
-					<p:outputLabel value="Email" />
-					<p:inputText value="#{userUpdateBean.updatedUser.email}">
-						<f:validator validatorId="emailValidator" />
-					</p:inputText>
+					<p:outputLabel value="#{msg['users.email']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="email" hideEvent="blur" position="right"
+							showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:email')}">
+							<p:message for="email" />
+						</p:tooltip>
+						<p:inputText id="email"
+							value="#{userUpdateBean.updatedUser.email}">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
-					<p:inputText value="#{userUpdateBean.updatedUser.phoneNumber}">
-						<f:validator validatorId="phoneNumberValidator" />
-					</p:inputText>
+					<h:panelGroup layout="block">
+						<p:tooltip for="phonenumber" hideEvent="blur" position="right"
+							showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:phonenumber')}">
+							<p:message for="phonenumber" />
+						</p:tooltip>
+						<p:inputText id="phonenumber"
+							requiredMessage="#{msg['error.phoneNumber']}"
+							value="#{userUpdateBean.updatedUser.phoneNumber}">
+							<f:validator validatorId="phoneNumberValidator" />
+						</p:inputText>
+					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['users.role']}" />
 					<p:selectManyMenu id="basic"
@@ -52,11 +72,13 @@
 						<f:selectItems value="#{userUpdateBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-					<h:commandButton value="#{msg['users.update']}"
-						action="#{userUpdateBean.editUser}">
-					</h:commandButton>
+					<p:commandButton value="#{msg['users.update']}"
+						action="#{userUpdateBean.editUser}"
+						oncomplete="handlePopUpRequest('userEditDialog', xhr, status, args)"
+						update="userForm:userList" ajax="true" />
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>
+		<p:ajax event="close" resetValues="true" />
 	</p:dialog>
 </ui:composition>

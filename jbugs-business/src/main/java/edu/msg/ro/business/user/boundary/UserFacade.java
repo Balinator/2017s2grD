@@ -9,7 +9,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.common.exception.BusinessException;
-import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -98,11 +97,6 @@ public class UserFacade {
 	 * @return
 	 */
 	public UserDTO getUserByUsername(String username) {
-		for (UserDTO userDTO : userService.getAllUsers()) {
-			if (userDTO.getUsername().equals(username)) {
-				return userDTO;
-			}
-		}
-		return null;
+		return userService.findUserByUsername(username);
 	}
 }
