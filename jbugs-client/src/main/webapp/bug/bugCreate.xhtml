@@ -96,7 +96,7 @@
 			<p:commandButton value="#{msg['bug.create']}"
 				action="#{bugNewBean.createNewBug}"
 				oncomplete="handlePopUpRequest('bugAddDialog', xhr, status, args)"
-				update="bugForm:bugList, display" ajax="true" />
+				update="bugForm:bugList, display" ajax="true" style="float:right;"/>
 		</h:form>
 		<p:ajax event="close" resetValues="true"
 			update="bugAddForm:display, bugAddForm:display2" />

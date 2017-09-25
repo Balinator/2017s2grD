@@ -85,11 +85,11 @@
 						<f:selectItems value="#{userNewBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-					<p:commandButton value="#{msg['users.create']}"
-						action="#{userNewBean.createNewUser}"
-						oncomplete="handlePopUpRequest('userCreateDialog', xhr, status, args)"
-						update="userForm:userList" ajax="true" />
 				</h:panelGrid>
+				<p:commandButton value="#{msg['users.create']}"
+					action="#{userNewBean.createNewUser}"
+					oncomplete="handlePopUpRequest('userCreateDialog', xhr, status, args)"
+					update="userForm:userList" ajax="true" style="float:right;"/>
 			</p:outputPanel>
 		</h:form>
 		<p:ajax event="close" resetValues="true" />
