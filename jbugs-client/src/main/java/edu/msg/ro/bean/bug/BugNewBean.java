@@ -74,6 +74,13 @@ public class BugNewBean extends AbstractBugBean {
 	}
 
 	/**
+	 * make null value for newBug
+	 */
+	public void refreshNewBug() {
+		newBug = new BugDTO();
+	}
+
+	/**
 	 * Just create a bug without return.
 	 */
 	public String createNewBug() {

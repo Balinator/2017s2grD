@@ -45,6 +45,7 @@
 
 						<p:commandLink value="#{msg['bug.add']}" type="button"
 							oncomplete="PF('bugAddDialog').show();"
+							actionListener="#{bugNewBean.refreshNewBug}"
 							update=":bugAddForm:display, :bugAddForm:display2" />
 					</h:panelGroup>
 				</f:facet>
