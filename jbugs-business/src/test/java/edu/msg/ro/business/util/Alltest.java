@@ -14,6 +14,8 @@ import edu.msg.ro.business.junit.user.boundary.UserLoginTest;
 import edu.msg.ro.business.junit.user.boundary.UserPermissonTest;
 import edu.msg.ro.business.junit.user.control.PermissionServiceTest;
 import edu.msg.ro.business.junit.user.control.RoleServiceTest;
+import edu.msg.ro.business.junit.user.dto.mapper.PermissionDTOMapperTest;
+import edu.msg.ro.business.junit.user.dto.mapper.RoleDTOMapperTest;
 import edu.msg.ro.business.junit.user.dto.mapper.UserDTOMapperTest;
 
 /**
@@ -23,9 +25,10 @@ import edu.msg.ro.business.junit.user.dto.mapper.UserDTOMapperTest;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ BugFacadeTest.class, BugServiceTest.class, RoleFacadeTest.class, UserFacadeTest.class,
-		UserLoginTest.class, UserPermissonTest.class, PermissionServiceTest.class, RoleServiceTest.class,
-		UserDTOMapperTest.class, BugDTOMapperTest.class, UserValidatorTest.class
+@SuiteClasses({ BugFacadeTest.class, BugServiceTest.class, BugDTOMapperTest.class, RoleFacadeTest.class,
+		UserFacadeTest.class, UserLoginTest.class, UserPermissonTest.class, PermissionServiceTest.class,
+		RoleServiceTest.class, UserDTOMapperTest.class, PermissionDTOMapperTest.class, RoleDTOMapperTest.class,
+		UserValidatorTest.class
 
 })
 public class Alltest {

@@ -27,8 +27,9 @@ public class PermissionDTOMapper extends AbstractDTOMapper<Permission, Permissio
 	 * Method for filling up the {@link PermissionDTO}.
 	 */
 	@Override
-	protected void mapEntityToDTOFields(Permission entity, PermissionDTO dto) {
+	public void mapEntityToDTOFields(Permission entity, PermissionDTO dto) {
 		dto.setName(entity.getName());
+		dto.setDetail(entity.getDetail());
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class PermissionDTOMapper extends AbstractDTOMapper<Permission, Permissio
 	@Override
 	protected void mapDTOToEntityFields(PermissionDTO dto, Permission entity) {
 		entity.setName(dto.getName());
-
+		entity.setDetail(dto.getDetail());
 	}
 
 }
