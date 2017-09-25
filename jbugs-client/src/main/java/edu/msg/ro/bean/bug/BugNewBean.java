@@ -1,7 +1,7 @@
 package edu.msg.ro.bean.bug;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -16,7 +16,7 @@ import edu.msg.ro.persistence.bug.entity.Bug;
  * @author balinc
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class BugNewBean extends AbstractBugBean {
 
 	private BugDTO newBug = new BugDTO();
@@ -71,6 +71,13 @@ public class BugNewBean extends AbstractBugBean {
 		newBug.setAttachment(file);
 		newBug.setAttachmentName(event.getFile().getFileName());
 
+	}
+
+	/**
+	 * make null value for newBug
+	 */
+	public void refreshNewBug() {
+		newBug = new BugDTO();
 	}
 
 	/**

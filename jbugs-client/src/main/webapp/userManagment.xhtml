@@ -6,10 +6,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:of="http://omnifaces.org/functions">
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-	<title><h:outputText value="#{msg['login.title']}" /></title>
+	<title><h:outputText value="#{msg['users.title']}" /></title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
@@ -18,13 +19,17 @@
 		<h:form id="userForm">
 			<p:messages autoUpdate="true" severity="info,error" globalOnly="true" />
 			<p:dataTable value="#{userListBean.allUsers}" var="user"
-				id="userList" paginator="true" selectionMode="single"
-				rowKey="#{user.id}" rows="15" styleClass="paginated">
+				widgetVar="userTable" id="userList" paginator="true"
+				selectionMode="single" rowKey="#{user.id}" rows="15"
+				styleClass="paginated">
 				<f:facet name="header">
-					<p:commandLink value="#{msg['users.add']}" type="button"
-						oncomplete="PF('userCreateDialog').show();"
-						style="padding: .3em 1em;"
-						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
+					<h:panelGroup layout="block" style="overflow: auto;">
+						<p:commandLink type="button"
+							oncomplete="PF('userCreateDialog').show();" style="float:right;"
+							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							<h:outputText value="+" />
+						</p:commandLink>
+					</h:panelGroup>
 				</f:facet>
 				<p:column style="text-align: center;" sortBy="#{user.firstname}"
 					filterBy="#{user.firstname}" filterMatchMode="contains">
@@ -46,7 +51,7 @@
 				</p:column>
 				<p:column style="text-align: center;" sortBy="#{user.email}"
 					filterBy="#{user.email}" filterMatchMode="contains">
-					<f:facet name="header">Email<br />
+					<f:facet name="header">#{msg['users.email']}<br />
 					</f:facet>
 					<h:outputText value="#{user.email}"></h:outputText>
 				</p:column>
@@ -65,31 +70,47 @@
 					</ui:repeat>
 				</p:column>
 
-				<p:column style="text-align: center;" sortBy="#{user.active}"
-					filterBy="#{user.active}" filterMatchMode="contains">
 
-					<f:facet name="header">#{msg['users.active']}<br />
+				<p:column filterBy="#{user.active}" filterMatchMode="equals"
+					headerText="#{msg['users.status']}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('userTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="All" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="#{msg['users.active']}" itemValue="true" />
+							<f:selectItem itemLabel="#{msg['users.inactive']}"
+								itemValue="false" />
+						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{msg['users.active']}"
-						rendered="#{user.active and !userListBean.verifyUserRendere(user)}"></h:outputText>
-					<h:outputText value="#{msg['users.inactive']}"
-						rendered="#{!user.active and !userListBean.verifyUserRendere(user)}"></h:outputText>
+					<h:outputText
+						value="#{user.active ? msg['users.active'] : msg['users.inactive']}" />
 				</p:column>
+				
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandLink value="#{msg['users.update']}" type="button"
+					<p:commandLink type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
-						update=":viewForm:display" />
+						update=":viewForm:display"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
+					</p:commandLink>
 
-					<p:commandButton value="#{msg['user.activate']}"
+					<p:commandLink type="button"
 						action="#{userListBean.activateUser(user)}"
-						rendered="#{!user.active}" update=":userForm" />
+						rendered="#{!user.active}" update=":userForm"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-unlocked" />
+					</p:commandLink>
 
-					<p:commandButton value="#{msg['user.deactivate']}"
+					<p:commandLink type="button"
 						action="#{userListBean.deleteUser(user)}"
-						rendered="#{user.active}" update=":userForm" />
+						rendered="#{user.active}" update=":userForm"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-locked" />
+					</p:commandLink>
 
 					<p:commandLink value="#{msg['users.resetPassword']}" type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
