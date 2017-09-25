@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
+import edu.msg.ro.persistence.user.entity.User;
 
 public class RoleDTO extends AbstractDTO implements Serializable {
 
@@ -15,6 +16,8 @@ public class RoleDTO extends AbstractDTO implements Serializable {
 	private List<PermissionDTO> permission;
 
 	private String name;
+
+	private List<User> users;
 
 	/**
 	 * Getter for name.
@@ -50,6 +53,14 @@ public class RoleDTO extends AbstractDTO implements Serializable {
 	 */
 	public void setPermission(List<PermissionDTO> permission) {
 		this.permission = permission;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	/**

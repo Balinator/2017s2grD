@@ -35,9 +35,13 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 	 * Method for filling up the {@link RoleDTO}.
 	 */
 	@Override
-	protected void mapEntityToDTOFields(Role entity, RoleDTO dto) {
+	public void mapEntityToDTOFields(Role entity, RoleDTO dto) {
+
+		entity.getPermissions();
+
 		dto.setPermission(pdm.mapToDTOs(entity.getPermissions()));
 		dto.setName(entity.getName());
+		dto.setUsers(entity.getUsers());
 
 	}
 
@@ -48,5 +52,6 @@ public class RoleDTOMapper extends AbstractDTOMapper<Role, RoleDTO> {
 	protected void mapDTOToEntityFields(RoleDTO dto, Role entity) {
 		entity.setPermissions(pdm.mapToEntities(dto.getPermissions(), pd));
 		entity.setName(dto.getName());
+		entity.setUsers(dto.getUsers());
 	}
 }

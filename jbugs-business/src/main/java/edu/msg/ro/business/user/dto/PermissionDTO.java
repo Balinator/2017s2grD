@@ -21,6 +21,8 @@ public class PermissionDTO extends AbstractDTO implements Serializable {
 
 	private String name;
 
+	private String detail;
+
 	private List<RoleDTO> role;
 
 	/**
@@ -39,6 +41,14 @@ public class PermissionDTO extends AbstractDTO implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 	/**
