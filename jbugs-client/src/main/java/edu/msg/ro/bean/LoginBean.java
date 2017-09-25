@@ -53,7 +53,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 	}
 
 	/**
-	 * 
+	 * If the password is wrong five times consecutively the user is deactivated
 	 */
 	private void toManyFailedPassword() {
 		String loggingUser = user.getUsername();
@@ -63,13 +63,14 @@ public class LoginBean extends AbstractBean implements Serializable {
 			session.setAttribute("FAILEDATTEMPS", failedlogins);
 			if (failedlogins == 4) {
 				userFacade.deleteUserNoCheck(user);
+				// session.setAttribute("FAILEDATTEMPS", 0);
 			}
 		} else {
 			FAILEDATTEMPS = 0;
 			session.setAttribute("FAILEDATTEMPS", 0);
 			session.setAttribute("OLDUSERNAME", user.getUsername());
 		}
-		if (Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString()) < 4) {
+		if ((Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString()) < 4)) {
 			addI18nMessage("loginForm:username", "login.error");
 		} else {
 			addI18nMessage("loginForm:username", "login.wrongpassword");
@@ -94,8 +95,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 		if (loginFacade.isValidUser(user)) {
 			session.setAttribute("username", user.getUsername());
 			addI18nMessage("login.welcome");
-			FAILEDATTEMPS = 0;
-			session.setAttribute("FAILEDATTEMPS", FAILEDATTEMPS);
+			session.setAttribute("FAILEDATTEMPS", 0);
 			return "bugManagment";
 		} else {
 			toManyFailedPassword();
