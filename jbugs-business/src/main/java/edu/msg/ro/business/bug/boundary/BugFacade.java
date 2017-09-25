@@ -62,14 +62,4 @@ public class BugFacade {
 	public List<BugDTO> getAllbugs() {
 		return bugService.getAllBugs();
 	}
-
-	/**
-	 * Delete attachment from bug.
-	 * 
-	 * @param id
-	 */
-	public void deleteAttachment(Long id) {
-		bugService.deleteAttachment(id);
-	}
-
 }
