@@ -45,7 +45,7 @@
 						<p:commandLink type="button"
 							oncomplete="PF('bugAddDialog').show();"
 							update=":bugAddForm:display, :bugAddForm:display2"
-							style="float:right;" styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" >
+							style="float:right;" styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" >
 							<h:outputText value=" " class="ui-icon ui-icon-plus"/>
 						</p:commandLink>
 					</h:panelGroup>
@@ -154,7 +154,7 @@
 						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
 						update=":formBugEdit:display, :formBugEdit:display2" 
-						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-pencil"/>
 					</p:commandLink>
 				</p:column>

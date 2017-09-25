@@ -25,7 +25,7 @@
 						<p:commandLink type="button"
 							oncomplete="PF('userCreateDialog').show();"
 							style="float:right;"
-							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value=" " class="ui-icon ui-icon-plus"/>
 						</p:commandLink>
 					</h:panelGroup>
@@ -86,21 +86,21 @@
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
 						update=":viewForm:display" 
-						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-pencil"/>
 					</p:commandLink>
 
 					<p:commandLink type="button"
 						action="#{userListBean.activateUser(user)}"
 						rendered="#{!user.active}" update=":userForm" 
-						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-unlocked"/>
 					</p:commandLink>
 
 					<p:commandLink type="button"
 						action="#{userListBean.deleteUser(user)}"
 						rendered="#{user.active}" update=":userForm"
-						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-locked"/>
 					</p:commandLink>
 				</p:column>
