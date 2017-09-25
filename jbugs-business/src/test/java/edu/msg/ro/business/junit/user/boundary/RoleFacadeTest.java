@@ -3,8 +3,6 @@ package edu.msg.ro.business.junit.user.boundary;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,9 +27,7 @@ public class RoleFacadeTest {
 	 */
 	@Test
 	public void testGetAllRoles() {
-
-		List<RoleDTO> result = roleFacade.getAllRoles();
-
+		roleFacade.getAllRoles();
 		verify(roleService, times(1)).getAllRoles();
 	}
 
@@ -40,9 +36,8 @@ public class RoleFacadeTest {
 	 */
 	@Test
 	public void testUpdateRoles() {
-
 		RoleDTO newRoleDTO = new RoleDTO();
-		RoleDTO result = roleFacade.update(newRoleDTO);
+		roleFacade.update(newRoleDTO);
 		verify(roleService, times(1)).update(newRoleDTO);
 
 	}

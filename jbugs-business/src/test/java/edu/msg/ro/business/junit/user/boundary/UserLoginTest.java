@@ -34,11 +34,8 @@ public class UserLoginTest {
 
 	@Test
 	public void testIsValidUser() throws BusinessException {
-
 		UserDTO toTest = th.initializUser("firstname", "lastname", "email@msggroup.com", "password", "0748102601");
-		UserDTO test = new UserDTO();
-		boolean result = loginFacade.isValidUser(toTest);
-
+		loginFacade.isValidUser(toTest);
 		verify(userPass, times(1)).encryptPassword(toTest);
 		verify(userService, times(1)).findUserExists(eq(toTest.getUsername()), any(String.class));
 	}

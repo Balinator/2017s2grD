@@ -9,12 +9,13 @@ import edu.msg.ro.business.junit.bug.control.BugServiceTest;
 import edu.msg.ro.business.junit.user.boundary.RoleFacadeTest;
 import edu.msg.ro.business.junit.user.boundary.UserFacadeTest;
 import edu.msg.ro.business.junit.user.boundary.UserLoginTest;
+import edu.msg.ro.business.junit.user.boundary.UserPermissonTest;
 import edu.msg.ro.business.junit.user.control.PermissionServiceTest;
 import edu.msg.ro.business.junit.user.control.RoleServiceTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ BugFacadeTest.class, BugServiceTest.class, RoleFacadeTest.class, UserFacadeTest.class,
-		PermissionServiceTest.class, UserLoginTest.class, RoleServiceTest.class
+		UserLoginTest.class, UserPermissonTest.class, PermissionServiceTest.class, RoleServiceTest.class
 
 })
 public class Alltest {

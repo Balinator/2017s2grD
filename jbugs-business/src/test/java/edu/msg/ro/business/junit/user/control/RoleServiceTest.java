@@ -35,11 +35,9 @@ public class RoleServiceTest {
 	 */
 	@Test
 	public void testGetAllRoles() {
-
-		List<RoleDTO> result = roleService.getAllRoles();
+		roleService.getAllRoles();
 		verify(roleDAO, times(1)).getAll();
 		verify(roleDTOMapper, times(1)).mapToDTOs(any(List.class));
-
 	}
 
 	/**
@@ -47,11 +45,9 @@ public class RoleServiceTest {
 	 */
 	@Test
 	public void testUpdateRoles() {
-
 		RoleDTO roleDTO = new RoleDTO();
 		Role role = new Role();
-		RoleDTO result = roleService.update(roleDTO);
-
+		roleService.update(roleDTO);
 		verify(roleDAO, times(1)).findEntity(role.getId());
 		verify(roleDTOMapper, times(1)).mapToDTO(any(Role.class));
 		verify(roleDTOMapper, times(1)).mapToEntity(any(RoleDTO.class), any(Role.class));

@@ -3,8 +3,6 @@ package edu.msg.ro.business.junit.bug.bundary;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,7 +29,7 @@ public class BugFacadeTest {
 	@Test
 	public void testCreateBug() {
 		BugDTO newBugDTO = new BugDTO();
-		BugDTO result = bugFacede.createBug(newBugDTO);
+		bugFacede.createBug(newBugDTO);
 		verify(bugService, times(1)).createBug(newBugDTO);
 	}
 
@@ -41,7 +39,7 @@ public class BugFacadeTest {
 	@Test
 	public void testUpdateBug() {
 		BugDTO newBugDTO = new BugDTO();
-		BugDTO result = bugFacede.updateBug(newBugDTO);
+		bugFacede.updateBug(newBugDTO);
 		verify(bugService, times(1)).updateBug(newBugDTO);
 	}
 
@@ -50,7 +48,7 @@ public class BugFacadeTest {
 	 */
 	@Test
 	public void testGetAllBug() {
-		List<BugDTO> result = bugFacede.getAllbugs();
+		bugFacede.getAllbugs();
 		verify(bugService, times(1)).getAllBugs();
 	}
 
@@ -60,7 +58,7 @@ public class BugFacadeTest {
 	@Test
 	public void testDeeleteBug() {
 		BugDTO newBugDTO = new BugDTO();
-		BugDTO result = bugFacede.deleteBug(newBugDTO);
+		bugFacede.deleteBug(newBugDTO);
 		verify(bugService, times(1)).deleteBug(newBugDTO);
 	}
 }

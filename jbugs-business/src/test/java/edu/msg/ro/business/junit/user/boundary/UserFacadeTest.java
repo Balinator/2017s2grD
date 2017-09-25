@@ -5,8 +5,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,50 +35,40 @@ public class UserFacadeTest {
 	@Test
 	public void testCreateUser() throws BusinessException {
 		UserDTO toTest = getUser();
-
-		UserDTO fromTest = userFacade.createUser(toTest);
-
+		userFacade.createUser(toTest);
 		verify(userService, times(1)).createUser(eq(toTest));
 	}
 
 	@Test
 	public void testUpdateUser() throws BusinessException {
 		UserDTO toTest = getUser();
-
-		UserDTO fromTest = userFacade.updateUser(toTest);
-
+		userFacade.updateUser(toTest);
 		verify(userService, times(1)).updateUser(eq(toTest));
 	}
 
 	@Test
 	public void testDeleteUser() throws BusinessException {
 		UserDTO toTest = getUser();
-
-		UserDTO fromTest = userFacade.deleteUser(toTest);
-
+		userFacade.deleteUser(toTest);
 		verify(userService, times(1)).deleteUser(eq(toTest));
 	}
 
 	@Test
 	public void testDeleteUserNoCheck() throws BusinessException {
 		UserDTO toTest = getUser();
-
-		UserDTO fromTest = userFacade.deleteUserNoCheck(toTest);
-
+		userFacade.deleteUserNoCheck(toTest);
 		verify(userService, times(1)).deleteUserNoCheck(eq(toTest));
 	}
 
 	@Test
 	public void testGetAllUserByQuery() throws BusinessException {
-		List<UserDTO> fromTest = userFacade.getAllUserByQuery("username");
-
+		userFacade.getAllUserByQuery("username");
 		verify(userService, times(1)).getAllUsers();
 	}
 
 	@Test
 	public void testGetUserByUsername() throws BusinessException {
-		UserDTO fromTest = userFacade.getUserByUsername("username");
-
+		userFacade.getUserByUsername("username");
 		verify(userService, times(1)).findUserByUsername(any(String.class));
 	}
 }
