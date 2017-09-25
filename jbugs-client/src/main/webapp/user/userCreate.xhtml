@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<p:dialog id="createUserDialog" header="#{msg['user.create']}"
+	<p:dialog id="createUserDialog" header="#{msg['users.create.dialog.title']}"
 		widgetVar="userCreateDialog" resizable="false" modal="true"
 		showEffect="clip" hideEffect="fold">
 
@@ -85,7 +85,7 @@
 						<f:selectItems value="#{userNewBean.roles}" var="role"
 							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
 					</p:selectManyMenu>
-					<p:commandButton value="#{msg['users.create']}"
+					<p:commandButton value="#{msg['users.create.dialog.create']}"
 						action="#{userNewBean.createNewUser}"
 						oncomplete="handlePopUpRequest('userCreateDialog', xhr, status, args)"
 						update="userForm:userList" ajax="true" />

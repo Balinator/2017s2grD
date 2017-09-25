@@ -94,7 +94,7 @@
 				</h:panelGrid>
 			</p:outputPanel>
 
-			<p:commandButton value="#{msg['bug.create']}"
+			<p:commandButton value="#{msg['bug.create.dialog.add']}"
 				action="#{bugNewBean.createNewBug}"
 				oncomplete="handlePopUpRequest('bugAddDialog', xhr, status, args)"
 				update="bugForm:bugList, display" ajax="true" />
