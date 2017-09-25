@@ -1,4 +1,4 @@
-package edu.msg.ro.business.bug.util;
+package edu.msg.ro.business.bug.enums;
 
 /**
  * Enum for bug severity.
@@ -19,13 +19,4 @@ public enum BugSeverity {
 		this.key = ordinal();
 	}
 
-	/**
-	 * Get bug severity by ID.
-	 * 
-	 * @param id
-	 * @return BugSeverity
-	 */
-	public BugSeverity getSeverityById(int id) {
-		return BugSeverity.values()[id];
-	}
 }

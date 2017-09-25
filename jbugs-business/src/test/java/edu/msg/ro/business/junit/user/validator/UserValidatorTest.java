@@ -1,4 +1,4 @@
-package edu.msg.ro.business.integration.user.validator;
+package edu.msg.ro.business.junit.user.validator;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -31,6 +31,5 @@ public class UserValidatorTest {
 		User user = new User();
 		userValidator.checkIfUserHasActiveTasks(user);
 		verify(userDAO, times(1)).checkIfUserHasAssignedBugs(any(User.class));
-
 	}
 }

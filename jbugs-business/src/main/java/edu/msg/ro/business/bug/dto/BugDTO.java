@@ -3,8 +3,8 @@ package edu.msg.ro.business.bug.dto;
 import java.util.Arrays;
 import java.util.Date;
 
-import edu.msg.ro.business.bug.util.BugSeverity;
-import edu.msg.ro.business.bug.util.StatusEnum;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.common.dto.AbstractDTO;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;

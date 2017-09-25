@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
-import edu.msg.ro.business.bug.util.StatusEnum;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
 import edu.msg.ro.business.user.security.PermissionEnum;

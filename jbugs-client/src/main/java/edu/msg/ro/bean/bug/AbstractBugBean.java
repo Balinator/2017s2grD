@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 
 import edu.msg.ro.bean.AbstractBean;
 import edu.msg.ro.business.bug.boundary.BugFacade;
-import edu.msg.ro.business.bug.util.BugSeverity;
+import edu.msg.ro.business.bug.enums.BugSeverity;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.bug.entity.Bug;

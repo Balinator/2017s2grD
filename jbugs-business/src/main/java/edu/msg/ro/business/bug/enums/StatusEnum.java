@@ -1,4 +1,4 @@
-package edu.msg.ro.business.bug.util;
+package edu.msg.ro.business.bug.enums;
 
 import java.util.ArrayList;
 
@@ -8,12 +8,16 @@ import java.util.ArrayList;
  * @author fulops
  *
  */
-
 public enum StatusEnum {
+
 	/**
 	 * The bug possible statuses.
 	 */
 	OPEN, REJECTED, INPROGRESS, INFONEEDED, FIXED, CLOSE;
+
+	public int key;
+
+	public ArrayList<StatusEnum> neighbors;
 
 	/**
 	 * Every state every state has next state.
@@ -45,17 +49,9 @@ public enum StatusEnum {
 	/**
 	 * Constructor.
 	 * 
-	 * @param s
+	 * @param
 	 */
 	private StatusEnum() {
 		this.key = ordinal();
 	}
-
-	public StatusEnum getEnumById(int id) {
-		return StatusEnum.values()[id];
-	}
-
-	public int key;
-	public ArrayList<StatusEnum> neighbors;
-
 }

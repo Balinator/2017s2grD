@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 import edu.msg.ro.business.bug.control.BugService;
-import edu.msg.ro.business.bug.util.StatusEnum;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 
 @ManagedBean
 @RequestScoped

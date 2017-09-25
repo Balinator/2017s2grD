@@ -6,8 +6,8 @@ import java.util.Date;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.bug.dto.BugDTO;
-import edu.msg.ro.business.bug.util.BugSeverity;
-import edu.msg.ro.business.bug.util.StatusEnum;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dto.UserDTO;
 
