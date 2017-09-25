@@ -4,13 +4,13 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.awt.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dao.BugDAO;
