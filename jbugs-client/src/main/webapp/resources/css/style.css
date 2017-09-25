@@ -58,3 +58,6 @@ body > :not(.header-class){
 	width: 35%;
 	text-align: left;
 }
+.commandLinkToButton{
+	 padding: .3em 1em !important;
+}

@@ -21,10 +21,12 @@
 				id="userList" paginator="true" selectionMode="single"
 				rowKey="#{user.id}" rows="15" styleClass="paginated">
 				<f:facet name="header">
-					<p:commandLink value="#{msg['users.add']}" type="button"
-						oncomplete="PF('userCreateDialog').show();"
-						style="padding: .3em 1em;"
-						styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
+					<h:panelGroup layout="block" style="overflow: auto;">
+						<p:commandLink value="#{msg['users.add']}" type="button"
+							oncomplete="PF('userCreateDialog').show();"
+							style="float:right;"
+							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
+					</h:panelGroup>
 				</f:facet>
 				<p:column style="text-align: center;" sortBy="#{user.firstname}"
 					filterBy="#{user.firstname}" filterMatchMode="contains">
@@ -81,7 +83,8 @@
 					<p:commandLink value="#{msg['users.update']}" type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
-						update=":viewForm:display" />
+						update=":viewForm:display" 
+						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"/>
 
 					<p:commandButton value="#{msg['user.activate']}"
 						action="#{userListBean.activateUser(user)}"

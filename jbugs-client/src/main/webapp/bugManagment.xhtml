@@ -35,17 +35,17 @@
 
 					<h:panelGroup layout="block" style=" overflow: auto;">
 
-						<p:outputPanel>
-
+						<p:outputPanel style="float: left;">
 							<h:outputText value="#{msg['bug.search.all']}" />
 							<p:inputText id="globalFilter" onkeyup="PF('bugTable').filter()"
-								style="width:150px"
+								style="width:150px; margin-left: 1em;"
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
 						<p:commandLink value="#{msg['add']}" type="button"
 							oncomplete="PF('bugAddDialog').show();"
-							update=":bugAddForm:display, :bugAddForm:display2" />
+							update=":bugAddForm:display, :bugAddForm:display2"
+							style="float:right;" styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" />
 					</h:panelGroup>
 				</f:facet>
 
@@ -151,7 +151,8 @@
 					<p:commandLink value="#{msg['bug.update']}" type="button"
 						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
-						update=":formBugEdit:display, :formBugEdit:display2" />
+						update=":formBugEdit:display, :formBugEdit:display2" 
+						styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"/>
 				</p:column>
 			</p:dataTable>
 		</h:form>
