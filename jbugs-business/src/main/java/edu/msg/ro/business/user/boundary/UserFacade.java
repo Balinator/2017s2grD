@@ -49,6 +49,17 @@ public class UserFacade {
 	}
 
 	/**
+	 * Method for reseting the user password
+	 * 
+	 * @param user
+	 * @return
+	 * @throws BusinessException
+	 */
+	public UserDTO resetPassword(UserDTO user) throws BusinessException {
+		return userService.resetPassword(user);
+	}
+
+	/**
 	 * Method for deleting(deactivating) an {@link User}.
 	 * 
 	 * @param userDTO

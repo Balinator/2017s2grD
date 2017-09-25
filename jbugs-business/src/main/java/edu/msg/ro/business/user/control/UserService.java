@@ -76,6 +76,21 @@ public class UserService {
 	}
 
 	/**
+	 * Reseting the password for user
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public UserDTO resetPassword(UserDTO user) {
+
+		String password = userUtils.encryptPassword(user);
+		user.setPassword(password);
+		User persistedUser = userDAO.findEntity(user.getId());
+		userDTOMapper.mapToEntity(user, persistedUser);
+		return userDTOMapper.mapToDTO(persistedUser);
+	}
+
+	/**
 	 * Method for deleting(deactivating) an {@link User}.
 	 * 
 	 * @param userDTO
