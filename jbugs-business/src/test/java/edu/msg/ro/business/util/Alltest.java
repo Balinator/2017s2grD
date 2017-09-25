@@ -1,4 +1,4 @@
-package edu.msg.ro.business.allunit;
+package edu.msg.ro.business.util;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
