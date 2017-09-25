@@ -53,6 +53,29 @@ public class BugFacadeTest extends AbstractIntegrationTest {
 	}
 
 	/**
+	 * if update is not working
+	 *
+	 * @throws BusinessException
+	 * @throws TechnicalExeption
+	 */
+	@Test
+	public void updateBug_UpdatedTestBug() throws BusinessException, TechnicalExeption {
+
+		UserDTO testUser = th.initializUser("Mary", "Jane", "asd@msggroup.com", "asd", "0756748395");
+		UserDTO persistUser = uf.createUser(testUser);
+
+		BugDTO testBug = th.initializingBug("Bug title", "Description", BugSeverity.MEDIUM, "v2.2", "bug",
+				StatusEnum.INFONEEDED, persistUser);
+		BugDTO persistBug = sut.createBug(testBug);
+		String createdBugTitle = persistBug.getTitle();
+
+		persistBug.setTitle("Updated title!");
+		BugDTO updatedBug = sut.updateBug(persistBug);
+
+		Assert.assertNotEquals("Update bug issue!", createdBugTitle, updatedBug.getTitle());
+	}
+
+	/**
 	 * Check if delete working
 	 * 
 	 * @throws TechnicalExeption

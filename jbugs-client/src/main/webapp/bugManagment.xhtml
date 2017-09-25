@@ -43,10 +43,9 @@
 						</p:outputPanel>
 
 						<p:commandLink type="button"
-
 							oncomplete="PF('bugAddDialog').show();"
 							update=":bugAddForm:display, :bugAddForm:display2"
-							style="float:right;"
+							actionListener="#{bugNewBean.refreshNewBug}" style="float:right;"
 							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value="+" />
 						</p:commandLink>

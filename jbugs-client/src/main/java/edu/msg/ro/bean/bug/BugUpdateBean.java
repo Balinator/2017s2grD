@@ -106,7 +106,6 @@ public class BugUpdateBean extends AbstractBugBean {
 	public void deleteAttachment() {
 		selectedBug.setAttachment(null);
 		selectedBug.setAttachmentName(null);
-
 	}
 
 	/**
