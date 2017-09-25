@@ -103,26 +103,23 @@
 							<h:outputText value="#{msg['bug.attachment.delete']}" />
 						</p:commandLink>
 
-						<p:fileUpload id="uploadFile"
-							fileUploadListener="#{bugUpdateBean.handleFileEdit}"
-							dragDropSupport="false" sizeLimit="26214400"
-							update="@this, attachmentUploded" fileLimit="1"
-							disabled="#{not empty bugUpdateBean.selectedBug.attachment}"
-							allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
-							value="#{bugUpdateBean.selectedBug.attachment}" />
-
-						<h:panelGrid id="attachmentUploded">
-							<p:outputLabel value="#{msg['bug.attachment.updoded']}"
-								rendered="#{not empty bugUpdateBean.selectedBug.attachment}" />
-						</h:panelGrid>
+							<p:fileUpload id="uploadFile"
+								fileUploadListener="#{bugUpdateBean.handleFileEdit}"
+								dragDropSupport="false" sizeLimit="26214400"
+								update="@this, attachmentUploded, uploadGrid" fileLimit="1"
+								disabled="#{not empty bugUpdateBean.selectedBug.attachment}"
+								allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
+								value="#{bugUpdateBean.selectedBug.attachment}" />
+							<p:tooltip id="attachmentUploded" for="uploadFile" position="bottom" value="#{msg['bug.attachment.updoded']}"
+								rendered="#{not empty bugUpdateBean.selectedBug.attachment}">
+							</p:tooltip>
 					</h:panelGroup>
 				</h:panelGrid>
 			</p:outputPanel>
-
 			<p:commandButton value="#{msg['bug.update']}"
 				action="#{bugUpdateBean.editBug}"
 				oncomplete="handlePopUpRequest('bugUpdateDialog', xhr, status, args)"
-				update="bugForm:bugList, display" ajax="true" />
+				update="bugForm:bugList, display" ajax="true" style="float:right;"/>
 		</h:form>
 		<p:ajax event="close" resetValues="true"
 			update="formBugEdit:display, formBugEdit:display2" />

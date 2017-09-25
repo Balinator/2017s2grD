@@ -81,23 +81,21 @@
 
 
 					<p:outputLabel value="#{msg['bug.attachment']}" />
-					<p:fileUpload fileUploadListener="#{bugNewBean.handleFileUpload}"
+					<p:fileUpload id="uploadFile" fileUploadListener="#{bugNewBean.handleFileUpload}"
 						dragDropSupport="false" sizeLimit="26214400"
 						update="alreadyUploaded, @this" fileLimit="1"
 						disabled="#{not empty bugNewBean.newBug.attachment}"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
-
-					<h:panelGroup id="alreadyUploaded">
-						<p:outputLabel value="#{msg['bug.attachment.updoded']}"
-							rendered="#{not empty bugNewBean.newBug.attachment}" />
-					</h:panelGroup>
+					<p:tooltip id="alreadyUploaded" for="uploadFile" position="bottom" value="#{msg['bug.attachment.updoded']}"
+						rendered="#{not empty bugNewBean.newBug.attachment}">
+					</p:tooltip>
 				</h:panelGrid>
 			</p:outputPanel>
 
 			<p:commandButton value="#{msg['bug.create.dialog.add']}"
 				action="#{bugNewBean.createNewBug}"
 				oncomplete="handlePopUpRequest('bugAddDialog', xhr, status, args)"
-				update="bugForm:bugList, display" ajax="true" />
+				update="bugForm:bugList, display" ajax="true" style="float:right;"/>
 		</h:form>
 
 		<p:ajax event="close" resetValues="true"
