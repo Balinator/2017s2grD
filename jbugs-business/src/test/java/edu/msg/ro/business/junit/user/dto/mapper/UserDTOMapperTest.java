@@ -40,6 +40,10 @@ public class UserDTOMapperTest {
 		UserDTO userDTO = sut.mapToDTO(entity);
 		sut.mapEntityToDTOFields(entity, userDTO);
 
+		// To complete the entity Junit test.
+		@SuppressWarnings("unused")
+		String stringEntity = entity.toString();
+
 		Assert.assertEquals("Email mapping failed", entity.getEmail(), userDTO.getEmail());
 		Assert.assertEquals("First name mapping failed", entity.getFirstname(), userDTO.getFirstname());
 		Assert.assertEquals("Last name mapping failed", entity.getLastname(), userDTO.getLastname());
