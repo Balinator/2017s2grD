@@ -75,6 +75,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	public void resetPassword() throws BusinessException {
 		try {
 			userFacade.resetPassword(updatedUser);
+			addI18nMessage(I18N_Reset);
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}

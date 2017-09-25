@@ -31,6 +31,7 @@ abstract class AbstractUserBean extends AbstractBean {
 	 * Notification message key.
 	 */
 	public static final String I18N_SAVED = "user.crud.save.success";
+	public static final String I18N_Reset = "user.resetedPassword";
 
 	/**
 	 * Init function.
