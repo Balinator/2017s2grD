@@ -9,22 +9,21 @@
 		showEffect="clip" hideEffect="fold">
 
 		<h:form id="addForm">
+			<p:outputPanel id="display" autoUpdate="true">
 
-
-			<p:outputPanel id="display">
 				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
 					columnClasses="panel-colum-label, panel-colum">
 
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
-						<p:inputText id="firstname" required="true"
-							requiredMessage="#{msg['error.emptyfirstname']}"
-							value="#{userNewBean.newUser.firstname}"></p:inputText>
 						<p:tooltip for="firstname" hideEvent="blur" position="right"
 							showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:firstname')}">
 							<p:message for="firstname" />
 						</p:tooltip>
+						<p:inputText id="firstname" required="true"
+							requiredMessage="#{msg['error.emptyfirstname']}"
+							value="#{userNewBean.newUser.firstname}"></p:inputText>
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['users.lastname']}" />
@@ -39,9 +38,8 @@
 							value="#{userNewBean.newUser.lastname}"></p:inputText>
 					</h:panelGroup>
 
-					<p:outputLabel value="Email" />
+					<p:outputLabel value="#{msg['users.email']}" />
 					<h:panelGroup layout="block">
-
 						<p:tooltip for="email" hideEvent="blur" position="right"
 							showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:email')}">
@@ -89,10 +87,11 @@
 					</p:selectManyMenu>
 					<p:commandButton value="#{msg['users.create']}"
 						action="#{userNewBean.createNewUser}"
-						oncomplete="PF('userCreateDialog').hide();"
-						update="userForm:userList" ajax="false" />
+						oncomplete="handlePopUpRequest('userCreateDialog', xhr, status, args)"
+						update="userForm:userList" ajax="true" />
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>
+		<p:ajax event="close" resetValues="true" />
 	</p:dialog>
 </ui:composition>

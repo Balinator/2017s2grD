@@ -118,4 +118,14 @@ public class UserService {
 	public List<UserDTO> getAllUsers() {
 		return userDTOMapper.mapToDTOs(userDAO.getAll());
 	}
+
+	/**
+	 * Get user by username.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public UserDTO findUserByUsername(String username) {
+		return userDTOMapper.mapToDTO(userDAO.findUserByUsername(username));
+	}
 }
