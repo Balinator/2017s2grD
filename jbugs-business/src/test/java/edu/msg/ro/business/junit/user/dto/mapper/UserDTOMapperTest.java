@@ -1,0 +1,59 @@
+package edu.msg.ro.business.junit.user.dto.mapper;
+
+import java.util.ArrayList;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.dto.mapper.RoleDTOMapper;
+import edu.msg.ro.business.user.dto.mapper.UserDTOMapper;
+import edu.msg.ro.persistence.user.entity.User;
+
+@RunWith(MockitoJUnitRunner.class)
+public class UserDTOMapperTest {
+
+	@InjectMocks
+	UserDTOMapper sut;
+
+	@Mock
+	RoleDTOMapper roleDTOMapper;
+
+	/**
+	 * test for entity to DTO field for User
+	 */
+	@Test
+	public void entityToDtoFieldTest() {
+
+		User entity = new User();
+		entity.setEmail("test@msg.com");
+		entity.setFirstname("firstname");
+		entity.setLastname("lastname");
+		entity.setPassword("msg");
+		entity.setLockVersion(1L);
+		entity.setPhoneNumber("54545");
+		entity.setUsername("msg");
+		entity.setActive(true);
+		entity.setRoles(new ArrayList<>());
+
+		UserDTO userDTO = sut.mapToDTO(entity);
+		sut.mapEntityToDTOFields(entity, userDTO);
+
+		Assert.assertEquals("Email mapping failed", entity.getEmail(), userDTO.getEmail());
+		Assert.assertEquals("First name mapping failed", entity.getFirstname(), userDTO.getFirstname());
+		Assert.assertEquals("Last name mapping failed", entity.getLastname(), userDTO.getLastname());
+		Assert.assertEquals("Password mapping failed", entity.getPassword(), userDTO.getPassword());
+		Assert.assertEquals("LockVersion mapping failed", entity.getLockVersion(), userDTO.getLockVersion());
+		Assert.assertEquals("Phone Number mapping failed", entity.getPhoneNumber(), userDTO.getPhoneNumber());
+		Assert.assertEquals("Username mapping failed", entity.getUsername(), userDTO.getUsername());
+
+		Assert.assertEquals("Active mapping failed", entity.getRoles(), userDTO.getRoles());
+		Assert.assertEquals("Roles mapping failed", entity.isActive(), userDTO.isActive());
+
+	}
+
+}

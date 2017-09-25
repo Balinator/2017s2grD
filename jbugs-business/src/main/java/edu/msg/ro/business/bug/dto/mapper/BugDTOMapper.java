@@ -37,7 +37,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 	 * Method for filling {@link BugDTO}.
 	 */
 	@Override
-	protected void mapEntityToDTOFields(Bug entity, BugDTO dto) {
+	public void mapEntityToDTOFields(Bug entity, BugDTO dto) {
 		dto.setTitle(entity.getTitle());
 		dto.setDescription(entity.getDescription());
 		dto.setAuthor(userDtoMapper.mapToDTO(entity.getAuthor()));
