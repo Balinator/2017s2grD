@@ -62,9 +62,6 @@ public class BugService {
 	 */
 	public BugDTO deleteBug(BugDTO bugDTO) {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
-		if (persistedBug.getId() != null) {
-			persistedBug = null;
-		}
 		return bugDTOMapper.mapToDTO(persistedBug);
 	}
 
