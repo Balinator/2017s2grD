@@ -8,6 +8,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
+import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.user.boundary.LoginFacade;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
@@ -92,18 +93,22 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @return
 	 */
 	public String processLogin() {
-		if (loginFacade.isValidUser(user)) {
-			UserDTO persistedUser = userFacade.getUserByUsername(user.getUsername());
-			session.setAttribute("username", persistedUser.getUsername());
-			session.setAttribute("loggedUser", persistedUser);
-			addI18nMessage("login.welcome");
-			session.setAttribute("FAILEDATTEMPS", 0);
-			return "bugManagment";
-		} else {
-			toManyFailedPassword();
-			return LOGIN;
-
+		try {
+			if (loginFacade.isValidUser(user)) {
+				UserDTO persistedUser = userFacade.getUserByUsername(user.getUsername());
+				session.setAttribute("username", persistedUser.getUsername());
+				session.setAttribute("loggedUser", persistedUser);
+				addI18nMessage("login.welcome");
+				session.setAttribute("FAILEDATTEMPS", 0);
+				return "bugManagment";
+			} else {
+				toManyFailedPassword();
+			}
+		} catch (JBugsExeption e) {
+			handleExeptionI18n(e);
 		}
+		return LOGIN;
+
 	}
 
 	/**

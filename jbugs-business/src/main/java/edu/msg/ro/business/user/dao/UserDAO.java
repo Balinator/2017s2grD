@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.common.dao.AbstractDao;
+import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -63,16 +64,21 @@ public class UserDAO extends AbstractDao<User> {
 	 * @param username
 	 * @param password
 	 * @return {@link Boolean}
+	 * @throws BusinessException
 	 */
-	public boolean verifyUserExist(String username, String password) {
+	public boolean verifyUserExist(String username, String password) throws BusinessException {
 		TypedQuery<User> query = this.em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASS, User.class);
 		query.setParameter("username", username);
 		query.setParameter("password", password);
 
 		List<User> userList = query.getResultList();
 		if (userList.isEmpty() == false) {
+			if (userList.get(0).isActive() == false) {
+				throw new BusinessException("login.wrongpassword");
+			}
 			return userList.get(0).isActive();
 		}
+
 		return false;
 	}
 

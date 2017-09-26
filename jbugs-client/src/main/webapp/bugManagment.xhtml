@@ -142,8 +142,9 @@
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
-
-				<p:column headerText="#{msg['bug.attachment']}" exportable="false">
+				<p:column headerText="#{msg['bug.attachment']}"
+					sortBy="#{bug.attachmentName}" filterBy="#{bug.attachmentName}"
+					filterMatchMode="contains" exportable="false">
 
 					<p:commandButton value="#{bug.attachmentName}" ajax="false"
 						actionListener="#{bugBean.fileDownload(bug)}"

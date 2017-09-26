@@ -84,3 +84,12 @@ body > :not(.header-class ) {
 .ui-operations {
 	padding: 0.2em !important;
 }
+
+.deleteButton{
+	margin: 0.2em;
+}
+
+th input,th div > div{
+	width: -webkit-fill-available;
+	min-width: 0px !important;
+}
