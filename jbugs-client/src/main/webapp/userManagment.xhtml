@@ -112,10 +112,13 @@
 						<h:outputText value=" " class="ui-icon ui-icon-locked" />
 					</p:commandLink>
 
-					<p:commandLink value="#{msg['user.resetPassword']}" type="button"
+					<p:commandLink type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('resetPasswordDialog').show()"
-						update=":resetPasswordForm:display" />
+						update=":resetPasswordForm:display" 
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-key" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 		</h:form>
