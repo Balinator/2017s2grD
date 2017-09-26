@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.dao.UserDAO;
 import edu.msg.ro.persistence.user.entity.User;
 
@@ -62,7 +63,7 @@ public class UserDAOTest {
 	}
 
 	@Test
-	public void verifyUserExistTest() {
+	public void verifyUserExistTest() throws BusinessException {
 		when(em.getTransaction()).thenReturn(transaction);
 		when(this.em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASS, User.class)).thenReturn(query);
 		when(query.getResultList()).thenReturn(new ArrayList<User>());

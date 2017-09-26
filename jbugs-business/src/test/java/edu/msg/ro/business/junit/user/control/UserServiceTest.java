@@ -123,9 +123,11 @@ public class UserServiceTest {
 
 	/**
 	 * test findUserExists
+	 * 
+	 * @throws BusinessException
 	 */
 	@Test
-	public void findUserExistsTest() {
+	public void findUserExistsTest() throws BusinessException {
 		userService.findUserExists("a", "b");
 	}
 
