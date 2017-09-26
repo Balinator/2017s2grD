@@ -48,24 +48,19 @@ public class AccessFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		try {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		HttpSession httpSession = httpRequest.getSession(true);
 
-			HttpServletRequest httpRequest = (HttpServletRequest) request;
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			HttpSession httpSession = httpRequest.getSession(true);
+		if (httpSession.getAttribute("username") == null) {
+			chain.doFilter(request, response);
+		} else {
 
-			if (httpSession.getAttribute("username") == null) {
+			if (canAcessPage(httpRequest.getRequestURI(), (String) httpSession.getAttribute("username"))) {
 				chain.doFilter(request, response);
 			} else {
-
-				if (canAcessPage(httpRequest.getRequestURI(), (String) httpSession.getAttribute("username"))) {
-					chain.doFilter(request, response);
-				} else {
-					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
-				}
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 			}
-		} catch (Exception t) {
-			System.err.println(t.getMessage());
 		}
 
 	}

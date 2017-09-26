@@ -5,9 +5,9 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 		<h:panelGroup layout="block">
 			<h:form>
-				<p:link outcome="bugManagment" value="BugManagment" styleClass="header-button" rendered="#{userAccessService.canAccess(null)}"/>
-				<p:link outcome="userManagment" value="UserManagement" styleClass="header-button" rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}"/>
-				<p:link outcome="permissionManager" value="PermissionManager" styleClass="header-button" rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}"/>
+				<p:link outcome="bugManagment" value="#{msg['menu.bugManagment']}" styleClass="header-button" rendered="#{userAccessService.canAccess(null)}"/>
+				<p:link outcome="userManagment" value="#{msg['menu.userManagment']}" styleClass="header-button" rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}"/>
+				<p:link outcome="permissionManager" value="#{msg['menu.permissionManager']}" styleClass="header-button" rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}"/>
 			</h:form>
 		</h:panelGroup>
 </ui:composition>
