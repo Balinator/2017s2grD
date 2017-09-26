@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import edu.msg.ro.business.common.exception.JBugsExeption;
@@ -22,8 +21,7 @@ import edu.msg.ro.business.user.dto.UserDTO;
 @RequestScoped
 public class LoginBean extends AbstractBean implements Serializable {
 
-	private static int FAILEDATTEMPS;
-	private static String OLDUSERNAME = null;
+	private static final String FAILEDATTEMPSC = "FAILEDATTEMPS";
 	private static final String LOGIN = "login";
 	private transient HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 
@@ -32,10 +30,10 @@ public class LoginBean extends AbstractBean implements Serializable {
 	private UserDTO user = new UserDTO();
 
 	@EJB
-	private LoginFacade loginFacade;
+	private transient LoginFacade loginFacade;
 
 	@EJB
-	private UserFacade userFacade;
+	private transient UserFacade userFacade;
 
 	/**
 	 * @return the user
@@ -59,32 +57,21 @@ public class LoginBean extends AbstractBean implements Serializable {
 	private void toManyFailedPassword() {
 		String loggingUser = user.getUsername();
 		if (loggingUser.equals(session.getAttribute("OLDUSERNAME"))) {
-			int failedlogins = Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString());
+			int failedlogins = Integer.parseInt(session.getAttribute(FAILEDATTEMPSC).toString());
 			failedlogins++;
-			session.setAttribute("FAILEDATTEMPS", failedlogins);
+			session.setAttribute(FAILEDATTEMPSC, failedlogins);
 			if (failedlogins == 4) {
 				userFacade.deleteUserNoCheck(user);
-				// session.setAttribute("FAILEDATTEMPS", 0);
 			}
 		} else {
-			FAILEDATTEMPS = 0;
-			session.setAttribute("FAILEDATTEMPS", 0);
+			session.setAttribute(FAILEDATTEMPSC, 0);
 			session.setAttribute("OLDUSERNAME", user.getUsername());
 		}
-		if ((Integer.parseInt(session.getAttribute("FAILEDATTEMPS").toString()) < 4)) {
+		if ((Integer.parseInt(session.getAttribute(FAILEDATTEMPSC).toString()) < 4)) {
 			addI18nMessage("loginForm:username", "login.error");
 		} else {
 			addI18nMessage("loginForm:username", "login.wrongpassword");
 		}
-	}
-
-	/**
-	 * Login action listener.
-	 *
-	 * @param event
-	 */
-	public void loginActionListener(ActionEvent event) {
-		// TODO: useless function or need logger
 	}
 
 	/**
@@ -99,7 +86,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 				session.setAttribute("username", persistedUser.getUsername());
 				session.setAttribute("loggedUser", persistedUser);
 				addI18nMessage("login.welcome");
-				session.setAttribute("FAILEDATTEMPS", 0);
+				session.setAttribute(FAILEDATTEMPSC, 0);
 				return "bugManagment";
 			} else {
 				toManyFailedPassword();
@@ -117,7 +104,6 @@ public class LoginBean extends AbstractBean implements Serializable {
 	 * @return
 	 */
 	public String processLogout() {
-		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 		session.invalidate();
 		return LOGIN;
 	}
