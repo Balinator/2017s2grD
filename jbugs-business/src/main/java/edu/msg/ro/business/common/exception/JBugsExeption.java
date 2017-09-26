@@ -10,9 +10,9 @@ public class JBugsExeption extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private String message;
+	private final String message;
 
-	private Object arguments = null;
+	private transient Object arguments = null;
 
 	/**
 	 * Constructor.

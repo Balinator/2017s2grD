@@ -17,7 +17,7 @@ public class RoleDTO extends AbstractDTO implements Serializable {
 
 	private String name;
 
-	private List<User> users;
+	private transient List<User> users;
 
 	/**
 	 * Getter for name.
