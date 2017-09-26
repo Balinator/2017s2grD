@@ -120,8 +120,9 @@ public class UserService {
 	 * @param username
 	 * @param pass
 	 * @return {@link Boolean}
+	 * @throws BusinessException
 	 */
-	public boolean findUserExists(String username, String pass) {
+	public boolean findUserExists(String username, String pass) throws BusinessException {
 		return userDAO.verifyUserExist(username, pass);
 	}
 
