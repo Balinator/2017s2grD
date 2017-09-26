@@ -23,7 +23,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 
 	private static final String FAILEDATTEMPSC = "FAILEDATTEMPS";
 	private static final String LOGIN = "login";
-	private HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+	private transient HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 
 	private static final long serialVersionUID = -2617767540112561117L;
 
