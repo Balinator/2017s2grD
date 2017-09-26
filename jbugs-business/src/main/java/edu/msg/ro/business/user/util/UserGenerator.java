@@ -97,7 +97,7 @@ public class UserGenerator {
 			}
 			return sb.toString();
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-			System.err.println(e.getMessage());
+			// not needed
 		}
 		return null;
 	}
