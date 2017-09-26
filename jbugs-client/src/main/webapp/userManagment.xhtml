@@ -17,7 +17,7 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="userForm">
-			<p:messages id="userMSG" severity="info,error" globalOnly="true" autoUpdate="true"/>
+			<p:messages id="userMSG" severity="info,error" globalOnly="true" closable="true"/>
 			<p:dataTable value="#{userListBean.allUsers}" var="user"
 				widgetVar="userTable" id="userList" paginator="true"
 				selectionMode="single" rowKey="#{user.id}" rows="15"

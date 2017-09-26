@@ -15,7 +15,8 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="bugForm">
-			<p:messages id="userMSG" severity="info,error" globalOnly="true" />
+			<p:messages id="userMSG" severity="info,error" globalOnly="true"
+				closable="true" />
 			<p:dataTable id="bugList" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
 				paginator="true" rows="25" styleClass="paginated"
@@ -157,8 +158,8 @@
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
 					</p:commandLink>
-					<p:tooltip for="bugEdit" position="bottom" styleClass="normalTooltip"
-								value="#{msg['bug.update']}" />
+					<p:tooltip for="bugEdit" position="bottom"
+						styleClass="normalTooltip" value="#{msg['bug.update']}" />
 				</p:column>
 
 				<f:facet name="footer">
