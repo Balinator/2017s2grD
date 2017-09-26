@@ -18,19 +18,18 @@
 			<p:messages autoUpdate="true" severity="info" />
 			<p:dataTable id="bugList" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
-				paginator="true" rows="25" styleClass="paginated"
+				paginator="true" rows="1" styleClass="paginated"
 				selectionMode="single" rowKey="#{bug.id}">
 
 				<f:facet name="header">
 					<h:commandLink>
 						<p:graphicImage library="icons" name="excel.png" width="24" />
-						<p:dataExporter type="xls" target="dataTable" fileName="bugs"
-							postProcessor="#{customizedDocumentsView.postProcessXLS}" />
+						<p:dataExporter type="xls" target="bugList" fileName="bugs" />
 					</h:commandLink>
 
 					<h:commandLink>
 						<p:graphicImage library="icons" name="pdf.png" width="24" />
-						<p:dataExporter type="pdf" target="dataTable" fileName="bugs" />
+						<p:dataExporter type="pdf" target="bugList" fileName="bugs" />
 					</h:commandLink>
 
 					<h:panelGroup layout="block" style=" overflow: auto;">
@@ -64,10 +63,10 @@
 					<h:outputText value="#{bug.description}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
-				
+
 				<p:column headerText="#{msg['bug.autor']}"
-					sortBy="#{bug.author.username}"
-					filterBy="#{bug.author.username}" filterMatchMode="contains">
+					sortBy="#{bug.author.username}" filterBy="#{bug.author.username}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.author.username}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
@@ -99,7 +98,7 @@
 								itemLabel="#{msg['bug.severity.' += severity]}" />
 						</p:selectOneMenu>
 					</f:facet>
-					<br />
+
 
 					<h:outputText value="#{msg['bug.severity.' += bug.severity]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
@@ -119,7 +118,7 @@
 						</p:selectOneMenu>
 
 					</f:facet>
-					<br />
+
 					<h:outputText value="#{msg['bug.status.' += bug.status]}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
@@ -144,7 +143,7 @@
 				</p:column>
 
 
-				<p:column headerText="#{msg['bug.attachment']}">
+				<p:column headerText="#{msg['bug.attachment']}" exportable="false">
 
 					<p:commandButton value="#{bug.attachmentName}" ajax="false"
 						actionListener="#{bugBean.fileDownload(bug)}"
@@ -156,7 +155,7 @@
 
 				</p:column>
 
-				<p:column headerText="#{msg['bug.operation']}"
+				<p:column headerText="#{msg['bug.operation']}" exportable="false"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandLink type="button"
 						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
@@ -166,6 +165,22 @@
 						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
 					</p:commandLink>
 				</p:column>
+
+				<f:facet name="footer">
+					<h:commandLink>
+						<p:graphicImage library="icons" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="bugList" fileName="bugs"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage library="icons" name="pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="bugList" fileName="bugs"
+							pageOnly="true" />
+					</h:commandLink>
+
+				</f:facet>
+
 			</p:dataTable>
 		</h:form>
 		<ui:include src="/bug/bugCreate.xhtml" />
