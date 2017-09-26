@@ -45,6 +45,8 @@ public class RoleDTOMapperTest {
 		Assert.assertEquals("Lock Version mapping failed", entity.getLockVersion(), roleDTO.getLockVersion());
 		Assert.assertEquals("Permissions mapping failed", entity.getPermissions(), roleDTO.getPermissions());
 		Assert.assertEquals("Users mapping failed", entity.getUsers(), roleDTO.getUsers());
+		Assert.assertEquals("Users name mapping failed", entity.getName(), roleDTO.getName());
+
 	}
 
 	/**
