@@ -91,7 +91,7 @@ public class UserDAOTest extends AbstractIntegrationTest {
 	public void verifyUserExist_succesfull() throws BusinessException {
 		UserDTO user = th.initializUser("Fulop", "Gabor", "gabika@msggroup.com", "asd", "0756748395");
 		uf.createUser(user);
-		Assert.assertEquals("User should exist ", dao.verifyUserExist(user.getUsername(), user.getPassword()), true);
+		Assert.assertEquals("User should exist ", true, dao.verifyUserExist(user.getUsername(), user.getPassword()));
 	}
 
 	/**
