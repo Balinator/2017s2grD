@@ -15,7 +15,7 @@
 	<f:view>
 		<ui:include src="/header.xhtml" />
 		<h:form id="bugForm">
-			<p:messages autoUpdate="true" severity="info" />
+			<p:messages id="userMSG" severity="info,error" globalOnly="true" />
 			<p:dataTable id="bugList" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
 				paginator="true" rows="25" styleClass="paginated"

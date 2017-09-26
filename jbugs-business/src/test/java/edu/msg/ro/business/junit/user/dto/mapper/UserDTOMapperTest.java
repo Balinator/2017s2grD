@@ -18,7 +18,7 @@ import edu.msg.ro.persistence.user.entity.User;
 public class UserDTOMapperTest {
 
 	@InjectMocks
-	UserDTOMapper sut;
+	UserDTOMapper userDTOMapper;
 
 	@Mock
 	RoleDTOMapper roleDTOMapper;
@@ -37,8 +37,8 @@ public class UserDTOMapperTest {
 		entity.setActive(true);
 		entity.setRoles(new ArrayList<>());
 
-		UserDTO userDTO = sut.mapToDTO(entity);
-		sut.mapEntityToDTOFields(entity, userDTO);
+		UserDTO userDTO = userDTOMapper.mapToDTO(entity);
+		userDTOMapper.mapEntityToDTOFields(entity, userDTO);
 
 		// To complete the entity Junit test.
 		@SuppressWarnings("unused")
@@ -62,8 +62,30 @@ public class UserDTOMapperTest {
 	 */
 	@Test
 	public void mapToDTO_NullEntity() {
-		UserDTO userDTO = sut.mapToDTO(null);
+		UserDTO userDTO = userDTOMapper.mapToDTO(null);
 		Assert.assertNull("Return value of an NULL input should be also NULL", userDTO);
+	}
+
+	/**
+	 * test dto to map
+	 */
+	@Test
+	public void mapDTOToEntityFieldsTest() {
+
+		UserDTO userDto = new UserDTO();
+
+		userDto.setActive(true);
+		userDto.setEmail("email@msggroup.com");
+		userDto.setFirstname("firstname");
+		userDto.setLastname("lastname");
+		userDto.setLockVersion(1L);
+		userDto.setPassword("password");
+		userDto.setPhoneNumber("0729565412");
+		userDto.setRoles(new ArrayList<>());
+		userDto.setUsername("username");
+
+		userDTOMapper.mapToEntity(userDto, new User());
+
 	}
 
 }
