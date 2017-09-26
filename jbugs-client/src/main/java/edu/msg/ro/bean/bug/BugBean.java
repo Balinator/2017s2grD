@@ -55,10 +55,6 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private StatusEnum[] statusList;
-
-	private StatusEnum[] statusListFilter;
-
 	private BugSeverity[] severityList;
 
 	private int severities;
@@ -262,15 +258,6 @@ public class BugBean extends AbstractBean {
 
 	public StatusEnum[] getStatusListFilter() {
 		return StatusEnum.values();
-	}
-
-	/**
-	 * Set for statusListFilter
-	 * 
-	 * @param statusListFilter
-	 */
-	public void setStatusListFilter(StatusEnum[] statusListFilter) {
-		this.statusListFilter = statusListFilter;
 	}
 
 	/**

@@ -35,31 +35,26 @@ public class AuthenticationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		try {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		HttpSession httpSession = httpRequest.getSession(false);
 
-			HttpServletRequest httpRequest = (HttpServletRequest) request;
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			HttpSession httpSession = httpRequest.getSession(false);
+		String requestUrl = httpRequest.getRequestURI();
 
-			String requestUrl = httpRequest.getRequestURI();
+		boolean isLoginPage = requestUrl.indexOf("/login.xhtml") >= 0;
+		boolean isUserLoggedIn = httpSession != null && httpSession.getAttribute("username") != null;
+		boolean isResource = requestUrl.contains("javax.faces.resource");
 
-			boolean isLoginPage = requestUrl.indexOf("/login.xhtml") >= 0;
-			boolean isUserLoggedIn = httpSession != null && httpSession.getAttribute("username") != null;
-			boolean isResource = requestUrl.contains("javax.faces.resource");
-
-			if (isLoginPage || isUserLoggedIn || isResource) {
-				if (isLoginPage && isUserLoggedIn) {
-					httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
-				} else {
-					chain.doFilter(request, response);
-				}
+		if (isLoginPage || isUserLoggedIn || isResource) {
+			if (isLoginPage && isUserLoggedIn) {
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 			} else {
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.xhtml");
+				chain.doFilter(request, response);
 			}
-
-		} catch (Exception t) {
-			System.err.println(t.getMessage());
+		} else {
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.xhtml");
 		}
+
 	}
 
 	/**
