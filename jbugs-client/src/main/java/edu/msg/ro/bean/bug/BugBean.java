@@ -55,8 +55,6 @@ public class BugBean extends AbstractBean {
 
 	private List<BugDTO> filteredBugList;
 
-	private BugSeverity[] severityList;
-
 	private int severities;
 
 	private int stasuses;
@@ -267,15 +265,6 @@ public class BugBean extends AbstractBean {
 	 */
 	public BugSeverity[] getSeverityList() {
 		return BugSeverity.values();
-	}
-
-	/**
-	 * Set for severityList.
-	 * 
-	 * @param severityList
-	 */
-	public void setSeverityList(BugSeverity[] severityList) {
-		this.severityList = severityList;
 	}
 
 	/**

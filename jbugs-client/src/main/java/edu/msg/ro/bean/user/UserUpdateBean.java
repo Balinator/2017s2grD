@@ -75,7 +75,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	public void resetPassword() throws BusinessException {
 		try {
 			userFacade.resetPassword(updatedUser);
-			addI18nMessage(I18N_Reset);
+			addI18nMessage(I18N_RESET);
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
@@ -97,13 +97,12 @@ public class UserUpdateBean extends AbstractUserBean {
 	 */
 	public void setSelectedRoles(List<RoleDTO> persistedRoles) {
 		if (!persistedRoles.isEmpty()) {
-			List<RoleDTO> selectedRoles = new ArrayList<RoleDTO>();
+			selectedRoles = new ArrayList<RoleDTO>();
 			Map<Long, RoleDTO> mappedItems = service.getRoleItemMap();
 			for (RoleDTO role : persistedRoles) {
 				selectedRoles.add(mappedItems.get(role.getId()));
 			}
 			this.updatedUser.setRoles(selectedRoles);
-			this.selectedRoles = selectedRoles;
 		}
 	}
 
