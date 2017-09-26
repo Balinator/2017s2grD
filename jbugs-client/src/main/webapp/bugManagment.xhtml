@@ -18,19 +18,11 @@
 			<p:messages autoUpdate="true" severity="info" />
 			<p:dataTable id="bugList" value="#{bugBean.bugList}" var="bug"
 				filteredValue="#{bugBean.filteredBugList}" widgetVar="bugTable"
-				paginator="true" rows="1" styleClass="paginated"
+				paginator="true" rows="25" styleClass="paginated"
 				selectionMode="single" rowKey="#{bug.id}">
 
 				<f:facet name="header">
-					<h:commandLink>
-						<p:graphicImage library="icons" name="excel.png" width="24" />
-						<p:dataExporter type="xls" target="bugList" fileName="bugs" />
-					</h:commandLink>
 
-					<h:commandLink>
-						<p:graphicImage library="icons" name="pdf.png" width="24" />
-						<p:dataExporter type="pdf" target="bugList" fileName="bugs" />
-					</h:commandLink>
 
 					<h:panelGroup layout="block" style=" overflow: auto;">
 
@@ -178,6 +170,17 @@
 						<p:graphicImage library="icons" name="pdf.png" width="24" />
 						<p:dataExporter type="pdf" target="bugList" fileName="bugs"
 							pageOnly="true" />
+					</h:commandLink>
+
+
+					<h:commandLink>
+						<p:graphicImage library="icons" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="bugList" fileName="bugs" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage library="icons" name="pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="bugList" fileName="bugs" />
 					</h:commandLink>
 
 				</f:facet>
