@@ -15,11 +15,17 @@
 
 <h:body>
 	<ui:include src="/header.xhtml" />
-	
-	<h:outputText value="#{msg['errorpage.404']}"/>
-	<br/>
-	<p:link outcome="login" value="#{msg['errorpage.linkLogin']}" 
-	styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
-	rendered="#{sessionScope['username'] == null}"/>
+	<p:growl id="msg" showDetail="true" life="4000" />
+	<h:form>
+		<p:panel header="#{msg['errorpage.404']}"
+			style="width: 350px; margin: 0 auto;">
+			<h:panelGrid id="loginPanel" columns="1" cellpadding="5">
+				<h:outputText value="#{msg['errorpage.404details']}" />
+				<p:link outcome="login" value="#{msg['errorpage.linkLogin']}"
+					styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+					rendered="#{sessionScope['username'] == null}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
 </h:body>
 </html>
