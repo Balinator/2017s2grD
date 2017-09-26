@@ -18,7 +18,7 @@
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="firstname" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:firstname')}">
 							<p:message for="firstname" />
 						</p:tooltip>
@@ -30,7 +30,7 @@
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="lastname" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:lastname')}">
 							<p:message for="lastname" />
 						</p:tooltip>
@@ -42,7 +42,7 @@
 					<p:outputLabel value="#{msg['users.email']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="email" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:email')}">
 							<p:message for="email" />
 						</p:tooltip>
@@ -55,7 +55,7 @@
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="phonenumber" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:phonenumber')}">
 							<p:message for="phonenumber" />
 						</p:tooltip>
@@ -69,7 +69,7 @@
 					<p:outputLabel value="#{msg['login.password']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="password" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:password')}">
 							<p:message for="password" />
 						</p:tooltip>

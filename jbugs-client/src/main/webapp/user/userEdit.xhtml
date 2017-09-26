@@ -4,7 +4,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<p:dialog id="editUserDialog" header="#{msg['users.update.dialog.title']}"
+	<p:dialog id="editUserDialog"
+		header="#{msg['users.update.dialog.title']}"
 		widgetVar="userEditDialog" resizable="false" modal="true"
 		showEffect="clip" hideEffect="fold">
 
@@ -17,7 +18,7 @@
 					<p:outputLabel value="#{msg['users.firstname']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="firstname" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:firstname')}">
 							<p:message for="firstname" />
 						</p:tooltip>
@@ -29,7 +30,7 @@
 					<p:outputLabel value="#{msg['users.lastname']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="lastname" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:lastname')}">
 							<p:message for="lastname" />
 						</p:tooltip>
@@ -41,7 +42,7 @@
 					<p:outputLabel value="#{msg['users.email']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="email" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:email')}">
 							<p:message for="email" />
 						</p:tooltip>
@@ -54,7 +55,7 @@
 					<p:outputLabel value="#{msg['users.phonenumber']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="phonenumber" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:phonenumber')}">
 							<p:message for="phonenumber" />
 						</p:tooltip>
@@ -76,7 +77,7 @@
 				<p:commandButton value="#{msg['users.update']}"
 					action="#{userUpdateBean.editUser}"
 					oncomplete="handlePopUpRequest('userEditDialog', xhr, status, args)"
-					update="userForm:userList" ajax="true" style="float:right"/>
+					update="userForm:userList" ajax="true" style="float:right" />
 			</p:outputPanel>
 		</h:form>
 		<p:ajax event="close" resetValues="true" />

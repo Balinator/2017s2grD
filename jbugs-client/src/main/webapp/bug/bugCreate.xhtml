@@ -17,7 +17,7 @@
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="title" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:title')}">
 							<p:message for="title" />
 						</p:tooltip>
@@ -29,7 +29,7 @@
 					<p:outputLabel value="#{msg['bug.description']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="description" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:description')}">
 							<p:message for="description" />
 						</p:tooltip>
@@ -52,7 +52,7 @@
 					<p:outputLabel value="#{msg['bug.version']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="version" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
 							<p:message for="version" />
 						</p:tooltip>
@@ -81,12 +81,14 @@
 
 
 					<p:outputLabel value="#{msg['bug.attachment']}" />
-					<p:fileUpload id="uploadFile" fileUploadListener="#{bugNewBean.handleFileUpload}"
+					<p:fileUpload id="uploadFile"
+						fileUploadListener="#{bugNewBean.handleFileUpload}"
 						dragDropSupport="false" sizeLimit="26214400"
 						update="alreadyUploaded, @this" fileLimit="1"
 						disabled="#{not empty bugNewBean.newBug.attachment}"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/" />
-					<p:tooltip id="alreadyUploaded" for="uploadFile" position="bottom" value="#{msg['bug.attachment.updoded']}"
+					<p:tooltip id="alreadyUploaded" for="uploadFile" position="bottom"
+						value="#{msg['bug.attachment.updoded']}"
 						rendered="#{not empty bugNewBean.newBug.attachment}">
 					</p:tooltip>
 				</h:panelGrid>
@@ -95,7 +97,7 @@
 			<p:commandButton value="#{msg['bug.create.dialog.add']}"
 				action="#{bugNewBean.createNewBug}"
 				oncomplete="handlePopUpRequest('bugAddDialog', xhr, status, args)"
-				update="bugForm:bugList, display" ajax="true" style="float:right;"/>
+				update="bugForm:bugList, display" ajax="true" style="float:right;" />
 		</h:form>
 
 		<p:ajax event="close" resetValues="true"

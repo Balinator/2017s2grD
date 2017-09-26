@@ -93,3 +93,20 @@ th input,th div > div{
 	width: -webkit-fill-available;
 	min-width: 0px !important;
 }
+
+.normalTooltip > .ui-tooltip-text{
+	padding: .2em;
+	padding-left: .3em;
+	padding-right: .3em;
+}
+
+/* Custom */
+.errorTooltip > .ui-tooltip-text{
+	padding: 0px !important;
+}
+.errorTooltip > .ui-tooltip-text > div{
+	margin: 0px !important;
+}
+.errorTooltip > .ui-tooltip-arrow{
+	border-bottom-color: #f2dede;
+}
