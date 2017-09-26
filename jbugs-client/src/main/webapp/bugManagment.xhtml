@@ -160,29 +160,39 @@
 				</p:column>
 
 				<f:facet name="footer">
-					<h:commandLink>
-						<p:graphicImage library="icons" name="excel.png" width="24" />
-						<p:dataExporter type="xls" target="bugList" fileName="bugs"
-							pageOnly="true" />
-					</h:commandLink>
+					<h:panelGroup layout="block" style=" overflow: auto;">
+						<h:panelGroup id="exportCurentPage" layout="block"
+							styleClass="header-class-right">
+							<p:tooltip for="exportCurentPage" position="left"
+								value="#{msg['export.curentPage']}" />
+							<h:commandLink>
+								<p:graphicImage library="icons" name="excel.png" width="24" />
+								<p:dataExporter type="xls" target="bugList" fileName="bugs"
+									pageOnly="true" />
+							</h:commandLink>
 
-					<h:commandLink>
-						<p:graphicImage library="icons" name="pdf.png" width="24" />
-						<p:dataExporter type="pdf" target="bugList" fileName="bugs"
-							pageOnly="true" />
-					</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="icons" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="bugList" fileName="bugs"
+									pageOnly="true" />
+							</h:commandLink>
+						</h:panelGroup>
 
+						<h:panelGroup id="exportAllPages" layout="block"
+							styleClass="header-class-left">
+							<p:tooltip for="exportAllPages" position="right"
+								value="#{msg['export.allPage']}" />
+							<h:commandLink>
+								<p:graphicImage library="icons" name="excel.png" width="24" />
+								<p:dataExporter type="xls" target="bugList" fileName="bugs" />
+							</h:commandLink>
 
-					<h:commandLink>
-						<p:graphicImage library="icons" name="excel.png" width="24" />
-						<p:dataExporter type="xls" target="bugList" fileName="bugs" />
-					</h:commandLink>
-
-					<h:commandLink>
-						<p:graphicImage library="icons" name="pdf.png" width="24" />
-						<p:dataExporter type="pdf" target="bugList" fileName="bugs" />
-					</h:commandLink>
-
+							<h:commandLink>
+								<p:graphicImage library="icons" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="bugList" fileName="bugs" />
+							</h:commandLink>
+						</h:panelGroup>
+					</h:panelGroup>
 				</f:facet>
 
 			</p:dataTable>
