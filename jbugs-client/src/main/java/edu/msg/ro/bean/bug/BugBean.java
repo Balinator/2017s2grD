@@ -244,16 +244,7 @@ public class BugBean extends AbstractBean {
 		List<PermissionEnum> permissionList = new ArrayList<>();
 		permissionList.add(PermissionEnum.BUG_CLOSE);
 
-		UserDTO curentUser = null;
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("username");
-
-		for (UserDTO userDTO : userService.getAllUsers()) {
-			if (userDTO.getUsername().equals(username)) {
-				curentUser = userDTO;
-				break;
-			}
-		}
+		UserDTO curentUser = getLoggedUser();
 
 		if (!selectedBug.getStatus().equals(StatusEnum.CLOSE)
 				&& !permissionChecker.canAccess(permissionList, curentUser)) {

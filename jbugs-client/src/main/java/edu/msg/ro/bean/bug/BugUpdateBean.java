@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -67,16 +66,7 @@ public class BugUpdateBean extends AbstractBugBean {
 		List<PermissionEnum> permissionList = new ArrayList<>();
 		permissionList.add(PermissionEnum.BUG_CLOSE);
 
-		UserDTO curentUser = null;
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("username");
-
-		for (UserDTO userDTO : userFacade.getAllUsers()) {
-			if (userDTO.getUsername().equals(username)) {
-				curentUser = userDTO;
-				break;
-			}
-		}
+		UserDTO curentUser = getLoggedUser();
 
 		if (!selectedBug.getStatus().equals(StatusEnum.CLOSE)
 				&& !permissionChecker.canAccess(permissionList, curentUser)) {
