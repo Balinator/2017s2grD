@@ -64,10 +64,10 @@
 					<h:outputText value="#{bug.description}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
-				
+
 				<p:column headerText="#{msg['bug.autor']}"
-					sortBy="#{bug.author.username}"
-					filterBy="#{bug.author.username}" filterMatchMode="contains">
+					sortBy="#{bug.author.username}" filterBy="#{bug.author.username}"
+					filterMatchMode="contains">
 					<h:outputText value="#{bug.author.username}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
@@ -144,7 +144,9 @@
 				</p:column>
 
 
-				<p:column headerText="#{msg['bug.attachment']}">
+				<p:column headerText="#{msg['bug.attachment']}"
+					sortBy="#{bug.attachmentName}" filterBy="#{bug.attachmentName}"
+					filterMatchMode="contains">
 
 					<p:commandButton value="#{bug.attachmentName}" ajax="false"
 						actionListener="#{bugBean.fileDownload(bug)}"
