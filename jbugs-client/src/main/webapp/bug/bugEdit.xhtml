@@ -16,7 +16,7 @@
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="title" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:title')}">
 							<p:message for="title" />
 						</p:tooltip>
@@ -28,7 +28,7 @@
 					<p:outputLabel value="#{msg['bug.description']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="description" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:description')}">
 							<p:message for="description" />
 						</p:tooltip>
@@ -63,7 +63,7 @@
 					<p:outputLabel value="#{msg['bug.version']}" />
 					<h:panelGroup layout="block">
 						<p:tooltip for="version" hideEvent="blur" position="right"
-							showEvent="focus"
+							styleClass="errorTooltip" showEvent="focus"
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
 							<p:message for="version" />
 						</p:tooltip>

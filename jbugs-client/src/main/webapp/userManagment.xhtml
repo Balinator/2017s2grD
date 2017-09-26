@@ -90,35 +90,43 @@
 				<p:column style="text-align: center;">
 					<f:facet name="header">#{msg['users.operation']}<br />
 					</f:facet>
-					<p:commandLink type="button"
+					<p:commandLink id="userEdit" type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('userEditDialog').show()"
 						update=":viewForm:display"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
 					</p:commandLink>
+					<p:tooltip for="userEdit" position="bottom" styleClass="normalTooltip"
+								value="#{msg['users.update']}" />
 
-					<p:commandLink type="button"
+					<p:commandLink id="userLock" type="button"
 						action="#{userListBean.activateUser(user)}"
 						rendered="#{!user.active}" update=":userForm"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-						<h:outputText value=" " class="ui-icon ui-icon-unlocked" />
+						<h:outputText value=" " class="ui-icon ui-icon-locked" />
 					</p:commandLink>
+					<p:tooltip for="userLock" position="bottom" styleClass="normalTooltip"
+								value="#{msg['user.activate']}" rendered="#{!user.active}"/>
 
-					<p:commandLink type="button"
+					<p:commandLink id="userUnlock" type="button"
 						action="#{userListBean.deleteUser(user)}"
 						rendered="#{user.active}" update=":userForm"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-						<h:outputText value=" " class="ui-icon ui-icon-locked" />
+						<h:outputText value=" " class="ui-icon ui-icon-unlocked" />
 					</p:commandLink>
+					<p:tooltip for="userUnlock" position="bottom" styleClass="normalTooltip"
+								value="#{msg['user.deactivate']}" rendered="#{user.active}"/>
 
-					<p:commandLink type="button"
+					<p:commandLink id="userPasswordReset" type="button"
 						actionListener="#{userUpdateBean.setUpdatedUser(user)}"
 						oncomplete="PF('resetPasswordDialog').show()"
 						update=":resetPasswordForm:display" 
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-key" />
 					</p:commandLink>
+					<p:tooltip for="userPasswordReset" position="bottom" styleClass="normalTooltip"
+								value="#{msg['user.resetPassword']}" />
 				</p:column>
 			</p:dataTable>
 		</h:form>
