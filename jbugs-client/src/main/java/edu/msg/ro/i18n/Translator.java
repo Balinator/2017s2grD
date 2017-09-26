@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 @Stateless
 public class Translator {
 
-	public static final String i18n_BUNDLE = "i18n.messages";
+	public static final String INT_BUNDLE = "i18n.messages";
 
 	/**
 	 * Get ResourceBundle.
