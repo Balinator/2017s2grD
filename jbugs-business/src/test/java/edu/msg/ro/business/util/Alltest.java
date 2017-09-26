@@ -22,6 +22,7 @@ import edu.msg.ro.business.junit.user.dao.UserDAOTest;
 import edu.msg.ro.business.junit.user.dto.mapper.PermissionDTOMapperTest;
 import edu.msg.ro.business.junit.user.dto.mapper.RoleDTOMapperTest;
 import edu.msg.ro.business.junit.user.dto.mapper.UserDTOMapperTest;
+import edu.msg.ro.business.junit.user.security.PermissionCheckerTest;
 import edu.msg.ro.business.junit.user.validator.UserValidatorTest;
 
 /**
@@ -36,7 +37,7 @@ import edu.msg.ro.business.junit.user.validator.UserValidatorTest;
 		UserFacadeTest.class, UserLoginTest.class, UserPermissonTest.class, PermissionServiceTest.class,
 		RoleServiceTest.class, UserDTOMapperTest.class, PermissionDTOMapperTest.class, RoleDTOMapperTest.class,
 		UserValidatorTest.class, UserServiceTest.class, BugDAOTest.class, PermissionDAOTest.class, RoleDAOTest.class,
-		AbstractDAOTest.class, UserDAOTest.class
+		AbstractDAOTest.class, UserDAOTest.class, PermissionCheckerTest.class
 
 })
 public class Alltest {
