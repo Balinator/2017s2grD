@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['bug.view.dialog.title']}"
+		widgetVar="bugViewDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+		<h:form id="formBugView">
+			<p:outputPanel id="display">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+					<p:outputLabel value="#{msg['bug.title']}" />
+					<h:panelGroup layout="block">
+						<p:outputLabel id="title"
+							value="#{bugUpdateBean.selectedBug.title}" />
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.description']}" />
+					<h:panelGroup layout="block">
+						<p:inputTextarea id="description" rows="5" cols="50"
+							autoResize="false" disabled="true"
+							value="#{bugUpdateBean.selectedBug.description}">
+						</p:inputTextarea>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}"
+						disabled="true" />
+
+					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.severity}"
+						disabled="true" style="width:90px">
+
+						<f:selectItems value="#{bugUpdateBean.severityList}"
+							var="severity" itemLabel="#{msg['bug.severity.' += severity]}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.status}"
+						converter="#{bugConverter}" style="width:90px" disabled="true">
+
+						<f:selectItems value="#{bugUpdateBean.getStatusList()}"
+							var="status" itemLabel="#{msg['bug.status.' += status]}"
+							itemValue="#{status}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.version']}" />
+					<h:panelGroup layout="block">
+						<p:outputLabel id="version"
+							value="#{bugUpdateBean.selectedBug.version}" />
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.fixedIn']}" />
+					<p:outputLabel value="#{bugUpdateBean.selectedBug.fixedIn}" />
+
+					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+					<p:outputLabel
+						value="#{bugUpdateBean.selectedBug.assigned.username}"></p:outputLabel>
+						
+					<p:outputLabel value="#{msg['bug.attachment']}" />
+					<p:commandButton value="#{bugUpdateBean.selectedBug.attachmentName}" ajax="false"
+						actionListener="#{bugBean.fileDownload(bugUpdateBean.selectedBug)}"
+						rendered="#{not empty bugUpdateBean.selectedBug.attachmentName}"
+						onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{bugBean.downloadAttachment}"
+							rendered="#{!bugBean.verifyBugRendere(bugUpdateBean.selectedBug)}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>

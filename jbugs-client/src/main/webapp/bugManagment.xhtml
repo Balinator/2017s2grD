@@ -160,6 +160,16 @@
 					</p:commandLink>
 					<p:tooltip for="bugEdit" position="bottom"
 						styleClass="normalTooltip" value="#{msg['bug.update']}" />
+						
+					<p:commandLink id="bugView" type="button"
+						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
+						oncomplete="PF('bugViewDialog').show()"
+						update=":formBugView:display"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-search" />
+					</p:commandLink>
+					<p:tooltip for="bugView" position="bottom"
+						styleClass="normalTooltip" value="#{msg['bug.view']}" />
 				</p:column>
 
 				<f:facet name="footer">
@@ -202,6 +212,7 @@
 		</h:form>
 		<ui:include src="/bug/bugCreate.xhtml" />
 		<ui:include src="/bug/bugEdit.xhtml" />
+		<ui:include src="/bug/bugView.xhtml" />
 		<ui:include src="/bug/attachmentDownload.xhtml" />
 		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
