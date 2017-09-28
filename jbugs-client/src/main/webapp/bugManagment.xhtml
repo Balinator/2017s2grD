@@ -163,7 +163,7 @@
 				</p:column>
 
 				<f:facet name="footer">
-					<h:panelGroup layout="block" style=" overflow: auto;">
+					<h:panelGroup layout="block" style=" overflow: auto;" rendered="#{userAccessService.canAccessE('BUG_EXPORT')}">
 						<h:panelGroup id="exportCurentPage" layout="block"
 							styleClass="header-class-right">
 							<p:tooltip for="exportCurentPage" position="left"
