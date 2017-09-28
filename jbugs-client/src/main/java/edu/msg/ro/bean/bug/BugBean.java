@@ -71,6 +71,10 @@ public class BugBean extends AbstractBean {
 		this.assignedUser = user;
 	}
 
+	public String setDescription(String description) {
+		return description.length() > 10 ? description.substring(0, 10) + "..." : description;
+	}
+
 	/**
 	 * Init method.
 	 */

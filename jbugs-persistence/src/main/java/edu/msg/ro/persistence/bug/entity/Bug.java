@@ -39,7 +39,7 @@ public class Bug extends AbstractEntity {
 	@Column
 	private String title;
 
-	@Column
+	@Column(length = 500)
 	private String description;
 
 	@Temporal(TemporalType.DATE)

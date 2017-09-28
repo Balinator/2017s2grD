@@ -53,7 +53,7 @@
 				<p:column headerText="#{msg['bug.description']}"
 					sortBy="#{bug.description}" filterBy="#{bug.description}"
 					filterMatchMode="contains">
-					<h:outputText value="#{bug.description}"
+					<h:outputText value="#{bugBean.setDescription(bug.description)}"
 						rendered="#{!bugBean.verifyBugRendere(bug)}"></h:outputText>
 				</p:column>
 
