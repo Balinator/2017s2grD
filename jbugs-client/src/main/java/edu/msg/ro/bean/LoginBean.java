@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.servlet.http.HttpSession;
 
+import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.user.boundary.LoginFacade;
 import edu.msg.ro.business.user.boundary.UserFacade;
@@ -35,6 +36,9 @@ public class LoginBean extends AbstractBean implements Serializable {
 	@EJB
 	private transient UserFacade userFacade;
 
+	@EJB
+	private transient NotificationCreator notificationCreator;
+
 	/**
 	 * @return the user
 	 */
@@ -62,6 +66,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 			session.setAttribute(FAILEDATTEMPSC, failedlogins);
 			if (failedlogins == 4) {
 				userFacade.deleteUserNoCheck(user);
+				notificationCreator.createUserDeactivatedNotification(user);
 			}
 		} else {
 			session.setAttribute(FAILEDATTEMPSC, 0);
@@ -87,6 +92,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 				session.setAttribute("loggedUser", persistedUser);
 				addI18nMessage("login.welcome");
 				session.setAttribute(FAILEDATTEMPSC, 0);
+
 				return "bugManagment";
 			} else {
 				toManyFailedPassword();

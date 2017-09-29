@@ -84,4 +84,8 @@ public class BugService {
 		bugDAO.deleteAttachemtn(id);
 	}
 
+	public BugDTO findBug(Long id) {
+		return bugDTOMapper.mapToDTO(bugDAO.findEntity(id));
+	}
+
 }

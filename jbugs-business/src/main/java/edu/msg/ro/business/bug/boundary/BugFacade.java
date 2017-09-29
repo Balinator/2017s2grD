@@ -62,4 +62,8 @@ public class BugFacade {
 	public List<BugDTO> getAllbugs() {
 		return bugService.getAllBugs();
 	}
+
+	public BugDTO findBug(Long id) {
+		return bugService.findBug(id);
+	}
 }

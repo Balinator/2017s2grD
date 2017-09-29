@@ -100,7 +100,6 @@ th input,th div > div{
 	padding-right: .3em;
 }
 
-/* Custom */
 .errorTooltip > .ui-tooltip-text{
 	padding: 0px !important;
 }
@@ -109,4 +108,7 @@ th input,th div > div{
 }
 .errorTooltip > .ui-tooltip-arrow{
 	border-bottom-color: #f2dede;
+}
+
+.notification{
 }

@@ -152,7 +152,7 @@
 				<p:column headerText="#{msg['bug.operation']}" exportable="false"
 					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 					<p:commandLink id="bugEdit" type="button"
-						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
+						actionListener="#{bugUpdateBean.setSelectedBug2(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
 						update=":formBugEdit:display, :formBugEdit:display2"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">

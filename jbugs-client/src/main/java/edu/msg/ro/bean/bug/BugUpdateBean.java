@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 
+import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.user.dto.UserDTO;
@@ -27,9 +28,19 @@ import edu.msg.ro.persistence.bug.entity.Bug;
 public class BugUpdateBean extends AbstractBugBean {
 
 	@EJB
+	private NotificationCreator notificationCreator;
+
+	@EJB
 	private PermissionChecker permissionChecker;
 
 	private BugDTO selectedBug = new BugDTO();
+
+	private StatusEnum selectedBugStatus = StatusEnum.OPEN;
+
+	public void setSelectedBug2(BugDTO selectedBug) {
+		this.selectedBugStatus = selectedBug.getStatus();
+		this.selectedBug = selectedBug;
+	}
 
 	/**
 	 * Get for selectedBug.
@@ -105,6 +116,15 @@ public class BugUpdateBean extends AbstractBugBean {
 	 */
 	public String editBug() {
 		bugFacade.updateBug(selectedBug);
+		notificationCreator.createBugUpdatedNotification(getLoggedUser(), selectedBug);
+		if (!selectedBug.getStatus().equals(selectedBugStatus)) {
+			if (selectedBug.getStatus().equals(StatusEnum.CLOSE)) {
+				notificationCreator.createBugClosedNotification(getLoggedUser(), selectedBug);
+			} else {
+				notificationCreator.createBugStatusUpdatedNotification(getLoggedUser(), selectedBug);
+			}
+		}
+
 		addI18nMessage(I18N_BUG_SAVED, new Object[] { selectedBug.getTitle() });
 		selectedBug = new BugDTO();
 		return "bugManagment";

@@ -23,6 +23,13 @@
 			</h:panelGroup>
 		</h:panelGroup>
 		
+		<h:panelGroup styleClass="header-class-right">
+			<h:panelGroup layout="block"
+				rendered="#{sessionScope['username'] != null}">
+				<ui:include src="/header/header-notification.xhtml"></ui:include>
+			</h:panelGroup>
+		</h:panelGroup>
+		
 		<h:panelGroup styleClass="header-class-left">
 			<h:panelGroup layout="block"
 				rendered="#{sessionScope['username'] != null}">

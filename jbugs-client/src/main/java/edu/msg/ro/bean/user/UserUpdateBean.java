@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -23,6 +25,9 @@ import edu.msg.ro.persistence.user.entity.User;
 @ManagedBean
 @ViewScoped
 public class UserUpdateBean extends AbstractUserBean {
+
+	@EJB
+	private NotificationCreator notificationCreator;
 
 	private List<RoleDTO> selectedRoles;
 
@@ -60,6 +65,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	public void editUser() {
 		try {
 			userFacade.updateUser(updatedUser);
+			notificationCreator.createUserUpdateNotification(getLoggedUser(), updatedUser);
 			addI18nMessage(I18N_SAVED, new Object[] { updatedUser.getUsername() });
 			rebuildRoleService();
 		} catch (JBugsExeption e) {
@@ -75,6 +81,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	public void resetPassword() throws BusinessException {
 		try {
 			userFacade.resetPassword(updatedUser);
+			notificationCreator.createUserUpdateNotification(getLoggedUser(), updatedUser);
 			addI18nMessage(I18N_RESET);
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
