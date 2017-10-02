@@ -45,7 +45,7 @@
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-					<p:calendar value="#{bugNewBean.newBug.targetDate}" />
+					<p:calendar value="#{bugNewBean.newBug.targetDate}" mindate="#{bugBean.today}"/>
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
 					<p:selectOneMenu value="#{bugNewBean.newBug.severity}"

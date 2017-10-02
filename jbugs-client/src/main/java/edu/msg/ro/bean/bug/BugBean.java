@@ -3,6 +3,7 @@ package edu.msg.ro.bean.bug;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -62,6 +63,10 @@ public class BugBean extends AbstractBean {
 	private UserDTO assignedUser = new UserDTO();
 
 	private StreamedContent downloadAttachment;
+
+	public Date getToday() {
+		return new Date();
+	}
 
 	public UserDTO getAssignedUser() {
 		return assignedUser;
