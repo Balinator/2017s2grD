@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Filter for redirrecting unauthenticated users.
+ * Browser filter to prevent using the application with not supported browsers.
  * 
- * @author balinc
+ * @author laszll
+ *
  */
-@WebFilter(filterName = "AuthenticationFilter", urlPatterns = { "*.xhtml" })
-public class AuthenticationFilter implements Filter {
+@WebFilter(filterName = "BrowserFilter", urlPatterns = { "*.xhtml" })
+public class BrowserFilter implements Filter {
 
 	/**
 	 * Init method(not userd).
@@ -41,19 +42,39 @@ public class AuthenticationFilter implements Filter {
 
 		String requestUrl = httpRequest.getRequestURI();
 
-		boolean isLoginPage = requestUrl.indexOf("/login.xhtml") >= 0;
 		boolean isBrowserPage = requestUrl.indexOf("/browser.xhtml") >= 0;
-		boolean isUserLoggedIn = httpSession != null && httpSession.getAttribute("username") != null;
-		boolean isResource = requestUrl.contains("javax.faces.resource");
 
-		if (isLoginPage || isUserLoggedIn || isResource || isBrowserPage) {
-			if (isLoginPage && isUserLoggedIn) {
+		boolean isWrongBrowserOrVersion = true;
+
+		String browserData = httpRequest.getHeader("User-Agent");
+		int browserIndex = browserData.indexOf("Firefox");
+		if (browserIndex >= 0) {
+			String browser = browserData.substring(browserIndex);
+			String version = browser.replace("Firefox/", "").split(" ")[0];
+			int bigVersion = Integer.valueOf(version.split("\\.")[0]);
+			if (bigVersion > 30) {
+				isWrongBrowserOrVersion = false;
+			}
+		}
+
+		browserIndex = browserData.indexOf("Chrome");
+		if (browserIndex >= 0) {
+			String browser = browserData.substring(browserIndex);
+			String version = browser.replace("Chrome/", "").split(" ")[0];
+			int bigVersion = Integer.valueOf(version.split("\\.")[0]);
+			if (bigVersion > 35) {
+				isWrongBrowserOrVersion = false;
+			}
+		}
+
+		if (isWrongBrowserOrVersion && !isBrowserPage) {
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/browser.xhtml");
+		} else {
+			if (isBrowserPage && httpSession != null && httpSession.getAttribute("username") != null) {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 			} else {
 				chain.doFilter(request, response);
 			}
-		} else {
-			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.xhtml");
 		}
 
 	}
