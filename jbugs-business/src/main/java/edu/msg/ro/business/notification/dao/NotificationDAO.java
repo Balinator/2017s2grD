@@ -32,4 +32,10 @@ public class NotificationDAO extends AbstractDao<Notification> {
 		return query.getResultList();
 	}
 
+	public List<Notification> getSomeNotificationForUser(Long userId, int limit) {
+		TypedQuery<Notification> query = this.em.createQuery(Notification.QUERY_FIND_ALL_FOR_USER, Notification.class);
+		query.setParameter("user_id", userId);
+		return query.setMaxResults(limit).getResultList();
+	}
+
 }

@@ -6,7 +6,7 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-button, a {
+button, a, .notificationButton{
 	-webkit-transition-duration: 0.4s;
 	transition-duration: 0.4s;
 	border: none;
@@ -21,7 +21,7 @@ td {
 	text-align: center;
 }
 
-.header-class a, button, .header-element {
+.header-class a, .header-class button, .header-class .header-element, .header-class .notificationButton{
 	padding: 10px;
 }
 
@@ -112,6 +112,37 @@ th input,th div > div{
 
 .notification{
 }
+
 .chartPie{
 	height:20em;
+}
+
+.dropdown-list{
+	background-color: #6f6f6f;
+	color: #ffffff;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    max-width: 5%;
+    z-index: 1;
+}
+
+.dropdown-content {
+    z-index: 1;
+    overflow-x: visible;
+    padding: 10px;
+    -webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+
+.dropdown-content > a{
+    padding: 0px;
+}
+
+.dropdown-content:hover {
+	background-color: #9f9f9f;
+}
+
+.show{
+	display: block;
 }

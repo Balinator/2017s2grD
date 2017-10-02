@@ -57,4 +57,8 @@ public class NotificationService {
 		}
 	}
 
+	public List<NotificationDTO> getSomeNotificationForUser(Long userId, int limit) {
+		return notificationDTOMapper.mapToDTOs(notificationDAO.getSomeNotificationForUser(userId, limit));
+	}
+
 }

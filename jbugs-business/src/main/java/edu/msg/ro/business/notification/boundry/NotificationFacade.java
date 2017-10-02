@@ -25,4 +25,8 @@ public class NotificationFacade {
 	public List<NotificationDTO> getAllNotificationForUser(UserDTO user) {
 		return notificationService.getAllNotificationForUser(user.getId());
 	}
+
+	public List<NotificationDTO> getSomeNotificationForUser(UserDTO user, int limit) {
+		return notificationService.getSomeNotificationForUser(user.getId(), limit);
+	}
 }

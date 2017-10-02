@@ -2,11 +2,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<h:panelGroup layout="block">
-		<h:form>
-			<h:link outcome="notifications" value="#{msg['notification.title']}"
-				styleClass="header-button"/>
+		<h:form id="notificationForm" onclick="dropDown()">
+			<h:outputText value="#{msg['notification.title']}"
+				styleClass="header-button notificationButton" />
+			<h:panelGroup id="notificationContent" layout="block"
+				styleClass="dropdown-list">
+				<c:forEach items="#{notificationBean.someNotifications}"
+					var="notification">
+					<h:panelGroup layout="block" styleClass="dropdown-content">
+						<h:outputText
+							value="#{notificationBean.translateNotification(notification)}" />
+					</h:panelGroup>
+				</c:forEach>
+				<h:panelGroup layout="block" styleClass="dropdown-content" rendered="#{notificationBean.notifications == null || empty notificationBean.notifications}">
+					<h:outputText value="#{msg['notification.notAvabil']}"/>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="dropdown-content" rendered="#{notificationBean.notifications != null and fn:length(notificationBean.notifications) > notificationBean.LIMIT}">
+					<h:link outcome="notifications" value="#{msg['notification.showMore']}"/>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:outputScript library="js" name="notification.js" />
 		</h:form>
 	</h:panelGroup>
 </ui:composition>
