@@ -21,7 +21,7 @@ public class NotificationOption extends AbstractEntity {
 	private String option;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "notification_id")
 	private Notification notification;
 
 	@Override
@@ -37,4 +37,11 @@ public class NotificationOption extends AbstractEntity {
 		this.option = option;
 	}
 
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
 }

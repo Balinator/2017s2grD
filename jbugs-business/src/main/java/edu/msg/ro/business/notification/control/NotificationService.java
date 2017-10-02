@@ -1,9 +1,10 @@
 package edu.msg.ro.business.notification.control;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 
 import edu.msg.ro.business.notification.dao.NotificationDAO;
@@ -29,17 +30,17 @@ public class NotificationService {
 		Notification notification = new Notification();
 		notificationDTOMapper.mapToEntity(dto, notification);
 
-		List<NotificationOption> notificationoptionList = notification.getOptions();
-		List<NotificationOption> newNotificationoptionList = new ArrayList<>();
-		for (int i = 0; i < notificationoptionList.size(); ++i) {
-			NotificationOption option = notificationoptionList.get(i);
-			notificationOptionDAO.persistEntity(option);
-			newNotificationoptionList.add(notificationOptionDAO.findEntity(option.getId()));
-		}
-		notification.setOptions(newNotificationoptionList);
+		notification.setOptions(notification.getOptions());
+		notification.setCreated(new Date());
 
 		notificationDAO.persistEntity(notification);
-		return notificationDTOMapper.mapToDTO(notificationDAO.findEntity(notification.getId()));
+		notification = notificationDAO.findEntity(notification.getId());
+
+		for (NotificationOption o : notification.getOptions()) {
+			o.setNotification(notification);
+		}
+
+		return notificationDTOMapper.mapToDTO(notification);
 	}
 
 	public void deleteNotification(NotificationDTO dto) {
@@ -49,4 +50,15 @@ public class NotificationService {
 	public List<NotificationDTO> getAllNotificationForUser(Long userId) {
 		return notificationDTOMapper.mapToDTOs(notificationDAO.getAllNotificationForUser(userId));
 	}
+
+	@Schedule(second = "*/5", minute = "*", hour = "*")
+	private void deleteNotificationIfIsOldEnough() {
+		for (Notification entity : notificationDAO.getOldNotifications()) {
+			for (int i = 0; i < entity.getOptions().size(); ++i) {
+				notificationOptionDAO.deleteEntity(entity.getOptions().get(i));
+			}
+			notificationDAO.deleteEntity(entity);
+		}
+	}
+
 }

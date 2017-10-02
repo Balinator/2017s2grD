@@ -1,5 +1,6 @@
 package edu.msg.ro.business.notification.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -23,18 +24,12 @@ public class NotificationDAO extends AbstractDao<Notification> {
 		return query.getResultList();
 	}
 
-	public void deleteQuery(Long id) {
-		Query deleteQuery = this.em.createQuery(
-				"DELETE FROM notification_users WHERE notification_users.idNotification = :notification_id");
-		deleteQuery.setParameter("notification_id", id);
-		deleteQuery.executeUpdate();
-		deleteQuery = this.em.createQuery(
-				"DELETE FROM notification_option WHERE notification_option.NOTIFICATION_ID = :notification_id");
-		deleteQuery.setParameter("notification_id", id);
-		deleteQuery.executeUpdate();
-		deleteQuery = this.em.createQuery("DELETE FROM notification WHERE notification.ID = :notification_id");
-		deleteQuery.setParameter("notification_id", id);
-		deleteQuery.executeUpdate();
+	public List<Notification> getOldNotifications() {
+		Query query = this.em.createQuery("SELECT n FROM Notification n WHERE n.created < :date");
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, -1);
+		query.setParameter("date", calendar.getTime());
+		return query.getResultList();
 	}
 
 }

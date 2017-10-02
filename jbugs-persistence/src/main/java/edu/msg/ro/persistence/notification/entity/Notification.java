@@ -3,6 +3,7 @@ package edu.msg.ro.persistence.notification.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import edu.msg.ro.persistence.common.entity.AbstractEntity;
 import edu.msg.ro.persistence.user.entity.User;
@@ -35,15 +38,17 @@ public class Notification extends AbstractEntity {
 	private int type;
 
 	@ManyToMany
+	@CascadeOnDelete
 	@JoinTable(name = "Notification_User", joinColumns = @JoinColumn(name = "idNotification"), inverseJoinColumns = {
 			@JoinColumn(name = "idUser") })
 	private List<User> users;
 
-	@OneToMany(mappedBy = "notification")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "notification")
+	@JoinColumn
 	private List<NotificationOption> options;
 
 	@Temporal(TemporalType.DATE)
-	private Date created;// TODO: delete if older than 30days
+	private Date created;
 
 	@Override
 	public Long getId() {
