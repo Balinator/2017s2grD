@@ -27,7 +27,7 @@ public class NotificationDAO extends AbstractDao<Notification> {
 	public List<Notification> getOldNotifications() {
 		Query query = this.em.createQuery("SELECT n FROM Notification n WHERE n.created < :date");
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, -1);
+		calendar.add(Calendar.DATE, -30);
 		query.setParameter("date", calendar.getTime());
 		return query.getResultList();
 	}

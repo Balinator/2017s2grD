@@ -43,15 +43,11 @@ public class NotificationService {
 		return notificationDTOMapper.mapToDTO(notification);
 	}
 
-	public void deleteNotification(NotificationDTO dto) {
-		notificationDAO.deleteQuery(dto.getId());
-	}
-
 	public List<NotificationDTO> getAllNotificationForUser(Long userId) {
 		return notificationDTOMapper.mapToDTOs(notificationDAO.getAllNotificationForUser(userId));
 	}
 
-	@Schedule(second = "*/5", minute = "*", hour = "*")
+	@Schedule(second = "0", minute = "0", hour = "*")
 	private void deleteNotificationIfIsOldEnough() {
 		for (Notification entity : notificationDAO.getOldNotifications()) {
 			for (int i = 0; i < entity.getOptions().size(); ++i) {
