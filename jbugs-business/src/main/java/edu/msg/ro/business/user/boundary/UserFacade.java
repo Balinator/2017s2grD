@@ -112,4 +112,12 @@ public class UserFacade {
 	public List<UserDTO> getAllUsersWithRole(Long roleId) {
 		return userService.getAllUsersWithRole(roleId);
 	}
+
+	public int getStatisticsUser1Option1() {
+		return userService.getStatisticsUser1Option1();
+	}
+
+	public int getStatisticsUser1Option2() {
+		return userService.getStatisticsUser1Option2();
+	}
 }

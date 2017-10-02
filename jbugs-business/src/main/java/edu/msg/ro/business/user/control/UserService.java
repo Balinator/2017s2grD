@@ -162,4 +162,12 @@ public class UserService {
 	public List<UserDTO> getAllUsersWithRole(Long roleId) {
 		return userDTOMapper.mapToDTOs(userDAO.getAllUsersWithRole(roleId));
 	}
+
+	public int getStatisticsUser1Option1() {
+		return userDAO.getStatisticsUser1Option1();
+	}
+
+	public int getStatisticsUser1Option2() {
+		return userDAO.getStatisticsUser1Option2();
+	}
 }

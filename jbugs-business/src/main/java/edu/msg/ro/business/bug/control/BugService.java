@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.mapper.BugDTOMapper;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
@@ -86,6 +88,14 @@ public class BugService {
 
 	public BugDTO findBug(Long id) {
 		return bugDTOMapper.mapToDTO(bugDAO.findEntity(id));
+	}
+
+	public int getStatisticsBug1Option(StatusEnum open) {
+		return bugDAO.getStatisticsBug1Option(open.key);
+	}
+
+	public int getStatisticsBug2Option(BugSeverity critical) {
+		return bugDAO.getStatisticsBug2Option(critical.key);
 	}
 
 }

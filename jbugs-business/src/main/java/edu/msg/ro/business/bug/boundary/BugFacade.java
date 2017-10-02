@@ -9,6 +9,8 @@ import javax.ejb.TransactionAttributeType;
 
 import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -65,5 +67,13 @@ public class BugFacade {
 
 	public BugDTO findBug(Long id) {
 		return bugService.findBug(id);
+	}
+
+	public int getStatisticsBug1Option(StatusEnum open) {
+		return bugService.getStatisticsBug1Option(open);
+	}
+
+	public int getStatisticsBug2Option(BugSeverity critical) {
+		return bugService.getStatisticsBug2Option(critical);
 	}
 }

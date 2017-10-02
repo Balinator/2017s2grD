@@ -130,4 +130,14 @@ public class UserDAO extends AbstractDao<User> {
 		return query.getResultList();
 	}
 
+	public int getStatisticsUser1Option1() {
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active <> 0", Integer.class);
+		return query.getResultList().size();
+	}
+
+	public int getStatisticsUser1Option2() {
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active = 0", Integer.class);
+		return query.getResultList().size();
+	}
+
 }
