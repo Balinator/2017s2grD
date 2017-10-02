@@ -13,6 +13,7 @@ import edu.msg.ro.business.notification.dto.NotificationDTO;
 import edu.msg.ro.business.notification.enums.NotificationEnum;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionEnum;
 
 @Stateless
 public class NotificationCreator {
@@ -73,7 +74,7 @@ public class NotificationCreator {
 		notification.setType(NotificationEnum.USER_DELETED);
 
 		List<UserDTO> users = new ArrayList<>();
-		for (UserDTO user : userFacade.getAllUsers()) {// TODO:getAllUsersWithPrmission
+		for (UserDTO user : userFacade.getAllUsersWithPermission(PermissionEnum.USER_MANAGEMENT)) {
 			users.add(user);
 		}
 		notification.setUsers(users);
@@ -159,7 +160,7 @@ public class NotificationCreator {
 		notification.setType(NotificationEnum.USER_DEACTIVATED);
 
 		List<UserDTO> users = new ArrayList<>();
-		for (UserDTO u : userFacade.getAllUsers()) {// TODO:getAllUsersWithRight
+		for (UserDTO u : userFacade.getAllUsersWithRole(1L)) {
 			users.add(u);
 		}
 		notification.setUsers(users);

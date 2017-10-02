@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.persistence.user.entity.User;
 
 /**
@@ -102,5 +103,13 @@ public class UserFacade {
 	 */
 	public UserDTO getUserByUsername(String username) {
 		return userService.findUserByUsername(username);
+	}
+
+	public List<UserDTO> getAllUsersWithPermission(PermissionEnum userManagement) {
+		return userService.getAllUsersWithPermission(userManagement.getId());
+	}
+
+	public List<UserDTO> getAllUsersWithRole(Long roleId) {
+		return userService.getAllUsersWithRole(roleId);
 	}
 }
