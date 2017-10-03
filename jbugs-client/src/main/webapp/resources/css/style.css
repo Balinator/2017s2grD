@@ -131,8 +131,6 @@ th input,th div > div{
     z-index: 1;
     overflow-x: visible;
     padding: 10px;
-    -webkit-transition-duration: 0.2s;
-	transition-duration: 0.2s;
 }
 
 .dropdown-content > a{
