@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.mapper.BugDTOMapper;
 import edu.msg.ro.business.bug.enums.BugSeverity;
 import edu.msg.ro.business.bug.enums.StatusEnum;
+import edu.msg.ro.business.bug.interceptor.HistoryInterceptor;
 import edu.msg.ro.business.common.exception.TechnicalExeption;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
@@ -50,6 +52,7 @@ public class BugService {
 	 * @return
 	 * @throws TechnicalExeption
 	 */
+	@Interceptors({ HistoryInterceptor.class })
 	public BugDTO updateBug(BugDTO bugDTO) {
 		Bug persistedBug = bugDAO.getBug(bugDTO.getId());
 		bugDTOMapper.mapToEntity(bugDTO, persistedBug);

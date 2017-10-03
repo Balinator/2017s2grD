@@ -115,6 +115,7 @@ public class BugUpdateBean extends AbstractBugBean {
 	 * @return
 	 */
 	public String editBug() {
+		selectedBug.setModifier(getLoggedUser());
 		bugFacade.updateBug(selectedBug);
 		notificationCreator.createBugUpdatedNotification(getLoggedUser(), selectedBug);
 		if (!selectedBug.getStatus().equals(selectedBugStatus)) {
