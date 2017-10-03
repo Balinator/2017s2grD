@@ -146,3 +146,13 @@ th input,th div > div{
 .show{
 	display: block;
 }
+.notificationButton{
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.notificationButton > span{
+	padding: 0px !important;
+}
