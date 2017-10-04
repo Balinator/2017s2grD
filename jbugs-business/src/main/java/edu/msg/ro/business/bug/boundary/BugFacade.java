@@ -76,4 +76,12 @@ public class BugFacade {
 	public int getStatisticsBug2Option(BugSeverity critical) {
 		return bugService.getStatisticsBug2Option(critical);
 	}
+
+	public List<BugDTO> getAllBugsByQuery(String query) {
+		return bugService.getAllBugsByQuery(query);
+	}
+
+	public Object getBugByTitle(String value) {
+		return bugService.getBugByTitle(value);
+	}
 }

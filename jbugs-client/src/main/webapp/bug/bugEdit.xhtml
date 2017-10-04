@@ -70,7 +70,7 @@
 					<h:panelGroup layout="block">
 						<p:tooltip for="version" hideEvent="blur" position="right"
 							styleClass="errorTooltip" showEvent="focus"
-							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:version')}">
 							<p:message for="version" />
 						</p:tooltip>
 						<p:inputText id="version" required="true"

@@ -15,23 +15,23 @@
 					<p:outputLabel value="#{msg['bug.title']}" />
 					<h:panelGroup layout="block">
 						<p:outputLabel id="title"
-							value="#{bugUpdateBean.selectedBug.title}" />
+							value="#{bugRelationBean.selectedBug.title}" />
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.description']}" />
 					<h:panelGroup layout="block">
 						<p:inputTextarea id="description" rows="5" cols="50"
 							autoResize="false" disabled="true"
-							value="#{bugUpdateBean.selectedBug.description}">
+							value="#{bugRelationBean.selectedBug.description}">
 						</p:inputTextarea>
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}"
+					<p:calendar value="#{bugRelationBean.selectedBug.targetDate}"
 						disabled="true" />
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
-					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.severity}"
+					<p:selectOneMenu value="#{bugRelationBean.selectedBug.severity}"
 						disabled="true" style="width:90px">
 
 						<f:selectItems value="#{bugUpdateBean.severityList}"
@@ -40,7 +40,7 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
-					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.status}"
+					<p:selectOneMenu value="#{bugRelationBean.selectedBug.status}"
 						converter="#{bugConverter}" style="width:90px" disabled="true">
 
 						<f:selectItems value="#{bugUpdateBean.getStatusList()}"
@@ -52,24 +52,37 @@
 					<p:outputLabel value="#{msg['bug.version']}" />
 					<h:panelGroup layout="block">
 						<p:outputLabel id="version"
-							value="#{bugUpdateBean.selectedBug.version}" />
+							value="#{bugRelationBean.selectedBug.version}" />
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.fixedIn']}" />
-					<p:outputLabel value="#{bugUpdateBean.selectedBug.fixedIn}" />
+					<p:outputLabel value="#{bugRelationBean.selectedBug.fixedIn}" />
 
 					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
 					<p:outputLabel
-						value="#{bugUpdateBean.selectedBug.assigned.username}"></p:outputLabel>
+						value="#{bugRelationBean.selectedBug.assigned.username}"></p:outputLabel>
 						
 					<p:outputLabel value="#{msg['bug.attachment']}" />
-					<p:commandButton value="#{bugUpdateBean.selectedBug.attachmentName}" ajax="false"
-						actionListener="#{bugBean.fileDownload(bugUpdateBean.selectedBug)}"
-						rendered="#{not empty bugUpdateBean.selectedBug.attachmentName}"
+					<p:commandButton value="#{bugRelationBean.selectedBug.attachmentName}" ajax="false"
+						actionListener="#{bugBean.fileDownload(bugRelationBean.selectedBug)}"
+						rendered="#{not empty bugRelationBean.selectedBug.attachmentName}"
 						onclick="PrimeFaces.monitorDownload(start, stop);">
 						<p:fileDownload value="#{bugBean.downloadAttachment}"
-							rendered="#{!bugBean.verifyBugRendere(bugUpdateBean.selectedBug)}" />
+							rendered="#{!bugBean.verifyBugRendere(bugRelationBean.selectedBug)}" />
 					</p:commandButton>
+					<p:outputLabel value="#{msg['bug.view.noAttachment']}" rendered="#{empty bugRelationBean.selectedBug.attachmentName}"/>
+					
+					<p:outputLabel value="#{msg['bug.relation.relation']}"/>
+					<p:selectOneMenu value="#{bugRelationBean.bugRelation.relation}"
+						style="width:90px" disabled="true">
+						<f:selectItems value="#{bugRelationBean.relationList}"
+							var="relation" itemLabel="#{msg['bug.relations.' += relation]}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="#{msg['bug.relation.assigned']}"/>
+					<p:outputLabel value="#{bugRelationBean.bugRelation.bug2.title}" rendered="#{bugRelationBean.bugRelation.bug2 != null}"/>
+					<p:outputLabel value="#{msg['bug.view.noRelation']}" rendered="#{bugRelationBean.bugRelation.bug2 == null}"/>
+					
 				</h:panelGrid>
 			</p:outputPanel>
 		</h:form>

@@ -101,4 +101,12 @@ public class BugService {
 		return bugDAO.getStatisticsBug2Option(critical.key);
 	}
 
+	public List<BugDTO> getAllBugsByQuery(String query) {
+		return bugDTOMapper.mapToDTOs(bugDAO.getAllBugsByQuery(query));
+	}
+
+	public Object getBugByTitle(String value) {
+		return bugDTOMapper.mapToDTO(bugDAO.findBugByTitle(value));
+	}
+
 }

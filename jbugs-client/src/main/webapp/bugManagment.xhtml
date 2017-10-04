@@ -41,9 +41,9 @@
 							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value="+" />
 						</p:commandLink>
-						<p:link outcome="bugStatistics" type="button" style="float:right;" 
+						<p:link outcome="bugStatistics" type="button" style="float:right;"
 							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
-							<h:outputText value=" " class="ui-icon ui-icon-clipboard"/>
+							<h:outputText value=" " class="ui-icon ui-icon-clipboard" />
 						</p:link>
 					</h:panelGroup>
 				</f:facet>
@@ -153,20 +153,20 @@
 
 				</p:column>
 
-				<p:column headerText="#{msg['bug.operation']}" exportable="false"
-					rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
+				<p:column headerText="#{msg['bug.operation']}" exportable="false">
 					<p:commandLink id="bugEdit" type="button"
 						actionListener="#{bugUpdateBean.setSelectedBug2(bug)}"
 						oncomplete="PF('bugUpdateDialog').show()"
 						update=":formBugEdit:display, :formBugEdit:display2"
-						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+						rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
 						<h:outputText value=" " class="ui-icon ui-icon-pencil" />
 					</p:commandLink>
 					<p:tooltip for="bugEdit" position="bottom"
 						styleClass="normalTooltip" value="#{msg['bug.update']}" />
-						
+
 					<p:commandLink id="bugView" type="button"
-						actionListener="#{bugUpdateBean.setSelectedBug(bug)}"
+						actionListener="#{bugRelationBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugViewDialog').show()"
 						update=":formBugView:display"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
@@ -174,10 +174,22 @@
 					</p:commandLink>
 					<p:tooltip for="bugView" position="bottom"
 						styleClass="normalTooltip" value="#{msg['bug.view']}" />
+
+					<p:commandLink id="bugRelation" type="button"
+						actionListener="#{bugRelationBean.setSelectedBug(bug)}"
+						oncomplete="PF('bugRelationDialog').show()"
+						update=":formBugRelation:display , :formBugRelation:display2"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+						rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT') || userAccessService.canAccessE('BUG_CLOSE')}">
+						<h:outputText value=" " class="ui-icon ui-icon-transfer-e-w" />
+					</p:commandLink>
+					<p:tooltip for="bugRelation" position="bottom"
+						styleClass="normalTooltip" value="#{msg['bug.relation']}" />
 				</p:column>
 
 				<f:facet name="footer">
-					<h:panelGroup layout="block" style=" overflow: auto;" rendered="#{userAccessService.canAccessE('BUG_EXPORT')}">
+					<h:panelGroup layout="block" style=" overflow: auto;"
+						rendered="#{userAccessService.canAccessE('BUG_EXPORT')}">
 						<h:panelGroup id="exportCurentPage" layout="block"
 							styleClass="header-class-right">
 							<p:tooltip for="exportCurentPage" position="left"
@@ -217,6 +229,7 @@
 		<ui:include src="/bug/bugCreate.xhtml" />
 		<ui:include src="/bug/bugEdit.xhtml" />
 		<ui:include src="/bug/bugView.xhtml" />
+		<ui:include src="/bug/bugRelation.xhtml" />
 		<ui:include src="/bug/attachmentDownload.xhtml" />
 		<h:outputScript library="js" name="popUp.js" />
 	</f:view>

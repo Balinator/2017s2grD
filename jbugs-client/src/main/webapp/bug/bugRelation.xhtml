@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<p:dialog header="#{msg['bug.relation.dialog.title']}"
+		widgetVar="bugRelationDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+
+		<h:form id="formBugRelation">
+			<p:outputPanel id="display">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+					<p:outputLabel value="#{msg['bug.relation.relation']}"></p:outputLabel>
+
+					<p:selectOneMenu value="#{bugRelationBean.bugRelation.relation}"
+						style="width:90px">
+						<p:ajax update="formBugRelation display2 addBug2 autocomplete"
+							onstart="#{bugRelationBean.chack()}" />
+
+						<f:selectItems value="#{bugRelationBean.relationList}"
+							var="relation" itemLabel="#{msg['bug.relations.' += relation]}" />
+
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</p:outputPanel>
+
+			<p:outputPanel id="display2">
+				<h:panelGrid id="addBug2" columns="2" cellpadding="5"
+					style="width: 100%" columnClasses="panel-colum-label, panel-colum">
+
+					<p:outputLabel value="#{msg['bug.relation.assigned']}"></p:outputLabel>
+					<f:view>
+						<p:autoComplete id="autocomplete"
+							value="#{bugRelationBean.bugRelation.bug2}"
+							disabled="#{bugRelationBean.disabled()}"
+							required="#{bugRelationBean.required()}"
+							requiredMessage="#{msg['bug.relation.assigned.required']}"
+							completeMethod="#{bugRelationBean.completeBug}" var="bug"
+							itemLabel="#{bug.title}" itemValue="#{bug}"
+							converter="#{realBugConverter}" forceSelection="true">
+						</p:autoComplete>
+						<p:tooltip for="autocomplete" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugRelation:autocomplete')}">
+							<p:message for="autocomplete" />
+						</p:tooltip>
+					</f:view>
+				</h:panelGrid>
+			</p:outputPanel>
+			<p:commandButton value="#{msg['bug.relation.update']}"
+				action="#{bugRelationBean.editRelation}"
+				oncomplete="handlePopUpRequest('bugRelationDialog', xhr, status, args)"
+				update="bugForm:bugList, display, display2, bugForm:userMSG" ajax="true"
+				style="float:right;" />
+		</h:form>
+		<p:ajax event="close" resetValues="true"
+			update="formBugRelation:display formBugRelation:display2 formBugRelation:autocomplete" />
+	</p:dialog>
+</ui:composition>
