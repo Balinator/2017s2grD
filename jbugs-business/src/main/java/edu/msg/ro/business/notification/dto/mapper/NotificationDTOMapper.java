@@ -35,6 +35,7 @@ public class NotificationDTOMapper extends AbstractDTOMapper<Notification, Notif
 		dto.setOptions(options);
 		dto.setType(NotificationEnum.values()[entity.getType() - 1]);
 		dto.setUsers(userDTOMapper.mapToDTOs(entity.getUsers()));
+		dto.setCreated(entity.getCreated());
 	}
 
 	@Override

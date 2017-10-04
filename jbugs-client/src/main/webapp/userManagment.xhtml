@@ -24,15 +24,21 @@
 				styleClass="paginated">
 				<f:facet name="header">
 					<h:panelGroup layout="block" style="overflow: auto;">
-						<p:commandLink type="button"
+						<p:commandLink id="addUserButton" type="button"
 							oncomplete="PF('userCreateDialog').show();" style="float:right;"
 							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value="+" />
 						</p:commandLink>
-						<p:link outcome="userStatistics" type="button" style="float:right;" 
+						<p:tooltip for="addUserButton" position="bottom"
+								value="#{msg['user.add']}" />
+						
+						<p:link id="userStatistics" outcome="userStatistics" type="button" style="float:right;" 
 							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value=" " class="ui-icon ui-icon-clipboard"/>
 						</p:link>
+						<p:tooltip for="userStatistics" position="bottom"
+								value="#{msg['user.statistics']}" />
+						
 					</h:panelGroup>
 				</f:facet>
 				<p:column style="text-align: center;" sortBy="#{user.firstname}"

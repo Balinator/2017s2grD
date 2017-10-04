@@ -34,17 +34,29 @@
 								placeholder="#{msg['bug.search.placeholder']}" />
 						</p:outputPanel>
 
-						<p:commandLink type="button"
+						<p:commandLink id="addBugButton" type="button"
 							oncomplete="PF('bugAddDialog').show();"
 							update=":bugAddForm:display, :bugAddForm:display2"
 							actionListener="#{bugNewBean.refreshNewBug}" style="float:right;"
 							styleClass="commandLinkToAddButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value="+" />
 						</p:commandLink>
-						<p:link outcome="bugStatistics" type="button" style="float:right;"
+						<p:tooltip for="addBugButton" position="bottom"
+								value="#{msg['bug.add']}" />
+						
+						<p:link id="bugStatistics" outcome="bugStatistics" type="button" style="float:right;"
 							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 							<h:outputText value=" " class="ui-icon ui-icon-clipboard" />
 						</p:link>
+						<p:tooltip for="bugStatistics" position="bottom"
+								value="#{msg['bug.statistics']}" />
+						
+						<p:link id="bugHistory" outcome="history" type="button" style="float:right;"
+							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							<h:outputText value=" " class="ui-icon ui-icon-calendar" />
+						</p:link>
+						<p:tooltip for="bugHistory" position="bottom"
+								value="#{msg['bug.history']}" />
 					</h:panelGroup>
 				</f:facet>
 
@@ -73,6 +85,7 @@
 					<f:facet name="filter">
 						<p:calendar pattern="dd/MM/yyyy">
 							<p:ajax event="dateSelect" oncomplete="PF('bugTable').filter()" />
+							<p:ajax event="keyup" oncomplete="PF('bugTable').filter()" />
 						</p:calendar>
 
 					</f:facet>

@@ -1,5 +1,6 @@
 package edu.msg.ro.business.notification.dto;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.msg.ro.business.common.dto.AbstractDTO;
@@ -14,6 +15,8 @@ public class NotificationDTO extends AbstractDTO {
 	private List<UserDTO> users;
 
 	private List<String> options;
+
+	private Date created;
 
 	public Long getId() {
 		return id;
@@ -50,5 +53,13 @@ public class NotificationDTO extends AbstractDTO {
 
 	public void setOptions(List<String> options) {
 		this.options = options;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 }
