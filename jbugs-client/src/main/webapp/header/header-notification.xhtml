@@ -4,14 +4,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<h:panelGroup layout="block">
-		<div>
-			<h:panelGroup layout="block" escape="false" onclick="rc()">
+	<h:panelGroup id="notification-header" layout="block">
+		<h:panelGroup id="notification-button" layout="block">
+			<h:panelGroup layout="block" escape="false" onclick="dropUp()">
 				<h:outputText value="#{msg['notification.title']}"
 					styleClass="header-button notificationButton" />
 			</h:panelGroup>
-		</div>
-		<h:form id="notificationForm" onclick="dropDown()">
+		</h:panelGroup>
+		<h:form id="notificationForm">
 			<p:remoteCommand name="rc" update="notificationForm"
 				oncomplete="dropDown()" />
 			<h:panelGroup id="notificationContent" layout="block"
