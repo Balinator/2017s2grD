@@ -8,7 +8,9 @@ import edu.msg.ro.business.junit.bug.bundary.BugFacadeTest;
 import edu.msg.ro.business.junit.bug.control.BugServiceTest;
 import edu.msg.ro.business.junit.bug.dao.BugDAOTest;
 import edu.msg.ro.business.junit.bug.dto.mapper.BugDTOMapperTest;
+import edu.msg.ro.business.junit.bug.interceptor.HistoryInterceptorTest;
 import edu.msg.ro.business.junit.common.dao.AbstractDAOTest;
+import edu.msg.ro.business.junit.notification.boundry.NotificationFacadeTest;
 import edu.msg.ro.business.junit.user.boundary.RoleFacadeTest;
 import edu.msg.ro.business.junit.user.boundary.UserFacadeTest;
 import edu.msg.ro.business.junit.user.boundary.UserLoginTest;
@@ -23,6 +25,7 @@ import edu.msg.ro.business.junit.user.dto.mapper.PermissionDTOMapperTest;
 import edu.msg.ro.business.junit.user.dto.mapper.RoleDTOMapperTest;
 import edu.msg.ro.business.junit.user.dto.mapper.UserDTOMapperTest;
 import edu.msg.ro.business.junit.user.security.PermissionCheckerTest;
+import edu.msg.ro.business.junit.user.util.UserGeneratorTest;
 import edu.msg.ro.business.junit.user.validator.UserValidatorTest;
 
 /**
@@ -37,7 +40,8 @@ import edu.msg.ro.business.junit.user.validator.UserValidatorTest;
 		UserFacadeTest.class, UserLoginTest.class, UserPermissonTest.class, PermissionServiceTest.class,
 		RoleServiceTest.class, UserDTOMapperTest.class, PermissionDTOMapperTest.class, RoleDTOMapperTest.class,
 		UserValidatorTest.class, UserServiceTest.class, BugDAOTest.class, PermissionDAOTest.class, RoleDAOTest.class,
-		AbstractDAOTest.class, UserDAOTest.class, PermissionCheckerTest.class
+		AbstractDAOTest.class, UserDAOTest.class, PermissionCheckerTest.class, HistoryInterceptorTest.class,
+		NotificationFacadeTest.class, UserGeneratorTest.class
 
 })
 public class Alltest {

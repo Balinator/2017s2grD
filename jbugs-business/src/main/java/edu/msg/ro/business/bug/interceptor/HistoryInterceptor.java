@@ -77,7 +77,7 @@ public class HistoryInterceptor {
 		return ret;
 	}
 
-	private String hash(byte[] value) {
+	public String hash(byte[] value) {
 		byte[] md_password;
 		try {
 			md_password = MessageDigest.getInstance("MD5").digest(value);

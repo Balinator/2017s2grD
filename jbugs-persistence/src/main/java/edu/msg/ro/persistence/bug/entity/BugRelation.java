@@ -16,7 +16,7 @@ public class BugRelation extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne()
+	@OneToOne
 	private Bug bug1;
 
 	@OneToOne

@@ -15,6 +15,7 @@ import edu.msg.ro.business.common.exception.BusinessException;
 import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.business.util.TestHelper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -91,5 +92,29 @@ public class UserFacadeTest {
 	public void getAllUsersTets() throws BusinessException {
 		userFacade.getAllUsers();
 		verify(userService, times(1)).getAllUsers();
+	}
+
+	@Test
+	public void getAllUsersWithPermissionTets() throws BusinessException {
+		userFacade.getAllUsersWithPermission(PermissionEnum.BUG_CLOSE);
+		verify(userService, times(1)).getAllUsersWithPermission(any(Long.class));
+	}
+
+	@Test
+	public void getAllUsersWithRoleTets() throws BusinessException {
+		userFacade.getAllUsersWithRole(1L);
+		verify(userService, times(1)).getAllUsersWithRole(any(Long.class));
+	}
+
+	@Test
+	public void getStatisticsUser1Option1Tets() throws BusinessException {
+		userFacade.getStatisticsUser1Option1();
+		verify(userService, times(1)).getStatisticsUser1Option1();
+	}
+
+	@Test
+	public void getStatisticsUser1Option2Tets() throws BusinessException {
+		userFacade.getStatisticsUser1Option2();
+		verify(userService, times(1)).getStatisticsUser1Option2();
 	}
 }
