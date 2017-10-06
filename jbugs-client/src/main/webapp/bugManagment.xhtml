@@ -181,7 +181,7 @@
 					<p:commandLink id="bugView" type="button"
 						actionListener="#{bugRelationBean.setSelectedBug(bug)}"
 						oncomplete="PF('bugViewDialog').show()"
-						update=":formBugView:display"
+						update=":formBugView:display commentinputForm:commentList"
 						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
 						<h:outputText value=" " class="ui-icon ui-icon-search" />
 					</p:commandLink>

@@ -358,6 +358,5 @@ public class BugBean extends AbstractBean {
 	public void deleteAttachment() {
 		selectedBug.setAttachment(null);
 		selectedBug.setAttachmentName(null);
-
 	}
 }

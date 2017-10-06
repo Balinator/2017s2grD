@@ -1,6 +1,8 @@
 package edu.msg.ro.bean.bug;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,10 +11,13 @@ import javax.faces.bean.ViewScoped;
 
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.boundary.BugRelationFacade;
+import edu.msg.ro.business.bug.boundary.CommentFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.BugRelationDTO;
+import edu.msg.ro.business.bug.dto.CommentDTO;
 import edu.msg.ro.business.bug.enums.BugRelationEnum;
 import edu.msg.ro.business.common.exception.JBugsExeption;
+import edu.msg.ro.business.user.boundary.UserFacade;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
 /**
@@ -32,6 +37,16 @@ public class BugRelationBean extends AbstractBugBean {
 
 	@EJB
 	private BugFacade bugFacade;
+
+	@EJB
+	private UserFacade userFacade;
+
+	@EJB
+	private CommentFacade commentFacade;
+
+	private List<CommentDTO> allComments = new ArrayList<>();
+
+	private String newMessage = "";
 
 	private BugDTO selectedBug = new BugDTO();
 
@@ -87,6 +102,7 @@ public class BugRelationBean extends AbstractBugBean {
 	 */
 	public void setSelectedBug(BugDTO selectedBug) {
 		this.selectedBug = selectedBug;
+		getRefreshAllComments();
 		try {
 			setBugRelation(bugRelationFacade.getBugRelation(selectedBug));
 		} catch (JBugsExeption e) {
@@ -106,5 +122,50 @@ public class BugRelationBean extends AbstractBugBean {
 
 	public void setBugRelation(BugRelationDTO bugRelation) {
 		this.bugRelation = bugRelation;
+	}
+
+	public void getRefreshAllComments() {
+		allComments = commentFacade.getAllCommentForBug(selectedBug);
+	}
+
+	public List<CommentDTO> getAllComments() {
+		return allComments;
+	}
+
+	public void setAllComments(List<CommentDTO> allComments) {
+		this.allComments = allComments;
+	}
+
+	public String getComment(CommentDTO comment) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(comment.getCreator().getUsername());
+		builder.append(" (");
+		builder.append(new SimpleDateFormat("dd/MM/yyyy").format(comment.getTargetDate()));
+		builder.append("): ");
+		builder.append(comment.getMessage());
+		return builder.toString();
+	}
+
+	public String getNewMessage() {
+		return newMessage;
+	}
+
+	public void setNewMessage(String newMessage) {
+		this.newMessage = newMessage;
+	}
+
+	public void makeComment() {
+		if (newMessage.length() > 0) {
+			CommentDTO comment = new CommentDTO();
+			comment.setBug(bugFacade.findBug(selectedBug.getId()));
+			comment.setCreator(userFacade.getUserByUsername(getLoggedUser().getUsername()));
+			comment.setMessage(newMessage);
+			comment.setTargetDate(new Date());
+
+			commentFacade.createComment(comment);
+			newMessage = "";
+
+			getRefreshAllComments();
+		}
 	}
 }

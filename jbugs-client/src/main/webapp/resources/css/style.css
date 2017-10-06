@@ -154,3 +154,7 @@ th input,th div > div{
 .notificationButton > span{
 	padding: 0px !important;
 }
+
+.toTop{
+    vertical-align: top !important;
+}
