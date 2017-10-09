@@ -103,21 +103,24 @@
 					<h:panelGroup id="comments">
 						<h:panelGroup id="commentinput" layout="block"
 							style="overflow: auto;">
-							<p:inputTextarea id="commentinputArea" value="#{bugRelationBean.newMessage}"
-								counter="counter" maxlength="250" counterTemplate="{0}"
-								style="width:96%;" />
+							<p:inputTextarea id="commentinputArea"
+								value="#{bugRelationBean.newMessage}" counter="counter"
+								maxlength="250" counterTemplate="{0}" style="width:96%;" />
 							<h:outputLabel id="counter" />
 							<p:commandButton value="#{msg['bug.comment.send']}"
 								style="float: right;"
 								actionListener="#{bugRelationBean.makeComment}"
-								update="commentinputForm:commentList commentinputForm:commentinputArea"/>
+								update="commentinputForm:commentList commentinputForm:commentinputArea" />
 						</h:panelGroup>
-						<p:dataList id="commentList" emptyMessage="#{msg['bug.comment.noData']}"
+						<p:dataTable id="commentList"
+							emptyMessage="#{msg['bug.comment.noData']}"
 							value="#{bugRelationBean.allComments}" var="comment"
-							type="definition" paginator="true" rows="3"
-							paginatorPosition="bottom" styleClass="paginated">
-							<p:outputLabel value="#{bugRelationBean.getComment(comment)}" />
-						</p:dataList>
+							type="definition" scrollRows="20" scrollable="true"
+							liveScroll="true" scrollHeight="300">
+							<p:column style="text-align: left;">
+								<p:outputLabel value="#{bugRelationBean.getComment(comment)}" />
+							</p:column>
+						</p:dataTable>
 					</h:panelGroup>
 				</h:form>
 			</p:outputPanel>
