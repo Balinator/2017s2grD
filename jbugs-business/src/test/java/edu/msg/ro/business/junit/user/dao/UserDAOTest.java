@@ -99,11 +99,50 @@ public class UserDAOTest {
 		userDAO.checkIfUserHasAssignedBugs(any(User.class));
 	}
 
+	@Test
+	public void getAllUsersWithPermissionTest() {
+		when(em.getTransaction()).thenReturn(transaction);
+		when(this.em.createQuery("SELECT u FROM User u JOIN u.roles r JOIN r.permissions p WHERE p.id = :permId "))
+				.thenReturn(query);
+		when(query.getResultList()).thenReturn(getNewUserList());
+		userDAO.getAllUsersWithPermission(1L);
+	}
+
+	@Test
+	public void getAllUsersWithRoleTest() {
+		when(em.getTransaction()).thenReturn(transaction);
+		when(this.em.createQuery("SELECT u FROM User u JOIN u.roles r WHERE r.id = :roleId ")).thenReturn(query);
+		when(query.getResultList()).thenReturn(getNewUserList());
+		userDAO.getAllUsersWithRole(1L);
+	}
+
+	@Test
+	public void getStatisticsUser1Option1Test() {
+		when(em.getTransaction()).thenReturn(transaction);
+		when(this.em.createQuery("SELECT u FROM User u WHERE u.active <> 0")).thenReturn(query);
+		when(query.getResultList()).thenReturn(getNewUserList());
+		userDAO.getStatisticsUser1Option1();
+	}
+
+	@Test
+	public void getStatisticsUser1Option2Test() {
+		when(em.getTransaction()).thenReturn(transaction);
+		when(this.em.createQuery("SELECT u FROM User u WHERE u.active = 0")).thenReturn(query);
+		when(query.getResultList()).thenReturn(getNewUserList());
+		userDAO.getStatisticsUser1Option2();
+	}
+
 	public List<User> getNewUserList() {
+		List<User> userList = new ArrayList<User>();
+
 		User user = new User();
 		user.setActive(true);
-		List<User> userList = new ArrayList<User>();
 		userList.add(user);
+
+		user = new User();
+		user.setActive(false);
+		userList.add(user);
+
 		return userList;
 	}
 }

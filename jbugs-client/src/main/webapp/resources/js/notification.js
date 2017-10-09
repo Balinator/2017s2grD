@@ -10,6 +10,6 @@ function dropUp() {
     if (myDropdown.classList.contains('show')) {
     	myDropdown.classList.remove('show');
     }else{
-    	rc();
+    	notificationUpdate();
     }
 }

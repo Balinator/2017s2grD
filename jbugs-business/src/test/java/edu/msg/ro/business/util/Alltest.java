@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import edu.msg.ro.business.junit.bug.bundary.BugFacadeTest;
+import edu.msg.ro.business.junit.bug.control.BugRelationServiceTest;
 import edu.msg.ro.business.junit.bug.control.BugServiceTest;
 import edu.msg.ro.business.junit.bug.dao.BugDAOTest;
 import edu.msg.ro.business.junit.bug.dto.mapper.BugDTOMapperTest;
@@ -41,7 +42,7 @@ import edu.msg.ro.business.junit.user.validator.UserValidatorTest;
 		RoleServiceTest.class, UserDTOMapperTest.class, PermissionDTOMapperTest.class, RoleDTOMapperTest.class,
 		UserValidatorTest.class, UserServiceTest.class, BugDAOTest.class, PermissionDAOTest.class, RoleDAOTest.class,
 		AbstractDAOTest.class, UserDAOTest.class, PermissionCheckerTest.class, HistoryInterceptorTest.class,
-		NotificationFacadeTest.class, UserGeneratorTest.class
+		NotificationFacadeTest.class, UserGeneratorTest.class, BugRelationServiceTest.class
 
 })
 public class Alltest {

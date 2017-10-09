@@ -131,12 +131,12 @@ public class UserDAO extends AbstractDao<User> {
 	}
 
 	public int getStatisticsUser1Option1() {
-		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active <> 0", Integer.class);
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active <> 0");
 		return query.getResultList().size();
 	}
 
 	public int getStatisticsUser1Option2() {
-		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active = 0", Integer.class);
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active = 0");
 		return query.getResultList().size();
 	}
 
