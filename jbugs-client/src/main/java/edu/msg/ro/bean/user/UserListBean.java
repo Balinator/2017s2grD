@@ -2,6 +2,7 @@ package edu.msg.ro.bean.user;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -19,6 +20,8 @@ public class UserListBean extends AbstractUserBean {
 	private NotificationCreator notificationCreator;
 
 	private UserDTO userDTO = new UserDTO();
+
+	private List<UserDTO> filteredUsers;
 
 	/**
 	 * Notification message key.
@@ -38,6 +41,11 @@ public class UserListBean extends AbstractUserBean {
 	 */
 	public boolean verifyUserRendere(UserDTO user) {
 		return userDTO != null && user.getId().equals(userDTO.getId());
+	}
+
+	@PostConstruct
+	public void init() {
+		filteredUsers = userFacade.getAllUsers();
 	}
 
 	/**
@@ -87,6 +95,14 @@ public class UserListBean extends AbstractUserBean {
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
+	}
+
+	public List<UserDTO> getFilteredUsers() {
+		return filteredUsers;
+	}
+
+	public void setFilteredUsers(List<UserDTO> filteredUsers) {
+		this.filteredUsers = filteredUsers;
 	}
 
 }
