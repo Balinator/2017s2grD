@@ -52,7 +52,8 @@
 								value="#{msg['bug.statistics']}" />
 						
 						<p:link id="bugHistory" outcome="history" type="button" style="float:right;"
-							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+							styleClass="commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+							rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT','BUG_CLOSE')}">
 							<h:outputText value=" " class="ui-icon ui-icon-calendar" />
 						</p:link>
 						<p:tooltip for="bugHistory" position="bottom"

@@ -72,20 +72,14 @@ public class AccessFilter implements Filter {
 			permissionList.add(1L);
 		} else if (requestUrl.indexOf("/userManagment.xhtml") >= 0) {
 			permissionList.add(2L);
-		} else if (isIncluded(requestUrl)) {
-			return false;
+		} else if (requestUrl.indexOf("/history.xhtml") >= 0) {
+			permissionList.add(3L);
+			permissionList.add(4L);
 		} else {
 			return true;
 		}
 
 		return permissionChecker.canAccess(userFacade.getUserByUsername(username), permissionList);
-	}
-
-	private boolean isIncluded(String requestUrl) {
-		return requestUrl.indexOf("/user/userEdit.xhtml") >= 0 || requestUrl.indexOf("/user/userCreate.xhtml") >= 0
-				|| requestUrl.indexOf("/bug/bugCreate.xhtml") >= 0 || requestUrl.indexOf("/bug/bugEdit.xhtml") >= 0
-				|| requestUrl.indexOf("/header/header-lang.xhtml") >= 0
-				|| requestUrl.indexOf("/header/header-menu.xhtml") >= 0 || requestUrl.indexOf("/header.xhtml") >= 0;
 	}
 
 	/**
