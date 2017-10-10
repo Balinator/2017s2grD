@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 
+import edu.msg.ro.bean.EmailService;
 import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.enums.StatusEnum;
@@ -32,6 +33,9 @@ public class BugUpdateBean extends AbstractBugBean {
 
 	@EJB
 	private PermissionChecker permissionChecker;
+
+	@EJB
+	private EmailService emailService;
 
 	private BugDTO selectedBug = new BugDTO();
 
@@ -126,8 +130,11 @@ public class BugUpdateBean extends AbstractBugBean {
 			}
 		}
 
+		emailService.sendEmail(getLoggedUser(), selectedBug);
+
 		addI18nMessage(I18N_BUG_SAVED, new Object[] { selectedBug.getTitle() });
 		selectedBug = new BugDTO();
 		return "bugManagment";
 	}
+
 }

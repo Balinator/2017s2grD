@@ -136,13 +136,9 @@ public class BugRelationBean extends AbstractBugBean {
 		this.allComments = allComments;
 	}
 
-	public String getComment(CommentDTO comment) {
+	public String getCommentDate(CommentDTO comment) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(comment.getCreator().getUsername());
-		builder.append(" (");
 		builder.append(new SimpleDateFormat("dd/MM/yyyy").format(comment.getTargetDate()));
-		builder.append("): ");
-		builder.append(comment.getMessage());
 		return builder.toString();
 	}
 

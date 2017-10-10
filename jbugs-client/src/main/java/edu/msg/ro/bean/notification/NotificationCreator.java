@@ -170,5 +170,6 @@ public class NotificationCreator {
 		notification.setOptions(options);
 
 		notificationFacade.createNotification(notification);
+
 	}
 }
