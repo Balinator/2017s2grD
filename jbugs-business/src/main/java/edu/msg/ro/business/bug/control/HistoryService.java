@@ -1,5 +1,6 @@
 package edu.msg.ro.business.bug.control;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -27,10 +28,14 @@ public class HistoryService {
 
 	public List<HistoryDTO> getHistory(UserDTO modifier, BugDTO bug) {
 		List<History> list = historyDAO.getHistory(modifier.getId(), bug.getId());
-		for (int i = 0; i < list.size(); ++i) {
-			History h = list.get(i);
-			list.removeIf(e -> e.getAttribute().equals(h.getAttribute()) && e.getId() < h.getId());
+		Date maxDate = null;
+		for (History h : list) {
+			if (maxDate == null || h.getModificationDate().after(maxDate)) {
+				maxDate = h.getModificationDate();
+			}
 		}
+		final Date date = maxDate;
+		list.removeIf(e -> e.getModificationDate().before(date));
 		return historyDTOMapper.mapToDTOs(list);
 	}
 

@@ -59,8 +59,10 @@ public class EmailService {
 		body.append("\nFor futher questions contact an admin.");
 
 		String title = "Bug updated";
-		sendEmail(bug.getAuthor().getEmail(), title, body.toString(), session);
-		if (bug.getAssigned() != null) {
+		if (bug.isAuthorEmail()) {
+			sendEmail(bug.getAuthor().getEmail(), title, body.toString(), session);
+		}
+		if (bug.getAssigned() != null && bug.isAssignedEmail()) {
 			sendEmail(bug.getAssigned().getEmail(), title, body.toString(), session);
 		}
 	}

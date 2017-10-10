@@ -80,6 +80,12 @@
 
 					<p:outputLabel value="#{msg['bug.fixedIn']}" />
 					<p:inputText value="#{bugUpdateBean.selectedBug.fixedIn}"></p:inputText>
+					
+					<p:outputLabel value="#{msg['bug.authorEmail']}" />
+					<p:selectBooleanCheckbox value="#{bugUpdateBean.selectedBug.authorEmail}"/>
+					
+					<p:outputLabel value="#{msg['bug.assignedEmail']}" />
+					<p:selectBooleanCheckbox value="#{bugUpdateBean.selectedBug.assignedEmail}"/>
 				</h:panelGrid>
 			</p:outputPanel>
 

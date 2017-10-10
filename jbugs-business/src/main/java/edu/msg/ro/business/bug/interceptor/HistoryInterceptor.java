@@ -49,6 +49,8 @@ public class HistoryInterceptor {
 
 		UserDTO curentUser = newBug.getModifier();
 
+		Date date = new Date();
+
 		for (Field field : oldBug.getClass().getDeclaredFields()) {
 			field.setAccessible(true);
 			Object oldValue = field.get(oldBug);
@@ -68,7 +70,7 @@ public class HistoryInterceptor {
 					history.setNewValue(newValue != null ? newValue.toString() : null);
 					history.setOldValue(oldValue != null ? oldValue.toString() : null);
 				}
-				history.setModificationDate(new Date());
+				history.setModificationDate(date);
 
 				historyDAO.persistEntity(history);
 			}

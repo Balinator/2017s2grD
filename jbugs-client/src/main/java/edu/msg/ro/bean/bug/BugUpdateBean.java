@@ -130,7 +130,8 @@ public class BugUpdateBean extends AbstractBugBean {
 			}
 		}
 
-		emailService.sendEmail(getLoggedUser(), selectedBug);
+		if (selectedBug.isAuthorEmail() || (selectedBug.getAssigned() != null && selectedBug.isAssignedEmail()))
+			emailService.sendEmail(getLoggedUser(), selectedBug);
 
 		addI18nMessage(I18N_BUG_SAVED, new Object[] { selectedBug.getTitle() });
 		selectedBug = new BugDTO();
