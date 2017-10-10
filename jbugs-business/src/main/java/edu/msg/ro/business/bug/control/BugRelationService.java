@@ -28,14 +28,9 @@ public class BugRelationService {
 	public BugRelationDTO getBugRelation(Long id) throws TechnicalExeption {
 		List<BugRelation> list = bugRelationDAO.getBugRelation(id);
 		if (list.isEmpty()) {
-			BugRelation relation = new BugRelation();
-			relation.setBug1(bugDAO.findEntity(id));
-			relation.setBug2(null);
-			relation.setRelation(BugRelationEnum.NONE.getKey());
-
-			bugRelationDAO.persistEntity(relation);
-
-			return bugRelationDTOMapper.mapToDTO(bugRelationDAO.findEntity(relation.getId()));
+			BugRelation ent = new BugRelation();
+			ent.setBug1(bugDAO.findEntity(id));
+			return bugRelationDTOMapper.mapToDTO(ent);
 		} else if (list.size() == 1) {
 			return bugRelationDTOMapper.mapToDTO(list.get(0));
 		} else {
@@ -44,8 +39,20 @@ public class BugRelationService {
 	}
 
 	public BugRelationDTO updateBugRelation(BugRelationDTO bugRelation) {
-		BugRelation entity = bugRelationDAO.findEntity(bugRelation.getId());
+		boolean isNotInDb = bugRelation.getId() == null;
+		BugRelation entity = null;
+		if (isNotInDb) {
+			entity = new BugRelation();
+		} else {
+			entity = bugRelationDAO.findEntity(bugRelation.getId());
+		}
 		bugRelationDTOMapper.mapToEntity(bugRelation, entity);
+		if (isNotInDb && entity.getBug2() != null) {
+			bugRelationDAO.persistEntity(entity);
+		} else if (BugRelationEnum.NONE.equals(bugRelation.getRelation())) {
+			bugRelationDAO.deleteEntity(entity);
+			return null;
+		}
 		return bugRelationDTOMapper.mapToDTO(entity);
 	}
 
