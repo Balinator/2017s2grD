@@ -112,18 +112,18 @@
 								actionListener="#{bugRelationBean.makeComment}"
 								update="commentinputForm:commentList commentinputForm:commentinputArea" />
 						</h:panelGroup>
-						<p:dataTable id="commentList"
+						<p:dataTable id="commentList" styleClass="borderless"
 							emptyMessage="#{msg['bug.comment.noData']}"
 							value="#{bugRelationBean.allComments}" var="comment"
 							type="definition" scrollRows="20" scrollable="true"
 							liveScroll="true" scrollHeight="300">
-							<p:column style="vertical-align: text-top;text-align: left;">
+							<p:column colspan="2" style="vertical-align: text-top;text-align: left;">
 								<p:outputLabel value="#{comment.creator.username}" />
 							</p:column>
-							<p:column style="vertical-align: text-top;text-align: left;">
+							<p:column colspan="3" style="vertical-align: text-top;text-align: left;">
 								<p:outputLabel value="#{bugRelationBean.getCommentDate(comment)}" />
 							</p:column>
-							<p:column colspan="3" style="vertical-align: text-top;text-align: left;">
+							<p:column colspan="11" style="vertical-align: text-top;text-align: left;">
 								<p:outputLabel value="#{comment.message}" />
 							</p:column>
 						</p:dataTable>

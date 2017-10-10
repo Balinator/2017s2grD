@@ -91,7 +91,7 @@ public class UserServiceTest {
 	 * 
 	 * @throws BusinessException
 	 */
-	@Test
+	@Test(expected = BusinessException.class)
 	public void deleteUserTest() throws BusinessException {
 		UserDTO userDto = th.initializUser(1L, "firstname", "lastname", "email", "password", "0751788565");
 		userDTOMapper.mapToEntity(userDto, userEntity);
@@ -99,12 +99,8 @@ public class UserServiceTest {
 		when(userValidator.checkIfUserHasActiveTasks(userEntity)).thenReturn(false);
 		userService.deleteUser(userDto);
 
-		try {
-			when(userValidator.checkIfUserHasActiveTasks(userEntity)).thenReturn(true);
-			userService.deleteUser(userDto);
-		} catch (BusinessException e) {
-			// TODO: handle exception
-		}
+		when(userValidator.checkIfUserHasActiveTasks(userEntity)).thenReturn(true);
+		userService.deleteUser(userDto);
 	}
 
 	/**
