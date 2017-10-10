@@ -49,7 +49,7 @@ public class BugRelationService {
 		bugRelationDTOMapper.mapToEntity(bugRelation, entity);
 		if (isNotInDb && entity.getBug2() != null) {
 			bugRelationDAO.persistEntity(entity);
-		} else if (BugRelationEnum.NONE.equals(bugRelation.getRelation())) {
+		} else if (BugRelationEnum.NONE.getKey() == entity.getRelation()) {
 			bugRelationDAO.deleteEntity(entity);
 			return null;
 		}
