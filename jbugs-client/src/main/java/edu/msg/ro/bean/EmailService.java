@@ -62,7 +62,10 @@ public class EmailService {
 		if (bug.isAuthorEmail()) {
 			sendEmail(bug.getAuthor().getEmail(), title, body.toString(), session);
 		}
-		if (bug.getAssigned() != null && bug.isAssignedEmail()) {
+		if ((bug.getAssigned() != null && bug.isAssignedEmail()
+				&& !bug.getAuthor().getId().equals(bug.getAssigned().getId()))
+				|| (bug.getAssigned() != null && bug.isAssignedEmail()
+						&& bug.getAuthor().getId().equals(bug.getAssigned().getId()) && !bug.isAuthorEmail())) {
 			sendEmail(bug.getAssigned().getEmail(), title, body.toString(), session);
 		}
 	}
