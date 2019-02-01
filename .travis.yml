@@ -3,11 +3,10 @@ sudo: false
 install: true
 addons:
   sonarqube:
-    organization: "msgjt-github"
+    organization: "balinator-github"
     branches:
       - master
       - develop
-      - laszlobalazs2
 notifications:
   email: false
   on_success: never
