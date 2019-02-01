@@ -1,5 +1,6 @@
 package edu.msg.ro.bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import edu.msg.ro.business.common.exception.TechnicalExeption;
@@ -14,6 +16,8 @@ import edu.msg.ro.business.user.boundary.PermissionFacade;
 import edu.msg.ro.business.user.boundary.RoleFacade;
 import edu.msg.ro.business.user.dto.PermissionDTO;
 import edu.msg.ro.business.user.dto.RoleDTO;
+import edu.msg.ro.business.user.security.PermissionChecker;
+import edu.msg.ro.business.user.security.PermissionEnum;
 import edu.msg.ro.persistence.user.entity.Permission;
 import edu.msg.ro.persistence.user.entity.Role;
 
@@ -27,12 +31,16 @@ import edu.msg.ro.persistence.user.entity.Role;
 public class PermissionManagerBean extends AbstractBean {
 
 	private static final String SUCESSFUL_UPDATE = "permissionManager.successfulupdate";
+	private static final String UNSUCESSFUL_UPDATE = "permissionManager.unsuccessfulupdate";
 
 	@EJB
 	private RoleFacade roleFacade;
 
 	@EJB
 	private PermissionFacade permissionFacade;
+
+	@EJB
+	private PermissionChecker permissionChecker;
 
 	private HashMap<Long, RoleDTO> allRoles;
 	private HashMap<Long, PermissionDTO> allPermissions;
@@ -205,6 +213,19 @@ public class PermissionManagerBean extends AbstractBean {
 	 */
 	public void permissionRoleChangedListener4(ValueChangeEvent event) throws TechnicalExeption {
 		permissionRoleChangedListener(event, getAllRoles().get(4));
+	}
+
+	public void onUpdate() {
+		List<Long> permissionIds = new ArrayList<>();
+		permissionIds.add(PermissionEnum.PERMISSION_MANAGEMENT.getId());
+		if (!permissionChecker.canAccess(getLoggedUser(), permissionIds)) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("permissionManager.xhtml");
+				FacesContext.getCurrentInstance().responseComplete();
+			} catch (IOException e) {
+				addI18nMessage(UNSUCESSFUL_UPDATE);
+			}
+		}
 	}
 
 }

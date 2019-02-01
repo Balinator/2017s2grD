@@ -1,8 +1,10 @@
 package edu.msg.ro.bean.user;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -16,6 +18,9 @@ import edu.msg.ro.persistence.user.entity.User;
 @ManagedBean
 @RequestScoped
 public class UserNewBean extends AbstractUserBean {
+
+	@EJB
+	private NotificationCreator notificationCreator;
 
 	/**
 	 * {@link UserDTO}
@@ -47,6 +52,7 @@ public class UserNewBean extends AbstractUserBean {
 	public void createNewUser() {
 		try {
 			userFacade.createUser(newUser);
+			notificationCreator.createWellcomeNotification(newUser);
 			addI18nMessage(I18N_SAVED, new Object[] { newUser.getUsername() });
 			clearUser();
 		} catch (JBugsExeption e) {

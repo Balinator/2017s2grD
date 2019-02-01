@@ -39,6 +39,12 @@ public class BugDTO extends AbstractDTO {
 
 	private String attachmentName;
 
+	private UserDTO modifier;
+
+	private boolean authorEmail;
+
+	private boolean assignedEmail;
+
 	/**
 	 * Get for title.
 	 * 
@@ -247,6 +253,30 @@ public class BugDTO extends AbstractDTO {
 		return "BugDTO [title=" + title + ", description=" + description + ", targetDate=" + targetDate + ", severity="
 				+ severity + ", author=" + author + ", status=" + status + ", assigned=" + assigned + ", version="
 				+ version + ", fixedIn=" + fixedIn + ", attachment=" + Arrays.toString(attachment) + "]";
+	}
+
+	public UserDTO getModifier() {
+		return modifier;
+	}
+
+	public void setModifier(UserDTO modifier) {
+		this.modifier = modifier;
+	}
+
+	public boolean isAuthorEmail() {
+		return authorEmail;
+	}
+
+	public void setAuthorEmail(boolean authorEmail) {
+		this.authorEmail = authorEmail;
+	}
+
+	public boolean isAssignedEmail() {
+		return assignedEmail;
+	}
+
+	public void setAssignedEmail(boolean assignedEmail) {
+		this.assignedEmail = assignedEmail;
 	}
 
 }

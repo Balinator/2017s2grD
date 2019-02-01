@@ -42,10 +42,11 @@ public class AuthenticationFilter implements Filter {
 		String requestUrl = httpRequest.getRequestURI();
 
 		boolean isLoginPage = requestUrl.indexOf("/login.xhtml") >= 0;
+		boolean isBrowserPage = requestUrl.indexOf("/browser.xhtml") >= 0;
 		boolean isUserLoggedIn = httpSession != null && httpSession.getAttribute("username") != null;
 		boolean isResource = requestUrl.contains("javax.faces.resource");
 
-		if (isLoginPage || isUserLoggedIn || isResource) {
+		if (isLoginPage || isUserLoggedIn || isResource || isBrowserPage) {
 			if (isLoginPage && isUserLoggedIn) {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/bugManagment.xhtml");
 			} else {

@@ -49,6 +49,8 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		dto.setTargetDate(entity.getTargetDate());
 		dto.setVersion(entity.getVersion());
 		dto.setAttachmentName(entity.getAttachmentName());
+		dto.setAssignedEmail(entity.isAssignedEmail());
+		dto.setAuthorEmail(entity.isAuthorEmail());
 	}
 
 	/**
@@ -71,5 +73,7 @@ public class BugDTOMapper extends AbstractDTOMapper<Bug, BugDTO> {
 		} else {
 			entity.setAssigned(null);
 		}
+		entity.setAssignedEmail(dto.isAssignedEmail());
+		entity.setAuthorEmail(dto.isAuthorEmail());
 	}
 }

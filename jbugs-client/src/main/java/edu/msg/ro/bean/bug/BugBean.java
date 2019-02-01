@@ -3,6 +3,7 @@ package edu.msg.ro.bean.bug;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -63,12 +64,20 @@ public class BugBean extends AbstractBean {
 
 	private StreamedContent downloadAttachment;
 
+	public Date getToday() {
+		return new Date();
+	}
+
 	public UserDTO getAssignedUser() {
 		return assignedUser;
 	}
 
 	public void setAssignedUser(UserDTO user) {
 		this.assignedUser = user;
+	}
+
+	public String setDescription(String description) {
+		return description.length() > 10 ? description.substring(0, 10) + "..." : description;
 	}
 
 	/**
@@ -349,6 +358,5 @@ public class BugBean extends AbstractBean {
 	public void deleteAttachment() {
 		selectedBug.setAttachment(null);
 		selectedBug.setAttachmentName(null);
-
 	}
 }

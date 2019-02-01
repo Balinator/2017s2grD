@@ -33,7 +33,7 @@
 								<f:selectItem itemValue="#{permission.id}"
 									itemLabel="#{msg[permission.name]}" />
 							</c:forEach>
-							<f:ajax />
+							<f:ajax listener="#{permissionManagerBean.onUpdate}"/>
 						</p:selectManyCheckbox>
 					</p:row>
 				</p:panelGrid>

@@ -39,7 +39,7 @@ public class Bug extends AbstractEntity {
 	@Column
 	private String title;
 
-	@Column
+	@Column(length = 500)
 	private String description;
 
 	@Temporal(TemporalType.DATE)
@@ -69,6 +69,28 @@ public class Bug extends AbstractEntity {
 
 	@Column
 	private String attachmentName;
+
+	@Column
+	private boolean authorEmail;
+
+	@Column
+	private boolean assignedEmail;
+
+	public boolean isAuthorEmail() {
+		return authorEmail;
+	}
+
+	public void setAuthorEmail(boolean authorEmail) {
+		this.authorEmail = authorEmail;
+	}
+
+	public boolean isAssignedEmail() {
+		return assignedEmail;
+	}
+
+	public void setAssignedEmail(boolean assignedEmail) {
+		this.assignedEmail = assignedEmail;
+	}
 
 	public Long getId() {
 		return id;

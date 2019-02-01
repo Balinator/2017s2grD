@@ -32,13 +32,19 @@
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:description')}">
 							<p:message for="description" />
 						</p:tooltip>
-						<p:inputText id="description" required="true"
+						<br/>
+						<p:inputTextarea id="description" rows="3" cols="30" maxlength="500" autoResize="false" required="true"
+							counter="counter" counterTemplate="{0}"
 							requiredMessage="#{msg['error.emptydescription']}"
-							value="#{bugUpdateBean.selectedBug.description}"></p:inputText>
+							validatorMessage="#{msg['error.minlength']}"
+							value="#{bugUpdateBean.selectedBug.description}">
+							<f:validateLength minimum="250" />
+						</p:inputTextarea>
+						<h:outputText id="counter"/>
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}" />
+					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}" mindate="#{bugBean.today}"/>
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
 
@@ -64,7 +70,7 @@
 					<h:panelGroup layout="block">
 						<p:tooltip for="version" hideEvent="blur" position="right"
 							styleClass="errorTooltip" showEvent="focus"
-							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:version')}">
 							<p:message for="version" />
 						</p:tooltip>
 						<p:inputText id="version" required="true"
@@ -74,6 +80,12 @@
 
 					<p:outputLabel value="#{msg['bug.fixedIn']}" />
 					<p:inputText value="#{bugUpdateBean.selectedBug.fixedIn}"></p:inputText>
+					
+					<p:outputLabel value="#{msg['bug.authorEmail']}" />
+					<p:selectBooleanCheckbox value="#{bugUpdateBean.selectedBug.authorEmail}"/>
+					
+					<p:outputLabel value="#{msg['bug.assignedEmail']}" />
+					<p:selectBooleanCheckbox value="#{bugUpdateBean.selectedBug.assignedEmail}"/>
 				</h:panelGrid>
 			</p:outputPanel>
 

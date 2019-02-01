@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><h:outputText value="#{msg['history.page.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<f:view>
+		<ui:include src="/header.xhtml" />
+		<h:form id="historyForm">
+			<p:dataTable id="historyList" value="#{historyBean.allHistory}"
+				var="history" widgetVar="historyTable" paginator="true" rows="25"
+				styleClass="paginated" rowKey="#{history.id}"
+				filteredValue="#{historyBean.allHistoryFiltered}">
+
+				<p:column colspan="2" headerText="#{msg['history.modifiedBug']}"
+					sortBy="#{history.modified.title}"
+					filterBy="#{history.modified.title}" filterMatchMode="contains">
+					<p:outputLabel value="#{history.modified.title}" />
+				</p:column>
+
+				<p:column colspan="2" headerText="#{msg['history.modifier']}"
+					sortBy="#{history.modifier.username}" filterBy="#{history.modifier.username}"
+					filterMatchMode="contains">
+					<p:outputLabel value="#{history.modifier.username}" />
+				</p:column>
+
+				<p:column colspan="2" headerText="#{msg['history.field']}" sortBy="#{history.attribute}"
+					filterBy="#{history.attribute}" filterMatchMode="contains">
+					<p:outputLabel value="#{history.attribute}" />
+				</p:column>
+
+				<p:column colspan="2" headerText="#{msg['history.date']}" sortBy="#{history.modificationDate}"
+					filterBy="#{history.modificationDate}" filterFunction="#{historyBean.dateFilter}">
+					<f:facet name="filter">
+						<p:calendar pattern="dd/MM/yyyy">
+							<p:ajax event="dateSelect" oncomplete="PF('historyTable').filter()" />
+							<p:ajax event="keyup" oncomplete="PF('historyTable').filter()" />
+						</p:calendar>
+
+					</f:facet>
+					<h:outputText value="#{history.modificationDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+					</h:outputText>
+				</p:column>
+
+				<p:column colspan="4" headerText="#{msg['history.oldValue']}">
+					<p:outputLabel value="#{historyBean.getValue(history.oldValue)}" />
+				</p:column>
+
+				<p:column colspan="4" headerText="#{msg['history.newValue']}">
+					<p:outputLabel value="#{historyBean.getValue(history.newValue)}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.view']}">
+					<p:commandLink id="historyView" type="button"
+						actionListener="#{historyBean.setSelected(history)}"
+						oncomplete="PF('historyDialog').show()"
+						update=":formHistoryView:display"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-search" />
+					</p:commandLink>
+					<p:tooltip for="historyView" position="bottom"
+						styleClass="normalTooltip" value="#{msg['history.view']}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<ui:include src="/history/historyView.xhtml" />
+	</f:view>
+</h:body>
+
+</html>

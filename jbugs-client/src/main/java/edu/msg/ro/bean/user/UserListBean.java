@@ -2,9 +2,12 @@ package edu.msg.ro.bean.user;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import edu.msg.ro.bean.notification.NotificationCreator;
 import edu.msg.ro.business.common.exception.JBugsExeption;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.user.entity.User;
@@ -13,7 +16,12 @@ import edu.msg.ro.persistence.user.entity.User;
 @RequestScoped
 public class UserListBean extends AbstractUserBean {
 
+	@EJB
+	private NotificationCreator notificationCreator;
+
 	private UserDTO userDTO = new UserDTO();
+
+	private List<UserDTO> filteredUsers;
 
 	/**
 	 * Notification message key.
@@ -33,6 +41,11 @@ public class UserListBean extends AbstractUserBean {
 	 */
 	public boolean verifyUserRendere(UserDTO user) {
 		return userDTO != null && user.getId().equals(userDTO.getId());
+	}
+
+	@PostConstruct
+	public void init() {
+		filteredUsers = userFacade.getAllUsers();
 	}
 
 	/**
@@ -62,6 +75,7 @@ public class UserListBean extends AbstractUserBean {
 	public void deleteUser(UserDTO user) {
 		try {
 			userFacade.deleteUser(user);
+			notificationCreator.createUserDeleteNotification(getLoggedUser(), user);
 			addI18nMessage(I18N_DELETE, new Object[] { user.getUsername() });
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
@@ -81,6 +95,14 @@ public class UserListBean extends AbstractUserBean {
 		} catch (JBugsExeption e) {
 			handleExeptionI18n(e);
 		}
+	}
+
+	public List<UserDTO> getFilteredUsers() {
+		return filteredUsers;
+	}
+
+	public void setFilteredUsers(List<UserDTO> filteredUsers) {
+		this.filteredUsers = filteredUsers;
 	}
 
 }

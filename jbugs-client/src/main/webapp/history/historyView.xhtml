@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['history.view']}" widgetVar="historyDialog"
+		resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+		<h:form id="formHistoryView">
+			<p:outputPanel id="display">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+					<p:outputLabel value="#{msg['history.modifiedBug']}" />
+					<p:outputLabel value="#{historyBean.history.modified.title}"
+						rendered="#{historyBean.history.modified != null}" />
+
+					<p:outputLabel value="#{msg['history.modifier']}" />
+					<p:outputLabel value="#{historyBean.history.modifier.username}"
+						rendered="#{historyBean.history.modifier != null}" />
+
+					<p:outputLabel value="#{msg['history.field']}" />
+					<p:outputLabel value="#{historyBean.history.attribute}" />
+
+					<p:outputLabel value="#{msg['history.date']}" />
+					<p:outputLabel value="#{historyBean.history.modificationDate}" />
+
+					<p:outputLabel value="#{msg['history.oldValue']}" />
+					<p:inputTextarea value="#{historyBean.history.oldValue}" cols="40"
+						rows="6" disabled="true" autoResize="false" />
+
+					<p:outputLabel value="#{msg['history.newValue']}" />
+					<p:inputTextarea value="#{historyBean.history.newValue}" cols="40"
+						rows="6" disabled="true" autoResize="false" />
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>

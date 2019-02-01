@@ -117,4 +117,27 @@ public class UserDAO extends AbstractDao<User> {
 		return !result.isEmpty();
 	}
 
+	public List<User> getAllUsersWithPermission(Long id) {
+		Query query = this.em
+				.createQuery("SELECT u FROM User u JOIN u.roles r JOIN r.permissions p WHERE p.id = :permId ");
+		query.setParameter("permId", id);
+		return query.getResultList();
+	}
+
+	public List<User> getAllUsersWithRole(Long roleId) {
+		Query query = this.em.createQuery("SELECT u FROM User u JOIN u.roles r WHERE r.id = :roleId ");
+		query.setParameter("roleId", roleId);
+		return query.getResultList();
+	}
+
+	public int getStatisticsUser1Option1() {
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active <> 0");
+		return query.getResultList().size();
+	}
+
+	public int getStatisticsUser1Option2() {
+		Query query = this.em.createQuery("SELECT u FROM User u WHERE u.active = 0");
+		return query.getResultList().size();
+	}
+
 }

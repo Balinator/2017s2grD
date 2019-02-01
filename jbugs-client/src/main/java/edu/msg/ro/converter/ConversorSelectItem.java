@@ -1,4 +1,4 @@
-package edu.msg.ro.bean;
+package edu.msg.ro.converter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

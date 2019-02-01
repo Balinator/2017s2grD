@@ -13,6 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dto.BugDTO;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BugFacadeTest {
@@ -58,5 +60,35 @@ public class BugFacadeTest {
 	public void testDeleteBug() {
 		bugFacede.deleteBug(any(BugDTO.class));
 		verify(bugService, times(1)).deleteBug(any(BugDTO.class));
+	}
+
+	@Test
+	public void testFindBug() {
+		bugFacede.findBug(any(Long.class));
+		verify(bugService, times(1)).findBug(any(Long.class));
+	}
+
+	@Test
+	public void testGetStatisticsBug1Option() {
+		bugFacede.getStatisticsBug1Option(any(StatusEnum.class));
+		verify(bugService, times(1)).getStatisticsBug1Option(any(StatusEnum.class));
+	}
+
+	@Test
+	public void testGetStatisticsBug2Option() {
+		bugFacede.getStatisticsBug2Option(any(BugSeverity.class));
+		verify(bugService, times(1)).getStatisticsBug2Option(any(BugSeverity.class));
+	}
+
+	@Test
+	public void testGetAllBugsByQuery() {
+		bugFacede.getAllBugsByQuery(any(String.class));
+		verify(bugService, times(1)).getAllBugsByQuery(any(String.class));
+	}
+
+	@Test
+	public void testGetBugByTitle() {
+		bugFacede.getBugByTitle(any(String.class));
+		verify(bugService, times(1)).getBugByTitle(any(String.class));
 	}
 }

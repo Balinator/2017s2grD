@@ -154,4 +154,20 @@ public class UserService {
 	public List<UserDTO> getAllUserByQuery(String query) {
 		return userDTOMapper.mapToDTOs(userDAO.getAllUsernameStartsWith(query));
 	}
+
+	public List<UserDTO> getAllUsersWithPermission(Long id) {
+		return userDTOMapper.mapToDTOs(userDAO.getAllUsersWithPermission(id));
+	}
+
+	public List<UserDTO> getAllUsersWithRole(Long roleId) {
+		return userDTOMapper.mapToDTOs(userDAO.getAllUsersWithRole(roleId));
+	}
+
+	public int getStatisticsUser1Option1() {
+		return userDAO.getStatisticsUser1Option1();
+	}
+
+	public int getStatisticsUser1Option2() {
+		return userDAO.getStatisticsUser1Option2();
+	}
 }

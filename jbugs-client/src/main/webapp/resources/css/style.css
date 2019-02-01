@@ -6,7 +6,7 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-button, a {
+button, a, .notificationButton{
 	-webkit-transition-duration: 0.4s;
 	transition-duration: 0.4s;
 	border: none;
@@ -21,7 +21,7 @@ td {
 	text-align: center;
 }
 
-.header-class a, button, .header-element {
+.header-class a, .header-class button, .header-class .header-element, .header-class .notificationButton{
 	padding: 10px;
 }
 
@@ -100,7 +100,6 @@ th input,th div > div{
 	padding-right: .3em;
 }
 
-/* Custom */
 .errorTooltip > .ui-tooltip-text{
 	padding: 0px !important;
 }
@@ -109,4 +108,61 @@ th input,th div > div{
 }
 .errorTooltip > .ui-tooltip-arrow{
 	border-bottom-color: #f2dede;
+}
+
+.notification{
+}
+
+.chartPie{
+	height:20em;
+}
+
+.dropdown-list{
+	background-color: #6f6f6f;
+	color: #ffffff;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    max-width: 5%;
+    z-index: 1;
+}
+
+.dropdown-content {
+    z-index: 1;
+    overflow-x: visible;
+    padding: 10px;
+}
+
+.dropdown-content > a{
+    padding: 0px;
+}
+
+.dropdown-content:hover {
+	background-color: #9f9f9f;
+}
+
+.show{
+	display: block;
+}
+.notificationButton{
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
+.notificationButton > span{
+	padding: 0px !important;
+}
+
+.toTop{
+    vertical-align: top !important;
+}
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+    background: white;
 }

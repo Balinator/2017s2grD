@@ -10,12 +10,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import edu.msg.ro.business.bug.control.BugService;
 import edu.msg.ro.business.bug.dao.BugDAO;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.dto.mapper.BugDTOMapper;
+import edu.msg.ro.business.bug.enums.BugSeverity;
+import edu.msg.ro.business.bug.enums.StatusEnum;
 import edu.msg.ro.business.util.TestHelper;
 import edu.msg.ro.persistence.bug.entity.Bug;
 
@@ -68,5 +71,38 @@ public class BugServiceTest {
 	public void testDeleteAttachemtn() {
 		bugService.deleteAttachment(any(Long.class));
 		verify(bugDAO, times(1)).deleteAttachemtn(any(Long.class));
+	}
+
+	@Test
+	public void testFindBug() {
+		bugService.findBug(any(Long.class));
+		verify(bugDAO, times(1)).findEntity(any(Long.class));
+		verify(bugDTOMapper, times(1)).mapToDTO(any(Bug.class));
+	}
+
+	@Test
+	public void testGetStatisticsBug1Option() {
+		bugService.getStatisticsBug1Option(StatusEnum.CLOSE);
+		verify(bugDAO, times(1)).getStatisticsBug1Option(Mockito.anyInt());
+	}
+
+	@Test
+	public void testGetStatisticsBug2Option() {
+		bugService.getStatisticsBug2Option(BugSeverity.CRITICAL);
+		verify(bugDAO, times(1)).getStatisticsBug2Option(Mockito.anyInt());
+	}
+
+	@Test
+	public void testGetAllBugsByQuery() {
+		bugService.getAllBugsByQuery(any(String.class));
+		verify(bugDAO, times(1)).getAllBugsByQuery(any(String.class));
+		verify(bugDTOMapper, times(1)).mapToDTOs((java.util.List<Bug>) any(List.class));
+	}
+
+	@Test
+	public void testGetBugByTitle() {
+		bugService.getBugByTitle(any(String.class));
+		verify(bugDAO, times(1)).findBugByTitle(any(String.class));
+		verify(bugDTOMapper, times(1)).mapToDTO(any(Bug.class));
 	}
 }

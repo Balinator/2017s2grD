@@ -33,13 +33,19 @@
 							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:description')}">
 							<p:message for="description" />
 						</p:tooltip>
-						<p:inputText id="description" required="true"
+						<br/>
+						<p:inputTextarea id="description" rows="3" cols="20" maxlength="500" autoResize="false" required="true"
+							counter="counter" counterTemplate="{0}"
 							requiredMessage="#{msg['error.emptydescription']}"
-							value="#{bugNewBean.newBug.description}"></p:inputText>
+							validatorMessage="#{msg['error.minlength']}"
+							value="#{bugNewBean.newBug.description}">
+							<f:validateLength minimum="250" />
+						</p:inputTextarea>
+						<h:outputText id="counter"/>
 					</h:panelGroup>
 
 					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
-					<p:calendar value="#{bugNewBean.newBug.targetDate}" />
+					<p:calendar value="#{bugNewBean.newBug.targetDate}" mindate="#{bugBean.today}"/>
 
 					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
 					<p:selectOneMenu value="#{bugNewBean.newBug.severity}"

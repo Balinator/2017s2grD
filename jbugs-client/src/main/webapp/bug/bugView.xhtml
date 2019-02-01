@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['bug.view.dialog.title']}"
+		widgetVar="bugViewDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+		<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+			columnClasses="panel-colum, panel-colum-label toTop">
+			<h:form id="formBugView">
+				<p:outputPanel id="display">
+
+					<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+						columnClasses="panel-colum-label, panel-colum">
+						<p:outputLabel value="#{msg['bug.title']}" />
+						<h:panelGroup layout="block">
+							<p:outputLabel id="title"
+								value="#{bugRelationBean.selectedBug.title}" />
+						</h:panelGroup>
+
+						<p:outputLabel value="#{msg['bug.description']}" />
+						<h:panelGroup layout="block">
+							<p:inputTextarea id="description" rows="5" cols="50"
+								autoResize="false" disabled="true"
+								value="#{bugRelationBean.selectedBug.description}">
+							</p:inputTextarea>
+						</h:panelGroup>
+
+						<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+						<p:calendar value="#{bugRelationBean.selectedBug.targetDate}"
+							disabled="true" />
+
+						<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+						<p:selectOneMenu value="#{bugRelationBean.selectedBug.severity}"
+							disabled="true" style="width:90px">
+
+							<f:selectItems value="#{bugUpdateBean.severityList}"
+								var="severity" itemLabel="#{msg['bug.severity.' += severity]}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+						<p:selectOneMenu value="#{bugRelationBean.selectedBug.status}"
+							converter="#{bugConverter}" style="width:90px" disabled="true">
+
+							<f:selectItems value="#{bugUpdateBean.getStatusList()}"
+								var="status" itemLabel="#{msg['bug.status.' += status]}"
+								itemValue="#{status}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg['bug.version']}" />
+						<h:panelGroup layout="block">
+							<p:outputLabel id="version"
+								value="#{bugRelationBean.selectedBug.version}" />
+						</h:panelGroup>
+
+						<p:outputLabel value="#{msg['bug.fixedIn']}" />
+						<p:outputLabel value="#{bugRelationBean.selectedBug.fixedIn}" />
+
+						<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+						<p:outputLabel
+							value="#{bugRelationBean.selectedBug.assigned.username}"></p:outputLabel>
+
+						<p:outputLabel value="#{msg['bug.attachment']}" />
+						<p:commandButton
+							value="#{bugRelationBean.selectedBug.attachmentName}"
+							ajax="false"
+							actionListener="#{bugBean.fileDownload(bugRelationBean.selectedBug)}"
+							rendered="#{not empty bugRelationBean.selectedBug.attachmentName}"
+							onclick="PrimeFaces.monitorDownload(start, stop);">
+							<p:fileDownload value="#{bugBean.downloadAttachment}"
+								rendered="#{!bugBean.verifyBugRendere(bugRelationBean.selectedBug)}" />
+						</p:commandButton>
+						<p:outputLabel value="#{msg['bug.view.noAttachment']}"
+							rendered="#{empty bugRelationBean.selectedBug.attachmentName}" />
+
+						<p:outputLabel value="#{msg['bug.relation.relation']}" />
+						<p:selectOneMenu value="#{bugRelationBean.bugRelation.relation}"
+							style="width:90px" disabled="true">
+							<f:selectItems value="#{bugRelationBean.relationList}"
+								var="relation" itemLabel="#{msg['bug.relations.' += relation]}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg['bug.relation.assigned']}" />
+						<p:outputLabel value="#{bugRelationBean.bugRelation.bug2.title}"
+							rendered="#{bugRelationBean.bugRelation.bug2 != null}" />
+						<p:outputLabel value="#{msg['bug.view.noRelation']}"
+							rendered="#{bugRelationBean.bugRelation.bug2 == null}" />
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:form>
+			<p:outputPanel>
+				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<p:outputLabel value="#{msg['bug.comment.title']}" />
+					</p:toolbarGroup>
+				</p:toolbar>
+				<h:form id="commentinputForm">
+					<h:panelGroup id="comments">
+						<h:panelGroup id="commentinput" layout="block"
+							style="overflow: auto;">
+							<p:inputTextarea id="commentinputArea"
+								value="#{bugRelationBean.newMessage}" counter="counter"
+								maxlength="250" counterTemplate="{0}" style="width:96%;" />
+							<h:outputLabel id="counter" />
+							<p:commandButton value="#{msg['bug.comment.send']}"
+								style="float: right;"
+								actionListener="#{bugRelationBean.makeComment}"
+								update="commentinputForm:commentList commentinputForm:commentinputArea" />
+						</h:panelGroup>
+						<p:dataTable id="commentList" styleClass="borderless"
+							emptyMessage="#{msg['bug.comment.noData']}"
+							value="#{bugRelationBean.allComments}" var="comment"
+							type="definition" scrollRows="20" scrollable="true"
+							liveScroll="true" scrollHeight="300">
+							<p:column colspan="2" style="vertical-align: text-top;text-align: left;">
+								<p:outputLabel value="#{comment.creator.username}" />
+							</p:column>
+							<p:column colspan="3" style="vertical-align: text-top;text-align: left;">
+								<p:outputLabel value="#{bugRelationBean.getCommentDate(comment)}" />
+							</p:column>
+							<p:column colspan="11" style="vertical-align: text-top;text-align: left;">
+								<p:outputLabel value="#{comment.message}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
+				</h:form>
+			</p:outputPanel>
+		</h:panelGrid>
+	</p:dialog>
+</ui:composition>
